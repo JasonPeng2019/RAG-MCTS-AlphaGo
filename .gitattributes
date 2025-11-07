@@ -1,0 +1,2 @@
+selfplay_output/** filter=lfs diff=lfs merge=lfs -text
+archives/**/*.json filter=lfs diff=lfs merge=lfs -text
