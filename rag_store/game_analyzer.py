@@ -2,83 +2,82 @@ import json
 import subprocess
 from typing import Optional
 
+try:
+    from sgfmill import boards
+except ImportError:
+    boards = None
+
+
+def count_stones_on_board(moves: list, board_size: int = 19) -> dict:
+    """
+    Count stones on board by replaying moves with capture logic.
+    Call this on-demand when retrieving from RAG, not during storage.
+
+    Args:
+        moves: List of [player, location] like [["B","Q4"], ["W","D4"]]
+        board_size: Board size (default 19)
+
+    Returns:
+        {'black': int, 'white': int, 'total': int}
+    """
+    if boards is None:
+        raise ImportError("sgfmill not installed. Run: pip install sgfmill")
+
+    board = boards.Board(board_size)
+
+    for player, location in moves:
+        if location.upper() == 'PASS':
+            continue
+
+        # Parse KataGo coordinate format (e.g., "Q4")
+        col = ord(location[0].upper()) - ord('A')
+        if col >= 8:  # Skip 'I' in Go coordinates
+            col -= 1
+        row = board_size - int(location[1:])
+
+        # Play move (sgfmill handles captures automatically)
+        color = 'b' if player == 'B' else 'w'
+        board.play(row, col, color)
+
+    # Count stones
+    black_count = 0
+    white_count = 0
+    for r in range(board_size):
+        for c in range(board_size):
+            stone = board.get(r, c)
+            if stone == 'b':
+                black_count += 1
+            elif stone == 'w':
+                white_count += 1
+
+    return {
+        'black': black_count,
+        'white': white_count,
+        'total': black_count + white_count
+    }
+
+
 class GoStateEmbedding:
-    """
-    Stores a complete state embedding from KataGo analysis.
-    All data comes from KataGo's JSON analysis response.
-    """
-    
+    """Stores KataGo state embedding for RAG storage."""
+
     def __init__(self, katago_response: dict, query_info: dict):
-        """
-        Args:
-            katago_response: The JSON response from KataGo analysis engine
-            query_info: Your original query data (for komi, rules)
-        """
-        
-        # 1. Compact feature vector (your "fingerprint")
-        # Source: response['rootInfo']['thisHash']
-        self.state_hash = katago_response['rootInfo']['thisHash']  # 128-bit hash string
-        
-        # 2. Neural net evaluation vectors
-        # Source: response['policy'] - only present if you set includePolicy=True
-        self.policy = katago_response.get('policy', None)  # 362 floats (361 + pass)
-        
-        # Source: response['ownership'] - only present if you set includeOwnership=True
-        self.ownership = katago_response.get('ownership', None)  # 361 floats
-        
-        # 3. Value head outputs (from rootInfo after MCTS search)
-        # Source: response['rootInfo']['winrate']
-        self.winrate = katago_response['rootInfo']['winrate']
-        
-        # Source: response['rootInfo']['scoreLead']
-        self.score_lead = katago_response['rootInfo']['scoreLead']
-        
-        # Source: response['rootInfo']['utility']
-        self.utility = katago_response['rootInfo']['utility']
-        
-        # Source: response['rootInfo']['scoreStdev']
-        self.score_stdev = katago_response['rootInfo']['scoreStdev']
-        
-        # Additional value head outputs (optional, check if present)
-        # Source: response['rootInfo']['scoreSelfplay']
-        self.score_selfplay = katago_response['rootInfo'].get('scoreSelfplay', None)
-        
-        # Raw neural net outputs (before search) - optional
-        # Source: response['rootInfo']['rawWinrate'] etc.
-        self.raw_winrate = katago_response['rootInfo'].get('rawWinrate', None)
-        self.raw_score_lead = katago_response['rootInfo'].get('rawLead', None)
-        self.raw_score_stdev = katago_response['rootInfo'].get('rawScoreSelfplayStdev', None)
-        
-        # 4. Search statistics (for context)
-        # Source: response['rootInfo']['visits']
-        self.visits = katago_response['rootInfo']['visits']
-        
-        # Source: response['rootInfo']['lcb']
-        self.lcb = katago_response['rootInfo']['lcb']
-        
-        # 5. Game context
-        # Source: response['turnNumber']
-        self.turn_number = katago_response['turnNumber']
-        
-        # Source: response['rootInfo']['currentPlayer']
-        self.player_to_move = katago_response['rootInfo']['currentPlayer']  # "B" or "W"
-        
-        # Source: from your original query
-        self.komi = query_info['komi']
-        self.rules = query_info['rules']
-        self.board_size_x = query_info['boardXSize']
-        self.board_size_y = query_info['boardYSize']
-        
-        # 6. Symmetry hash (useful for detecting equivalent positions)
-        # Source: response['rootInfo']['symHash']
+        # Stored vectors
+        self.state_hash = katago_response['rootInfo']['thisHash']
         self.sym_hash = katago_response['rootInfo']['symHash']
-        
-        # 7. Query identifier
-        # Source: response['id']
+        self.policy = katago_response.get('policy', None)
+        self.ownership = katago_response.get('ownership', None)
+        self.winrate = katago_response['rootInfo']['winrate']
+        self.score_lead = katago_response['rootInfo']['scoreLead']
+        self.move_infos = katago_response.get('moveInfos', None)
+        self.komi = query_info['komi']
         self.query_id = katago_response['id']
-    
+
+        # Temporary fields for storage decision (not saved to DB)
+        self.score_stdev = katago_response['rootInfo']['scoreStdev']
+        self.lcb = katago_response['rootInfo']['lcb']
+
     def to_dict(self):
-        """Convert to dictionary for storage in database"""
+        """Convert to dictionary for RAG storage."""
         return {
             'state_hash': self.state_hash,
             'sym_hash': self.sym_hash,
@@ -86,20 +85,8 @@ class GoStateEmbedding:
             'ownership': self.ownership,
             'winrate': self.winrate,
             'score_lead': self.score_lead,
-            'utility': self.utility,
-            'score_stdev': self.score_stdev,
-            'score_selfplay': self.score_selfplay,
-            'raw_winrate': self.raw_winrate,
-            'raw_score_lead': self.raw_score_lead,
-            'raw_score_stdev': self.raw_score_stdev,
-            'visits': self.visits,
-            'lcb': self.lcb,
-            'turn_number': self.turn_number,
-            'player_to_move': self.player_to_move,
+            'move_infos': self.move_infos,
             'komi': self.komi,
-            'rules': self.rules,
-            'board_size_x': self.board_size_x,
-            'board_size_y': self.board_size_y,
             'query_id': self.query_id,
         }
 
@@ -134,7 +121,6 @@ class KataGoAnalyzer:
             GoStateEmbedding with all extracted features
         """
         
-        # Build query
         query = {
             "id": f"query_{self.query_counter}",
             "moves": moves,
@@ -142,29 +128,24 @@ class KataGoAnalyzer:
             "komi": komi,
             "boardXSize": board_size,
             "boardYSize": board_size,
-            
-            # IMPORTANT: Request the data you need!
-            "includePolicy": True,      # Get raw neural net policy
-            "includeOwnership": True,   # Get territory predictions
-            # Optional: "includeOwnershipStdev": True,
-            # Optional: "maxVisits": max_visits,
+            "includePolicy": True,
+            "includeOwnership": True,
         }
-        
+
+        if max_visits:
+            query["maxVisits"] = max_visits
+
         self.query_counter += 1
-        
-        # Send query
+
         self.katago.stdin.write(json.dumps(query) + '\n')
         self.katago.stdin.flush()
-        
-        # Read response
+
         response_line = self.katago.stdout.readline()
         response = json.loads(response_line)
-        
-        # Check for errors
+
         if 'error' in response:
             raise RuntimeError(f"KataGo error: {response['error']}")
-        
-        # Create embedding
+
         return GoStateEmbedding(response, query)
     
     def close(self):
