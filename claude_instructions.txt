@@ -1,0 +1,15 @@
+KataGo RAG implementation:
+
+add to database: vector embeddings 
+
+FIRST THINGS TO LOSE:
+- value / policy lineup but high entropy
+- value confidence / policy inconfidence
+
+Potential entropy mid-late scaling factor:
+e^entropy / # legal moves available
+
+
+SHOULD KEEP:
+- value / policy both unconfident 
+-> High entropy on both
