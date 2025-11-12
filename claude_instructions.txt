@@ -1,6 +1,6 @@
 # storing to RAG
 1. Run through self-play games, and store the following information:
-'state_hash': self.state_hash,
+'sym_hash': self.state_hash,
             'sym_hash': self.sym_hash,
             'policy': self.policy,
             'ownership': self.ownership,
