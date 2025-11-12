@@ -36,8 +36,13 @@ It will store these updated results in the form of storing a dict:
 {Game Hash: 
  (2 best moves based on value from here, the actual policy function at this snapshot
 of the game state, the actual value function at this snapshot of the game,
-the policy distribution for those, and the info we pulled in step 1.) }
+the policy distribution + the list of child nodes that the policy is assigned to, and the info we pulled in step 1.) }
 When the model runs into this exact same complex position again, when it does the ANN, it will find this position amongst the RAG database.
+To compare value similarity and policy similarity, we first compare how many child node hashes overlap.
+Then for each game state node comparison, we calculate the overlap between the children; for each overlapping child,
+we compare its policy function (val of a vector) and value (val) at that child's assigned vector dimensional position (to clarify:
+since the policy vector matches with the list of children in its feasible reach, so the policy means nothing unless
+its assigned to the same child).
 
 5. Upon finding this position, it will do a relevancy comparison (threshold 90% - hand tune after fixing the weights) by comparing 
 the other features of the vector with the current complex state vector. The comparison weights of the various features will also be learned.
