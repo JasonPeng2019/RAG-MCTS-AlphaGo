@@ -91,29 +91,4 @@ else
     echo "=========================================="
     exit $TUNING_EXIT_CODE
 fi
-
-if [ $TUNING_EXIT_CODE -eq 0 ]; then
-    echo ""
-    echo "=========================================="
-    echo "Phase 1b completed successfully!"
-    echo "=========================================="
-    echo ""
-    echo "Results saved to: $OUTPUT_DIR/storage_threshold_results.json"
-    echo "Plots saved to:"
-    echo "  - $OUTPUT_DIR/uncertainty_distribution.png"
-    echo "  - $OUTPUT_DIR/threshold_comparison.png"
-    echo ""
-    echo "Phase 1 (complete) is now finished!"
-    echo ""
-    echo "Next steps:"
-    echo "1. Review results and plots"
-    echo "2. Proceed to Phase 2: Deep MCTS and Recursion Control tuning"
-    echo ""
-else
-    echo ""
-    echo "=========================================="
-    echo "Error: Phase 1b failed with exit code $TUNING_EXIT_CODE"
-    echo "=========================================="
-    echo ""
-    exit $TUNING_EXIT_CODE
 fi
