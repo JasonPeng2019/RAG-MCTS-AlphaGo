@@ -79,8 +79,8 @@ class GoStateEmbedding:
     def to_dict(self):
         """Convert to dictionary for RAG storage."""
         return {
-            'state_hash': self.state_hash,
             'sym_hash': self.sym_hash,
+            'state_hash': self.state_hash,
             'policy': self.policy,
             'ownership': self.ownership,
             'winrate': self.winrate,
