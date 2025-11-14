@@ -16,7 +16,7 @@ RAG + MCTS deep search during self play be fast enough? Or if we augmented the R
             'stone_count': self.stone_count #the stone count from the stone count function
             'child nodes': self.child_nodes #this would be a collection (hashmap of direct
             child node explored by MCTS:
-            value, pUCT)
+            value, policy value for that index child)
 
     #similarity_weights = {
     'policy': 0.40,        # Highest - determines exploration
@@ -56,6 +56,7 @@ It will store these updated results in the form of storing a dict:
  (2 best moves based on value from here, the actual policy function at this snapshot
 of the game state, the actual value function at this snapshot of the game,
 the policy distribution + the list of child nodes that the policy is assigned to, and the info we pulled in step 1.) }
+
 When the model runs into this exact same complex position again, when it does the ANN, it will find this position amongst the RAG database.
 To compare value similarity and policy similarity, we first compare how many child node hashes overlap.
 Then for each game state node comparison, we calculate the overlap between the children; for each overlapping child,
