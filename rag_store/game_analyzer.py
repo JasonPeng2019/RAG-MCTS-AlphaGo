@@ -213,40 +213,32 @@ if __name__ == "__main__":
         model_path="cpp/tests/models/g170e-b10c128-s1141046784-d204142634.bin.gz"
     )
 
-    json_example = {} # Placeholder for actual JSON input
-    flagged_positions = json_example
-    
-    
-    # Analyze a position
-    moves = [
-        ["B", "Q4"],
-        ["W", "D4"],
-        ["B", "Q16"],
-        ["W", "D16"],
-    ]
+    # needs to be changed to actual path
+    csv_path = "path/to/flagged_positions.csv"
 
+    moves_histories = parse_flagged_positions_csv(csv_path)
 
-    
-    embedding = analyzer.analyze_position(
-        moves=moves,
-        komi=7.5,
-        rules="chinese",
-        max_visits=10000  # Quick analysis
-    )
-    
-    # Print results
-    print(f"State Hash: {embedding.state_hash}")
-    print(f"Sym Hash: {embedding.sym_hash}")
-    print(f"Query ID: {embedding.query_id}")
-    print(f"Winrate: {embedding.winrate:.3f}")
-    print(f"Score Lead: {embedding.score_lead:.2f}")
-    print(f"Komi: {embedding.komi}")
-    print(f"Policy shape: {len(embedding.policy) if embedding.policy else 'None'}")
-    print(f"Ownership shape: {len(embedding.ownership) if embedding.ownership else 'None'}")
-    print(f"Move infos: {len(embedding.move_infos) if embedding.move_infos else 'None'}")
-    
-    # Convert to dict for storage
-    data = embedding.to_dict()
-    print(f"\nStorable dict keys: {list(data.keys())}")
+    for move_history in moves_histories:
+        embedding = analyzer.analyze_position(
+            moves=move_history,
+            komi=7.5,
+            rules="chinese",
+            max_visits=10000  # Quick analysis
+        ) 
+
+        # Print results
+        print(f"State Hash: {embedding.state_hash}")
+        print(f"Sym Hash: {embedding.sym_hash}")
+        print(f"Query ID: {embedding.query_id}")
+        print(f"Winrate: {embedding.winrate:.3f}")
+        print(f"Score Lead: {embedding.score_lead:.2f}")
+        print(f"Komi: {embedding.komi}")
+        print(f"Policy shape: {len(embedding.policy) if embedding.policy else 'None'}")
+        print(f"Ownership shape: {len(embedding.ownership) if embedding.ownership else 'None'}")
+        print(f"Move infos: {len(embedding.move_infos) if embedding.move_infos else 'None'}")
+        
+        # Convert to dict for storage
+        data = embedding.to_dict()
+        print(f"\nStorable dict keys: {list(data.keys())}")
     
     analyzer.close()
