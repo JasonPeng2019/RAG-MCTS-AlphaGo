@@ -231,7 +231,7 @@ if __name__ == "__main__":
         moves=moves,
         komi=7.5,
         rules="chinese",
-        max_visits=100  # Quick analysis
+        max_visits=10000  # Quick analysis
     )
     
     # Print results
