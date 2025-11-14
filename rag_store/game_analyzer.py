@@ -1,11 +1,62 @@
 import json
 import subprocess
-from typing import Optional
+import csv
+from typing import Optional, List
 
 try:
     from sgfmill import boards
 except ImportError:
     boards = None
+
+
+def parse_flagged_positions_csv(csv_path: str) -> List[List[List]]:
+    """
+    Parse a CSV file containing JSON objects and extract all moves_history lists.
+
+    Args:
+        csv_path: Path to CSV file where each row contains a JSON object
+
+    Returns:
+        List of moves_history lists, where each moves_history is a list of
+        [player, location] pairs like [["B","Q4"], ["W","D4"], ...]
+
+    Example:
+        >>> moves_histories = parse_flagged_positions_csv("games.csv")
+        >>> for moves in moves_histories:
+        >>>     print(f"Found game with {len(moves)} moves")
+    """
+    all_moves_histories = []
+
+    with open(csv_path, 'r', encoding='utf-8') as csvfile:
+        csv_reader = csv.reader(csvfile)
+
+        for row in csv_reader:
+            # Skip empty rows
+            if not row:
+                continue
+
+            # Assume the JSON is in the first column (adjust if needed)
+            json_str = row[0]
+
+            try:
+                game_data = json.loads(json_str)
+
+                # Extract flagged_positions field
+                if 'flagged_positions' not in game_data:
+                    continue
+
+                flagged_positions = game_data['flagged_positions']
+
+                # Extract moves_history from each flagged position
+                for position in flagged_positions:
+                    if 'moves_history' in position:
+                        all_moves_histories.append(position['moves_history'])
+
+            except json.JSONDecodeError as e:
+                print(f"Warning: Failed to parse JSON in row: {e}")
+                continue
+
+    return all_moves_histories
 
 
 def count_stones_on_board(moves: list, board_size: int = 19) -> dict:
@@ -161,34 +212,33 @@ if __name__ == "__main__":
         config_path="cpp/configs/analysis_example.cfg",
         model_path="cpp/tests/models/g170e-b10c128-s1141046784-d204142634.bin.gz"
     )
-    
-    # Analyze a position
-    moves = [
-        ["B", "Q4"],
-        ["W", "D4"],
-        ["B", "Q16"],
-        ["W", "D16"],
-    ]
-    
-    embedding = analyzer.analyze_position(
-        moves=moves,
-        komi=7.5,
-        rules="chinese",
-        max_visits=100  # Quick analysis
-    )
-    
-    # Print results
-    print(f"State Hash: {embedding.state_hash}")
-    print(f"Turn: {embedding.turn_number}")
-    print(f"Player to move: {embedding.player_to_move}")
-    print(f"Winrate: {embedding.winrate:.3f}")
-    print(f"Score Lead: {embedding.score_lead:.2f}")
-    print(f"Visits: {embedding.visits}")
-    print(f"Policy shape: {len(embedding.policy) if embedding.policy else 'None'}")
-    print(f"Ownership shape: {len(embedding.ownership) if embedding.ownership else 'None'}")
-    
-    # Convert to dict for storage
-    data = embedding.to_dict()
-    print(f"\nStorable dict keys: {list(data.keys())}")
+
+    # needs to be changed to actual path
+    csv_path = "path/to/flagged_positions.csv"
+
+    moves_histories = parse_flagged_positions_csv(csv_path)
+
+    for move_history in moves_histories:
+        embedding = analyzer.analyze_position(
+            moves=move_history,
+            komi=7.5,
+            rules="chinese",
+            max_visits=10000  # Quick analysis
+        ) 
+
+        # Print results
+        print(f"State Hash: {embedding.state_hash}")
+        print(f"Sym Hash: {embedding.sym_hash}")
+        print(f"Query ID: {embedding.query_id}")
+        print(f"Winrate: {embedding.winrate:.3f}")
+        print(f"Score Lead: {embedding.score_lead:.2f}")
+        print(f"Komi: {embedding.komi}")
+        print(f"Policy shape: {len(embedding.policy) if embedding.policy else 'None'}")
+        print(f"Ownership shape: {len(embedding.ownership) if embedding.ownership else 'None'}")
+        print(f"Move infos: {len(embedding.move_infos) if embedding.move_infos else 'None'}")
+        
+        # Convert to dict for storage
+        data = embedding.to_dict()
+        print(f"\nStorable dict keys: {list(data.keys())}")
     
     analyzer.close()
