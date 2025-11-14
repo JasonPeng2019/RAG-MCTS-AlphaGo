@@ -23,19 +23,33 @@ class PositionEmbeddingStore:
     Total dimension: 725
     """
 
-    def __init__(self, dimension: Optional[int] = None, index_type: str = 'L2'):
+    def __init__(self, dimension: Optional[int] = None, index_type: str = 'HNSW',
+                 M: int = 32, ef_construction: int = 200, ef_search: int = 128):
         """
-        Initialize the ANN index.
+        Initialize the ANN index using approximate search.
 
         Args:
             dimension: Embedding dimension (default: 725 for policy+ownership+winrate+score)
-            index_type: 'L2' for L2 distance or 'IP' for inner product (cosine similarity)
+            index_type: Index type - 'HNSW' (hierarchical graph, recommended),
+                       'IVF' (inverted file), or 'Flat' (exact/brute force)
+            M: HNSW parameter - number of connections per layer (higher = better accuracy, more memory)
+            ef_construction: HNSW build-time parameter (higher = better index quality, slower build)
+            ef_search: HNSW search-time parameter (higher = better accuracy, slower search)
         """
         self.dimension = dimension
         self.index_type = index_type
         self.index = None
         self.embeddings_data = []  # Store full embedding dicts for retrieval
         self.is_trained = False
+
+        # HNSW parameters
+        self.M = M
+        self.ef_construction = ef_construction
+        self.ef_search = ef_search
+
+        # IVF parameters (used if index_type == 'IVF')
+        self.nlist = 100  # Number of clusters
+        self.nprobe = 10  # Number of clusters to search
 
     def _create_embedding_vector(self, embedding_dict: dict) -> np.ndarray:
         """
@@ -101,12 +115,32 @@ class PositionEmbeddingStore:
 
         # Create index if it doesn't exist
         if self.index is None:
-            if self.index_type == 'L2':
+            if self.index_type == 'HNSW':
+                # Hierarchical Navigable Small World - fast approximate search
+                self.index = faiss.IndexHNSWFlat(self.dimension, self.M)
+                self.index.hnsw.efConstruction = self.ef_construction
+                self.index.hnsw.efSearch = self.ef_search
+                print(f"Created HNSW index: M={self.M}, efConstruction={self.ef_construction}, efSearch={self.ef_search}")
+
+            elif self.index_type == 'IVF':
+                # Inverted File index - partitions space into clusters
+                quantizer = faiss.IndexFlatL2(self.dimension)
+                self.index = faiss.IndexIVFFlat(quantizer, self.dimension, self.nlist)
+                print(f"Created IVF index: nlist={self.nlist}, nprobe={self.nprobe}")
+
+            elif self.index_type == 'Flat':
+                # Exact search (brute force) - for comparison
                 self.index = faiss.IndexFlatL2(self.dimension)
-            elif self.index_type == 'IP':
-                self.index = faiss.IndexFlatIP(self.dimension)
+                print("Created Flat index (exact search)")
+
             else:
-                raise ValueError(f"Unknown index_type: {self.index_type}")
+                raise ValueError(f"Unknown index_type: {self.index_type}. Use 'HNSW', 'IVF', or 'Flat'")
+
+        # Train IVF index if needed (HNSW doesn't need training)
+        if self.index_type == 'IVF' and not self.is_trained:
+            print(f"Training IVF index with {len(vectors)} vectors...")
+            self.index.train(vectors)
+            self.index.nprobe = self.nprobe
 
         # Add vectors to index
         self.index.add(vectors)
@@ -226,7 +260,8 @@ if __name__ == "__main__":
     ]
 
     # Initialize store and add embeddings
-    store = PositionEmbeddingStore(index_type='L2')
+    # Using HNSW for approximate search (faster than brute force)
+    store = PositionEmbeddingStore(index_type='HNSW', M=16, ef_construction=100, ef_search=64)
     store.add_embeddings(sample_embeddings)
 
     print(f"Added {store.size()} embeddings to the store")
