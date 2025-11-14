@@ -1,11 +1,62 @@
 import json
 import subprocess
-from typing import Optional
+import csv
+from typing import Optional, List
 
 try:
     from sgfmill import boards
 except ImportError:
     boards = None
+
+
+def parse_flagged_positions_csv(csv_path: str) -> List[List[List]]:
+    """
+    Parse a CSV file containing JSON objects and extract all moves_history lists.
+
+    Args:
+        csv_path: Path to CSV file where each row contains a JSON object
+
+    Returns:
+        List of moves_history lists, where each moves_history is a list of
+        [player, location] pairs like [["B","Q4"], ["W","D4"], ...]
+
+    Example:
+        >>> moves_histories = parse_flagged_positions_csv("games.csv")
+        >>> for moves in moves_histories:
+        >>>     print(f"Found game with {len(moves)} moves")
+    """
+    all_moves_histories = []
+
+    with open(csv_path, 'r', encoding='utf-8') as csvfile:
+        csv_reader = csv.reader(csvfile)
+
+        for row in csv_reader:
+            # Skip empty rows
+            if not row:
+                continue
+
+            # Assume the JSON is in the first column (adjust if needed)
+            json_str = row[0]
+
+            try:
+                game_data = json.loads(json_str)
+
+                # Extract flagged_positions field
+                if 'flagged_positions' not in game_data:
+                    continue
+
+                flagged_positions = game_data['flagged_positions']
+
+                # Extract moves_history from each flagged position
+                for position in flagged_positions:
+                    if 'moves_history' in position:
+                        all_moves_histories.append(position['moves_history'])
+
+            except json.JSONDecodeError as e:
+                print(f"Warning: Failed to parse JSON in row: {e}")
+                continue
+
+    return all_moves_histories
 
 
 def count_stones_on_board(moves: list, board_size: int = 19) -> dict:
@@ -161,6 +212,10 @@ if __name__ == "__main__":
         config_path="cpp/configs/analysis_example.cfg",
         model_path="cpp/tests/models/g170e-b10c128-s1141046784-d204142634.bin.gz"
     )
+
+    json_example = {} # Placeholder for actual JSON input
+    flagged_positions = json_example
+    
     
     # Analyze a position
     moves = [
@@ -169,6 +224,8 @@ if __name__ == "__main__":
         ["B", "Q16"],
         ["W", "D16"],
     ]
+
+
     
     embedding = analyzer.analyze_position(
         moves=moves,
