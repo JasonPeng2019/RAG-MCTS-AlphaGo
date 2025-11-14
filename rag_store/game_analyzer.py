@@ -236,13 +236,14 @@ if __name__ == "__main__":
     
     # Print results
     print(f"State Hash: {embedding.state_hash}")
-    print(f"Turn: {embedding.turn_number}")
-    print(f"Player to move: {embedding.player_to_move}")
+    print(f"Sym Hash: {embedding.sym_hash}")
+    print(f"Query ID: {embedding.query_id}")
     print(f"Winrate: {embedding.winrate:.3f}")
     print(f"Score Lead: {embedding.score_lead:.2f}")
-    print(f"Visits: {embedding.visits}")
+    print(f"Komi: {embedding.komi}")
     print(f"Policy shape: {len(embedding.policy) if embedding.policy else 'None'}")
     print(f"Ownership shape: {len(embedding.ownership) if embedding.ownership else 'None'}")
+    print(f"Move infos: {len(embedding.move_infos) if embedding.move_infos else 'None'}")
     
     # Convert to dict for storage
     data = embedding.to_dict()
