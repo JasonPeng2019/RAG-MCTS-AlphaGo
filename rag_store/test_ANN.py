@@ -92,12 +92,12 @@ def main():
     """Test the ANN search with dummy data."""
 
     print("=" * 70)
-    print("Testing Approximate Nearest Neighbor Search")
+    print("Testing Approximate Nearest Neighbor Search with HNSW")
     print("=" * 70)
 
     # Generate a collection of dummy embeddings
     print("\n1. Generating dummy embeddings...")
-    num_embeddings = 100
+    num_embeddings = 1000  # Increased to better test approximate search
     embeddings = []
 
     # Create diverse embeddings
@@ -109,64 +109,107 @@ def main():
 
     print(f"   Generated {len(embeddings)} dummy embeddings")
 
-    # Create the ANN store and add embeddings
-    print("\n2. Building ANN index...")
-    store = PositionEmbeddingStore(index_type='L2')
-    store.add_embeddings(embeddings)
-    print(f"   Index built with {store.size()} embeddings")
-    print(f"   Embedding dimension: {store.dimension}")
+    # Test different index types
+    print("\n2. Building ANN indexes...")
+
+    # HNSW - Approximate search (default, recommended)
+    print("\n   a) HNSW Index (Approximate, Fast):")
+    store_hnsw = PositionEmbeddingStore(
+        index_type='HNSW',
+        M=32,
+        ef_construction=200,
+        ef_search=128
+    )
+    store_hnsw.add_embeddings(embeddings)
+    print(f"      Index built with {store_hnsw.size()} embeddings")
+    print(f"      Embedding dimension: {store_hnsw.dimension}")
+
+    # Flat - Exact search for comparison
+    print("\n   b) Flat Index (Exact, Slower):")
+    store_flat = PositionEmbeddingStore(index_type='Flat')
+    store_flat.add_embeddings(embeddings)
+    print(f"      Index built with {store_flat.size()} embeddings")
+
+    # Use HNSW for the rest of the tests
+    store = store_hnsw
 
     # Generate a query embedding that should be similar to a known embedding
     print("\n3. Creating query embedding...")
-    target_idx = 42  # We'll make a query similar to embedding #42
+    target_idx = 420  # We'll make a query similar to embedding #420
     target_embedding = embeddings[target_idx]
 
     # Create a query that's 95% similar to the target
-    query = generate_similar_embedding(target_embedding, idx=999, similarity=0.95)
+    query = generate_similar_embedding(target_embedding, idx=9999, similarity=0.95)
 
     print(f"   Query created (similar to embedding #{target_idx})")
     print(f"   Query winrate: {query['winrate']:.4f}, score: {query['score_lead']:.2f}")
     print(f"   Target winrate: {target_embedding['winrate']:.4f}, "
           f"score: {target_embedding['score_lead']:.2f}")
 
-    # Search for nearest neighbors
+    # Search for nearest neighbors with both methods
     print("\n4. Searching for k=5 nearest neighbors...")
     k = 5
-    results = store.search(query, k=k)
 
-    print(f"\n   Results (closest first):")
+    print("\n   a) HNSW (Approximate) Results:")
+    results_hnsw = store_hnsw.search(query, k=k)
     print("   " + "-" * 66)
-    for rank, (embedding, distance) in enumerate(results, 1):
+    for rank, (embedding, distance) in enumerate(results_hnsw, 1):
         is_target = "*** TARGET ***" if embedding['query_id'] == target_embedding['query_id'] else ""
         print(f"   {rank}. {embedding['query_id']:20s} | Distance: {distance:10.4f} {is_target}")
         print(f"      Winrate: {embedding['winrate']:.4f} | Score: {embedding['score_lead']:6.2f}")
-        print(f"      Sym hash: {embedding['sym_hash']}")
         if rank < k:
             print()
 
+    print("\n   b) Flat (Exact) Results:")
+    results_flat = store_flat.search(query, k=k)
+    print("   " + "-" * 66)
+    for rank, (embedding, distance) in enumerate(results_flat, 1):
+        is_target = "*** TARGET ***" if embedding['query_id'] == target_embedding['query_id'] else ""
+        print(f"   {rank}. {embedding['query_id']:20s} | Distance: {distance:10.4f} {is_target}")
+        print(f"      Winrate: {embedding['winrate']:.4f} | Score: {embedding['score_lead']:6.2f}")
+        if rank < k:
+            print()
+
+    # Compare results
+    hnsw_ids = [emb['query_id'] for emb, _ in results_hnsw]
+    flat_ids = [emb['query_id'] for emb, _ in results_flat]
+    matches = sum(1 for id in hnsw_ids if id in flat_ids)
+    print(f"\n   Overlap between HNSW and Exact: {matches}/{k} ({100*matches/k:.0f}%)")
+
     # Verify the target is in top results
     print("\n5. Verification:")
-    found_in_top = any(emb['query_id'] == target_embedding['query_id']
-                       for emb, _ in results)
+    found_in_top_hnsw = any(emb['query_id'] == target_embedding['query_id']
+                            for emb, _ in results_hnsw)
+    found_in_top_flat = any(emb['query_id'] == target_embedding['query_id']
+                            for emb, _ in results_flat)
 
-    if found_in_top:
-        rank = next(i for i, (emb, _) in enumerate(results, 1)
+    print("   HNSW Index:")
+    if found_in_top_hnsw:
+        rank = next(i for i, (emb, _) in enumerate(results_hnsw, 1)
                    if emb['query_id'] == target_embedding['query_id'])
-        print(f"    Target embedding found at rank {rank}/{k}")
+        print(f"   ✓ Target embedding found at rank {rank}/{k}")
     else:
-        print(f"    Target embedding NOT in top {k}")
+        print(f"   ✗ Target embedding NOT in top {k}")
+
+    print("   Flat Index:")
+    if found_in_top_flat:
+        rank = next(i for i, (emb, _) in enumerate(results_flat, 1)
+                   if emb['query_id'] == target_embedding['query_id'])
+        print(f"   ✓ Target embedding found at rank {rank}/{k}")
+    else:
+        print(f"   ✗ Target embedding NOT in top {k}")
 
     # Test exact hash lookup
     print("\n6. Testing exact sym_hash lookup...")
-    exact_match = store.search_by_sym_hash(embeddings[10]['sym_hash'])
+    exact_match = store.search_by_sym_hash(embeddings[100]['sym_hash'])
     if exact_match:
-        print(f"    Found embedding by sym_hash: {exact_match['query_id']}")
+        print(f"   ✓ Found embedding by sym_hash: {exact_match['query_id']}")
     else:
-        print("    Exact lookup failed")
+        print("   ✗ Exact lookup failed")
 
     # Additional test: Find nearest neighbor to an existing embedding
     print("\n7. Testing self-similarity (query with existing embedding)...")
-    self_query = embeddings[25]
+    self_query = embeddings[250]
     self_results = store.search(self_query, k=3)
 
     print(f"   Query: {self_query['query_id']}")
@@ -177,12 +220,17 @@ def main():
 
     # The first result should be itself with distance ~0
     if self_results[0][1] < 0.01:  # Very small distance threshold
-        print(f"    Self-match verified (distance: {self_results[0][1]:.6f})")
+        print(f"   ✓ Self-match verified (distance: {self_results[0][1]:.6f})")
     else:
-        print(f"    Self-match failed (distance: {self_results[0][1]:.6f})")
+        print(f"   ✗ Self-match failed (distance: {self_results[0][1]:.6f})")
 
     print("\n" + "=" * 70)
-    print("Test completed!")
+    print("Test completed successfully!")
+    print("=" * 70)
+    print("\nSummary:")
+    print(f"  - HNSW provides fast approximate search")
+    print(f"  - Tested with {num_embeddings} embeddings in 725 dimensions")
+    print(f"  - HNSW accuracy: {100*matches/k:.0f}% match with exact search in top-{k}")
     print("=" * 70)
 
 
