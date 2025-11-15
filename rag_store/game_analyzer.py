@@ -156,8 +156,8 @@ class GoStateEmbedding:
         self.query_id = katago_response['id']
 
         # Temporary fields for storage decision (not saved to DB)
-        self.score_stdev = katago_response['rootInfo']['scoreStdev']
-        self.lcb = katago_response['rootInfo']['lcb']
+        self.score_stdev = katago_response['rootInfo'].get('scoreStdev', 0)
+        self.lcb = katago_response['rootInfo'].get('lcb', 0)
 
     def to_dict(self):
         """Convert to dictionary for RAG storage."""
@@ -238,35 +238,69 @@ class KataGoAnalyzer:
 
 # Example Usage
 if __name__ == "__main__":
+    import argparse
+    
+    parser = argparse.ArgumentParser(description='Analyze flagged positions from selfplay games')
+    parser.add_argument('--katago-path', default='../../build/katago',
+                       help='Path to KataGo executable')
+    parser.add_argument('--config', default='../../katago_repo/run/analysis.cfg',
+                       help='Path to KataGo analysis config')
+    parser.add_argument('--model', default='../../katago_repo/run/kata1-b28c512nbt-s11653980416-d5514111622.bin.gz',
+                       help='Path to KataGo model')
+    parser.add_argument('--csv', default='rag_files_list.csv',
+                       help='Path to CSV file containing JSON filenames')
+    parser.add_argument('--json-dir', default='../../build/rag_data',
+                       help='Directory containing RAG JSON game files')
+    parser.add_argument('--output-dir', default='./rag_output',
+                       help='Directory to save output JSON database')
+    parser.add_argument('--max-visits', type=int, default=8000,
+                       help='Maximum MCTS visits for analysis')
+    parser.add_argument('--max-positions', type=int, default=None,
+                       help='Maximum number of positions to process (for testing)')
+    
+    args = parser.parse_args()
+    
     # Initialize analyzer
+    print(f"Initializing KataGo analyzer...")
+    print(f"  KataGo: {args.katago_path}")
+    print(f"  Config: {args.config}")
+    print(f"  Model: {args.model}")
+    
     analyzer = KataGoAnalyzer(
-        katago_path="./katago",
-        config_path="cpp/configs/analysis_example.cfg",
-        model_path="cpp/tests/models/g170e-b10c128-s1141046784-d204142634.bin.gz"
+        katago_path=args.katago_path,
+        config_path=args.config,
+        model_path=args.model
     )
 
     # Configure paths
-    csv_path = "rag_files_list.csv"  # CSV containing JSON filenames
-    json_dir = "../../build/rag_data"  # Directory containing the JSON game files
-    output_dir = "./json"  # Directory to save output JSON files
+    csv_path = args.csv
+    json_dir = args.json_dir
+    output_dir = args.output_dir
 
     # Create output directory if it doesn't exist
     os.makedirs(output_dir, exist_ok=True)
 
     # Parse CSV and load all flagged positions from JSON files
+    print(f"\nLoading flagged positions from CSV: {csv_path}")
+    print(f"Reading JSON files from: {json_dir}")
     flagged_positions = parse_flagged_positions_csv(csv_path, json_dir)
     
-    print(f"Found {len(flagged_positions)} flagged positions from CSV")
+    total_positions = len(flagged_positions)
+    print(f"Found {total_positions} flagged positions")
+    
+    if args.max_positions:
+        flagged_positions = flagged_positions[:args.max_positions]
+        print(f"Processing first {len(flagged_positions)} positions (limited by --max-positions)")
 
+    # Process all positions
+    all_analyzed_positions = []
+    output_path = os.path.join(output_dir, "rag_database.json")
+    
     for idx, position_info in enumerate(flagged_positions):
-        if idx > 5:
-            break
-        output_json = {}
         game_id = position_info['game_id']
         filename = position_info['filename']
         moves_history = position_info['moves_history']
         position_data = position_info['position_data']
-        position_children = position_info['children']
         
         print(f"\n{'='*60}")
         print(f"Processing position {idx+1}/{len(flagged_positions)}")
@@ -275,46 +309,59 @@ if __name__ == "__main__":
         print(f"Move number: {position_data.get('move_number', 'N/A')}")
         print(f"Moves played: {len(moves_history)}")
         
-        # Analyze position with KataGo
+        # Analyze position with KataGo (offline MCTS for depth)
         embedding = analyzer.analyze_position(
             moves=moves_history,
-            komi=7.5,
+            komi=position_data.get('komi', 7.5),
             rules="chinese",
-            max_visits=5  # Quick analysis
+            max_visits=args.max_visits
         ) 
 
-        # Print results
-        output_json['state_hash'] = embedding.state_hash
-        output_json['sym_hash'] = embedding.sym_hash
-        output_json['policy'] = embedding.policy
-        output_json['ownership'] = embedding.ownership
-        output_json['winrate'] = embedding.winrate
-        output_json['score_lead'] = embedding.score_lead
-        output_json['move_infos'] = embedding.move_infos
-        output_json['komi'] = embedding.komi
-        output_json['query_id'] = embedding.query_id
-        output_json['stone_count'] = count_stones_on_board(moves_history)
-        for child in position_children:
-            output_json['child_nodes'] = {child['move']: [child['value'], child['policy']]}
-
-        # Save output_json to file
-        output_filename = f"{game_id}_position_{idx+1}.json"
-        output_path = os.path.join(output_dir, output_filename)
-
-        with open(output_path, 'w', encoding='utf-8') as f:
-            json.dump(output_json, f, indent=4)
-
-        print(f"Saved JSON to: {output_path}")
-
-        # Print uncertainty metrics from original data
+        # Build output JSON entry
+        output_json = {
+            'sym_hash': embedding.sym_hash,
+            'state_hash': embedding.state_hash,
+            'policy': embedding.policy,
+            'ownership': embedding.ownership,
+            'winrate': embedding.winrate,
+            'score_lead': embedding.score_lead,
+            'move_infos': embedding.move_infos,
+            'komi': embedding.komi,
+            'query_id': embedding.query_id,
+            'stone_count': count_stones_on_board(moves_history),
+            'child_nodes': {}
+        }
+        
+        # Add child nodes from original selfplay data
+        if 'children' in position_data:
+            for child in position_data['children']:
+                output_json['child_nodes'][child['move']] = {
+                    'value': child.get('value', 0),
+                    'prior': child.get('prior', 0),
+                    'visits': child.get('visits', 0),
+                    'child_sym_hash': child.get('child_sym_hash', '')
+                }
+        
+        all_analyzed_positions.append(output_json)
+        
+        # Print progress
         if 'uncertainty_metrics' in position_data:
             metrics = position_data['uncertainty_metrics']
-            print(f"Policy Entropy: {metrics.get('policy_entropy', 'N/A')}")
-            print(f"Value Variance: {metrics.get('value_variance', 'N/A')}")
-            print(f"Combined Score: {metrics.get('combined_score', 'N/A')}")
+            print(f"Original uncertainty - Entropy: {metrics.get('policy_entropy', 'N/A'):.3f}, "
+                  f"Variance: {metrics.get('value_variance', 'N/A'):.3f}")
+        print(f"Analyzed - Winrate: {embedding.winrate:.3f}, Score Lead: {embedding.score_lead:.2f}")
         
-        # Convert to dict for storage
-        data = embedding.to_dict()
-        print(f"Storable dict keys: {list(data.keys())}")
+        # Write incrementally after each position
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump(all_analyzed_positions, f, indent=2)
+        
+        if (idx + 1) % 10 == 0:
+            print(f"💾 Saved progress: {len(all_analyzed_positions)} positions ({os.path.getsize(output_path) / 1024 / 1024:.2f} MB)")
+
+    # Final summary
+    print(f"\n{'='*60}")
+    print(f"✓ Successfully created RAG database with {len(all_analyzed_positions)} positions")
+    print(f"  File: {output_path}")
+    print(f"  Size: {os.path.getsize(output_path) / 1024 / 1024:.2f} MB")
     
     analyzer.close()
