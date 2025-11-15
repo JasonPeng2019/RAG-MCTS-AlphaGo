@@ -1,0 +1,625 @@
+2025-11-14 23:24:02-0500: Running with following config:
+logDir = analysis_logs
+maxVisits = 500
+nnCacheSizePowerOfTwo = 23
+nnMaxBatchSize = 64
+nnMutexPoolSizePowerOfTwo = 17
+nnRandomize = true
+numAnalysisThreads = 2
+numSearchThreads = 16
+reportAnalysisWinratesAs = BLACK
+
+2025-11-14 23:24:02-0500: Analysis Engine starting...
+2025-11-14 23:24:02-0500: KataGo v1.16.4
+2025-11-14 23:24:02-0500: nnRandSeed0 = 841290736015750612
+2025-11-14 23:24:02-0500: After dedups: nnModelFile0 = ../../katago_repo/run/kata1-b28c512nbt-s11653980416-d5514111622.bin.gz useFP16 auto useNHWC auto
+2025-11-14 23:24:02-0500: Initializing neural net buffer to be size 19 * 19 allowing smaller boards
+2025-11-14 23:24:07-0500: Found OpenCL Platform 0: NVIDIA CUDA (NVIDIA Corporation) (OpenCL 3.0 CUDA 12.8.98)
+2025-11-14 23:24:07-0500: Found 1 device(s) on platform 0 with type CPU or GPU or Accelerator
+2025-11-14 23:24:07-0500: Found OpenCL Device 0: NVIDIA RTX 6000 Ada Generation (NVIDIA Corporation) (score 11000300)
+2025-11-14 23:24:07-0500: Creating context for OpenCL Platform: NVIDIA CUDA (NVIDIA Corporation) (OpenCL 3.0 CUDA 12.8.98)
+2025-11-14 23:24:07-0500: Using OpenCL Device 0: NVIDIA RTX 6000 Ada Generation (NVIDIA Corporation) OpenCL 3.0 CUDA (Extensions: cl_khr_global_int32_base_atomics cl_khr_global_int32_extended_atomics cl_khr_local_int32_base_atomics cl_khr_local_int32_extended_atomics cl_khr_fp64 cl_khr_3d_image_writes cl_khr_byte_addressable_store cl_khr_icd cl_khr_gl_sharing cl_nv_compiler_options cl_nv_device_attribute_query cl_nv_pragma_unroll cl_nv_copy_opts cl_khr_gl_event cl_nv_create_buffer cl_khr_int64_base_atomics cl_khr_int64_extended_atomics cl_nv_kernel_attribute cl_khr_device_uuid cl_khr_pci_bus_info cl_khr_external_semaphore cl_khr_external_memory cl_khr_external_semaphore_opaque_fd cl_khr_external_memory_opaque_fd cl_khr_semaphore)
+2025-11-14 23:24:07-0500: Loaded tuning parameters from: /thayerfs/home/f004h1v/.katago/opencltuning/tune11_gpuNVIDIARTX6000AdaGeneration_x19_y19_c512_mv15.txt
+2025-11-14 23:24:07-0500: OpenCL backend thread 0: Model version 15
+2025-11-14 23:24:07-0500: OpenCL backend thread 0: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-14 23:24:10-0500: OpenCL backend thread 0: FP16Storage true FP16Compute false FP16TensorCores true FP16TensorCoresFor1x1 false
+2025-11-14 23:24:10-0500: Loaded config ../../katago_repo/run/analysis.cfg
+2025-11-14 23:24:10-0500: Loaded model ../../katago_repo/run/kata1-b28c512nbt-s11653980416-d5514111622.bin.gz
+2025-11-14 23:24:10-0500: Analyzing up to 2 positions at a time in parallel
+2025-11-14 23:24:10-0500: Started, ready to begin handling requests
+2025-11-14 23:25:56-0500: Error: {"error":"Illegal move 65: A4","field":"moves","id":"query_14"}
+2025-11-14 23:25:56-0500: Error: {"error":"Illegal move 65: A4","field":"moves","id":"query_15"}
+2025-11-14 23:25:56-0500: Error: {"error":"Illegal move 65: A4","field":"moves","id":"query_16"}
+2025-11-14 23:25:56-0500: Error: {"error":"Illegal move 65: A4","field":"moves","id":"query_17"}
+2025-11-14 23:25:56-0500: Error: {"error":"Illegal move 65: A4","field":"moves","id":"query_18"}
+2025-11-14 23:25:56-0500: Error: {"error":"Illegal move 65: A4","field":"moves","id":"query_19"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_36"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_37"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_38"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_39"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_40"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_41"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_42"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_43"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_44"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_45"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_46"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_47"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_48"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_49"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_50"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_51"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_52"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_53"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_54"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_55"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_56"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_57"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_58"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_59"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_60"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_61"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_62"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_63"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_64"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_65"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_66"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_67"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_68"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_69"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_70"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_71"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_72"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_73"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_74"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_75"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_76"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_77"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_78"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_79"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_80"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_81"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_82"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_83"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_84"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_85"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_86"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_87"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_88"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_89"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_90"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_91"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_92"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_93"}
+2025-11-14 23:28:38-0500: Error: {"error":"Illegal move 77: E9","field":"moves","id":"query_94"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_135"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_136"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_137"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_138"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_139"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_140"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_141"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_142"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_143"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_144"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_145"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_146"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_147"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_148"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_149"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_150"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_151"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_152"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_153"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_154"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_155"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_156"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_157"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_158"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_159"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_160"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_161"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_162"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_163"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_164"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_165"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_166"}
+2025-11-14 23:33:29-0500: Error: {"error":"Illegal move 200: H12","field":"moves","id":"query_167"}
+2025-11-14 23:38:21-0500: Error: {"error":"Illegal move 175: C1","field":"moves","id":"query_205"}
+2025-11-14 23:38:21-0500: Error: {"error":"Illegal move 175: C1","field":"moves","id":"query_206"}
+2025-11-14 23:38:21-0500: Error: {"error":"Illegal move 175: C1","field":"moves","id":"query_207"}
+2025-11-14 23:38:21-0500: Error: {"error":"Illegal move 175: C1","field":"moves","id":"query_208"}
+2025-11-14 23:38:21-0500: Error: {"error":"Illegal move 175: C1","field":"moves","id":"query_209"}
+2025-11-14 23:38:21-0500: Error: {"error":"Illegal move 175: C1","field":"moves","id":"query_210"}
+2025-11-14 23:38:21-0500: Error: {"error":"Illegal move 175: C1","field":"moves","id":"query_211"}
+2025-11-14 23:38:21-0500: Error: {"error":"Illegal move 175: C1","field":"moves","id":"query_212"}
+2025-11-14 23:38:21-0500: Error: {"error":"Illegal move 175: C1","field":"moves","id":"query_213"}
+2025-11-14 23:38:21-0500: Error: {"error":"Illegal move 175: C1","field":"moves","id":"query_214"}
+2025-11-14 23:38:21-0500: Error: {"error":"Illegal move 175: C1","field":"moves","id":"query_215"}
+2025-11-14 23:38:21-0500: Error: {"error":"Illegal move 175: C1","field":"moves","id":"query_216"}
+2025-11-14 23:38:21-0500: Error: {"error":"Illegal move 175: C1","field":"moves","id":"query_217"}
+2025-11-14 23:38:21-0500: Error: {"error":"Illegal move 175: C1","field":"moves","id":"query_218"}
+2025-11-14 23:38:21-0500: Error: {"error":"Illegal move 175: C1","field":"moves","id":"query_219"}
+2025-11-14 23:38:21-0500: Error: {"error":"Illegal move 175: C1","field":"moves","id":"query_220"}
+2025-11-14 23:38:21-0500: Error: {"error":"Illegal move 175: C1","field":"moves","id":"query_221"}
+2025-11-14 23:38:21-0500: Error: {"error":"Illegal move 175: C1","field":"moves","id":"query_222"}
+2025-11-14 23:38:21-0500: Error: {"error":"Illegal move 175: C1","field":"moves","id":"query_223"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_238"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_239"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_240"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_241"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_242"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_243"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_244"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_245"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_246"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_247"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_248"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_249"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_250"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_251"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_252"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_253"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_254"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_255"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_256"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_257"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_258"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_259"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_260"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_261"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_262"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_263"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_264"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_265"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_266"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_267"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_268"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_269"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_270"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_271"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_272"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_273"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_274"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_275"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_276"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_277"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_278"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_279"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_280"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_281"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_282"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_283"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_284"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_285"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_286"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_287"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_288"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_289"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_290"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_291"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_292"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_293"}
+2025-11-14 23:40:31-0500: Error: {"error":"Illegal move 64: D1","field":"moves","id":"query_294"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_298"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_299"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_300"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_301"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_302"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_303"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_304"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_305"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_306"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_307"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_308"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_309"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_310"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_311"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_312"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_313"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_314"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_315"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_316"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_317"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_318"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_319"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_320"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_321"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_322"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_323"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_324"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_325"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_326"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_327"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_328"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_329"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_330"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_331"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_332"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_333"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_334"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_335"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_336"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_337"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_338"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_339"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_340"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_341"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_342"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_343"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_344"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_345"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_346"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_347"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_348"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_349"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_350"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_351"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_352"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_353"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_354"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_355"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_356"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_357"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_358"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_359"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_360"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_361"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_362"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_363"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_364"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_365"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_366"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_367"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_368"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_369"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_370"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_371"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_372"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_373"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_374"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_375"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_376"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_377"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_378"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_379"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_380"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_381"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_382"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_383"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_384"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_385"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_386"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_387"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_388"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_389"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_390"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_391"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_392"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_393"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_394"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_395"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_396"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_397"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_398"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_399"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_400"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_401"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_402"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_403"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_404"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_405"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_406"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_407"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_408"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_409"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_410"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_411"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_412"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_413"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_414"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_415"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_416"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_417"}
+2025-11-14 23:40:53-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_418"}
+2025-11-14 23:40:54-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_419"}
+2025-11-14 23:40:54-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_420"}
+2025-11-14 23:40:54-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_421"}
+2025-11-14 23:40:54-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_422"}
+2025-11-14 23:40:54-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_423"}
+2025-11-15 00:03:33-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_597"}
+2025-11-15 00:03:33-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_598"}
+2025-11-15 00:03:33-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_599"}
+2025-11-15 00:03:33-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_600"}
+2025-11-15 00:03:33-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_601"}
+2025-11-15 00:03:33-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_602"}
+2025-11-15 00:03:33-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_603"}
+2025-11-15 00:03:33-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_604"}
+2025-11-15 00:03:33-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_605"}
+2025-11-15 00:03:33-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_606"}
+2025-11-15 00:03:33-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_607"}
+2025-11-15 00:03:33-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_608"}
+2025-11-15 00:03:33-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_609"}
+2025-11-15 00:03:33-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_610"}
+2025-11-15 00:03:33-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_611"}
+2025-11-15 00:03:33-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_612"}
+2025-11-15 00:03:33-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_613"}
+2025-11-15 00:03:33-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_614"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_819"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_820"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_821"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_822"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_823"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_824"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_825"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_826"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_827"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_828"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_829"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_830"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_831"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_832"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_833"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_834"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_835"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_836"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_837"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_838"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_839"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_840"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_841"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_842"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_843"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_844"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_845"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_846"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_847"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_848"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_849"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_850"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_851"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_852"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_853"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_854"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_855"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_856"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_857"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_858"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_859"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_860"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_861"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_862"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_863"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_864"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_865"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_866"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_867"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_868"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_869"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_870"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_871"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_872"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_873"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_874"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_875"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_876"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_877"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_878"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_879"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_880"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_881"}
+2025-11-15 00:34:12-0500: Error: {"error":"Illegal move 233: C17","field":"moves","id":"query_882"}
+2025-11-15 00:45:48-0500: Error: {"error":"Illegal move 174: A7","field":"moves","id":"query_977"}
+2025-11-15 00:56:53-0500: Error: {"error":"Illegal move 347: N10","field":"moves","id":"query_1048"}
+2025-11-15 00:56:53-0500: Error: {"error":"Illegal move 347: N10","field":"moves","id":"query_1049"}
+2025-11-15 00:56:53-0500: Error: {"error":"Illegal move 347: N10","field":"moves","id":"query_1050"}
+2025-11-15 00:56:53-0500: Error: {"error":"Illegal move 347: N10","field":"moves","id":"query_1051"}
+2025-11-15 00:56:53-0500: Error: {"error":"Illegal move 347: N10","field":"moves","id":"query_1052"}
+2025-11-15 00:56:53-0500: Error: {"error":"Illegal move 347: N10","field":"moves","id":"query_1053"}
+2025-11-15 00:56:53-0500: Error: {"error":"Illegal move 347: N10","field":"moves","id":"query_1054"}
+2025-11-15 00:56:53-0500: Error: {"error":"Illegal move 347: N10","field":"moves","id":"query_1055"}
+2025-11-15 01:08:22-0500: Error: {"error":"Illegal move 192: B5","field":"moves","id":"query_1129"}
+2025-11-15 01:08:22-0500: Error: {"error":"Illegal move 192: B5","field":"moves","id":"query_1130"}
+2025-11-15 01:08:22-0500: Error: {"error":"Illegal move 192: B5","field":"moves","id":"query_1131"}
+2025-11-15 01:08:22-0500: Error: {"error":"Illegal move 192: B5","field":"moves","id":"query_1132"}
+2025-11-15 01:08:22-0500: Error: {"error":"Illegal move 192: B5","field":"moves","id":"query_1133"}
+2025-11-15 01:08:22-0500: Error: {"error":"Illegal move 192: B5","field":"moves","id":"query_1134"}
+2025-11-15 01:08:22-0500: Error: {"error":"Illegal move 192: B5","field":"moves","id":"query_1135"}
+2025-11-15 01:08:22-0500: Error: {"error":"Illegal move 192: B5","field":"moves","id":"query_1136"}
+2025-11-15 01:08:22-0500: Error: {"error":"Illegal move 192: B5","field":"moves","id":"query_1137"}
+2025-11-15 01:08:22-0500: Error: {"error":"Illegal move 192: B5","field":"moves","id":"query_1138"}
+2025-11-15 01:08:22-0500: Error: {"error":"Illegal move 192: B5","field":"moves","id":"query_1139"}
+2025-11-15 01:08:22-0500: Error: {"error":"Illegal move 192: B5","field":"moves","id":"query_1140"}
+2025-11-15 01:08:22-0500: Error: {"error":"Illegal move 192: B5","field":"moves","id":"query_1141"}
+2025-11-15 01:08:22-0500: Error: {"error":"Illegal move 192: B5","field":"moves","id":"query_1142"}
+2025-11-15 01:08:22-0500: Error: {"error":"Illegal move 192: B5","field":"moves","id":"query_1143"}
+2025-11-15 01:08:22-0500: Error: {"error":"Illegal move 192: B5","field":"moves","id":"query_1144"}
+2025-11-15 01:08:22-0500: Error: {"error":"Illegal move 192: B5","field":"moves","id":"query_1145"}
+2025-11-15 01:08:22-0500: Error: {"error":"Illegal move 192: B5","field":"moves","id":"query_1146"}
+2025-11-15 01:08:22-0500: Error: {"error":"Illegal move 192: B5","field":"moves","id":"query_1147"}
+2025-11-15 01:08:22-0500: Error: {"error":"Illegal move 192: B5","field":"moves","id":"query_1148"}
+2025-11-15 01:08:22-0500: Error: {"error":"Illegal move 192: B5","field":"moves","id":"query_1149"}
+2025-11-15 01:08:22-0500: Error: {"error":"Illegal move 192: B5","field":"moves","id":"query_1150"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1152"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1153"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1154"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1155"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1156"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1157"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1158"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1159"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1160"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1161"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1162"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1163"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1164"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1165"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1166"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1167"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1168"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1169"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1170"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1171"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1172"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1173"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1174"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1175"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1176"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1177"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1178"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1179"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1180"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1181"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1182"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1183"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1184"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1185"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1186"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1187"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1188"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1189"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1190"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1191"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1192"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1193"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1194"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1195"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1196"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1197"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1198"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1199"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1200"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1201"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1202"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1203"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1204"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1205"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1206"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1207"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1208"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1209"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1210"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1211"}
+2025-11-15 01:08:31-0500: Error: {"error":"Could not parse board location: Q15","field":"moves","id":"query_1212"}
+2025-11-15 01:08:44-0500: Error: {"error":"Could not parse board location: C15","field":"moves","id":"query_1215"}
+2025-11-15 01:08:44-0500: Error: {"error":"Could not parse board location: C15","field":"moves","id":"query_1216"}
+2025-11-15 01:08:44-0500: Error: {"error":"Could not parse board location: C15","field":"moves","id":"query_1217"}
+2025-11-15 01:08:44-0500: Error: {"error":"Could not parse board location: C15","field":"moves","id":"query_1218"}
+2025-11-15 01:08:44-0500: Error: {"error":"Could not parse board location: C15","field":"moves","id":"query_1219"}
+2025-11-15 01:12:19-0500: Error: {"error":"Illegal move 115: H4","field":"moves","id":"query_1244"}
+2025-11-15 01:12:19-0500: Error: {"error":"Illegal move 115: H4","field":"moves","id":"query_1245"}
+2025-11-15 01:12:19-0500: Error: {"error":"Illegal move 115: H4","field":"moves","id":"query_1246"}
+2025-11-15 01:12:19-0500: Error: {"error":"Illegal move 115: H4","field":"moves","id":"query_1247"}
+2025-11-15 01:12:19-0500: Error: {"error":"Illegal move 115: H4","field":"moves","id":"query_1248"}
+2025-11-15 01:12:19-0500: Error: {"error":"Illegal move 115: H4","field":"moves","id":"query_1249"}
+2025-11-15 01:12:19-0500: Error: {"error":"Illegal move 115: H4","field":"moves","id":"query_1250"}
+2025-11-15 01:12:19-0500: Error: {"error":"Illegal move 115: H4","field":"moves","id":"query_1251"}
+2025-11-15 01:12:19-0500: Error: {"error":"Illegal move 115: H4","field":"moves","id":"query_1252"}
+2025-11-15 01:12:19-0500: Error: {"error":"Illegal move 115: H4","field":"moves","id":"query_1253"}
+2025-11-15 01:12:19-0500: Error: {"error":"Illegal move 115: H4","field":"moves","id":"query_1254"}
+2025-11-15 01:12:19-0500: Error: {"error":"Illegal move 115: H4","field":"moves","id":"query_1255"}
+2025-11-15 01:12:19-0500: Error: {"error":"Illegal move 115: H4","field":"moves","id":"query_1256"}
+2025-11-15 01:12:19-0500: Error: {"error":"Illegal move 115: H4","field":"moves","id":"query_1257"}
+2025-11-15 01:12:19-0500: Error: {"error":"Illegal move 115: H4","field":"moves","id":"query_1258"}
+2025-11-15 01:12:19-0500: Error: {"error":"Illegal move 115: H4","field":"moves","id":"query_1259"}
+2025-11-15 01:12:19-0500: Error: {"error":"Illegal move 115: H4","field":"moves","id":"query_1260"}
+2025-11-15 01:12:19-0500: Error: {"error":"Illegal move 115: H4","field":"moves","id":"query_1261"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1391"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1392"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1393"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1394"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1395"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1396"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1397"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1398"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1399"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1400"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1401"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1402"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1403"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1404"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1405"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1406"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1407"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1408"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1409"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1410"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1411"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1412"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1413"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1414"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1415"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1416"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1417"}
+2025-11-15 01:33:30-0500: Error: {"error":"Illegal move 180: E11","field":"moves","id":"query_1418"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1454"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1455"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1456"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1457"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1458"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1459"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1460"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1461"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1462"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1463"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1464"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1465"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1466"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1467"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1468"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1469"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1470"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1471"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1472"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1473"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1474"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1475"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1476"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1477"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1478"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1479"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1480"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1481"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1482"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1483"}
+2025-11-15 01:39:53-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1484"}
+2025-11-15 01:39:54-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1485"}
+2025-11-15 01:39:54-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1486"}
+2025-11-15 01:39:54-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1487"}
+2025-11-15 01:39:54-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1488"}
+2025-11-15 01:39:54-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1489"}
+2025-11-15 01:39:54-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1490"}
+2025-11-15 01:39:54-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1491"}
+2025-11-15 01:39:54-0500: Error: {"error":"Illegal move 175: Q3","field":"moves","id":"query_1492"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1494"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1495"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1496"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1497"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1498"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1499"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1500"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1501"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1502"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1503"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1504"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1505"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1506"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1507"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1508"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1509"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1510"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1511"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1512"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1513"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1514"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1515"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1516"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1517"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1518"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1519"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1520"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1521"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1522"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1523"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1524"}
+2025-11-15 01:40:06-0500: Error: {"error":"Could not parse board location: P16","field":"moves","id":"query_1525"}

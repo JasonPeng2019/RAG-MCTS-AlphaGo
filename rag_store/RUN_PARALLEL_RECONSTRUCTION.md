@@ -4,16 +4,22 @@ This guide runs deep MCTS analysis on all flagged positions across 5 GPUs in par
 
 ## System Setup
 
-**Available GPUs**: 7, 5, 3, 1, 2 (sorted by available memory)
+**Available GPUs**: 7, 5, 3, 1, 2 (auto-selected by nvidia-smi availability)
 
 **Data Split**:
-- GPU 7: rag_data_1 (200 files) → rag_output_1
-- GPU 5: rag_data_2 (200 files) → rag_output_2
-- GPU 3: rag_data_3 (200 files) → rag_output_3
-- GPU 1: rag_data_4 (200 files) → rag_output_4
-- GPU 2: rag_data_5 (171 files) → rag_output_5
+- GPU 7: rag_data_1 (200 files, ~2,559 positions) → rag_output_1
+- GPU 5: rag_data_2 (200 files, ~2,559 positions) → rag_output_2
+- GPU 3: rag_data_3 (200 files, ~2,559 positions) → rag_output_3
+- GPU 1: rag_data_4 (200 files, ~2,559 positions) → rag_output_4
+- GPU 2: rag_data_5 (171 files, ~2,191 positions) → rag_output_5
 
 **Total**: 971 RAG files containing ~12,797 flagged positions
+
+**Key Features**:
+- Uses exact game settings (rules, komi, board_size) from selfplay
+- Handles varied rulesets: koRules (SIMPLE/POSITIONAL/SITUATIONAL), scoringRules (AREA/TERRITORY), taxRules
+- Error handling for any remaining illegal moves
+- Incremental saving for progress tracking
 
 ## Configuration
 

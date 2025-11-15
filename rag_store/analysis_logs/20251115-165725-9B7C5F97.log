@@ -1,0 +1,132 @@
+2025-11-15 16:57:25-0500: Running with following config:
+logDir = analysis_logs
+maxVisits = 500
+nnCacheSizePowerOfTwo = 23
+nnMaxBatchSize = 64
+nnMutexPoolSizePowerOfTwo = 17
+nnRandomize = true
+numAnalysisThreads = 2
+numSearchThreads = 16
+reportAnalysisWinratesAs = BLACK
+
+2025-11-15 16:57:25-0500: Analysis Engine starting...
+2025-11-15 16:57:25-0500: KataGo v1.16.4
+2025-11-15 16:57:25-0500: nnRandSeed0 = 6054569601511555006
+2025-11-15 16:57:25-0500: After dedups: nnModelFile0 = ../../katago_repo/run/kata1-b28c512nbt-s11653980416-d5514111622.bin.gz useFP16 auto useNHWC auto
+2025-11-15 16:57:25-0500: Initializing neural net buffer to be size 19 * 19 allowing smaller boards
+2025-11-15 16:57:28-0500: Found OpenCL Platform 0: NVIDIA CUDA (NVIDIA Corporation) (OpenCL 3.0 CUDA 12.8.98)
+2025-11-15 16:57:28-0500: Found 1 device(s) on platform 0 with type CPU or GPU or Accelerator
+2025-11-15 16:57:28-0500: Found OpenCL Device 0: NVIDIA RTX 6000 Ada Generation (NVIDIA Corporation) (score 11000300)
+2025-11-15 16:57:28-0500: Creating context for OpenCL Platform: NVIDIA CUDA (NVIDIA Corporation) (OpenCL 3.0 CUDA 12.8.98)
+2025-11-15 16:57:28-0500: Using OpenCL Device 0: NVIDIA RTX 6000 Ada Generation (NVIDIA Corporation) OpenCL 3.0 CUDA (Extensions: cl_khr_global_int32_base_atomics cl_khr_global_int32_extended_atomics cl_khr_local_int32_base_atomics cl_khr_local_int32_extended_atomics cl_khr_fp64 cl_khr_3d_image_writes cl_khr_byte_addressable_store cl_khr_icd cl_khr_gl_sharing cl_nv_compiler_options cl_nv_device_attribute_query cl_nv_pragma_unroll cl_nv_copy_opts cl_khr_gl_event cl_nv_create_buffer cl_khr_int64_base_atomics cl_khr_int64_extended_atomics cl_nv_kernel_attribute cl_khr_device_uuid cl_khr_pci_bus_info cl_khr_external_semaphore cl_khr_external_memory cl_khr_external_semaphore_opaque_fd cl_khr_external_memory_opaque_fd cl_khr_semaphore)
+2025-11-15 16:57:28-0500: Loaded tuning parameters from: /thayerfs/home/f004h1v/.katago/opencltuning/tune11_gpuNVIDIARTX6000AdaGeneration_x19_y19_c512_mv15.txt
+2025-11-15 16:57:29-0500: OpenCL backend thread 0: Model version 15
+2025-11-15 16:57:29-0500: OpenCL backend thread 0: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-15 16:57:32-0500: OpenCL backend thread 0: FP16Storage true FP16Compute false FP16TensorCores true FP16TensorCoresFor1x1 false
+2025-11-15 16:57:32-0500: Loaded config ../../katago_repo/run/analysis.cfg
+2025-11-15 16:57:32-0500: Loaded model ../../katago_repo/run/kata1-b28c512nbt-s11653980416-d5514111622.bin.gz
+2025-11-15 16:57:32-0500: Analyzing up to 2 positions at a time in parallel
+2025-11-15 16:57:32-0500: Started, ready to begin handling requests
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_9"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_10"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_11"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_12"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_13"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_14"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_15"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_16"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_17"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_18"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_19"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_20"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_21"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_22"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_23"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_24"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_25"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_26"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_27"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_28"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_29"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_30"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_31"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_32"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_33"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_34"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_35"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_36"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_37"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_38"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_39"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_40"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_41"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_42"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_43"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_44"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_45"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_46"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_47"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_48"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_49"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_50"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_51"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_52"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_53"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_54"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_55"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_56"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_57"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_58"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_59"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_60"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_61"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_62"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_63"}
+2025-11-15 16:59:05-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_64"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_65"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_66"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_67"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_68"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_69"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_70"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_71"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_72"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_73"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_74"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_75"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_76"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_77"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_78"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_79"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_80"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_81"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_82"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_83"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_84"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_85"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_86"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_87"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_88"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_89"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_90"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_91"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_92"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_93"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_94"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_95"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_96"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_97"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_98"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_99"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_100"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_101"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_102"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_103"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_104"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_105"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_106"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_107"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_108"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_109"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_110"}
+2025-11-15 16:59:06-0500: Error: {"error":"Illegal move 43: J9","field":"moves","id":"query_111"}
