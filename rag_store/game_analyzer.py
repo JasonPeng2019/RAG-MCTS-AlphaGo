@@ -259,6 +259,8 @@ if __name__ == "__main__":
     print(f"Found {len(flagged_positions)} flagged positions from CSV")
 
     for idx, position_info in enumerate(flagged_positions):
+        if idx > 5:
+            break
         output_json = {}
         game_id = position_info['game_id']
         filename = position_info['filename']
