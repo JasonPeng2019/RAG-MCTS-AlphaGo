@@ -248,6 +248,10 @@ if __name__ == "__main__":
     # Configure paths
     csv_path = "rag_files_list.csv"  # CSV containing JSON filenames
     json_dir = "../../build/rag_data"  # Directory containing the JSON game files
+    output_dir = "./json"  # Directory to save output JSON files
+
+    # Create output directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
 
     # Parse CSV and load all flagged positions from JSON files
     flagged_positions = parse_flagged_positions_csv(csv_path, json_dir)
@@ -255,10 +259,12 @@ if __name__ == "__main__":
     print(f"Found {len(flagged_positions)} flagged positions from CSV")
 
     for idx, position_info in enumerate(flagged_positions):
+        output_json = {}
         game_id = position_info['game_id']
         filename = position_info['filename']
         moves_history = position_info['moves_history']
         position_data = position_info['position_data']
+        position_children = position_info['children']
         
         print(f"\n{'='*60}")
         print(f"Processing position {idx+1}/{len(flagged_positions)}")
@@ -276,16 +282,28 @@ if __name__ == "__main__":
         ) 
 
         # Print results
-        print(f"State Hash: {embedding.state_hash}")
-        print(f"Sym Hash: {embedding.sym_hash}")
-        print(f"Query ID: {embedding.query_id}")
-        print(f"Winrate: {embedding.winrate:.3f}")
-        print(f"Score Lead: {embedding.score_lead:.2f}")
-        print(f"Komi: {embedding.komi}")
-        print(f"Policy shape: {len(embedding.policy) if embedding.policy else 'None'}")
-        print(f"Ownership shape: {len(embedding.ownership) if embedding.ownership else 'None'}")
-        print(f"Move infos: {len(embedding.move_infos) if embedding.move_infos else 'None'}")
-        
+        output_json['state_hash'] = embedding.state_hash
+        output_json['sym_hash'] = embedding.sym_hash
+        output_json['policy'] = embedding.policy
+        output_json['ownership'] = embedding.ownership
+        output_json['winrate'] = embedding.winrate
+        output_json['score_lead'] = embedding.score_lead
+        output_json['move_infos'] = embedding.move_infos
+        output_json['komi'] = embedding.komi
+        output_json['query_id'] = embedding.query_id
+        output_json['stone_count'] = count_stones_on_board(moves_history)
+        for child in position_children:
+            output_json['child_nodes'] = {child['move']: [child['value'], child['policy']]}
+
+        # Save output_json to file
+        output_filename = f"{game_id}_position_{idx+1}.json"
+        output_path = os.path.join(output_dir, output_filename)
+
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump(output_json, f, indent=4)
+
+        print(f"Saved JSON to: {output_path}")
+
         # Print uncertainty metrics from original data
         if 'uncertainty_metrics' in position_data:
             metrics = position_data['uncertainty_metrics']
