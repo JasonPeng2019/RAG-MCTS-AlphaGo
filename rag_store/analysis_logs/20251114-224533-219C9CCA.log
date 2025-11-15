@@ -1,0 +1,30 @@
+2025-11-14 22:45:33-0500: Running with following config:
+logDir = analysis_logs
+maxVisits = 500
+nnCacheSizePowerOfTwo = 23
+nnMaxBatchSize = 64
+nnMutexPoolSizePowerOfTwo = 17
+nnRandomize = true
+numAnalysisThreads = 2
+numSearchThreads = 16
+reportAnalysisWinratesAs = BLACK
+
+2025-11-14 22:45:33-0500: Analysis Engine starting...
+2025-11-14 22:45:33-0500: KataGo v1.16.4
+2025-11-14 22:45:33-0500: nnRandSeed0 = 18202190565987641265
+2025-11-14 22:45:33-0500: After dedups: nnModelFile0 = ../../katago_repo/run/kata1-b28c512nbt-s11653980416-d5514111622.bin.gz useFP16 auto useNHWC auto
+2025-11-14 22:45:33-0500: Initializing neural net buffer to be size 19 * 19 allowing smaller boards
+2025-11-14 22:45:38-0500: Found OpenCL Platform 0: NVIDIA CUDA (NVIDIA Corporation) (OpenCL 3.0 CUDA 12.8.98)
+2025-11-14 22:45:38-0500: Found 1 device(s) on platform 0 with type CPU or GPU or Accelerator
+2025-11-14 22:45:38-0500: Found OpenCL Device 0: NVIDIA RTX 6000 Ada Generation (NVIDIA Corporation) (score 11000300)
+2025-11-14 22:45:38-0500: Creating context for OpenCL Platform: NVIDIA CUDA (NVIDIA Corporation) (OpenCL 3.0 CUDA 12.8.98)
+2025-11-14 22:45:39-0500: Using OpenCL Device 0: NVIDIA RTX 6000 Ada Generation (NVIDIA Corporation) OpenCL 3.0 CUDA (Extensions: cl_khr_global_int32_base_atomics cl_khr_global_int32_extended_atomics cl_khr_local_int32_base_atomics cl_khr_local_int32_extended_atomics cl_khr_fp64 cl_khr_3d_image_writes cl_khr_byte_addressable_store cl_khr_icd cl_khr_gl_sharing cl_nv_compiler_options cl_nv_device_attribute_query cl_nv_pragma_unroll cl_nv_copy_opts cl_khr_gl_event cl_nv_create_buffer cl_khr_int64_base_atomics cl_khr_int64_extended_atomics cl_nv_kernel_attribute cl_khr_device_uuid cl_khr_pci_bus_info cl_khr_external_semaphore cl_khr_external_memory cl_khr_external_semaphore_opaque_fd cl_khr_external_memory_opaque_fd cl_khr_semaphore)
+2025-11-14 22:45:39-0500: Loaded tuning parameters from: /thayerfs/home/f004h1v/.katago/opencltuning/tune11_gpuNVIDIARTX6000AdaGeneration_x19_y19_c512_mv15.txt
+2025-11-14 22:45:40-0500: OpenCL backend thread 0: Model version 15
+2025-11-14 22:45:40-0500: OpenCL backend thread 0: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-14 22:45:42-0500: OpenCL backend thread 0: FP16Storage true FP16Compute false FP16TensorCores true FP16TensorCoresFor1x1 false
+2025-11-14 22:45:42-0500: Loaded config ../../katago_repo/run/analysis.cfg
+2025-11-14 22:45:42-0500: Loaded model ../../katago_repo/run/kata1-b28c512nbt-s11653980416-d5514111622.bin.gz
+2025-11-14 22:45:42-0500: Analyzing up to 2 positions at a time in parallel
+2025-11-14 22:45:42-0500: Started, ready to begin handling requests
+2025-11-14 22:47:47-0500: Error: {"error":"Illegal move 58: J1","field":"moves","id":"query_12"}
