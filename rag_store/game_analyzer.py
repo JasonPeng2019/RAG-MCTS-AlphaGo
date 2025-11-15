@@ -1,7 +1,9 @@
 import json
 import subprocess
 import csv
-from typing import Optional, List
+import os
+from pathlib import Path
+from typing import Optional, List, Dict
 
 try:
     from sgfmill import boards
@@ -9,54 +11,84 @@ except ImportError:
     boards = None
 
 
-def parse_flagged_positions_csv(csv_path: str) -> List[List[List]]:
+def parse_flagged_positions_csv(csv_path: str, json_dir: str) -> List[Dict]:
     """
-    Parse a CSV file containing JSON objects and extract all moves_history lists.
+    Parse a CSV file containing JSON filenames, load those JSON files from a directory,
+    and extract all flagged positions with their moves_history.
 
     Args:
-        csv_path: Path to CSV file where each row contains a JSON object
+        csv_path: Path to CSV file where each row contains a JSON filename
+        json_dir: Directory path where the JSON game files are stored
 
     Returns:
-        List of moves_history lists, where each moves_history is a list of
-        [player, location] pairs like [["B","Q4"], ["W","D4"], ...]
+        List of dictionaries, each containing:
+        - 'game_id': The game identifier
+        - 'filename': The JSON filename
+        - 'moves_history': List of [player, location] pairs like [["B","Q4"], ["W","D4"], ...]
+        - 'position_data': Full flagged position data including uncertainty metrics, children, etc.
 
     Example:
-        >>> moves_histories = parse_flagged_positions_csv("games.csv")
-        >>> for moves in moves_histories:
-        >>>     print(f"Found game with {len(moves)} moves")
+        >>> positions = parse_flagged_positions_csv("games.csv", "/path/to/rag_data")
+        >>> for pos in positions:
+        >>>     print(f"Game {pos['game_id']}: {len(pos['moves_history'])} moves")
     """
-    all_moves_histories = []
+    all_flagged_positions = []
+    json_dir_path = Path(json_dir)
 
     with open(csv_path, 'r', encoding='utf-8') as csvfile:
         csv_reader = csv.reader(csvfile)
+        
+        # Skip header if present
+        header = next(csv_reader, None)
 
         for row in csv_reader:
             # Skip empty rows
             if not row:
                 continue
 
-            # Assume the JSON is in the first column (adjust if needed)
-            json_str = row[0]
+            # Get the JSON filename from the first column
+            json_filename = row[0].strip()
+            
+            # Construct full path to JSON file
+            json_path = json_dir_path / json_filename
+            
+            if not json_path.exists():
+                print(f"Warning: JSON file not found: {json_path}")
+                continue
 
             try:
-                game_data = json.loads(json_str)
+                # Load the JSON game file
+                with open(json_path, 'r', encoding='utf-8') as f:
+                    game_data = json.load(f)
+
+                # Extract game_id
+                game_id = game_data.get('game_id', 'unknown')
 
                 # Extract flagged_positions field
                 if 'flagged_positions' not in game_data:
+                    print(f"Warning: No flagged_positions in {json_filename}")
                     continue
 
                 flagged_positions = game_data['flagged_positions']
 
-                # Extract moves_history from each flagged position
+                # Extract each flagged position with its full data
                 for position in flagged_positions:
                     if 'moves_history' in position:
-                        all_moves_histories.append(position['moves_history'])
+                        all_flagged_positions.append({
+                            'game_id': game_id,
+                            'filename': json_filename,
+                            'moves_history': position['moves_history'],
+                            'position_data': position  # Include full position data
+                        })
 
             except json.JSONDecodeError as e:
-                print(f"Warning: Failed to parse JSON in row: {e}")
+                print(f"Warning: Failed to parse JSON file {json_filename}: {e}")
+                continue
+            except Exception as e:
+                print(f"Warning: Error processing {json_filename}: {e}")
                 continue
 
-    return all_moves_histories
+    return all_flagged_positions
 
 
 def count_stones_on_board(moves: list, board_size: int = 19) -> dict:
@@ -213,14 +245,31 @@ if __name__ == "__main__":
         model_path="cpp/tests/models/g170e-b10c128-s1141046784-d204142634.bin.gz"
     )
 
-    # needs to be changed to actual path
-    csv_path = "path/to/flagged_positions.csv"
+    # Configure paths
+    csv_path = "rag_files_list.csv"  # CSV containing JSON filenames
+    json_dir = "../../build/rag_data"  # Directory containing the JSON game files
 
-    moves_histories = parse_flagged_positions_csv(csv_path)
+    # Parse CSV and load all flagged positions from JSON files
+    flagged_positions = parse_flagged_positions_csv(csv_path, json_dir)
+    
+    print(f"Found {len(flagged_positions)} flagged positions from CSV")
 
-    for move_history in moves_histories:
+    for idx, position_info in enumerate(flagged_positions):
+        game_id = position_info['game_id']
+        filename = position_info['filename']
+        moves_history = position_info['moves_history']
+        position_data = position_info['position_data']
+        
+        print(f"\n{'='*60}")
+        print(f"Processing position {idx+1}/{len(flagged_positions)}")
+        print(f"Game ID: {game_id}")
+        print(f"Filename: {filename}")
+        print(f"Move number: {position_data.get('move_number', 'N/A')}")
+        print(f"Moves played: {len(moves_history)}")
+        
+        # Analyze position with KataGo
         embedding = analyzer.analyze_position(
-            moves=move_history,
+            moves=moves_history,
             komi=7.5,
             rules="chinese",
             max_visits=10000  # Quick analysis
@@ -237,8 +286,15 @@ if __name__ == "__main__":
         print(f"Ownership shape: {len(embedding.ownership) if embedding.ownership else 'None'}")
         print(f"Move infos: {len(embedding.move_infos) if embedding.move_infos else 'None'}")
         
+        # Print uncertainty metrics from original data
+        if 'uncertainty_metrics' in position_data:
+            metrics = position_data['uncertainty_metrics']
+            print(f"Policy Entropy: {metrics.get('policy_entropy', 'N/A')}")
+            print(f"Value Variance: {metrics.get('value_variance', 'N/A')}")
+            print(f"Combined Score: {metrics.get('combined_score', 'N/A')}")
+        
         # Convert to dict for storage
         data = embedding.to_dict()
-        print(f"\nStorable dict keys: {list(data.keys())}")
+        print(f"Storable dict keys: {list(data.keys())}")
     
     analyzer.close()

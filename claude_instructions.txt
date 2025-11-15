@@ -4,7 +4,7 @@ RAG + MCTS deep search during self play be fast enough? Or if we augmented the R
 
 # storing to RAG
 1. Run through self-play games, and store the following information:
-'sym hash': self.state_hash,
+{'sym hash': self.state_hash,
             'sym_hash': self.sym_hash,
             'policy': self.policy,
             'ownership': self.ownership,
@@ -16,7 +16,10 @@ RAG + MCTS deep search during self play be fast enough? Or if we augmented the R
             'stone_count': self.stone_count #the stone count from the stone count function
             'child nodes': self.child_nodes #this would be a collection (hashmap of direct
             child node explored by MCTS:
-            value, pUCT)
+            value, policy)}
+
+
+
 
     #similarity_weights = {
     'policy': 0.40,        # Highest - determines exploration
@@ -25,9 +28,7 @@ RAG + MCTS deep search during self play be fast enough? Or if we augmented the R
     'visit_distribution': 0.15,  # High - shows what MCTS actually preferred
     'stone_count': 0.05,   # Phase context
     'komi': 0.05,          # Must match exactly (binary)
-}
-            
-
+    }
 
 2. For positions we have high uncertainty about, due to either A: lack of sufficient training data
 on that game state, or B: many good options so high difficulty in distinguishing the true "best" winning move,
