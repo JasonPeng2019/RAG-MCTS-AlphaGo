@@ -61,8 +61,12 @@ def parse_flagged_positions_csv(csv_path: str, json_dir: str) -> List[Dict]:
                 with open(json_path, 'r', encoding='utf-8') as f:
                     game_data = json.load(f)
 
-                # Extract game_id
+                # Extract game_id and settings
                 game_id = game_data.get('game_id', 'unknown')
+                settings = game_data.get('settings', {})
+                game_rules = settings.get('rules', 'chinese')  # Use actual rules from game
+                game_komi = settings.get('komi', 7.5)
+                game_board_size = settings.get('board_size', 19)
 
                 # Extract flagged_positions field
                 if 'flagged_positions' not in game_data:
@@ -78,7 +82,10 @@ def parse_flagged_positions_csv(csv_path: str, json_dir: str) -> List[Dict]:
                             'game_id': game_id,
                             'filename': json_filename,
                             'moves_history': position['moves_history'],
-                            'position_data': position  # Include full position data
+                            'position_data': position,  # Include full position data
+                            'game_rules': game_rules,  # Store the actual rules used
+                            'game_komi': game_komi,
+                            'game_board_size': game_board_size
                         })
 
             except json.JSONDecodeError as e:
@@ -253,7 +260,7 @@ if __name__ == "__main__":
                        help='Directory containing RAG JSON game files')
     parser.add_argument('--output-dir', default='./rag_output',
                        help='Directory to save output JSON database')
-    parser.add_argument('--max-visits', type=int, default=8000,
+    parser.add_argument('--max-visits', type=int, default=2500,
                        help='Maximum MCTS visits for analysis')
     parser.add_argument('--max-positions', type=int, default=None,
                        help='Maximum number of positions to process (for testing)')
@@ -295,12 +302,16 @@ if __name__ == "__main__":
     # Process all positions
     all_analyzed_positions = []
     output_path = os.path.join(output_dir, "rag_database.json")
+    skipped_count = 0
     
     for idx, position_info in enumerate(flagged_positions):
         game_id = position_info['game_id']
         filename = position_info['filename']
         moves_history = position_info['moves_history']
         position_data = position_info['position_data']
+        game_rules = position_info['game_rules']  # Use actual game rules
+        game_komi = position_info['game_komi']
+        game_board_size = position_info['game_board_size']
         
         print(f"\n{'='*60}")
         print(f"Processing position {idx+1}/{len(flagged_positions)}")
@@ -310,12 +321,21 @@ if __name__ == "__main__":
         print(f"Moves played: {len(moves_history)}")
         
         # Analyze position with KataGo (offline MCTS for depth)
-        embedding = analyzer.analyze_position(
-            moves=moves_history,
-            komi=position_data.get('komi', 7.5),
-            rules="chinese",
-            max_visits=args.max_visits
-        ) 
+        try:
+            embedding = analyzer.analyze_position(
+                moves=moves_history,
+                komi=game_komi,  # Use actual komi from game
+                rules=game_rules,  # Use actual rules from game
+                board_size=game_board_size,  # Use actual board size
+                max_visits=args.max_visits
+            )
+        except RuntimeError as e:
+            if "Illegal move" in str(e) or "KataGo error" in str(e):
+                print(f"⚠️  Skipping position due to error: {e}")
+                skipped_count += 1
+                continue
+            else:
+                raise 
 
         # Build output JSON entry
         output_json = {
@@ -328,7 +348,7 @@ if __name__ == "__main__":
             'move_infos': embedding.move_infos,
             'komi': embedding.komi,
             'query_id': embedding.query_id,
-            'stone_count': count_stones_on_board(moves_history),
+            'stone_count': count_stones_on_board(moves_history, board_size=game_board_size),
             'child_nodes': {}
         }
         
@@ -361,6 +381,8 @@ if __name__ == "__main__":
     # Final summary
     print(f"\n{'='*60}")
     print(f"✓ Successfully created RAG database with {len(all_analyzed_positions)} positions")
+    if skipped_count > 0:
+        print(f"  ⚠️  Skipped {skipped_count} positions due to illegal move errors")
     print(f"  File: {output_path}")
     print(f"  Size: {os.path.getsize(output_path) / 1024 / 1024:.2f} MB")
     
