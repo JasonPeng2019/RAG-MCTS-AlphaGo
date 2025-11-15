@@ -3,7 +3,8 @@ import csv
 from pathlib import Path
 
 # Define the path to the RAG data directory
-RAG_DATA_DIR = "../../katago_repo/KataGo/cpp/datago_implement/rag_data"
+# RAG_DATA_DIR = "../../katago_repo/KataGo/cpp/datago_implement/rag_data"
+RAG_DATA_DIR = "../../../alphago_project/build/rag_data"
 
 # Output CSV file path (in the same directory as this script)
 OUTPUT_CSV = "rag_files_list.csv"
