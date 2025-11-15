@@ -27,3 +27,4 @@ reportAnalysisWinratesAs = BLACK
 2025-11-14 22:45:42-0500: Loaded model ../../katago_repo/run/kata1-b28c512nbt-s11653980416-d5514111622.bin.gz
 2025-11-14 22:45:42-0500: Analyzing up to 2 positions at a time in parallel
 2025-11-14 22:45:42-0500: Started, ready to begin handling requests
+2025-11-14 22:50:43-0500: Error: {"error":"Illegal move 157: H11","field":"moves","id":"query_32"}

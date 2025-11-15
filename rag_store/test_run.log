@@ -1,0 +1,297 @@
+nohup: ignoring input
+Initializing KataGo analyzer...
+  KataGo: ../../build/katago
+  Config: ../../katago_repo/run/analysis.cfg
+  Model: ../../katago_repo/run/kata1-b28c512nbt-s11653980416-d5514111622.bin.gz
+
+Loading flagged positions from CSV: rag_files_list_1.csv
+Reading JSON files from: ../../build/rag_data_1
+Found 12797 flagged positions
+Processing first 50 positions (limited by --max-positions)
+
+============================================================
+Processing position 1/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 0
+Moves played: 0
+Original uncertainty - Entropy: 4.488, Variance: 0.014
+Analyzed - Winrate: 0.346, Score Lead: -0.86
+
+============================================================
+Processing position 2/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 9
+Moves played: 1
+Original uncertainty - Entropy: 4.750, Variance: 0.004
+Analyzed - Winrate: 0.163, Score Lead: -3.01
+
+============================================================
+Processing position 3/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 14
+Moves played: 6
+Original uncertainty - Entropy: 4.405, Variance: 0.007
+Analyzed - Winrate: 0.617, Score Lead: 1.45
+
+============================================================
+Processing position 4/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 19
+Moves played: 11
+Original uncertainty - Entropy: 4.297, Variance: 0.006
+Analyzed - Winrate: 0.038, Score Lead: -7.02
+
+============================================================
+Processing position 5/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 24
+Moves played: 16
+Original uncertainty - Entropy: 4.530, Variance: 0.001
+Analyzed - Winrate: 0.529, Score Lead: 0.70
+
+============================================================
+Processing position 6/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 29
+Moves played: 21
+Original uncertainty - Entropy: 4.262, Variance: 0.002
+Analyzed - Winrate: 0.994, Score Lead: 15.00
+
+============================================================
+Processing position 7/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 34
+Moves played: 26
+Original uncertainty - Entropy: 4.528, Variance: 0.008
+Analyzed - Winrate: 0.983, Score Lead: 11.80
+
+============================================================
+Processing position 8/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 39
+Moves played: 31
+Original uncertainty - Entropy: 4.372, Variance: 0.011
+Analyzed - Winrate: 0.963, Score Lead: 8.93
+
+============================================================
+Processing position 9/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 44
+Moves played: 36
+Original uncertainty - Entropy: 4.424, Variance: 0.010
+Analyzed - Winrate: 0.975, Score Lead: 11.39
+
+============================================================
+Processing position 10/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 49
+Moves played: 41
+Original uncertainty - Entropy: 4.228, Variance: 0.000
+Analyzed - Winrate: 0.830, Score Lead: 4.51
+💾 Saved progress: 10 positions (0.58 MB)
+
+============================================================
+Processing position 11/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 54
+Moves played: 46
+Original uncertainty - Entropy: 4.265, Variance: 0.005
+Analyzed - Winrate: 0.690, Score Lead: 2.35
+
+============================================================
+Processing position 12/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 59
+Moves played: 51
+Original uncertainty - Entropy: 4.158, Variance: 0.013
+Analyzed - Winrate: 0.477, Score Lead: 0.17
+
+============================================================
+Processing position 13/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 64
+Moves played: 56
+Original uncertainty - Entropy: 4.225, Variance: 0.001
+Analyzed - Winrate: 0.957, Score Lead: 7.46
+
+============================================================
+Processing position 14/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 69
+Moves played: 61
+Original uncertainty - Entropy: 4.148, Variance: 0.014
+Analyzed - Winrate: 0.003, Score Lead: -16.15
+
+============================================================
+Processing position 15/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 74
+Moves played: 66
+Original uncertainty - Entropy: 4.023, Variance: 0.008
+Analyzed - Winrate: 0.182, Score Lead: -3.59
+
+============================================================
+Processing position 16/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 79
+Moves played: 71
+Original uncertainty - Entropy: 4.159, Variance: 0.009
+Analyzed - Winrate: 0.019, Score Lead: -10.69
+
+============================================================
+Processing position 17/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 84
+Moves played: 76
+Original uncertainty - Entropy: 4.017, Variance: 0.009
+Analyzed - Winrate: 0.370, Score Lead: -0.73
+
+============================================================
+Processing position 18/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 89
+Moves played: 81
+Original uncertainty - Entropy: 4.158, Variance: 0.003
+Analyzed - Winrate: 0.007, Score Lead: -13.53
+
+============================================================
+Processing position 19/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 94
+Moves played: 86
+Original uncertainty - Entropy: 3.923, Variance: 0.010
+Analyzed - Winrate: 0.927, Score Lead: 6.37
+
+============================================================
+Processing position 20/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 99
+Moves played: 91
+Original uncertainty - Entropy: 3.852, Variance: 0.016
+Analyzed - Winrate: 0.299, Score Lead: -1.29
+💾 Saved progress: 20 positions (1.01 MB)
+
+============================================================
+Processing position 21/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 104
+Moves played: 96
+Original uncertainty - Entropy: 4.018, Variance: 0.003
+Analyzed - Winrate: 0.981, Score Lead: 10.70
+
+============================================================
+Processing position 22/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 109
+Moves played: 101
+Original uncertainty - Entropy: 3.678, Variance: 0.013
+Analyzed - Winrate: 0.042, Score Lead: -6.85
+
+============================================================
+Processing position 23/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 114
+Moves played: 106
+Original uncertainty - Entropy: 3.864, Variance: 0.002
+Analyzed - Winrate: 0.994, Score Lead: 16.34
+
+============================================================
+Processing position 24/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 119
+Moves played: 111
+Original uncertainty - Entropy: 3.676, Variance: 0.009
+Analyzed - Winrate: 0.001, Score Lead: -27.29
+
+============================================================
+Processing position 25/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 124
+Moves played: 116
+Original uncertainty - Entropy: 3.571, Variance: 0.004
+Analyzed - Winrate: 0.413, Score Lead: -0.54
+
+============================================================
+Processing position 26/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 129
+Moves played: 121
+Original uncertainty - Entropy: 3.320, Variance: 0.004
+Analyzed - Winrate: 0.010, Score Lead: -22.73
+
+============================================================
+Processing position 27/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 134
+Moves played: 126
+Original uncertainty - Entropy: 3.218, Variance: 0.002
+Analyzed - Winrate: 0.005, Score Lead: -29.61
+
+============================================================
+Processing position 28/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 139
+Moves played: 131
+Original uncertainty - Entropy: 3.144, Variance: 0.005
+Analyzed - Winrate: 0.001, Score Lead: -39.92
+
+============================================================
+Processing position 29/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 144
+Moves played: 136
+Original uncertainty - Entropy: 3.032, Variance: 0.002
+Analyzed - Winrate: 0.002, Score Lead: -29.60
+
+============================================================
+Processing position 30/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 149
+Moves played: 141
+Original uncertainty - Entropy: 3.042, Variance: 0.015
+Analyzed - Winrate: 0.000, Score Lead: -49.30
+💾 Saved progress: 30 positions (1.34 MB)
+
+============================================================
+Processing position 31/50
+Game ID: game_0054E2AF26BD182EA5CC06EC728BE623
+Filename: RAG_rawdata_game_0054E2AF26BD182EA5CC06EC728BE623.json
+Move number: 154
+Moves played: 146
+Traceback (most recent call last):
+  File "/scratch2/f004h1v/alphago_project/datago/rag_store/game_analyzer.py", line 313, in <module>
+    embedding = analyzer.analyze_position(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch2/f004h1v/alphago_project/datago/rag_store/game_analyzer.py", line 230, in analyze_position
+    raise RuntimeError(f"KataGo error: {response['error']}")
+RuntimeError: KataGo error: Illegal move 145: J9
