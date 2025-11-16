@@ -162,7 +162,16 @@ rag_query:
   # Positions with uncertainty > threshold will trigger RAG lookup
   # Tuned in Phase 1c using percentile-based approach
   # This will map to top X% of uncertain positions (e.g., 0.15 = top 15%)
-  uncertainty_threshold: 0.75
+  # Set to ~95th percentile to capture only most complex positions (~5% activation rate)
+  # Based on observed uncertainty range (0.35-0.374), threshold at 0.370 targets top ~5-10%
+  # This captures only the most critical decision points in the game
+  uncertainty_threshold: 0.370
+  
+  # Deep search threshold offset (added to uncertainty_threshold)
+  # Controls when to trigger expensive recursive deep search
+  # Set to 0.0 to make deep search threshold same as RAG query threshold
+  # Recommended: 0.0 - 0.05
+  deep_search_offset: 0.0
   
   # Maximum number of RAG queries per game (to control overhead)
   max_queries_per_game: 50
@@ -177,11 +186,14 @@ rag_query:
 # Controls how deep MCTS searches when analyzing uncertain positions
 
 deep_mcts:
-  # Maximum number of visits for deep search
+  # Maximum number of visits for deep search (augmented recursive search)
+  # Standard search uses 800 visits (from katago.visits)
+  # Deep search uses MORE visits for thorough analysis of complex positions
   # Range: [1000, 10000+]
   # Trade-off: deeper = better quality but slower
   # Tuned in Phase 2
-  max_visits: 10000
+  # Recommended: 2000-5000 for balance, 10000+ for maximum quality
+  max_visits: 2000
   
   # Policy convergence threshold
   # Stop early if policy changes by less than this amount
@@ -232,8 +244,8 @@ recursion:
   # Prevents infinite recursion during MCTS
   # Controls how many times we can recursively query RAG for child nodes
   # Range: [1, 5]
-  # Tuned in Phase 3
-  max_recursion_depth: 2
+  # Set to 3 for thorough search tree exploration
+  max_recursion_depth: 3
   
   # Force exploration of top N moves from RAG when relevance < threshold
   # STRATEGY: Force explore only the single best move from RAG as first priority

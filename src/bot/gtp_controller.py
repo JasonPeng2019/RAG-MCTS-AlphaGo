@@ -7,7 +7,7 @@ This replaces the gomill dependency with a simple, lightweight implementation.
 
 import subprocess
 import logging
-from typing import Optional, List, Tuple
+from typing import Optional, List, Tuple, Dict
 
 logger = logging.getLogger(__name__)
 
@@ -178,6 +178,60 @@ class GTPController:
     def close(self):
         """Close the engine (alias for quit)."""
         self.quit()
+    
+    def set_max_visits(self, visits: int) -> bool:
+        """
+        Set KataGo's maxVisits parameter dynamically.
+        
+        Args:
+            visits: Number of visits for MCTS search
+            
+        Returns:
+            True if successful, False otherwise
+        """
+        success, response = self.send_command(f"kata-set-param maxVisits {visits}")
+        if success:
+            logger.debug(f"Set maxVisits to {visits}")
+            return True
+        else:
+            logger.warning(f"Failed to set maxVisits: {response}")
+            return False
+    
+    def kata_analyze(self, color: str = "b", max_moves: int = 30) -> Optional[Dict]:
+        """
+        Run KataGo's kata-analyze command for detailed position analysis.
+        
+        This uses the simpler lz-analyze format which is more compatible.
+        
+        Args:
+            color: Color to move ('b' or 'w')
+            max_moves: Maximum number of moves to analyze
+            
+        Returns:
+            Dict with analysis results, or None on error
+        """
+        # Use lz-analyze which is simpler and more reliable
+        command = f"lz-analyze {color} {max_moves}"
+        success, response = self.send_command(command)
+        
+        if success and response:
+            try:
+                # lz-analyze returns JSON-like format
+                # Parse it into a dict
+                import json
+                # Response might be multi-line JSON
+                for line in response.split('\n'):
+                    line = line.strip()
+                    if line and line.startswith('{'):
+                        try:
+                            return json.loads(line)
+                        except json.JSONDecodeError:
+                            continue
+            except Exception as e:
+                logger.error(f"Error parsing lz-analyze response: {e}")
+        
+        logger.warning(f"lz-analyze failed, using fallback genmove")
+        return None
     
     def __del__(self):
         """Cleanup when object is destroyed."""

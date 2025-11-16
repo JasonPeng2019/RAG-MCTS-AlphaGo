@@ -16,6 +16,7 @@ tmux send-keys -t $SESSION_NAME "python run_datago_match.py \\" C-m
 tmux send-keys -t $SESSION_NAME "  --katago-executable ../KataGo/cpp/katago \\" C-m
 tmux send-keys -t $SESSION_NAME "  --katago-model ../KataGo/models/g170e-b10c128-s1141046784-d204142634.bin.gz \\" C-m
 tmux send-keys -t $SESSION_NAME "  --katago-config ../KataGo/configs/gtp_800visits.cfg \\" C-m
+tmux send-keys -t $SESSION_NAME "  --config src/bot/config.yaml \\" C-m
 tmux send-keys -t $SESSION_NAME "  --games 3 \\" C-m
 tmux send-keys -t $SESSION_NAME "  --max-moves 250" C-m
 

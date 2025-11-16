@@ -1,0 +1,2059 @@
+2025-11-16 15:50:51,988 - INFO - ======================================================================
+2025-11-16 15:50:51,988 - INFO - DataGo Bot vs KataGo Match (Recursive Deep Search + RAG)
+2025-11-16 15:50:51,988 - INFO - ======================================================================
+2025-11-16 15:50:51,988 - INFO - Games: 3, Max moves per game: 100
+2025-11-16 15:50:51,988 - INFO - Deep search threshold: 0.42
+2025-11-16 15:50:51,988 - INFO - Max recursion depth: 3
+2025-11-16 15:50:51,988 - INFO - Deep MCTS visits: 2000
+2025-11-16 15:50:51,988 - INFO - 
+2025-11-16 15:50:51,988 - INFO - Starting KataGo GTP on GPU 7...
+2025-11-16 15:50:51,988 - INFO - Starting GTP engine: /scratch2/f004ndc/AlphaGo Project/KataGo/cpp/katago gtp -model /scratch2/f004ndc/AlphaGo Project/KataGo/models/g170e-b10c128-s1141046784-d204142634.bin.gz -config /scratch2/f004ndc/AlphaGo Project/KataGo/configs/gtp_800visits.cfg
+2025-11-16 15:50:51,989 - INFO - Initializing RAG database with multi-context support...
+2025-11-16 15:50:51,989 - INFO - Recursion depth: 3
+2025-11-16 15:50:51,989 - INFO - Deep search threshold: 0.370
+2025-11-16 15:50:51,989 - INFO - Deep search visits: 2000, Standard visits: 800
+2025-11-16 15:50:51,989 - INFO - 
+======================================================================
+2025-11-16 15:50:51,989 - INFO - Game 1/3
+2025-11-16 15:50:51,989 - INFO - ======================================================================
+
+2025-11-16 15:50:54,242 - INFO - Move 1: DataGo (Black) thinking...
+2025-11-16 15:50:54,358 - INFO - Move 1: DataGo (Black) plays R16 [unc=0.352, 116ms]
+2025-11-16 15:50:54,409 - INFO - Move 2: KataGo (White) thinking...
+2025-11-16 15:50:54,463 - INFO - Move 2: KataGo (White) plays D16
+2025-11-16 15:50:54,514 - INFO - Move 3: DataGo (Black) thinking...
+2025-11-16 15:50:54,608 - INFO - Move 3: DataGo (Black) plays Q3 [unc=0.351, 94ms]
+2025-11-16 15:50:54,658 - INFO - Move 4: KataGo (White) thinking...
+2025-11-16 15:50:54,765 - INFO - Move 4: KataGo (White) plays D4
+2025-11-16 15:50:54,815 - INFO - Move 5: DataGo (Black) thinking...
+2025-11-16 15:50:54,904 - INFO - Move 5: DataGo (Black) plays O17 [unc=0.348, 88ms]
+2025-11-16 15:50:54,954 - INFO - Move 6: KataGo (White) thinking...
+2025-11-16 15:50:55,012 - INFO - Move 6: KataGo (White) plays R5
+2025-11-16 15:50:55,062 - INFO - Move 7: DataGo (Black) thinking...
+2025-11-16 15:50:55,121 - INFO - Move 7: DataGo (Black) plays O4 [unc=0.353, 58ms]
+2025-11-16 15:50:55,171 - INFO - Move 8: KataGo (White) thinking...
+2025-11-16 15:50:55,220 - INFO - Move 8: KataGo (White) plays Q9
+2025-11-16 15:50:55,270 - INFO - Move 9: DataGo (Black) thinking...
+2025-11-16 15:50:55,389 - INFO - Move 9: DataGo (Black) plays C3 [unc=0.354, 118ms]
+2025-11-16 15:50:55,439 - INFO - Move 10: KataGo (White) thinking...
+2025-11-16 15:50:55,504 - INFO - Move 10: KataGo (White) plays D3
+2025-11-16 15:50:55,555 - INFO - Move 11: DataGo (Black) thinking...
+2025-11-16 15:50:55,590 - INFO - Move 11: DataGo (Black) plays C4 [unc=0.357, 35ms]
+2025-11-16 15:50:55,640 - INFO - Move 12: KataGo (White) thinking...
+2025-11-16 15:50:55,643 - INFO - Move 12: KataGo (White) plays C6
+2025-11-16 15:50:55,693 - INFO - Move 13: DataGo (Black) thinking...
+2025-11-16 15:50:55,768 - INFO - Move 13: DataGo (Black) plays C5 [unc=0.360, 75ms]
+2025-11-16 15:50:55,818 - INFO - Move 14: KataGo (White) thinking...
+2025-11-16 15:50:55,840 - INFO - Move 14: KataGo (White) plays D5
+2025-11-16 15:50:55,891 - INFO - Move 15: DataGo (Black) thinking...
+2025-11-16 15:50:55,898 - INFO - Move 15: DataGo (Black) plays B6 [unc=0.356, 8ms]
+2025-11-16 15:50:55,949 - INFO - Move 16: KataGo (White) thinking...
+2025-11-16 15:50:55,953 - INFO - Move 16: KataGo (White) plays M3
+2025-11-16 15:50:56,003 - INFO - Move 17: DataGo (Black) thinking...
+2025-11-16 15:50:56,090 - INFO - Move 17: DataGo (Black) plays C17 [unc=0.357, 86ms]
+2025-11-16 15:50:56,140 - INFO - Move 18: KataGo (White) thinking...
+2025-11-16 15:50:56,214 - INFO - Move 18: KataGo (White) plays C16
+2025-11-16 15:50:56,264 - INFO - Move 19: DataGo (Black) thinking...
+2025-11-16 15:50:56,344 - INFO - Move 19: DataGo (Black) plays D17 [unc=0.360, 80ms]
+2025-11-16 15:50:56,395 - INFO - Move 20: KataGo (White) thinking...
+2025-11-16 15:50:56,398 - INFO - Move 20: KataGo (White) plays E16
+2025-11-16 15:50:56,448 - INFO - Move 21: DataGo (Black) thinking...
+2025-11-16 15:50:56,503 - INFO - Move 21: DataGo (Black) plays E17 [unc=0.362, 55ms]
+2025-11-16 15:50:56,553 - INFO - Move 22: KataGo (White) thinking...
+2025-11-16 15:50:56,646 - INFO - Move 22: KataGo (White) plays F17
+2025-11-16 15:50:56,696 - INFO - Move 23: DataGo (Black) thinking...
+2025-11-16 15:50:56,771 - INFO - Move 23: DataGo (Black) plays F18 [unc=0.360, 75ms]
+2025-11-16 15:50:56,821 - INFO - Move 24: KataGo (White) thinking...
+2025-11-16 15:50:56,826 - INFO - Move 24: KataGo (White) plays C7
+2025-11-16 15:50:56,877 - INFO - Move 25: DataGo (Black) thinking...
+2025-11-16 15:50:57,000 - INFO - Move 25: DataGo (Black) plays B7 [unc=0.365, 123ms]
+2025-11-16 15:50:57,050 - INFO - Move 26: KataGo (White) thinking...
+2025-11-16 15:50:57,054 - INFO - Move 26: KataGo (White) plays C8
+2025-11-16 15:50:57,104 - INFO - Move 27: DataGo (Black) thinking...
+2025-11-16 15:50:57,108 - INFO - Move 27: DataGo (Black) plays F16 [unc=0.368, 4ms]
+2025-11-16 15:50:57,158 - INFO - Move 28: KataGo (White) thinking...
+2025-11-16 15:50:57,293 - INFO - Move 28: KataGo (White) plays G17
+2025-11-16 15:50:57,343 - INFO - Move 29: DataGo (Black) thinking...
+2025-11-16 15:50:57,347 - INFO - Move 29: DataGo (Black) plays G18 [unc=0.368, 4ms]
+2025-11-16 15:50:57,398 - INFO - Move 30: KataGo (White) thinking...
+2025-11-16 15:50:57,402 - INFO - Move 30: KataGo (White) plays H17
+2025-11-16 15:50:57,452 - INFO - Move 31: DataGo (Black) thinking...
+2025-11-16 15:50:57,472 - INFO - Move 31: DataGo (Black) plays F15 [unc=0.366, 20ms]
+2025-11-16 15:50:57,522 - INFO - Move 32: KataGo (White) thinking...
+2025-11-16 15:50:57,529 - INFO - Move 32: KataGo (White) plays H15
+2025-11-16 15:50:57,579 - INFO - Move 33: DataGo (Black) thinking...
+2025-11-16 15:50:57,624 - INFO - Move 33: DataGo (Black) plays J16 [unc=0.367, 45ms]
+2025-11-16 15:50:57,674 - INFO - Move 34: KataGo (White) thinking...
+2025-11-16 15:50:57,736 - INFO - Move 34: KataGo (White) plays G15
+2025-11-16 15:50:57,787 - INFO - Move 35: DataGo (Black) thinking...
+2025-11-16 15:50:57,821 - INFO -   → Complex position detected (unc=0.372)
+2025-11-16 15:50:57,824 - INFO -   → No match found: 50247e2b6c1c, running deep search
+2025-11-16 15:50:57,824 - INFO -   → Deep search (depth=0, unc=0.372)
+2025-11-16 15:50:58,140 - INFO -     → Recursive search for child
+2025-11-16 15:50:58,140 - INFO -     → Deep search (depth=1, unc=0.731)
+2025-11-16 15:50:58,456 - INFO -       → Recursive search for child
+2025-11-16 15:50:58,456 - INFO -       → Deep search (depth=2, unc=0.730)
+2025-11-16 15:50:58,756 - INFO -         → Recursive search for child
+2025-11-16 15:50:58,757 - INFO -         → Max recursion depth reached
+2025-11-16 15:50:58,910 - INFO -         → Recursive search for child
+2025-11-16 15:50:58,910 - INFO -         → Max recursion depth reached
+2025-11-16 15:50:59,006 - INFO -         → Recursive search for child
+2025-11-16 15:50:59,007 - INFO -         → Max recursion depth reached
+2025-11-16 15:50:59,076 - INFO -         → Recursive search for child
+2025-11-16 15:50:59,076 - INFO -         → Max recursion depth reached
+2025-11-16 15:50:59,142 - INFO -         → Recursive search for child
+2025-11-16 15:50:59,142 - INFO -         → Max recursion depth reached
+2025-11-16 15:50:59,203 - INFO -       → Recursive search for child
+2025-11-16 15:50:59,203 - INFO -       → Deep search (depth=2, unc=0.697)
+2025-11-16 15:50:59,345 - INFO -         → Recursive search for child
+2025-11-16 15:50:59,345 - INFO -         → Max recursion depth reached
+2025-11-16 15:50:59,409 - INFO -         → Recursive search for child
+2025-11-16 15:50:59,409 - INFO -         → Max recursion depth reached
+2025-11-16 15:50:59,463 - INFO -         → Recursive search for child
+2025-11-16 15:50:59,463 - INFO -         → Max recursion depth reached
+2025-11-16 15:50:59,514 - INFO -         → Recursive search for child
+2025-11-16 15:50:59,514 - INFO -         → Max recursion depth reached
+2025-11-16 15:50:59,567 - INFO -         → Recursive search for child
+2025-11-16 15:50:59,567 - INFO -         → Max recursion depth reached
+2025-11-16 15:50:59,582 - INFO -       → Recursive search for child
+2025-11-16 15:50:59,582 - INFO -       → Deep search (depth=2, unc=0.646)
+2025-11-16 15:50:59,700 - INFO -       → Recursive search for child
+2025-11-16 15:50:59,700 - INFO -       → Deep search (depth=2, unc=0.677)
+2025-11-16 15:50:59,743 - INFO -       → Recursive search for child
+2025-11-16 15:50:59,743 - INFO -       → Deep search (depth=2, unc=0.684)
+2025-11-16 15:50:59,825 - INFO -     → Recursive search for child
+2025-11-16 15:50:59,825 - INFO -     → Deep search (depth=1, unc=0.732)
+2025-11-16 15:50:59,856 - INFO -     → Recursive search for child
+2025-11-16 15:50:59,856 - INFO -     → Deep search (depth=1, unc=0.722)
+2025-11-16 15:50:59,881 - INFO -     → Recursive search for child
+2025-11-16 15:50:59,881 - INFO -     → Deep search (depth=1, unc=0.705)
+2025-11-16 15:50:59,901 - INFO -     → Recursive search for child
+2025-11-16 15:50:59,901 - INFO -     → Deep search (depth=1, unc=0.631)
+2025-11-16 15:50:59,921 - INFO - Move 35: DataGo (Black) plays D14 [unc=0.372, DEEP, 2134ms]
+2025-11-16 15:50:59,971 - INFO - Move 36: KataGo (White) thinking...
+2025-11-16 15:51:00,081 - INFO - Move 36: KataGo (White) plays D6
+2025-11-16 15:51:00,131 - INFO - Move 37: DataGo (Black) thinking...
+2025-11-16 15:51:00,149 - INFO -   → Complex position detected (unc=0.373)
+2025-11-16 15:51:00,152 - INFO -   → No match found: 0b63e2138453, running deep search
+2025-11-16 15:51:00,152 - INFO -   → Deep search (depth=0, unc=0.373)
+2025-11-16 15:51:00,270 - INFO -     → Recursive search for child
+2025-11-16 15:51:00,270 - INFO -     → Deep search (depth=1, unc=0.667)
+2025-11-16 15:51:00,400 - INFO -       → Recursive search for child
+2025-11-16 15:51:00,400 - INFO -       → Deep search (depth=2, unc=0.705)
+2025-11-16 15:51:00,508 - INFO -       → Recursive search for child
+2025-11-16 15:51:00,508 - INFO -       → Deep search (depth=2, unc=0.636)
+2025-11-16 15:51:00,556 - INFO -       → Recursive search for child
+2025-11-16 15:51:00,556 - INFO -       → Deep search (depth=2, unc=0.718)
+2025-11-16 15:51:00,612 - INFO -       → Recursive search for child
+2025-11-16 15:51:00,612 - INFO -       → Deep search (depth=2, unc=0.689)
+2025-11-16 15:51:00,643 - INFO -       → Recursive search for child
+2025-11-16 15:51:00,643 - INFO -       → Deep search (depth=2, unc=0.696)
+2025-11-16 15:51:00,664 - INFO -     → Recursive search for child
+2025-11-16 15:51:00,664 - INFO -     → Deep search (depth=1, unc=0.669)
+2025-11-16 15:51:00,696 - INFO -     → Recursive search for child
+2025-11-16 15:51:00,696 - INFO -     → Deep search (depth=1, unc=0.677)
+2025-11-16 15:51:00,723 - INFO -     → Recursive search for child
+2025-11-16 15:51:00,723 - INFO -     → Deep search (depth=1, unc=0.719)
+2025-11-16 15:51:00,747 - INFO -     → Recursive search for child
+2025-11-16 15:51:00,747 - INFO -     → Deep search (depth=1, unc=0.680)
+2025-11-16 15:51:00,775 - INFO - Move 37: DataGo (Black) plays P10 [unc=0.373, DEEP, 644ms]
+2025-11-16 15:51:00,826 - INFO - Move 38: KataGo (White) thinking...
+2025-11-16 15:51:00,952 - INFO - Move 38: KataGo (White) plays G3
+2025-11-16 15:51:01,003 - INFO - Move 39: DataGo (Black) thinking...
+2025-11-16 15:51:01,032 - INFO -   → Complex position detected (unc=0.371)
+2025-11-16 15:51:01,034 - INFO -   → No match found: 51a628e72ef5, running deep search
+2025-11-16 15:51:01,034 - INFO -   → Deep search (depth=0, unc=0.371)
+2025-11-16 15:51:01,170 - INFO - Move 39: DataGo (Black) plays pass [unc=0.371, DEEP, 167ms]
+2025-11-16 15:51:01,220 - INFO - Move 40: KataGo (White) thinking...
+2025-11-16 15:51:01,343 - INFO - Move 40: KataGo (White) plays F3
+2025-11-16 15:51:01,394 - INFO - Move 41: DataGo (Black) thinking...
+2025-11-16 15:51:01,411 - INFO -   → Complex position detected (unc=0.372)
+2025-11-16 15:51:01,413 - INFO -   → No match found: 3e9534a032f8, running deep search
+2025-11-16 15:51:01,413 - INFO -   → Deep search (depth=0, unc=0.372)
+2025-11-16 15:51:01,532 - INFO -     → Recursive search for child
+2025-11-16 15:51:01,532 - INFO -     → Deep search (depth=1, unc=0.691)
+2025-11-16 15:51:01,646 - INFO -       → Recursive search for child
+2025-11-16 15:51:01,646 - INFO -       → Deep search (depth=2, unc=0.672)
+2025-11-16 15:51:01,733 - INFO -       → Recursive search for child
+2025-11-16 15:51:01,733 - INFO -       → Deep search (depth=2, unc=0.729)
+2025-11-16 15:51:01,781 - INFO -       → Recursive search for child
+2025-11-16 15:51:01,781 - INFO -       → Deep search (depth=2, unc=0.767)
+2025-11-16 15:51:01,824 - INFO -       → Recursive search for child
+2025-11-16 15:51:01,825 - INFO -       → Deep search (depth=2, unc=0.703)
+2025-11-16 15:51:01,860 - INFO -         → Recursive search for child
+2025-11-16 15:51:01,860 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:01,904 - INFO -         → Recursive search for child
+2025-11-16 15:51:01,904 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:01,960 - INFO -         → Recursive search for child
+2025-11-16 15:51:01,961 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:02,018 - INFO -         → Recursive search for child
+2025-11-16 15:51:02,018 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:02,072 - INFO -         → Recursive search for child
+2025-11-16 15:51:02,072 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:02,122 - INFO -       → Recursive search for child
+2025-11-16 15:51:02,122 - INFO -       → Deep search (depth=2, unc=0.667)
+2025-11-16 15:51:02,223 - INFO -     → Recursive search for child
+2025-11-16 15:51:02,223 - INFO -     → Deep search (depth=1, unc=0.727)
+2025-11-16 15:51:02,312 - INFO -     → Recursive search for child
+2025-11-16 15:51:02,312 - INFO -     → Deep search (depth=1, unc=0.739)
+2025-11-16 15:51:02,363 - INFO -       → Recursive search for child
+2025-11-16 15:51:02,363 - INFO -       → Deep search (depth=2, unc=0.698)
+2025-11-16 15:51:02,472 - INFO -         → Recursive search for child
+2025-11-16 15:51:02,472 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:02,522 - INFO -         → Recursive search for child
+2025-11-16 15:51:02,522 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:02,568 - INFO -         → Recursive search for child
+2025-11-16 15:51:02,568 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:02,614 - INFO -         → Recursive search for child
+2025-11-16 15:51:02,614 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:02,665 - INFO -         → Recursive search for child
+2025-11-16 15:51:02,665 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:02,712 - INFO -       → Recursive search for child
+2025-11-16 15:51:02,712 - INFO -       → Deep search (depth=2, unc=0.687)
+2025-11-16 15:51:02,807 - INFO -       → Recursive search for child
+2025-11-16 15:51:02,807 - INFO -       → Deep search (depth=2, unc=0.720)
+2025-11-16 15:51:02,850 - INFO -       → Recursive search for child
+2025-11-16 15:51:02,850 - INFO -       → Deep search (depth=2, unc=0.690)
+2025-11-16 15:51:02,890 - INFO -         → Recursive search for child
+2025-11-16 15:51:02,890 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:02,937 - INFO -         → Recursive search for child
+2025-11-16 15:51:02,937 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:02,966 - INFO -         → Recursive search for child
+2025-11-16 15:51:02,966 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:02,982 - INFO -         → Recursive search for child
+2025-11-16 15:51:02,982 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:03,025 - INFO -         → Recursive search for child
+2025-11-16 15:51:03,025 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:03,071 - INFO -       → Recursive search for child
+2025-11-16 15:51:03,072 - INFO -       → Deep search (depth=2, unc=0.715)
+2025-11-16 15:51:03,176 - INFO -         → Recursive search for child
+2025-11-16 15:51:03,176 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:03,221 - INFO -         → Recursive search for child
+2025-11-16 15:51:03,221 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:03,248 - INFO -         → Recursive search for child
+2025-11-16 15:51:03,248 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:03,264 - INFO -         → Recursive search for child
+2025-11-16 15:51:03,264 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:03,275 - INFO -         → Recursive search for child
+2025-11-16 15:51:03,275 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:03,287 - INFO -     → Recursive search for child
+2025-11-16 15:51:03,287 - INFO -     → Deep search (depth=1, unc=0.722)
+2025-11-16 15:51:03,359 - INFO -     → Recursive search for child
+2025-11-16 15:51:03,360 - INFO -     → Deep search (depth=1, unc=0.722)
+2025-11-16 15:51:03,397 - INFO - Move 41: DataGo (Black) plays E2 [unc=0.372, DEEP, 2003ms]
+2025-11-16 15:51:03,448 - INFO - Move 42: KataGo (White) thinking...
+2025-11-16 15:51:03,580 - INFO - Move 42: KataGo (White) plays PASS
+2025-11-16 15:51:03,631 - INFO - Move 43: DataGo (Black) thinking...
+2025-11-16 15:51:03,648 - INFO -   → Complex position detected (unc=0.370)
+2025-11-16 15:51:03,650 - INFO -   → Exact match found: 7c86187be3db (2 contexts)
+2025-11-16 15:51:03,650 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 15:51:03,651 - INFO - Move 43: DataGo (Black) plays B17 [unc=0.370, CACHED(2), 20ms]
+2025-11-16 15:51:03,701 - INFO - Move 44: KataGo (White) thinking...
+2025-11-16 15:51:03,820 - INFO - Move 44: KataGo (White) plays PASS
+2025-11-16 15:51:03,871 - INFO - Move 45: DataGo (Black) thinking...
+2025-11-16 15:51:03,877 - INFO -   → Complex position detected (unc=0.375)
+2025-11-16 15:51:03,880 - INFO -   → Exact match found: 9e7f563ba1ae (1 contexts)
+2025-11-16 15:51:03,880 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 15:51:03,880 - INFO - Move 45: DataGo (Black) plays pass [unc=0.375, CACHED(1), 9ms]
+2025-11-16 15:51:03,930 - INFO - Move 46: KataGo (White) thinking...
+2025-11-16 15:51:03,996 - INFO - Move 46: KataGo (White) plays S17
+2025-11-16 15:51:04,046 - INFO - Move 47: DataGo (Black) thinking...
+2025-11-16 15:51:04,049 - INFO -   → Complex position detected (unc=0.374)
+2025-11-16 15:51:04,051 - INFO -   → No match found: c317df50ecc7, running deep search
+2025-11-16 15:51:04,051 - INFO -   → Deep search (depth=0, unc=0.374)
+2025-11-16 15:51:04,159 - INFO -     → Recursive search for child
+2025-11-16 15:51:04,159 - INFO -     → Deep search (depth=1, unc=0.720)
+2025-11-16 15:51:04,281 - INFO -       → Recursive search for child
+2025-11-16 15:51:04,281 - INFO -       → Deep search (depth=2, unc=0.718)
+2025-11-16 15:51:04,378 - INFO -         → Recursive search for child
+2025-11-16 15:51:04,378 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:04,414 - INFO -         → Recursive search for child
+2025-11-16 15:51:04,414 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:04,459 - INFO -         → Recursive search for child
+2025-11-16 15:51:04,459 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:04,498 - INFO -         → Recursive search for child
+2025-11-16 15:51:04,498 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:04,534 - INFO -         → Recursive search for child
+2025-11-16 15:51:04,534 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:04,547 - INFO -       → Recursive search for child
+2025-11-16 15:51:04,547 - INFO -       → Deep search (depth=2, unc=0.720)
+2025-11-16 15:51:04,596 - INFO -       → Recursive search for child
+2025-11-16 15:51:04,596 - INFO -       → Deep search (depth=2, unc=0.709)
+2025-11-16 15:51:04,636 - INFO -       → Recursive search for child
+2025-11-16 15:51:04,636 - INFO -       → Deep search (depth=2, unc=0.734)
+2025-11-16 15:51:04,667 - INFO -       → Recursive search for child
+2025-11-16 15:51:04,667 - INFO -       → Deep search (depth=2, unc=0.750)
+2025-11-16 15:51:04,691 - INFO -     → Recursive search for child
+2025-11-16 15:51:04,691 - INFO -     → Deep search (depth=1, unc=0.711)
+2025-11-16 15:51:04,735 - INFO -     → Recursive search for child
+2025-11-16 15:51:04,735 - INFO -     → Deep search (depth=1, unc=0.660)
+2025-11-16 15:51:04,764 - INFO -       → Recursive search for child
+2025-11-16 15:51:04,764 - INFO -       → Deep search (depth=2, unc=0.732)
+2025-11-16 15:51:04,843 - INFO -         → Recursive search for child
+2025-11-16 15:51:04,843 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:04,885 - INFO -         → Recursive search for child
+2025-11-16 15:51:04,885 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:04,929 - INFO -         → Recursive search for child
+2025-11-16 15:51:04,929 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:04,944 - INFO -         → Recursive search for child
+2025-11-16 15:51:04,944 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:04,959 - INFO -         → Recursive search for child
+2025-11-16 15:51:04,959 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:04,972 - INFO -       → Recursive search for child
+2025-11-16 15:51:04,972 - INFO -       → Deep search (depth=2, unc=0.700)
+2025-11-16 15:51:05,024 - INFO -         → Recursive search for child
+2025-11-16 15:51:05,024 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:05,058 - INFO -         → Recursive search for child
+2025-11-16 15:51:05,058 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:05,079 - INFO -         → Recursive search for child
+2025-11-16 15:51:05,079 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:05,104 - INFO -         → Recursive search for child
+2025-11-16 15:51:05,105 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:05,139 - INFO -       → Recursive search for child
+2025-11-16 15:51:05,139 - INFO -       → Deep search (depth=2, unc=0.701)
+2025-11-16 15:51:05,203 - INFO -       → Recursive search for child
+2025-11-16 15:51:05,203 - INFO -       → Deep search (depth=2, unc=0.752)
+2025-11-16 15:51:05,233 - INFO -       → Recursive search for child
+2025-11-16 15:51:05,233 - INFO -       → Deep search (depth=2, unc=0.724)
+2025-11-16 15:51:05,260 - INFO -     → Recursive search for child
+2025-11-16 15:51:05,261 - INFO -     → Deep search (depth=1, unc=0.706)
+2025-11-16 15:51:05,287 - INFO -     → Recursive search for child
+2025-11-16 15:51:05,287 - INFO -     → Deep search (depth=1, unc=0.694)
+2025-11-16 15:51:05,312 - INFO - Move 47: DataGo (Black) plays R17 [unc=0.374, DEEP, 1266ms]
+2025-11-16 15:51:05,362 - INFO - Move 48: KataGo (White) thinking...
+2025-11-16 15:51:05,461 - INFO - Move 48: KataGo (White) plays PASS
+2025-11-16 15:51:05,511 - INFO - Move 49: DataGo (Black) thinking...
+2025-11-16 15:51:05,526 - INFO -   → Complex position detected (unc=0.379)
+2025-11-16 15:51:05,528 - INFO -   → Exact match found: a601602ea0ad (2 contexts)
+2025-11-16 15:51:05,529 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 15:51:05,529 - INFO - Move 49: DataGo (Black) plays D15 [unc=0.379, CACHED(2), 17ms]
+2025-11-16 15:51:05,579 - INFO - Move 50: KataGo (White) thinking...
+2025-11-16 15:51:05,675 - INFO - Move 50: KataGo (White) plays PASS
+2025-11-16 15:51:05,725 - INFO - Move 51: DataGo (Black) thinking...
+2025-11-16 15:51:05,734 - INFO -   → Complex position detected (unc=0.373)
+2025-11-16 15:51:05,737 - INFO -   → Exact match found: bc07fbfb17fb (1 contexts)
+2025-11-16 15:51:05,737 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 15:51:05,737 - INFO - Move 51: DataGo (Black) plays E4 [unc=0.373, CACHED(1), 12ms]
+2025-11-16 15:51:05,787 - INFO - Move 52: KataGo (White) thinking...
+2025-11-16 15:51:05,804 - INFO - Move 52: KataGo (White) plays S6
+2025-11-16 15:51:05,854 - INFO - Move 53: DataGo (Black) thinking...
+2025-11-16 15:51:05,868 - INFO -   → Complex position detected (unc=0.379)
+2025-11-16 15:51:05,871 - INFO -   → No match found: cc908e30cdff, running deep search
+2025-11-16 15:51:05,871 - INFO -   → Deep search (depth=0, unc=0.379)
+2025-11-16 15:51:05,974 - INFO -     → Recursive search for child
+2025-11-16 15:51:05,974 - INFO -     → Deep search (depth=1, unc=0.715)
+2025-11-16 15:51:06,054 - INFO -     → Recursive search for child
+2025-11-16 15:51:06,054 - INFO -     → Deep search (depth=1, unc=0.726)
+2025-11-16 15:51:06,084 - INFO -     → Recursive search for child
+2025-11-16 15:51:06,084 - INFO -     → Deep search (depth=1, unc=0.710)
+2025-11-16 15:51:06,107 - INFO -     → Recursive search for child
+2025-11-16 15:51:06,107 - INFO -     → Deep search (depth=1, unc=0.657)
+2025-11-16 15:51:06,133 - INFO -     → Recursive search for child
+2025-11-16 15:51:06,133 - INFO -     → Deep search (depth=1, unc=0.680)
+2025-11-16 15:51:06,157 - INFO - Move 53: DataGo (Black) plays S7 [unc=0.379, DEEP, 303ms]
+2025-11-16 15:51:06,207 - INFO - Move 54: KataGo (White) thinking...
+2025-11-16 15:51:06,325 - INFO - Move 54: KataGo (White) plays PASS
+2025-11-16 15:51:06,375 - INFO - Move 55: DataGo (Black) thinking...
+2025-11-16 15:51:06,385 - INFO -   → Complex position detected (unc=0.379)
+2025-11-16 15:51:06,388 - INFO -   → Exact match found: e0f3a4b2b8db (1 contexts)
+2025-11-16 15:51:06,388 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 15:51:06,388 - INFO - Move 55: DataGo (Black) plays pass [unc=0.379, CACHED(1), 12ms]
+2025-11-16 15:51:06,438 - INFO - Move 56: KataGo (White) thinking...
+2025-11-16 15:51:06,548 - INFO - Move 56: KataGo (White) plays PASS
+2025-11-16 15:51:06,598 - INFO - Move 57: DataGo (Black) thinking...
+2025-11-16 15:51:06,607 - INFO -   → Complex position detected (unc=0.380)
+2025-11-16 15:51:06,608 - INFO -   → Exact match found: e0f3a4b2b8db (1 contexts)
+2025-11-16 15:51:06,609 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 15:51:06,609 - INFO - Move 57: DataGo (Black) plays pass [unc=0.380, CACHED(1), 10ms]
+2025-11-16 15:51:06,659 - INFO - Move 58: KataGo (White) thinking...
+2025-11-16 15:51:06,680 - INFO - Move 58: KataGo (White) plays S4
+2025-11-16 15:51:06,730 - INFO - Move 59: DataGo (Black) thinking...
+2025-11-16 15:51:06,734 - INFO -   → Complex position detected (unc=0.379)
+2025-11-16 15:51:06,737 - INFO -   → No match found: 7b2767991390, running deep search
+2025-11-16 15:51:06,737 - INFO -   → Deep search (depth=0, unc=0.379)
+2025-11-16 15:51:06,887 - INFO -     → Recursive search for child
+2025-11-16 15:51:06,887 - INFO -     → Deep search (depth=1, unc=0.700)
+2025-11-16 15:51:06,971 - INFO -       → Recursive search for child
+2025-11-16 15:51:06,971 - INFO -       → Deep search (depth=2, unc=0.725)
+2025-11-16 15:51:07,072 - INFO -         → Recursive search for child
+2025-11-16 15:51:07,072 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:07,123 - INFO -         → Recursive search for child
+2025-11-16 15:51:07,124 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:07,175 - INFO -         → Recursive search for child
+2025-11-16 15:51:07,175 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:07,204 - INFO -         → Recursive search for child
+2025-11-16 15:51:07,204 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:07,255 - INFO -         → Recursive search for child
+2025-11-16 15:51:07,255 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:07,290 - INFO -       → Recursive search for child
+2025-11-16 15:51:07,291 - INFO -       → Deep search (depth=2, unc=0.768)
+2025-11-16 15:51:07,308 - INFO -       → Recursive search for child
+2025-11-16 15:51:07,308 - INFO -       → Deep search (depth=2, unc=0.759)
+2025-11-16 15:51:07,372 - INFO -         → Recursive search for child
+2025-11-16 15:51:07,372 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:07,402 - INFO -         → Recursive search for child
+2025-11-16 15:51:07,402 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:07,435 - INFO -         → Recursive search for child
+2025-11-16 15:51:07,436 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:07,457 - INFO -         → Recursive search for child
+2025-11-16 15:51:07,457 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:07,499 - INFO -         → Recursive search for child
+2025-11-16 15:51:07,499 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:07,542 - INFO -       → Recursive search for child
+2025-11-16 15:51:07,542 - INFO -       → Deep search (depth=2, unc=0.735)
+2025-11-16 15:51:07,662 - INFO -     → Recursive search for child
+2025-11-16 15:51:07,662 - INFO -     → Deep search (depth=1, unc=0.710)
+2025-11-16 15:51:07,738 - INFO -       → Recursive search for child
+2025-11-16 15:51:07,738 - INFO -       → Deep search (depth=2, unc=0.741)
+2025-11-16 15:51:07,844 - INFO -       → Recursive search for child
+2025-11-16 15:51:07,844 - INFO -       → Deep search (depth=2, unc=0.742)
+2025-11-16 15:51:07,924 - INFO -         → Recursive search for child
+2025-11-16 15:51:07,924 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:07,971 - INFO -         → Recursive search for child
+2025-11-16 15:51:07,971 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:08,021 - INFO -         → Recursive search for child
+2025-11-16 15:51:08,021 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:08,077 - INFO -         → Recursive search for child
+2025-11-16 15:51:08,077 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:08,109 - INFO -         → Recursive search for child
+2025-11-16 15:51:08,109 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:08,131 - INFO -       → Recursive search for child
+2025-11-16 15:51:08,132 - INFO -       → Deep search (depth=2, unc=0.711)
+2025-11-16 15:51:08,206 - INFO -       → Recursive search for child
+2025-11-16 15:51:08,206 - INFO -       → Deep search (depth=2, unc=0.707)
+2025-11-16 15:51:08,249 - INFO -       → Recursive search for child
+2025-11-16 15:51:08,249 - INFO -       → Deep search (depth=2, unc=0.730)
+2025-11-16 15:51:08,305 - INFO -     → Recursive search for child
+2025-11-16 15:51:08,305 - INFO -     → Deep search (depth=1, unc=0.702)
+2025-11-16 15:51:08,335 - INFO -     → Recursive search for child
+2025-11-16 15:51:08,336 - INFO -     → Deep search (depth=1, unc=0.713)
+2025-11-16 15:51:08,383 - INFO - Move 59: DataGo (Black) plays T4 [unc=0.379, DEEP, 1653ms]
+2025-11-16 15:51:08,433 - INFO - Move 60: KataGo (White) thinking...
+2025-11-16 15:51:08,550 - INFO - Move 60: KataGo (White) plays PASS
+2025-11-16 15:51:08,601 - INFO - Move 61: DataGo (Black) thinking...
+2025-11-16 15:51:08,609 - INFO -   → Complex position detected (unc=0.382)
+2025-11-16 15:51:08,612 - INFO -   → Exact match found: d13c9721bd82 (2 contexts)
+2025-11-16 15:51:08,612 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 15:51:08,612 - INFO - Move 61: DataGo (Black) plays T5 [unc=0.382, CACHED(2), 11ms]
+2025-11-16 15:51:08,662 - INFO - Move 62: KataGo (White) thinking...
+2025-11-16 15:51:08,678 - INFO - Move 62: KataGo (White) plays PASS
+2025-11-16 15:51:08,728 - INFO - Move 63: DataGo (Black) thinking...
+2025-11-16 15:51:08,732 - INFO -   → Complex position detected (unc=0.382)
+2025-11-16 15:51:08,735 - INFO -   → Exact match found: f71392453f30 (1 contexts)
+2025-11-16 15:51:08,735 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 15:51:08,735 - INFO - Move 63: DataGo (Black) plays O8 [unc=0.382, CACHED(1), 7ms]
+2025-11-16 15:51:08,785 - INFO - Move 64: KataGo (White) thinking...
+2025-11-16 15:51:08,816 - INFO - Move 64: KataGo (White) plays M18
+2025-11-16 15:51:08,867 - INFO - Move 65: DataGo (Black) thinking...
+2025-11-16 15:51:08,918 - INFO -   → Complex position detected (unc=0.383)
+2025-11-16 15:51:08,920 - INFO -   → No match found: 462287a74d1c, running deep search
+2025-11-16 15:51:08,920 - INFO -   → Deep search (depth=0, unc=0.383)
+2025-11-16 15:51:09,052 - INFO - Move 65: DataGo (Black) plays pass [unc=0.383, DEEP, 185ms]
+2025-11-16 15:51:09,102 - INFO - Move 66: KataGo (White) thinking...
+2025-11-16 15:51:09,197 - INFO - Move 66: KataGo (White) plays PASS
+2025-11-16 15:51:09,248 - INFO - Move 67: DataGo (Black) thinking...
+2025-11-16 15:51:09,265 - INFO -   → Complex position detected (unc=0.380)
+2025-11-16 15:51:09,267 - INFO -   → Exact match found: 462287a74d1c (1 contexts)
+2025-11-16 15:51:09,267 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 15:51:09,268 - INFO - Move 67: DataGo (Black) plays pass [unc=0.380, CACHED(1), 20ms]
+2025-11-16 15:51:09,318 - INFO - Move 68: KataGo (White) thinking...
+2025-11-16 15:51:09,431 - INFO - Move 68: KataGo (White) plays S10
+2025-11-16 15:51:09,481 - INFO - Move 69: DataGo (Black) thinking...
+2025-11-16 15:51:09,485 - INFO -   → Complex position detected (unc=0.384)
+2025-11-16 15:51:09,487 - INFO -   → No match found: b93ce64712cf, running deep search
+2025-11-16 15:51:09,487 - INFO -   → Deep search (depth=0, unc=0.384)
+2025-11-16 15:51:09,637 - INFO - Move 69: DataGo (Black) plays pass [unc=0.384, DEEP, 156ms]
+2025-11-16 15:51:09,688 - INFO - Move 70: KataGo (White) thinking...
+2025-11-16 15:51:09,816 - INFO - Move 70: KataGo (White) plays PASS
+2025-11-16 15:51:09,866 - INFO - Move 71: DataGo (Black) thinking...
+2025-11-16 15:51:09,877 - INFO -   → Complex position detected (unc=0.389)
+2025-11-16 15:51:09,879 - INFO -   → Exact match found: b93ce64712cf (1 contexts)
+2025-11-16 15:51:09,879 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 15:51:09,880 - INFO - Move 71: DataGo (Black) plays pass [unc=0.389, CACHED(1), 13ms]
+2025-11-16 15:51:09,930 - INFO - Move 72: KataGo (White) thinking...
+2025-11-16 15:51:09,944 - INFO - Move 72: KataGo (White) plays PASS
+2025-11-16 15:51:09,994 - INFO - Move 73: DataGo (Black) thinking...
+2025-11-16 15:51:10,000 - INFO -   → Complex position detected (unc=0.385)
+2025-11-16 15:51:10,003 - INFO -   → Exact match found: b93ce64712cf (1 contexts)
+2025-11-16 15:51:10,003 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 15:51:10,003 - INFO - Move 73: DataGo (Black) plays pass [unc=0.385, CACHED(1), 9ms]
+2025-11-16 15:51:10,053 - INFO - Move 74: KataGo (White) thinking...
+2025-11-16 15:51:10,062 - INFO - Move 74: KataGo (White) plays PASS
+2025-11-16 15:51:10,113 - INFO - Move 75: DataGo (Black) thinking...
+2025-11-16 15:51:10,117 - INFO -   → Complex position detected (unc=0.380)
+2025-11-16 15:51:10,120 - INFO -   → Exact match found: b93ce64712cf (1 contexts)
+2025-11-16 15:51:10,120 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 15:51:10,120 - INFO - Move 75: DataGo (Black) plays pass [unc=0.380, CACHED(1), 7ms]
+2025-11-16 15:51:10,170 - INFO - Move 76: KataGo (White) thinking...
+2025-11-16 15:51:10,179 - INFO - Move 76: KataGo (White) plays PASS
+2025-11-16 15:51:10,230 - INFO - Move 77: DataGo (Black) thinking...
+2025-11-16 15:51:10,236 - INFO -   → Complex position detected (unc=0.391)
+2025-11-16 15:51:10,237 - INFO -   → Exact match found: b93ce64712cf (1 contexts)
+2025-11-16 15:51:10,237 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 15:51:10,237 - INFO - Move 77: DataGo (Black) plays pass [unc=0.391, CACHED(1), 8ms]
+2025-11-16 15:51:10,288 - INFO - Move 78: KataGo (White) thinking...
+2025-11-16 15:51:10,296 - INFO - Move 78: KataGo (White) plays PASS
+2025-11-16 15:51:10,346 - INFO - Move 79: DataGo (Black) thinking...
+2025-11-16 15:51:10,351 - INFO -   → Complex position detected (unc=0.388)
+2025-11-16 15:51:10,354 - INFO -   → Exact match found: b93ce64712cf (1 contexts)
+2025-11-16 15:51:10,354 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 15:51:10,354 - INFO - Move 79: DataGo (Black) plays pass [unc=0.388, CACHED(1), 8ms]
+2025-11-16 15:51:10,404 - INFO - Move 80: KataGo (White) thinking...
+2025-11-16 15:51:10,413 - INFO - Move 80: KataGo (White) plays PASS
+2025-11-16 15:51:10,463 - INFO - Move 81: DataGo (Black) thinking...
+2025-11-16 15:51:10,469 - INFO -   → Complex position detected (unc=0.388)
+2025-11-16 15:51:10,472 - INFO -   → Exact match found: b93ce64712cf (1 contexts)
+2025-11-16 15:51:10,472 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 15:51:10,472 - INFO - Move 81: DataGo (Black) plays pass [unc=0.388, CACHED(1), 9ms]
+2025-11-16 15:51:10,522 - INFO - Move 82: KataGo (White) thinking...
+2025-11-16 15:51:10,534 - INFO - Move 82: KataGo (White) plays PASS
+2025-11-16 15:51:10,584 - INFO - Move 83: DataGo (Black) thinking...
+2025-11-16 15:51:10,589 - INFO -   → Complex position detected (unc=0.391)
+2025-11-16 15:51:10,591 - INFO -   → Exact match found: b93ce64712cf (1 contexts)
+2025-11-16 15:51:10,591 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 15:51:10,591 - INFO - Move 83: DataGo (Black) plays pass [unc=0.391, CACHED(1), 7ms]
+2025-11-16 15:51:10,642 - INFO - Move 84: KataGo (White) thinking...
+2025-11-16 15:51:10,650 - INFO - Move 84: KataGo (White) plays PASS
+2025-11-16 15:51:10,701 - INFO - Move 85: DataGo (Black) thinking...
+2025-11-16 15:51:10,705 - INFO -   → Complex position detected (unc=0.389)
+2025-11-16 15:51:10,708 - INFO -   → Exact match found: b93ce64712cf (1 contexts)
+2025-11-16 15:51:10,708 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 15:51:10,708 - INFO - Move 85: DataGo (Black) plays pass [unc=0.389, CACHED(1), 7ms]
+2025-11-16 15:51:10,758 - INFO - Move 86: KataGo (White) thinking...
+2025-11-16 15:51:10,767 - INFO - Move 86: KataGo (White) plays PASS
+2025-11-16 15:51:10,817 - INFO - Move 87: DataGo (Black) thinking...
+2025-11-16 15:51:10,823 - INFO -   → Complex position detected (unc=0.392)
+2025-11-16 15:51:10,826 - INFO -   → Exact match found: b93ce64712cf (1 contexts)
+2025-11-16 15:51:10,826 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 15:51:10,826 - INFO - Move 87: DataGo (Black) plays pass [unc=0.392, CACHED(1), 8ms]
+2025-11-16 15:51:10,876 - INFO - Move 88: KataGo (White) thinking...
+2025-11-16 15:51:10,905 - INFO - Move 88: KataGo (White) plays S14
+2025-11-16 15:51:10,955 - INFO - Move 89: DataGo (Black) thinking...
+2025-11-16 15:51:10,995 - INFO -   → Complex position detected (unc=0.394)
+2025-11-16 15:51:10,998 - INFO -   → No match found: 1a28c74f6621, running deep search
+2025-11-16 15:51:10,998 - INFO -   → Deep search (depth=0, unc=0.394)
+2025-11-16 15:51:11,083 - INFO - Move 89: DataGo (Black) plays pass [unc=0.394, DEEP, 128ms]
+2025-11-16 15:51:11,133 - INFO - Move 90: KataGo (White) thinking...
+2025-11-16 15:51:11,224 - INFO - Move 90: KataGo (White) plays R11
+2025-11-16 15:51:11,274 - INFO - Move 91: DataGo (Black) thinking...
+2025-11-16 15:51:11,298 - INFO -   → Complex position detected (unc=0.395)
+2025-11-16 15:51:11,301 - INFO -   → No match found: be5ae04612e0, running deep search
+2025-11-16 15:51:11,301 - INFO -   → Deep search (depth=0, unc=0.395)
+2025-11-16 15:51:11,349 - INFO - Move 91: DataGo (Black) plays pass [unc=0.395, DEEP, 74ms]
+2025-11-16 15:51:11,399 - INFO - Move 92: KataGo (White) thinking...
+2025-11-16 15:51:11,498 - INFO - Move 92: KataGo (White) plays S12
+2025-11-16 15:51:11,548 - INFO - Move 93: DataGo (Black) thinking...
+2025-11-16 15:51:11,567 - INFO -   → Complex position detected (unc=0.394)
+2025-11-16 15:51:11,569 - INFO -   → No match found: a8988ceb4d43, running deep search
+2025-11-16 15:51:11,569 - INFO -   → Deep search (depth=0, unc=0.394)
+2025-11-16 15:51:11,620 - INFO - Move 93: DataGo (Black) plays pass [unc=0.394, DEEP, 72ms]
+2025-11-16 15:51:11,671 - INFO - Move 94: KataGo (White) thinking...
+2025-11-16 15:51:11,755 - INFO - Move 94: KataGo (White) plays Q12
+2025-11-16 15:51:11,805 - INFO - Move 95: DataGo (Black) thinking...
+2025-11-16 15:51:11,831 - INFO -   → Complex position detected (unc=0.397)
+2025-11-16 15:51:11,834 - INFO -   → No match found: a42ae7a17d66, running deep search
+2025-11-16 15:51:11,834 - INFO -   → Deep search (depth=0, unc=0.397)
+2025-11-16 15:51:11,906 - INFO -     → Recursive search for child
+2025-11-16 15:51:11,906 - INFO -     → Deep search (depth=1, unc=0.759)
+2025-11-16 15:51:12,002 - INFO -     → Recursive search for child
+2025-11-16 15:51:12,002 - INFO -     → Deep search (depth=1, unc=0.747)
+2025-11-16 15:51:12,037 - INFO -     → Recursive search for child
+2025-11-16 15:51:12,038 - INFO -     → Deep search (depth=1, unc=0.734)
+2025-11-16 15:51:12,062 - INFO -     → Recursive search for child
+2025-11-16 15:51:12,062 - INFO -     → Deep search (depth=1, unc=0.732)
+2025-11-16 15:51:12,085 - INFO -     → Recursive search for child
+2025-11-16 15:51:12,085 - INFO -     → Deep search (depth=1, unc=0.753)
+2025-11-16 15:51:12,103 - INFO - Move 95: DataGo (Black) plays R13 [unc=0.397, DEEP, 298ms]
+2025-11-16 15:51:12,154 - INFO - Move 96: KataGo (White) thinking...
+2025-11-16 15:51:12,236 - INFO - Move 96: KataGo (White) plays P13
+2025-11-16 15:51:12,286 - INFO - Move 97: DataGo (Black) thinking...
+2025-11-16 15:51:12,308 - INFO -   → Complex position detected (unc=0.398)
+2025-11-16 15:51:12,310 - INFO -   → No match found: b4cef1d898cc, running deep search
+2025-11-16 15:51:12,310 - INFO -   → Deep search (depth=0, unc=0.398)
+2025-11-16 15:51:12,379 - INFO - Move 97: DataGo (Black) plays pass [unc=0.398, DEEP, 92ms]
+2025-11-16 15:51:12,429 - INFO - Move 98: KataGo (White) thinking...
+2025-11-16 15:51:12,517 - INFO - Move 98: KataGo (White) plays O12
+2025-11-16 15:51:12,567 - INFO - Move 99: DataGo (Black) thinking...
+2025-11-16 15:51:12,597 - INFO -   → Complex position detected (unc=0.397)
+2025-11-16 15:51:12,600 - INFO -   → No match found: aabf1e123ee4, running deep search
+2025-11-16 15:51:12,600 - INFO -   → Deep search (depth=0, unc=0.397)
+2025-11-16 15:51:12,670 - INFO - Move 99: DataGo (Black) plays pass [unc=0.397, DEEP, 103ms]
+2025-11-16 15:51:12,720 - INFO - Move 100: KataGo (White) thinking...
+2025-11-16 15:51:12,806 - INFO - Move 100: KataGo (White) plays Q15
+2025-11-16 15:51:12,857 - INFO - 
+Reached max moves (100). Scoring game...
+2025-11-16 15:51:13,088 - INFO - Final score: B+304.5
+2025-11-16 15:51:13,089 - INFO - DataGo (Black) wins by scoring!
+2025-11-16 15:51:13,089 - INFO - 
+Game 1 Statistics:
+2025-11-16 15:51:13,089 - INFO -   Moves played: 50
+2025-11-16 15:51:13,089 - INFO -   RAG queries: 33
+2025-11-16 15:51:13,089 - INFO -   RAG hits: 18
+2025-11-16 15:51:13,089 - INFO -   Exact matches: 18
+2025-11-16 15:51:13,089 - INFO -   Deep searches: 88
+2025-11-16 15:51:13,089 - INFO -   Recursive searches: 73
+2025-11-16 15:51:13,089 - INFO -   Unique positions: 139
+2025-11-16 15:51:13,089 - INFO -   Total contexts: 147
+2025-11-16 15:51:13,089 - INFO -   Average uncertainty: 0.375
+2025-11-16 15:51:13,089 - INFO - 
+======================================================================
+2025-11-16 15:51:13,089 - INFO - Game 2/3
+2025-11-16 15:51:13,089 - INFO - ======================================================================
+
+2025-11-16 15:51:13,089 - INFO - Move 1: DataGo (Black) thinking...
+2025-11-16 15:51:13,108 - INFO - Move 1: DataGo (Black) plays R16 [unc=0.350, 19ms]
+2025-11-16 15:51:13,158 - INFO - Move 2: KataGo (White) thinking...
+2025-11-16 15:51:13,171 - INFO - Move 2: KataGo (White) plays D16
+2025-11-16 15:51:13,221 - INFO - Move 3: DataGo (Black) thinking...
+2025-11-16 15:51:13,243 - INFO - Move 3: DataGo (Black) plays Q3 [unc=0.352, 22ms]
+2025-11-16 15:51:13,293 - INFO - Move 4: KataGo (White) thinking...
+2025-11-16 15:51:13,331 - INFO - Move 4: KataGo (White) plays D3
+2025-11-16 15:51:13,382 - INFO - Move 5: DataGo (Black) thinking...
+2025-11-16 15:51:13,478 - INFO - Move 5: DataGo (Black) plays O17 [unc=0.353, 96ms]
+2025-11-16 15:51:13,529 - INFO - Move 6: KataGo (White) thinking...
+2025-11-16 15:51:13,616 - INFO - Move 6: KataGo (White) plays R5
+2025-11-16 15:51:13,666 - INFO - Move 7: DataGo (Black) thinking...
+2025-11-16 15:51:13,721 - INFO - Move 7: DataGo (Black) plays C5 [unc=0.351, 55ms]
+2025-11-16 15:51:13,771 - INFO - Move 8: KataGo (White) thinking...
+2025-11-16 15:51:13,865 - INFO - Move 8: KataGo (White) plays E4
+2025-11-16 15:51:13,915 - INFO - Move 9: DataGo (Black) thinking...
+2025-11-16 15:51:14,004 - INFO - Move 9: DataGo (Black) plays O4 [unc=0.357, 88ms]
+2025-11-16 15:51:14,054 - INFO - Move 10: KataGo (White) thinking...
+2025-11-16 15:51:14,124 - INFO - Move 10: KataGo (White) plays C8
+2025-11-16 15:51:14,174 - INFO - Move 11: DataGo (Black) thinking...
+2025-11-16 15:51:14,222 - INFO - Move 11: DataGo (Black) plays R8 [unc=0.350, 48ms]
+2025-11-16 15:51:14,272 - INFO - Move 12: KataGo (White) thinking...
+2025-11-16 15:51:14,333 - INFO - Move 12: KataGo (White) plays M3
+2025-11-16 15:51:14,383 - INFO - Move 13: DataGo (Black) thinking...
+2025-11-16 15:51:14,476 - INFO - Move 13: DataGo (Black) plays F17 [unc=0.356, 93ms]
+2025-11-16 15:51:14,526 - INFO - Move 14: KataGo (White) thinking...
+2025-11-16 15:51:14,608 - INFO - Move 14: KataGo (White) plays M5
+2025-11-16 15:51:14,658 - INFO - Move 15: DataGo (Black) thinking...
+2025-11-16 15:51:14,740 - INFO - Move 15: DataGo (Black) plays C14 [unc=0.361, 82ms]
+2025-11-16 15:51:14,790 - INFO - Move 16: KataGo (White) thinking...
+2025-11-16 15:51:14,871 - INFO - Move 16: KataGo (White) plays F16
+2025-11-16 15:51:14,922 - INFO - Move 17: DataGo (Black) thinking...
+2025-11-16 15:51:14,958 - INFO - Move 17: DataGo (Black) plays G16 [unc=0.356, 36ms]
+2025-11-16 15:51:15,009 - INFO - Move 18: KataGo (White) thinking...
+2025-11-16 15:51:15,020 - INFO - Move 18: KataGo (White) plays F15
+2025-11-16 15:51:15,070 - INFO - Move 19: DataGo (Black) thinking...
+2025-11-16 15:51:15,089 - INFO - Move 19: DataGo (Black) plays D17 [unc=0.360, 19ms]
+2025-11-16 15:51:15,140 - INFO - Move 20: KataGo (White) thinking...
+2025-11-16 15:51:15,269 - INFO - Move 20: KataGo (White) plays C17
+2025-11-16 15:51:15,320 - INFO - Move 21: DataGo (Black) thinking...
+2025-11-16 15:51:15,334 - INFO - Move 21: DataGo (Black) plays E17 [unc=0.362, 14ms]
+2025-11-16 15:51:15,384 - INFO - Move 22: KataGo (White) thinking...
+2025-11-16 15:51:15,389 - INFO - Move 22: KataGo (White) plays D14
+2025-11-16 15:51:15,439 - INFO - Move 23: DataGo (Black) thinking...
+2025-11-16 15:51:15,562 - INFO - Move 23: DataGo (Black) plays E16 [unc=0.364, 123ms]
+2025-11-16 15:51:15,613 - INFO - Move 24: KataGo (White) thinking...
+2025-11-16 15:51:15,634 - INFO - Move 24: KataGo (White) plays D15
+2025-11-16 15:51:15,684 - INFO - Move 25: DataGo (Black) thinking...
+2025-11-16 15:51:15,700 - INFO - Move 25: DataGo (Black) plays C18 [unc=0.365, 16ms]
+2025-11-16 15:51:15,750 - INFO - Move 26: KataGo (White) thinking...
+2025-11-16 15:51:15,768 - INFO - Move 26: KataGo (White) plays B16
+2025-11-16 15:51:15,819 - INFO - Move 27: DataGo (Black) thinking...
+2025-11-16 15:51:15,903 - INFO - Move 27: DataGo (Black) plays B17 [unc=0.362, 84ms]
+2025-11-16 15:51:15,953 - INFO - Move 28: KataGo (White) thinking...
+2025-11-16 15:51:15,965 - INFO - Move 28: KataGo (White) plays C16
+2025-11-16 15:51:16,016 - INFO - Move 29: DataGo (Black) thinking...
+2025-11-16 15:51:16,029 - INFO - Move 29: DataGo (Black) plays B18 [unc=0.366, 13ms]
+2025-11-16 15:51:16,079 - INFO - Move 30: KataGo (White) thinking...
+2025-11-16 15:51:16,151 - INFO - Move 30: KataGo (White) plays E8
+2025-11-16 15:51:16,202 - INFO - Move 31: DataGo (Black) thinking...
+2025-11-16 15:51:16,338 - INFO - Move 31: DataGo (Black) plays Q6 [unc=0.368, 136ms]
+2025-11-16 15:51:16,389 - INFO - Move 32: KataGo (White) thinking...
+2025-11-16 15:51:16,471 - INFO - Move 32: KataGo (White) plays G13
+2025-11-16 15:51:16,522 - INFO - Move 33: DataGo (Black) thinking...
+2025-11-16 15:51:16,609 - INFO - Move 33: DataGo (Black) plays C10 [unc=0.368, 87ms]
+2025-11-16 15:51:16,659 - INFO - Move 34: KataGo (White) thinking...
+2025-11-16 15:51:16,771 - INFO - Move 34: KataGo (White) plays C12
+2025-11-16 15:51:16,821 - INFO - Move 35: DataGo (Black) thinking...
+2025-11-16 15:51:16,876 - INFO -   → Complex position detected (unc=0.373)
+2025-11-16 15:51:16,879 - INFO -   → No match found: 80744ffddb4b, running deep search
+2025-11-16 15:51:16,879 - INFO -   → Deep search (depth=0, unc=0.373)
+2025-11-16 15:51:17,182 - INFO -     → Recursive search for child
+2025-11-16 15:51:17,183 - INFO -     → Deep search (depth=1, unc=0.682)
+2025-11-16 15:51:17,497 - INFO -       → Recursive search for child
+2025-11-16 15:51:17,498 - INFO -       → Deep search (depth=2, unc=0.679)
+2025-11-16 15:51:17,818 - INFO -         → Recursive search for child
+2025-11-16 15:51:17,818 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:17,971 - INFO -         → Recursive search for child
+2025-11-16 15:51:17,971 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:18,060 - INFO -         → Recursive search for child
+2025-11-16 15:51:18,060 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:18,121 - INFO -         → Recursive search for child
+2025-11-16 15:51:18,121 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:18,188 - INFO -         → Recursive search for child
+2025-11-16 15:51:18,188 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:18,244 - INFO -       → Recursive search for child
+2025-11-16 15:51:18,245 - INFO -       → Deep search (depth=2, unc=0.661)
+2025-11-16 15:51:18,399 - INFO -         → Recursive search for child
+2025-11-16 15:51:18,399 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:18,456 - INFO -         → Recursive search for child
+2025-11-16 15:51:18,456 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:18,522 - INFO -         → Recursive search for child
+2025-11-16 15:51:18,522 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:18,589 - INFO -         → Recursive search for child
+2025-11-16 15:51:18,589 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:18,644 - INFO -         → Recursive search for child
+2025-11-16 15:51:18,644 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:18,659 - INFO -       → Recursive search for child
+2025-11-16 15:51:18,659 - INFO -       → Deep search (depth=2, unc=0.716)
+2025-11-16 15:51:18,740 - INFO -         → Recursive search for child
+2025-11-16 15:51:18,740 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:18,790 - INFO -         → Recursive search for child
+2025-11-16 15:51:18,790 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:18,809 - INFO -         → Recursive search for child
+2025-11-16 15:51:18,809 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:18,865 - INFO -         → Recursive search for child
+2025-11-16 15:51:18,865 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:18,887 - INFO -         → Recursive search for child
+2025-11-16 15:51:18,887 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:18,901 - INFO -       → Recursive search for child
+2025-11-16 15:51:18,901 - INFO -       → Deep search (depth=2, unc=0.642)
+2025-11-16 15:51:18,986 - INFO -       → Recursive search for child
+2025-11-16 15:51:18,986 - INFO -       → Deep search (depth=2, unc=0.709)
+2025-11-16 15:51:19,020 - INFO -     → Recursive search for child
+2025-11-16 15:51:19,020 - INFO -     → Deep search (depth=1, unc=0.743)
+2025-11-16 15:51:19,052 - INFO -     → Recursive search for child
+2025-11-16 15:51:19,053 - INFO -     → Deep search (depth=1, unc=0.691)
+2025-11-16 15:51:19,080 - INFO -     → Recursive search for child
+2025-11-16 15:51:19,080 - INFO -     → Deep search (depth=1, unc=0.698)
+2025-11-16 15:51:19,111 - INFO -     → Recursive search for child
+2025-11-16 15:51:19,112 - INFO -     → Deep search (depth=1, unc=0.727)
+2025-11-16 15:51:19,138 - INFO -       → Recursive search for child
+2025-11-16 15:51:19,138 - INFO -       → Deep search (depth=2, unc=0.689)
+2025-11-16 15:51:19,280 - INFO -         → Recursive search for child
+2025-11-16 15:51:19,280 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:19,325 - INFO -         → Recursive search for child
+2025-11-16 15:51:19,325 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:19,378 - INFO -         → Recursive search for child
+2025-11-16 15:51:19,378 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:19,401 - INFO -         → Recursive search for child
+2025-11-16 15:51:19,401 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:19,422 - INFO -         → Recursive search for child
+2025-11-16 15:51:19,422 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:19,440 - INFO -       → Recursive search for child
+2025-11-16 15:51:19,440 - INFO -       → Deep search (depth=2, unc=0.702)
+2025-11-16 15:51:19,550 - INFO -       → Recursive search for child
+2025-11-16 15:51:19,550 - INFO -       → Deep search (depth=2, unc=0.718)
+2025-11-16 15:51:19,629 - INFO -       → Recursive search for child
+2025-11-16 15:51:19,629 - INFO -       → Deep search (depth=2, unc=0.703)
+2025-11-16 15:51:19,679 - INFO -       → Recursive search for child
+2025-11-16 15:51:19,679 - INFO -       → Deep search (depth=2, unc=0.700)
+2025-11-16 15:51:19,717 - INFO - Move 35: DataGo (Black) plays L4 [unc=0.373, DEEP, 2896ms]
+2025-11-16 15:51:19,768 - INFO - Move 36: KataGo (White) thinking...
+2025-11-16 15:51:19,870 - INFO - Move 36: KataGo (White) plays H16
+2025-11-16 15:51:19,920 - INFO - Move 37: DataGo (Black) thinking...
+2025-11-16 15:51:19,942 - INFO - Move 37: DataGo (Black) plays G15 [unc=0.369, 22ms]
+2025-11-16 15:51:19,992 - INFO - Move 38: KataGo (White) thinking...
+2025-11-16 15:51:20,114 - INFO - Move 38: KataGo (White) plays PASS
+2025-11-16 15:51:20,164 - INFO - Move 39: DataGo (Black) thinking...
+2025-11-16 15:51:20,184 - INFO -   → Complex position detected (unc=0.373)
+2025-11-16 15:51:20,186 - INFO -   → No match found: a5fbc9a86769, running deep search
+2025-11-16 15:51:20,186 - INFO -   → Deep search (depth=0, unc=0.373)
+2025-11-16 15:51:20,314 - INFO -     → Recursive search for child
+2025-11-16 15:51:20,314 - INFO -     → Deep search (depth=1, unc=0.673)
+2025-11-16 15:51:20,419 - INFO -       → Recursive search for child
+2025-11-16 15:51:20,419 - INFO -       → Deep search (depth=2, unc=0.684)
+2025-11-16 15:51:20,523 - INFO -         → Recursive search for child
+2025-11-16 15:51:20,524 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:20,569 - INFO -         → Recursive search for child
+2025-11-16 15:51:20,569 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:20,612 - INFO -         → Recursive search for child
+2025-11-16 15:51:20,612 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:20,651 - INFO -         → Recursive search for child
+2025-11-16 15:51:20,651 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:20,694 - INFO -         → Recursive search for child
+2025-11-16 15:51:20,694 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:20,728 - INFO -       → Recursive search for child
+2025-11-16 15:51:20,729 - INFO -       → Deep search (depth=2, unc=0.698)
+2025-11-16 15:51:20,823 - INFO -         → Recursive search for child
+2025-11-16 15:51:20,823 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:20,865 - INFO -         → Recursive search for child
+2025-11-16 15:51:20,865 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:20,895 - INFO -         → Recursive search for child
+2025-11-16 15:51:20,895 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:20,931 - INFO -         → Recursive search for child
+2025-11-16 15:51:20,931 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:20,950 - INFO -         → Recursive search for child
+2025-11-16 15:51:20,950 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:20,962 - INFO -       → Recursive search for child
+2025-11-16 15:51:20,962 - INFO -       → Deep search (depth=2, unc=0.718)
+2025-11-16 15:51:21,022 - INFO -         → Recursive search for child
+2025-11-16 15:51:21,022 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:21,052 - INFO -         → Recursive search for child
+2025-11-16 15:51:21,052 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:21,081 - INFO -         → Recursive search for child
+2025-11-16 15:51:21,081 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:21,112 - INFO -         → Recursive search for child
+2025-11-16 15:51:21,113 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:21,145 - INFO -         → Recursive search for child
+2025-11-16 15:51:21,145 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:21,184 - INFO -       → Recursive search for child
+2025-11-16 15:51:21,184 - INFO -       → Deep search (depth=2, unc=0.651)
+2025-11-16 15:51:21,259 - INFO -         → Recursive search for child
+2025-11-16 15:51:21,259 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:21,318 - INFO -         → Recursive search for child
+2025-11-16 15:51:21,318 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:21,348 - INFO -         → Recursive search for child
+2025-11-16 15:51:21,348 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:21,392 - INFO -         → Recursive search for child
+2025-11-16 15:51:21,392 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:21,428 - INFO -         → Recursive search for child
+2025-11-16 15:51:21,428 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:21,455 - INFO -       → Recursive search for child
+2025-11-16 15:51:21,455 - INFO -       → Deep search (depth=2, unc=0.731)
+2025-11-16 15:51:21,574 - INFO -         → Recursive search for child
+2025-11-16 15:51:21,575 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:21,620 - INFO -         → Recursive search for child
+2025-11-16 15:51:21,620 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:21,662 - INFO -         → Recursive search for child
+2025-11-16 15:51:21,662 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:21,717 - INFO -         → Recursive search for child
+2025-11-16 15:51:21,717 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:21,770 - INFO -         → Recursive search for child
+2025-11-16 15:51:21,770 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:21,795 - INFO -     → Recursive search for child
+2025-11-16 15:51:21,795 - INFO -     → Deep search (depth=1, unc=0.719)
+2025-11-16 15:51:21,872 - INFO -     → Recursive search for child
+2025-11-16 15:51:21,872 - INFO -     → Deep search (depth=1, unc=0.709)
+2025-11-16 15:51:21,908 - INFO -     → Recursive search for child
+2025-11-16 15:51:21,909 - INFO -     → Deep search (depth=1, unc=0.686)
+2025-11-16 15:51:21,940 - INFO -     → Recursive search for child
+2025-11-16 15:51:21,940 - INFO -     → Deep search (depth=1, unc=0.737)
+2025-11-16 15:51:21,980 - INFO -       → Recursive search for child
+2025-11-16 15:51:21,980 - INFO -       → Deep search (depth=2, unc=0.727)
+2025-11-16 15:51:22,096 - INFO -         → Recursive search for child
+2025-11-16 15:51:22,096 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:22,132 - INFO -         → Recursive search for child
+2025-11-16 15:51:22,132 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:22,181 - INFO -         → Recursive search for child
+2025-11-16 15:51:22,181 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:22,228 - INFO -         → Recursive search for child
+2025-11-16 15:51:22,228 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:22,245 - INFO -       → Recursive search for child
+2025-11-16 15:51:22,245 - INFO -       → Deep search (depth=2, unc=0.711)
+2025-11-16 15:51:22,314 - INFO -       → Recursive search for child
+2025-11-16 15:51:22,314 - INFO -       → Deep search (depth=2, unc=0.698)
+2025-11-16 15:51:22,351 - INFO -         → Recursive search for child
+2025-11-16 15:51:22,351 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:22,401 - INFO -         → Recursive search for child
+2025-11-16 15:51:22,401 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:22,448 - INFO -         → Recursive search for child
+2025-11-16 15:51:22,448 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:22,496 - INFO -         → Recursive search for child
+2025-11-16 15:51:22,497 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:22,544 - INFO -         → Recursive search for child
+2025-11-16 15:51:22,544 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:22,589 - INFO -       → Recursive search for child
+2025-11-16 15:51:22,589 - INFO -       → Deep search (depth=2, unc=0.709)
+2025-11-16 15:51:22,702 - INFO -         → Recursive search for child
+2025-11-16 15:51:22,703 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:22,759 - INFO -         → Recursive search for child
+2025-11-16 15:51:22,759 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:22,812 - INFO -         → Recursive search for child
+2025-11-16 15:51:22,812 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:22,856 - INFO -         → Recursive search for child
+2025-11-16 15:51:22,856 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:22,916 - INFO -         → Recursive search for child
+2025-11-16 15:51:22,916 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:22,944 - INFO -       → Recursive search for child
+2025-11-16 15:51:22,944 - INFO -       → Deep search (depth=2, unc=0.710)
+2025-11-16 15:51:23,011 - INFO - Move 39: DataGo (Black) plays R17 [unc=0.373, DEEP, 2846ms]
+2025-11-16 15:51:23,061 - INFO - Move 40: KataGo (White) thinking...
+2025-11-16 15:51:23,159 - INFO - Move 40: KataGo (White) plays R18
+2025-11-16 15:51:23,210 - INFO - Move 41: DataGo (Black) thinking...
+2025-11-16 15:51:23,229 - INFO -   → Complex position detected (unc=0.374)
+2025-11-16 15:51:23,231 - INFO -   → No match found: 86a66abffb8b, running deep search
+2025-11-16 15:51:23,231 - INFO -   → Deep search (depth=0, unc=0.374)
+2025-11-16 15:51:23,266 - INFO - Move 41: DataGo (Black) plays pass [unc=0.374, DEEP, 56ms]
+2025-11-16 15:51:23,316 - INFO - Move 42: KataGo (White) thinking...
+2025-11-16 15:51:23,439 - INFO - Move 42: KataGo (White) plays S18
+2025-11-16 15:51:23,489 - INFO - Move 43: DataGo (Black) thinking...
+2025-11-16 15:51:23,514 - INFO -   → Complex position detected (unc=0.377)
+2025-11-16 15:51:23,516 - INFO -   → No match found: 1088dd939756, running deep search
+2025-11-16 15:51:23,516 - INFO -   → Deep search (depth=0, unc=0.377)
+2025-11-16 15:51:23,570 - INFO - Move 43: DataGo (Black) plays pass [unc=0.377, DEEP, 81ms]
+2025-11-16 15:51:23,621 - INFO - Move 44: KataGo (White) thinking...
+2025-11-16 15:51:23,710 - INFO - Move 44: KataGo (White) plays P17
+2025-11-16 15:51:23,760 - INFO - Move 45: DataGo (Black) thinking...
+2025-11-16 15:51:23,778 - INFO -   → Complex position detected (unc=0.374)
+2025-11-16 15:51:23,781 - INFO -   → No match found: d599230b5ee5, running deep search
+2025-11-16 15:51:23,781 - INFO -   → Deep search (depth=0, unc=0.374)
+2025-11-16 15:51:23,834 - INFO -     → Recursive search for child
+2025-11-16 15:51:23,834 - INFO -     → Deep search (depth=1, unc=0.717)
+2025-11-16 15:51:23,940 - INFO -     → Recursive search for child
+2025-11-16 15:51:23,940 - INFO -     → Deep search (depth=1, unc=0.687)
+2025-11-16 15:51:23,970 - INFO -     → Recursive search for child
+2025-11-16 15:51:23,971 - INFO -     → Deep search (depth=1, unc=0.723)
+2025-11-16 15:51:23,997 - INFO -     → Recursive search for child
+2025-11-16 15:51:23,997 - INFO -     → Deep search (depth=1, unc=0.726)
+2025-11-16 15:51:24,028 - INFO -     → Recursive search for child
+2025-11-16 15:51:24,028 - INFO -     → Deep search (depth=1, unc=0.691)
+2025-11-16 15:51:24,051 - INFO - Move 45: DataGo (Black) plays P16 [unc=0.374, DEEP, 290ms]
+2025-11-16 15:51:24,101 - INFO - Move 46: KataGo (White) thinking...
+2025-11-16 15:51:24,199 - INFO - Move 46: KataGo (White) plays P18
+2025-11-16 15:51:24,249 - INFO - Move 47: DataGo (Black) thinking...
+2025-11-16 15:51:24,266 - INFO -   → Complex position detected (unc=0.374)
+2025-11-16 15:51:24,269 - INFO -   → No match found: ee67d74b15e6, running deep search
+2025-11-16 15:51:24,269 - INFO -   → Deep search (depth=0, unc=0.374)
+2025-11-16 15:51:24,343 - INFO - Move 47: DataGo (Black) plays pass [unc=0.374, DEEP, 94ms]
+2025-11-16 15:51:24,394 - INFO - Move 48: KataGo (White) thinking...
+2025-11-16 15:51:24,500 - INFO - Move 48: KataGo (White) plays N17
+2025-11-16 15:51:24,551 - INFO - Move 49: DataGo (Black) thinking...
+2025-11-16 15:51:24,598 - INFO -   → Complex position detected (unc=0.381)
+2025-11-16 15:51:24,600 - INFO -   → No match found: b78c05a4b962, running deep search
+2025-11-16 15:51:24,601 - INFO -   → Deep search (depth=0, unc=0.381)
+2025-11-16 15:51:24,716 - INFO -     → Recursive search for child
+2025-11-16 15:51:24,716 - INFO -     → Deep search (depth=1, unc=0.715)
+2025-11-16 15:51:24,809 - INFO -       → Recursive search for child
+2025-11-16 15:51:24,809 - INFO -       → Deep search (depth=2, unc=0.741)
+2025-11-16 15:51:24,901 - INFO -         → Recursive search for child
+2025-11-16 15:51:24,901 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:24,939 - INFO -         → Recursive search for child
+2025-11-16 15:51:24,939 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:24,984 - INFO -         → Recursive search for child
+2025-11-16 15:51:24,984 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:24,998 - INFO -         → Recursive search for child
+2025-11-16 15:51:24,998 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:25,054 - INFO -         → Recursive search for child
+2025-11-16 15:51:25,054 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:25,111 - INFO -       → Recursive search for child
+2025-11-16 15:51:25,111 - INFO -       → Deep search (depth=2, unc=0.649)
+2025-11-16 15:51:25,232 - INFO -         → Recursive search for child
+2025-11-16 15:51:25,232 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:25,284 - INFO -         → Recursive search for child
+2025-11-16 15:51:25,284 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:25,309 - INFO -         → Recursive search for child
+2025-11-16 15:51:25,309 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:25,364 - INFO -         → Recursive search for child
+2025-11-16 15:51:25,364 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:25,384 - INFO -         → Recursive search for child
+2025-11-16 15:51:25,384 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:25,400 - INFO -       → Recursive search for child
+2025-11-16 15:51:25,400 - INFO -       → Deep search (depth=2, unc=0.724)
+2025-11-16 15:51:25,481 - INFO -       → Child cache hit: b3a0936bd290
+2025-11-16 15:51:25,484 - INFO -       → Recursive search for child
+2025-11-16 15:51:25,484 - INFO -       → Deep search (depth=2, unc=0.669)
+2025-11-16 15:51:25,532 - INFO -     → Recursive search for child
+2025-11-16 15:51:25,532 - INFO -     → Deep search (depth=1, unc=0.700)
+2025-11-16 15:51:25,563 - INFO -     → Recursive search for child
+2025-11-16 15:51:25,563 - INFO -     → Deep search (depth=1, unc=0.708)
+2025-11-16 15:51:25,598 - INFO -       → Recursive search for child
+2025-11-16 15:51:25,598 - INFO -       → Deep search (depth=2, unc=0.730)
+2025-11-16 15:51:25,717 - INFO -       → Recursive search for child
+2025-11-16 15:51:25,717 - INFO -       → Deep search (depth=2, unc=0.716)
+2025-11-16 15:51:25,779 - INFO -         → Recursive search for child
+2025-11-16 15:51:25,780 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:25,835 - INFO -         → Recursive search for child
+2025-11-16 15:51:25,835 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:25,860 - INFO -         → Recursive search for child
+2025-11-16 15:51:25,860 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:25,879 - INFO -         → Recursive search for child
+2025-11-16 15:51:25,880 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:25,933 - INFO -       → Recursive search for child
+2025-11-16 15:51:25,933 - INFO -       → Deep search (depth=2, unc=0.693)
+2025-11-16 15:51:26,022 - INFO -         → Recursive search for child
+2025-11-16 15:51:26,023 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:26,075 - INFO -         → Recursive search for child
+2025-11-16 15:51:26,075 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:26,102 - INFO -         → Recursive search for child
+2025-11-16 15:51:26,102 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:26,151 - INFO -         → Recursive search for child
+2025-11-16 15:51:26,151 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:26,209 - INFO -         → Recursive search for child
+2025-11-16 15:51:26,209 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:26,234 - INFO -       → Recursive search for child
+2025-11-16 15:51:26,234 - INFO -       → Deep search (depth=2, unc=0.743)
+2025-11-16 15:51:26,308 - INFO -       → Recursive search for child
+2025-11-16 15:51:26,308 - INFO -       → Deep search (depth=2, unc=0.675)
+2025-11-16 15:51:26,355 - INFO -     → Recursive search for child
+2025-11-16 15:51:26,355 - INFO -     → Deep search (depth=1, unc=0.718)
+2025-11-16 15:51:26,432 - INFO -       → Recursive search for child
+2025-11-16 15:51:26,432 - INFO -       → Deep search (depth=2, unc=0.695)
+2025-11-16 15:51:26,547 - INFO -         → Recursive search for child
+2025-11-16 15:51:26,548 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:26,592 - INFO -         → Recursive search for child
+2025-11-16 15:51:26,592 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:26,609 - INFO -         → Recursive search for child
+2025-11-16 15:51:26,609 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:26,628 - INFO -         → Recursive search for child
+2025-11-16 15:51:26,629 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:26,643 - INFO -         → Recursive search for child
+2025-11-16 15:51:26,643 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:26,655 - INFO -       → Recursive search for child
+2025-11-16 15:51:26,655 - INFO -       → Deep search (depth=2, unc=0.727)
+2025-11-16 15:51:26,719 - INFO -         → Recursive search for child
+2025-11-16 15:51:26,719 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:26,771 - INFO -         → Recursive search for child
+2025-11-16 15:51:26,771 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:26,796 - INFO -         → Recursive search for child
+2025-11-16 15:51:26,796 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:26,852 - INFO -         → Recursive search for child
+2025-11-16 15:51:26,852 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:26,874 - INFO -       → Recursive search for child
+2025-11-16 15:51:26,874 - INFO -       → Deep search (depth=2, unc=0.702)
+2025-11-16 15:51:26,952 - INFO -         → Recursive search for child
+2025-11-16 15:51:26,953 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:27,000 - INFO -         → Recursive search for child
+2025-11-16 15:51:27,001 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:27,047 - INFO -         → Recursive search for child
+2025-11-16 15:51:27,047 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:27,071 - INFO -         → Recursive search for child
+2025-11-16 15:51:27,071 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:27,121 - INFO -         → Recursive search for child
+2025-11-16 15:51:27,121 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:27,161 - INFO -       → Recursive search for child
+2025-11-16 15:51:27,161 - INFO -       → Deep search (depth=2, unc=0.715)
+2025-11-16 15:51:27,259 - INFO -         → Recursive search for child
+2025-11-16 15:51:27,259 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:27,307 - INFO -         → Recursive search for child
+2025-11-16 15:51:27,307 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:27,356 - INFO -         → Recursive search for child
+2025-11-16 15:51:27,356 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:27,376 - INFO -         → Recursive search for child
+2025-11-16 15:51:27,376 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:27,417 - INFO -     → Recursive search for child
+2025-11-16 15:51:27,417 - INFO -     → Deep search (depth=1, unc=0.670)
+2025-11-16 15:51:27,533 - INFO -       → Recursive search for child
+2025-11-16 15:51:27,533 - INFO -       → Deep search (depth=2, unc=0.723)
+2025-11-16 15:51:27,642 - INFO -         → Recursive search for child
+2025-11-16 15:51:27,642 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:27,684 - INFO -         → Recursive search for child
+2025-11-16 15:51:27,684 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:27,741 - INFO -         → Recursive search for child
+2025-11-16 15:51:27,741 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:27,771 - INFO -         → Recursive search for child
+2025-11-16 15:51:27,771 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:27,828 - INFO -       → Recursive search for child
+2025-11-16 15:51:27,828 - INFO -       → Deep search (depth=2, unc=0.716)
+2025-11-16 15:51:27,923 - INFO -         → Recursive search for child
+2025-11-16 15:51:27,923 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:27,976 - INFO -         → Recursive search for child
+2025-11-16 15:51:27,976 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:28,035 - INFO -         → Recursive search for child
+2025-11-16 15:51:28,035 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:28,056 - INFO -         → Recursive search for child
+2025-11-16 15:51:28,056 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:28,074 - INFO -         → Recursive search for child
+2025-11-16 15:51:28,074 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:28,086 - INFO -       → Recursive search for child
+2025-11-16 15:51:28,087 - INFO -       → Deep search (depth=2, unc=0.712)
+2025-11-16 15:51:28,162 - INFO -       → Recursive search for child
+2025-11-16 15:51:28,162 - INFO -       → Deep search (depth=2, unc=0.753)
+2025-11-16 15:51:28,199 - INFO - Move 49: DataGo (Black) plays O18 [unc=0.381, DEEP, 3648ms]
+2025-11-16 15:51:28,249 - INFO - Move 50: KataGo (White) thinking...
+2025-11-16 15:51:28,374 - INFO - Move 50: KataGo (White) plays Q13
+2025-11-16 15:51:28,425 - INFO - Move 51: DataGo (Black) thinking...
+2025-11-16 15:51:28,462 - INFO -   → Complex position detected (unc=0.380)
+2025-11-16 15:51:28,464 - INFO -   → No match found: 73385f5e24e3, running deep search
+2025-11-16 15:51:28,464 - INFO -   → Deep search (depth=0, unc=0.380)
+2025-11-16 15:51:28,590 - INFO - Move 51: DataGo (Black) plays pass [unc=0.380, DEEP, 165ms]
+2025-11-16 15:51:28,640 - INFO - Move 52: KataGo (White) thinking...
+2025-11-16 15:51:28,781 - INFO - Move 52: KataGo (White) plays R11
+2025-11-16 15:51:28,832 - INFO - Move 53: DataGo (Black) thinking...
+2025-11-16 15:51:28,858 - INFO -   → Complex position detected (unc=0.382)
+2025-11-16 15:51:28,861 - INFO -   → No match found: c9a29d634c59, running deep search
+2025-11-16 15:51:28,861 - INFO -   → Deep search (depth=0, unc=0.382)
+2025-11-16 15:51:28,982 - INFO -     → Recursive search for child
+2025-11-16 15:51:28,982 - INFO -     → Deep search (depth=1, unc=0.749)
+2025-11-16 15:51:29,095 - INFO -       → Recursive search for child
+2025-11-16 15:51:29,095 - INFO -       → Deep search (depth=2, unc=0.715)
+2025-11-16 15:51:29,209 - INFO -         → Recursive search for child
+2025-11-16 15:51:29,209 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:29,261 - INFO -         → Recursive search for child
+2025-11-16 15:51:29,261 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:29,279 - INFO -         → Recursive search for child
+2025-11-16 15:51:29,279 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:29,296 - INFO -         → Recursive search for child
+2025-11-16 15:51:29,296 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:29,312 - INFO -         → Recursive search for child
+2025-11-16 15:51:29,312 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:29,325 - INFO -       → Recursive search for child
+2025-11-16 15:51:29,325 - INFO -       → Deep search (depth=2, unc=0.707)
+2025-11-16 15:51:29,388 - INFO -       → Recursive search for child
+2025-11-16 15:51:29,388 - INFO -       → Deep search (depth=2, unc=0.730)
+2025-11-16 15:51:29,424 - INFO -       → Recursive search for child
+2025-11-16 15:51:29,424 - INFO -       → Deep search (depth=2, unc=0.690)
+2025-11-16 15:51:29,456 - INFO -       → Recursive search for child
+2025-11-16 15:51:29,456 - INFO -       → Deep search (depth=2, unc=0.693)
+2025-11-16 15:51:29,483 - INFO -     → Recursive search for child
+2025-11-16 15:51:29,483 - INFO -     → Deep search (depth=1, unc=0.772)
+2025-11-16 15:51:29,499 - INFO -     → Recursive search for child
+2025-11-16 15:51:29,499 - INFO -     → Deep search (depth=1, unc=0.720)
+2025-11-16 15:51:29,519 - INFO -     → Recursive search for child
+2025-11-16 15:51:29,519 - INFO -     → Deep search (depth=1, unc=0.747)
+2025-11-16 15:51:29,539 - INFO -     → Recursive search for child
+2025-11-16 15:51:29,539 - INFO -     → Deep search (depth=1, unc=0.725)
+2025-11-16 15:51:29,552 - INFO - Move 53: DataGo (Black) plays S10 [unc=0.382, DEEP, 721ms]
+2025-11-16 15:51:29,602 - INFO - Move 54: KataGo (White) thinking...
+2025-11-16 15:51:29,712 - INFO - Move 54: KataGo (White) plays PASS
+2025-11-16 15:51:29,762 - INFO - Move 55: DataGo (Black) thinking...
+2025-11-16 15:51:29,771 - INFO -   → Complex position detected (unc=0.383)
+2025-11-16 15:51:29,774 - INFO -   → Exact match found: a71bb3babc80 (1 contexts)
+2025-11-16 15:51:29,774 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 15:51:29,774 - INFO - Move 55: DataGo (Black) plays Q12 [unc=0.383, CACHED(1), 11ms]
+2025-11-16 15:51:29,824 - INFO - Move 56: KataGo (White) thinking...
+2025-11-16 15:51:29,834 - INFO - Move 56: KataGo (White) plays PASS
+2025-11-16 15:51:29,884 - INFO - Move 57: DataGo (Black) thinking...
+2025-11-16 15:51:29,891 - INFO -   → Complex position detected (unc=0.380)
+2025-11-16 15:51:29,894 - INFO -   → Exact match found: c66447b4e2a4 (2 contexts)
+2025-11-16 15:51:29,894 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 15:51:29,894 - INFO - Move 57: DataGo (Black) plays S11 [unc=0.380, CACHED(2), 9ms]
+2025-11-16 15:51:29,944 - INFO - Move 58: KataGo (White) thinking...
+2025-11-16 15:51:29,955 - INFO - Move 58: KataGo (White) plays PASS
+2025-11-16 15:51:30,005 - INFO - Move 59: DataGo (Black) thinking...
+2025-11-16 15:51:30,011 - INFO -   → Complex position detected (unc=0.382)
+2025-11-16 15:51:30,014 - INFO -   → Exact match found: df32d2274305 (1 contexts)
+2025-11-16 15:51:30,014 - INFO -   → Using cached analysis (deep_visits=0)
+2025-11-16 15:51:30,014 - INFO - Move 59: DataGo (Black) plays pass [unc=0.382, CACHED(1), 9ms]
+2025-11-16 15:51:30,064 - INFO - Move 60: KataGo (White) thinking...
+2025-11-16 15:51:30,077 - INFO - Move 60: KataGo (White) plays A11
+2025-11-16 15:51:30,127 - INFO - Move 61: DataGo (Black) thinking...
+2025-11-16 15:51:30,198 - INFO -   → Complex position detected (unc=0.384)
+2025-11-16 15:51:30,201 - INFO -   → No match found: abd17bee6124, running deep search
+2025-11-16 15:51:30,201 - INFO -   → Deep search (depth=0, unc=0.384)
+2025-11-16 15:51:30,305 - INFO -     → Recursive search for child
+2025-11-16 15:51:30,306 - INFO -     → Deep search (depth=1, unc=0.729)
+2025-11-16 15:51:30,426 - INFO -     → Recursive search for child
+2025-11-16 15:51:30,426 - INFO -     → Deep search (depth=1, unc=0.743)
+2025-11-16 15:51:30,470 - INFO -     → Recursive search for child
+2025-11-16 15:51:30,470 - INFO -     → Deep search (depth=1, unc=0.710)
+2025-11-16 15:51:30,498 - INFO -     → Recursive search for child
+2025-11-16 15:51:30,498 - INFO -     → Deep search (depth=1, unc=0.748)
+2025-11-16 15:51:30,523 - INFO -     → Recursive search for child
+2025-11-16 15:51:30,523 - INFO -     → Deep search (depth=1, unc=0.746)
+2025-11-16 15:51:30,545 - INFO - Move 61: DataGo (Black) plays R10 [unc=0.384, DEEP, 418ms]
+2025-11-16 15:51:30,595 - INFO - Move 62: KataGo (White) thinking...
+2025-11-16 15:51:30,703 - INFO - Move 62: KataGo (White) plays PASS
+2025-11-16 15:51:30,753 - INFO - Move 63: DataGo (Black) thinking...
+2025-11-16 15:51:30,759 - INFO -   → Complex position detected (unc=0.387)
+2025-11-16 15:51:30,762 - INFO -   → Exact match found: 420fef3d20f3 (1 contexts)
+2025-11-16 15:51:30,762 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 15:51:30,762 - INFO - Move 63: DataGo (Black) plays pass [unc=0.387, CACHED(1), 9ms]
+2025-11-16 15:51:30,812 - INFO - Move 64: KataGo (White) thinking...
+2025-11-16 15:51:30,924 - INFO - Move 64: KataGo (White) plays B10
+2025-11-16 15:51:30,975 - INFO - Move 65: DataGo (Black) thinking...
+2025-11-16 15:51:30,978 - INFO -   → Complex position detected (unc=0.387)
+2025-11-16 15:51:30,981 - INFO -   → No match found: 4e088fc2e806, running deep search
+2025-11-16 15:51:30,981 - INFO -   → Deep search (depth=0, unc=0.387)
+2025-11-16 15:51:31,131 - INFO -     → Recursive search for child
+2025-11-16 15:51:31,131 - INFO -     → Deep search (depth=1, unc=0.742)
+2025-11-16 15:51:31,255 - INFO -       → Recursive search for child
+2025-11-16 15:51:31,255 - INFO -       → Deep search (depth=2, unc=0.746)
+2025-11-16 15:51:31,372 - INFO -         → Recursive search for child
+2025-11-16 15:51:31,373 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:31,425 - INFO -         → Recursive search for child
+2025-11-16 15:51:31,425 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:31,446 - INFO -         → Recursive search for child
+2025-11-16 15:51:31,446 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:31,466 - INFO -         → Recursive search for child
+2025-11-16 15:51:31,466 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:31,479 - INFO -         → Recursive search for child
+2025-11-16 15:51:31,480 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:31,491 - INFO -       → Recursive search for child
+2025-11-16 15:51:31,491 - INFO -       → Deep search (depth=2, unc=0.682)
+2025-11-16 15:51:31,551 - INFO -         → Recursive search for child
+2025-11-16 15:51:31,551 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:31,604 - INFO -         → Recursive search for child
+2025-11-16 15:51:31,605 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:31,658 - INFO -         → Recursive search for child
+2025-11-16 15:51:31,658 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:31,711 - INFO -         → Recursive search for child
+2025-11-16 15:51:31,712 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:31,732 - INFO -       → Recursive search for child
+2025-11-16 15:51:31,732 - INFO -       → Deep search (depth=2, unc=0.730)
+2025-11-16 15:51:31,808 - INFO -         → Recursive search for child
+2025-11-16 15:51:31,808 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:31,860 - INFO -         → Recursive search for child
+2025-11-16 15:51:31,860 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:31,910 - INFO -         → Recursive search for child
+2025-11-16 15:51:31,910 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:31,936 - INFO -         → Recursive search for child
+2025-11-16 15:51:31,936 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:31,987 - INFO -       → Recursive search for child
+2025-11-16 15:51:31,987 - INFO -       → Deep search (depth=2, unc=0.672)
+2025-11-16 15:51:32,111 - INFO -         → Recursive search for child
+2025-11-16 15:51:32,111 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:32,166 - INFO -         → Recursive search for child
+2025-11-16 15:51:32,166 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:32,184 - INFO -         → Recursive search for child
+2025-11-16 15:51:32,184 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:32,247 - INFO -         → Recursive search for child
+2025-11-16 15:51:32,247 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:32,308 - INFO -       → Recursive search for child
+2025-11-16 15:51:32,308 - INFO -       → Deep search (depth=2, unc=0.713)
+2025-11-16 15:51:32,392 - INFO -         → Recursive search for child
+2025-11-16 15:51:32,392 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:32,449 - INFO -         → Recursive search for child
+2025-11-16 15:51:32,449 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:32,468 - INFO -         → Recursive search for child
+2025-11-16 15:51:32,468 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:32,488 - INFO -         → Recursive search for child
+2025-11-16 15:51:32,488 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:32,497 - INFO -         → Recursive search for child
+2025-11-16 15:51:32,497 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:32,507 - INFO -     → Recursive search for child
+2025-11-16 15:51:32,508 - INFO -     → Deep search (depth=1, unc=0.759)
+2025-11-16 15:51:32,562 - INFO -       → Recursive search for child
+2025-11-16 15:51:32,562 - INFO -       → Deep search (depth=2, unc=0.758)
+2025-11-16 15:51:32,683 - INFO -         → Recursive search for child
+2025-11-16 15:51:32,683 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:32,722 - INFO -         → Recursive search for child
+2025-11-16 15:51:32,722 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:32,740 - INFO -         → Recursive search for child
+2025-11-16 15:51:32,740 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:32,757 - INFO -         → Recursive search for child
+2025-11-16 15:51:32,757 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:32,768 - INFO -         → Recursive search for child
+2025-11-16 15:51:32,768 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:32,778 - INFO -       → Recursive search for child
+2025-11-16 15:51:32,778 - INFO -       → Deep search (depth=2, unc=0.720)
+2025-11-16 15:51:32,831 - INFO -         → Recursive search for child
+2025-11-16 15:51:32,831 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:32,887 - INFO -         → Recursive search for child
+2025-11-16 15:51:32,887 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:32,906 - INFO -         → Recursive search for child
+2025-11-16 15:51:32,906 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:32,967 - INFO -         → Recursive search for child
+2025-11-16 15:51:32,967 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:32,983 - INFO -         → Recursive search for child
+2025-11-16 15:51:32,983 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:32,995 - INFO -       → Recursive search for child
+2025-11-16 15:51:32,996 - INFO -       → Deep search (depth=2, unc=0.717)
+2025-11-16 15:51:33,036 - INFO -       → Recursive search for child
+2025-11-16 15:51:33,036 - INFO -       → Deep search (depth=2, unc=0.773)
+2025-11-16 15:51:33,060 - INFO -       → Recursive search for child
+2025-11-16 15:51:33,060 - INFO -       → Deep search (depth=2, unc=0.661)
+2025-11-16 15:51:33,106 - INFO -         → Recursive search for child
+2025-11-16 15:51:33,106 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:33,163 - INFO -         → Recursive search for child
+2025-11-16 15:51:33,163 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:33,185 - INFO -         → Recursive search for child
+2025-11-16 15:51:33,185 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:33,243 - INFO -         → Child cache hit: ef9473c46f89
+2025-11-16 15:51:33,245 - INFO -         → Child cache hit: cf8c87d42860
+2025-11-16 15:51:33,248 - INFO -     → Recursive search for child
+2025-11-16 15:51:33,248 - INFO -     → Deep search (depth=1, unc=0.737)
+2025-11-16 15:51:33,358 - INFO -       → Recursive search for child
+2025-11-16 15:51:33,358 - INFO -       → Deep search (depth=2, unc=0.745)
+2025-11-16 15:51:33,458 - INFO -       → Recursive search for child
+2025-11-16 15:51:33,458 - INFO -       → Deep search (depth=2, unc=0.739)
+2025-11-16 15:51:33,485 - INFO -       → Recursive search for child
+2025-11-16 15:51:33,485 - INFO -       → Deep search (depth=2, unc=0.714)
+2025-11-16 15:51:33,530 - INFO -         → Recursive search for child
+2025-11-16 15:51:33,530 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:33,577 - INFO -         → Recursive search for child
+2025-11-16 15:51:33,577 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:33,633 - INFO -         → Recursive search for child
+2025-11-16 15:51:33,633 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:33,681 - INFO -         → Recursive search for child
+2025-11-16 15:51:33,681 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:33,733 - INFO -       → Recursive search for child
+2025-11-16 15:51:33,733 - INFO -       → Deep search (depth=2, unc=0.755)
+2025-11-16 15:51:33,798 - INFO -       → Recursive search for child
+2025-11-16 15:51:33,799 - INFO -       → Deep search (depth=2, unc=0.706)
+2025-11-16 15:51:33,852 - INFO -         → Recursive search for child
+2025-11-16 15:51:33,852 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:33,898 - INFO -         → Recursive search for child
+2025-11-16 15:51:33,898 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:33,946 - INFO -         → Recursive search for child
+2025-11-16 15:51:33,946 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:33,995 - INFO -         → Recursive search for child
+2025-11-16 15:51:33,995 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:34,051 - INFO -         → Recursive search for child
+2025-11-16 15:51:34,051 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:34,102 - INFO -     → Recursive search for child
+2025-11-16 15:51:34,102 - INFO -     → Deep search (depth=1, unc=0.752)
+2025-11-16 15:51:34,190 - INFO -       → Recursive search for child
+2025-11-16 15:51:34,190 - INFO -       → Deep search (depth=2, unc=0.729)
+2025-11-16 15:51:34,292 - INFO -         → Recursive search for child
+2025-11-16 15:51:34,292 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:34,343 - INFO -         → Recursive search for child
+2025-11-16 15:51:34,343 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:34,397 - INFO -         → Recursive search for child
+2025-11-16 15:51:34,397 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:34,454 - INFO -         → Recursive search for child
+2025-11-16 15:51:34,454 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:34,507 - INFO -         → Recursive search for child
+2025-11-16 15:51:34,507 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:34,562 - INFO -       → Recursive search for child
+2025-11-16 15:51:34,562 - INFO -       → Deep search (depth=2, unc=0.706)
+2025-11-16 15:51:34,668 - INFO -       → Recursive search for child
+2025-11-16 15:51:34,668 - INFO -       → Deep search (depth=2, unc=0.736)
+2025-11-16 15:51:34,715 - INFO -         → Recursive search for child
+2025-11-16 15:51:34,715 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:34,769 - INFO -         → Recursive search for child
+2025-11-16 15:51:34,769 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:34,829 - INFO -         → Recursive search for child
+2025-11-16 15:51:34,829 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:34,850 - INFO -         → Recursive search for child
+2025-11-16 15:51:34,850 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:34,861 - INFO -         → Recursive search for child
+2025-11-16 15:51:34,861 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:34,873 - INFO -       → Recursive search for child
+2025-11-16 15:51:34,873 - INFO -       → Deep search (depth=2, unc=0.659)
+2025-11-16 15:51:34,937 - INFO -         → Recursive search for child
+2025-11-16 15:51:34,937 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:34,969 - INFO -         → Recursive search for child
+2025-11-16 15:51:34,969 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:35,025 - INFO -         → Recursive search for child
+2025-11-16 15:51:35,025 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:35,075 - INFO -         → Recursive search for child
+2025-11-16 15:51:35,075 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:35,131 - INFO -         → Recursive search for child
+2025-11-16 15:51:35,131 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:35,186 - INFO -     → Recursive search for child
+2025-11-16 15:51:35,186 - INFO -     → Deep search (depth=1, unc=0.708)
+2025-11-16 15:51:35,299 - INFO - Move 65: DataGo (Black) plays R12 [unc=0.387, DEEP, 4324ms]
+2025-11-16 15:51:35,349 - INFO - Move 66: KataGo (White) thinking...
+2025-11-16 15:51:35,470 - INFO - Move 66: KataGo (White) plays M12
+2025-11-16 15:51:35,520 - INFO - Move 67: DataGo (Black) thinking...
+2025-11-16 15:51:35,554 - INFO -   → Complex position detected (unc=0.388)
+2025-11-16 15:51:35,556 - INFO -   → No match found: 61dd0333a711, running deep search
+2025-11-16 15:51:35,556 - INFO -   → Deep search (depth=0, unc=0.388)
+2025-11-16 15:51:35,671 - INFO -     → Recursive search for child
+2025-11-16 15:51:35,671 - INFO -     → Deep search (depth=1, unc=0.752)
+2025-11-16 15:51:35,786 - INFO -       → Recursive search for child
+2025-11-16 15:51:35,786 - INFO -       → Deep search (depth=2, unc=0.779)
+2025-11-16 15:51:35,904 - INFO -         → Recursive search for child
+2025-11-16 15:51:35,904 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:35,953 - INFO -         → Recursive search for child
+2025-11-16 15:51:35,953 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:36,012 - INFO -         → Recursive search for child
+2025-11-16 15:51:36,013 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:36,071 - INFO -         → Recursive search for child
+2025-11-16 15:51:36,071 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:36,090 - INFO -         → Recursive search for child
+2025-11-16 15:51:36,090 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:36,106 - INFO -       → Recursive search for child
+2025-11-16 15:51:36,107 - INFO -       → Deep search (depth=2, unc=0.718)
+2025-11-16 15:51:36,186 - INFO -       → Recursive search for child
+2025-11-16 15:51:36,186 - INFO -       → Deep search (depth=2, unc=0.719)
+2025-11-16 15:51:36,232 - INFO -         → Recursive search for child
+2025-11-16 15:51:36,232 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:36,291 - INFO -         → Recursive search for child
+2025-11-16 15:51:36,291 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:36,310 - INFO -         → Recursive search for child
+2025-11-16 15:51:36,310 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:36,326 - INFO -         → Recursive search for child
+2025-11-16 15:51:36,326 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:36,343 - INFO -         → Recursive search for child
+2025-11-16 15:51:36,343 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:36,354 - INFO -       → Recursive search for child
+2025-11-16 15:51:36,355 - INFO -       → Deep search (depth=2, unc=0.732)
+2025-11-16 15:51:36,427 - INFO -         → Recursive search for child
+2025-11-16 15:51:36,427 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:36,472 - INFO -         → Recursive search for child
+2025-11-16 15:51:36,473 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:36,490 - INFO -         → Recursive search for child
+2025-11-16 15:51:36,490 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:36,505 - INFO -         → Recursive search for child
+2025-11-16 15:51:36,505 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:36,520 - INFO -         → Recursive search for child
+2025-11-16 15:51:36,520 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:36,532 - INFO -       → Recursive search for child
+2025-11-16 15:51:36,532 - INFO -       → Deep search (depth=2, unc=0.761)
+2025-11-16 15:51:36,605 - INFO -     → Recursive search for child
+2025-11-16 15:51:36,605 - INFO -     → Deep search (depth=1, unc=0.745)
+2025-11-16 15:51:36,637 - INFO -     → Recursive search for child
+2025-11-16 15:51:36,637 - INFO -     → Deep search (depth=1, unc=0.772)
+2025-11-16 15:51:36,660 - INFO -     → Recursive search for child
+2025-11-16 15:51:36,660 - INFO -     → Deep search (depth=1, unc=0.749)
+2025-11-16 15:51:36,690 - INFO -     → Recursive search for child
+2025-11-16 15:51:36,690 - INFO -     → Deep search (depth=1, unc=0.739)
+2025-11-16 15:51:36,712 - INFO - Move 67: DataGo (Black) plays L12 [unc=0.388, DEEP, 1192ms]
+2025-11-16 15:51:36,762 - INFO - Move 68: KataGo (White) thinking...
+2025-11-16 15:51:36,910 - INFO - Move 68: KataGo (White) plays H9
+2025-11-16 15:51:36,961 - INFO - Move 69: DataGo (Black) thinking...
+2025-11-16 15:51:36,992 - INFO -   → Complex position detected (unc=0.389)
+2025-11-16 15:51:36,995 - INFO -   → No match found: f346e7ada510, running deep search
+2025-11-16 15:51:36,995 - INFO -   → Deep search (depth=0, unc=0.389)
+2025-11-16 15:51:37,133 - INFO -     → Recursive search for child
+2025-11-16 15:51:37,133 - INFO -     → Deep search (depth=1, unc=0.728)
+2025-11-16 15:51:37,249 - INFO -       → Recursive search for child
+2025-11-16 15:51:37,249 - INFO -       → Deep search (depth=2, unc=0.699)
+2025-11-16 15:51:37,368 - INFO -         → Recursive search for child
+2025-11-16 15:51:37,368 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:37,417 - INFO -         → Recursive search for child
+2025-11-16 15:51:37,418 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:37,474 - INFO -         → Recursive search for child
+2025-11-16 15:51:37,474 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:37,527 - INFO -         → Recursive search for child
+2025-11-16 15:51:37,527 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:37,585 - INFO -         → Recursive search for child
+2025-11-16 15:51:37,586 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:37,606 - INFO -       → Recursive search for child
+2025-11-16 15:51:37,606 - INFO -       → Deep search (depth=2, unc=0.760)
+2025-11-16 15:51:37,684 - INFO -         → Recursive search for child
+2025-11-16 15:51:37,684 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:37,730 - INFO -         → Recursive search for child
+2025-11-16 15:51:37,731 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:37,787 - INFO -         → Recursive search for child
+2025-11-16 15:51:37,787 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:37,843 - INFO -         → Recursive search for child
+2025-11-16 15:51:37,843 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:37,898 - INFO -         → Recursive search for child
+2025-11-16 15:51:37,898 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:37,923 - INFO -       → Recursive search for child
+2025-11-16 15:51:37,923 - INFO -       → Deep search (depth=2, unc=0.725)
+2025-11-16 15:51:38,047 - INFO -       → Recursive search for child
+2025-11-16 15:51:38,048 - INFO -       → Deep search (depth=2, unc=0.747)
+2025-11-16 15:51:38,092 - INFO -         → Recursive search for child
+2025-11-16 15:51:38,092 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:38,137 - INFO -         → Recursive search for child
+2025-11-16 15:51:38,137 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:38,155 - INFO -         → Recursive search for child
+2025-11-16 15:51:38,155 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:38,170 - INFO -         → Recursive search for child
+2025-11-16 15:51:38,170 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:38,182 - INFO -         → Recursive search for child
+2025-11-16 15:51:38,182 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:38,196 - INFO -       → Recursive search for child
+2025-11-16 15:51:38,196 - INFO -       → Deep search (depth=2, unc=0.719)
+2025-11-16 15:51:38,258 - INFO -     → Recursive search for child
+2025-11-16 15:51:38,258 - INFO -     → Deep search (depth=1, unc=0.707)
+2025-11-16 15:51:38,289 - INFO -     → Recursive search for child
+2025-11-16 15:51:38,289 - INFO -     → Deep search (depth=1, unc=0.723)
+2025-11-16 15:51:38,324 - INFO -     → Recursive search for child
+2025-11-16 15:51:38,324 - INFO -     → Deep search (depth=1, unc=0.743)
+2025-11-16 15:51:38,350 - INFO -     → Recursive search for child
+2025-11-16 15:51:38,350 - INFO -     → Deep search (depth=1, unc=0.762)
+2025-11-16 15:51:38,370 - INFO - Move 69: DataGo (Black) plays H8 [unc=0.389, DEEP, 1409ms]
+2025-11-16 15:51:38,420 - INFO - Move 70: KataGo (White) thinking...
+2025-11-16 15:51:38,538 - INFO - Move 70: KataGo (White) plays N10
+2025-11-16 15:51:38,589 - INFO - Move 71: DataGo (Black) thinking...
+2025-11-16 15:51:38,620 - INFO -   → Complex position detected (unc=0.391)
+2025-11-16 15:51:38,623 - INFO -   → No match found: a09acafcb266, running deep search
+2025-11-16 15:51:38,623 - INFO -   → Deep search (depth=0, unc=0.391)
+2025-11-16 15:51:38,732 - INFO - Move 71: DataGo (Black) plays pass [unc=0.391, DEEP, 143ms]
+2025-11-16 15:51:38,782 - INFO - Move 72: KataGo (White) thinking...
+2025-11-16 15:51:38,914 - INFO - Move 72: KataGo (White) plays G6
+2025-11-16 15:51:38,965 - INFO - Move 73: DataGo (Black) thinking...
+2025-11-16 15:51:38,994 - INFO -   → Complex position detected (unc=0.393)
+2025-11-16 15:51:38,997 - INFO -   → No match found: e1e12883869f, running deep search
+2025-11-16 15:51:38,997 - INFO -   → Deep search (depth=0, unc=0.393)
+2025-11-16 15:51:39,113 - INFO -     → Recursive search for child
+2025-11-16 15:51:39,113 - INFO -     → Deep search (depth=1, unc=0.790)
+2025-11-16 15:51:39,232 - INFO -       → Recursive search for child
+2025-11-16 15:51:39,232 - INFO -       → Deep search (depth=2, unc=0.735)
+2025-11-16 15:51:39,349 - INFO -         → Recursive search for child
+2025-11-16 15:51:39,349 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:39,399 - INFO -         → Recursive search for child
+2025-11-16 15:51:39,399 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:39,450 - INFO -         → Recursive search for child
+2025-11-16 15:51:39,450 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:39,499 - INFO -         → Recursive search for child
+2025-11-16 15:51:39,500 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:39,546 - INFO -         → Recursive search for child
+2025-11-16 15:51:39,546 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:39,595 - INFO -       → Recursive search for child
+2025-11-16 15:51:39,595 - INFO -       → Deep search (depth=2, unc=0.783)
+2025-11-16 15:51:39,713 - INFO -       → Recursive search for child
+2025-11-16 15:51:39,713 - INFO -       → Deep search (depth=2, unc=0.762)
+2025-11-16 15:51:39,750 - INFO -         → Recursive search for child
+2025-11-16 15:51:39,750 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:39,801 - INFO -         → Recursive search for child
+2025-11-16 15:51:39,801 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:39,823 - INFO -         → Recursive search for child
+2025-11-16 15:51:39,823 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:39,872 - INFO -         → Recursive search for child
+2025-11-16 15:51:39,872 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:39,886 - INFO -         → Recursive search for child
+2025-11-16 15:51:39,886 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:39,898 - INFO -       → Recursive search for child
+2025-11-16 15:51:39,898 - INFO -       → Deep search (depth=2, unc=0.710)
+2025-11-16 15:51:39,972 - INFO -         → Recursive search for child
+2025-11-16 15:51:39,972 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:40,015 - INFO -         → Recursive search for child
+2025-11-16 15:51:40,015 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:40,068 - INFO -         → Recursive search for child
+2025-11-16 15:51:40,069 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:40,086 - INFO -         → Recursive search for child
+2025-11-16 15:51:40,086 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:40,101 - INFO -         → Recursive search for child
+2025-11-16 15:51:40,101 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:40,112 - INFO -       → Recursive search for child
+2025-11-16 15:51:40,113 - INFO -       → Deep search (depth=2, unc=0.729)
+2025-11-16 15:51:40,178 - INFO -         → Recursive search for child
+2025-11-16 15:51:40,178 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:40,221 - INFO -         → Recursive search for child
+2025-11-16 15:51:40,221 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:40,236 - INFO -         → Recursive search for child
+2025-11-16 15:51:40,236 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:40,248 - INFO -         → Recursive search for child
+2025-11-16 15:51:40,248 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:40,260 - INFO -         → Recursive search for child
+2025-11-16 15:51:40,260 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:40,272 - INFO -     → Recursive search for child
+2025-11-16 15:51:40,272 - INFO -     → Deep search (depth=1, unc=0.728)
+2025-11-16 15:51:40,346 - INFO -       → Recursive search for child
+2025-11-16 15:51:40,346 - INFO -       → Deep search (depth=2, unc=0.711)
+2025-11-16 15:51:40,458 - INFO -       → Recursive search for child
+2025-11-16 15:51:40,458 - INFO -       → Deep search (depth=2, unc=0.733)
+2025-11-16 15:51:40,499 - INFO -       → Recursive search for child
+2025-11-16 15:51:40,499 - INFO -       → Deep search (depth=2, unc=0.680)
+2025-11-16 15:51:40,520 - INFO -         → Recursive search for child
+2025-11-16 15:51:40,520 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:40,563 - INFO -         → Recursive search for child
+2025-11-16 15:51:40,563 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:40,580 - INFO -         → Recursive search for child
+2025-11-16 15:51:40,580 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:40,597 - INFO -         → Recursive search for child
+2025-11-16 15:51:40,597 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:40,607 - INFO -         → Recursive search for child
+2025-11-16 15:51:40,607 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:40,619 - INFO -       → Recursive search for child
+2025-11-16 15:51:40,619 - INFO -       → Deep search (depth=2, unc=0.738)
+2025-11-16 15:51:40,688 - INFO -       → Recursive search for child
+2025-11-16 15:51:40,688 - INFO -       → Deep search (depth=2, unc=0.736)
+2025-11-16 15:51:40,721 - INFO -         → Recursive search for child
+2025-11-16 15:51:40,721 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:40,772 - INFO -         → Recursive search for child
+2025-11-16 15:51:40,772 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:40,790 - INFO -         → Recursive search for child
+2025-11-16 15:51:40,790 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:40,803 - INFO -         → Recursive search for child
+2025-11-16 15:51:40,803 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:40,815 - INFO -         → Recursive search for child
+2025-11-16 15:51:40,815 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:40,825 - INFO -     → Recursive search for child
+2025-11-16 15:51:40,825 - INFO -     → Deep search (depth=1, unc=0.736)
+2025-11-16 15:51:40,892 - INFO -     → Recursive search for child
+2025-11-16 15:51:40,892 - INFO -     → Deep search (depth=1, unc=0.752)
+2025-11-16 15:51:40,918 - INFO - Move 73: DataGo (Black) plays G1 [unc=0.393, DEEP, 1953ms]
+2025-11-16 15:51:40,969 - INFO - Move 74: KataGo (White) thinking...
+2025-11-16 15:51:41,088 - INFO - Move 74: KataGo (White) plays H14
+2025-11-16 15:51:41,138 - INFO - Move 75: DataGo (Black) thinking...
+2025-11-16 15:51:41,179 - INFO -   → Complex position detected (unc=0.394)
+2025-11-16 15:51:41,182 - INFO -   → No match found: 87c7e0c3dbb2, running deep search
+2025-11-16 15:51:41,182 - INFO -   → Deep search (depth=0, unc=0.394)
+2025-11-16 15:51:41,297 - INFO -     → Recursive search for child
+2025-11-16 15:51:41,297 - INFO -     → Deep search (depth=1, unc=0.725)
+2025-11-16 15:51:41,409 - INFO -       → Recursive search for child
+2025-11-16 15:51:41,409 - INFO -       → Deep search (depth=2, unc=0.741)
+2025-11-16 15:51:41,520 - INFO -       → Recursive search for child
+2025-11-16 15:51:41,520 - INFO -       → Deep search (depth=2, unc=0.738)
+2025-11-16 15:51:41,565 - INFO -       → Recursive search for child
+2025-11-16 15:51:41,565 - INFO -       → Deep search (depth=2, unc=0.779)
+2025-11-16 15:51:41,597 - INFO -         → Recursive search for child
+2025-11-16 15:51:41,597 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:41,644 - INFO -         → Recursive search for child
+2025-11-16 15:51:41,644 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:41,662 - INFO -         → Recursive search for child
+2025-11-16 15:51:41,662 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:41,674 - INFO -         → Recursive search for child
+2025-11-16 15:51:41,674 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:41,686 - INFO -         → Recursive search for child
+2025-11-16 15:51:41,686 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:41,698 - INFO -       → Recursive search for child
+2025-11-16 15:51:41,698 - INFO -       → Deep search (depth=2, unc=0.652)
+2025-11-16 15:51:41,773 - INFO -       → Recursive search for child
+2025-11-16 15:51:41,773 - INFO -       → Deep search (depth=2, unc=0.750)
+2025-11-16 15:51:41,799 - INFO -         → Recursive search for child
+2025-11-16 15:51:41,799 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:41,846 - INFO -         → Recursive search for child
+2025-11-16 15:51:41,846 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:41,866 - INFO -         → Recursive search for child
+2025-11-16 15:51:41,866 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:41,882 - INFO -         → Child cache hit: bd1ade6b67ad
+2025-11-16 15:51:41,885 - INFO -         → Recursive search for child
+2025-11-16 15:51:41,885 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:41,897 - INFO -     → Recursive search for child
+2025-11-16 15:51:41,897 - INFO -     → Deep search (depth=1, unc=0.752)
+2025-11-16 15:51:41,964 - INFO -     → Recursive search for child
+2025-11-16 15:51:41,964 - INFO -     → Deep search (depth=1, unc=0.774)
+2025-11-16 15:51:41,996 - INFO -       → Recursive search for child
+2025-11-16 15:51:41,996 - INFO -       → Deep search (depth=2, unc=0.734)
+2025-11-16 15:51:42,112 - INFO -         → Recursive search for child
+2025-11-16 15:51:42,112 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:42,154 - INFO -         → Recursive search for child
+2025-11-16 15:51:42,154 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:42,172 - INFO -         → Recursive search for child
+2025-11-16 15:51:42,172 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:42,183 - INFO -         → Recursive search for child
+2025-11-16 15:51:42,183 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:42,195 - INFO -         → Recursive search for child
+2025-11-16 15:51:42,195 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:42,208 - INFO -       → Recursive search for child
+2025-11-16 15:51:42,208 - INFO -       → Deep search (depth=2, unc=0.755)
+2025-11-16 15:51:42,278 - INFO -       → Recursive search for child
+2025-11-16 15:51:42,278 - INFO -       → Deep search (depth=2, unc=0.720)
+2025-11-16 15:51:42,314 - INFO -       → Recursive search for child
+2025-11-16 15:51:42,314 - INFO -       → Deep search (depth=2, unc=0.730)
+2025-11-16 15:51:42,337 - INFO -     → Recursive search for child
+2025-11-16 15:51:42,337 - INFO -     → Deep search (depth=1, unc=0.782)
+2025-11-16 15:51:42,359 - INFO -       → Recursive search for child
+2025-11-16 15:51:42,359 - INFO -       → Deep search (depth=2, unc=0.701)
+2025-11-16 15:51:42,471 - INFO -       → Recursive search for child
+2025-11-16 15:51:42,471 - INFO -       → Deep search (depth=2, unc=0.741)
+2025-11-16 15:51:42,508 - INFO -       → Recursive search for child
+2025-11-16 15:51:42,509 - INFO -       → Deep search (depth=2, unc=0.751)
+2025-11-16 15:51:42,533 - INFO -       → Recursive search for child
+2025-11-16 15:51:42,533 - INFO -       → Deep search (depth=2, unc=0.727)
+2025-11-16 15:51:42,557 - INFO -     → Recursive search for child
+2025-11-16 15:51:42,557 - INFO -     → Deep search (depth=1, unc=0.691)
+2025-11-16 15:51:42,579 - INFO -       → Recursive search for child
+2025-11-16 15:51:42,579 - INFO -       → Deep search (depth=2, unc=0.673)
+2025-11-16 15:51:42,696 - INFO -       → Recursive search for child
+2025-11-16 15:51:42,696 - INFO -       → Deep search (depth=2, unc=0.790)
+2025-11-16 15:51:42,721 - INFO -       → Recursive search for child
+2025-11-16 15:51:42,721 - INFO -       → Deep search (depth=2, unc=0.746)
+2025-11-16 15:51:42,742 - INFO -       → Recursive search for child
+2025-11-16 15:51:42,742 - INFO -       → Deep search (depth=2, unc=0.713)
+2025-11-16 15:51:42,771 - INFO -       → Recursive search for child
+2025-11-16 15:51:42,771 - INFO -       → Deep search (depth=2, unc=0.772)
+2025-11-16 15:51:42,790 - INFO - Move 75: DataGo (Black) plays G3 [unc=0.394, DEEP, 1652ms]
+2025-11-16 15:51:42,840 - INFO - Move 76: KataGo (White) thinking...
+2025-11-16 15:51:42,971 - INFO - Move 76: KataGo (White) plays F18
+2025-11-16 15:51:43,022 - INFO - Move 77: DataGo (Black) thinking...
+2025-11-16 15:51:43,063 - INFO -   → Complex position detected (unc=0.394)
+2025-11-16 15:51:43,065 - INFO -   → No match found: 43029dc2bde0, running deep search
+2025-11-16 15:51:43,066 - INFO -   → Deep search (depth=0, unc=0.394)
+2025-11-16 15:51:43,179 - INFO - Move 77: DataGo (Black) plays pass [unc=0.394, DEEP, 157ms]
+2025-11-16 15:51:43,230 - INFO - Move 78: KataGo (White) thinking...
+2025-11-16 15:51:43,343 - INFO - Move 78: KataGo (White) plays E2
+2025-11-16 15:51:43,393 - INFO - Move 79: DataGo (Black) thinking...
+2025-11-16 15:51:43,440 - INFO -   → Complex position detected (unc=0.396)
+2025-11-16 15:51:43,443 - INFO -   → No match found: 4a89f4b83571, running deep search
+2025-11-16 15:51:43,443 - INFO -   → Deep search (depth=0, unc=0.396)
+2025-11-16 15:51:43,560 - INFO - Move 79: DataGo (Black) plays pass [unc=0.396, DEEP, 167ms]
+2025-11-16 15:51:43,611 - INFO - Move 80: KataGo (White) thinking...
+2025-11-16 15:51:43,713 - INFO - Move 80: KataGo (White) plays L14
+2025-11-16 15:51:43,764 - INFO - Move 81: DataGo (Black) thinking...
+2025-11-16 15:51:43,804 - INFO -   → Complex position detected (unc=0.400)
+2025-11-16 15:51:43,807 - INFO -   → No match found: 9adc48aab65e, running deep search
+2025-11-16 15:51:43,807 - INFO -   → Deep search (depth=0, unc=0.400)
+2025-11-16 15:51:43,922 - INFO -     → Recursive search for child
+2025-11-16 15:51:43,922 - INFO -     → Deep search (depth=1, unc=0.717)
+2025-11-16 15:51:44,031 - INFO -     → Recursive search for child
+2025-11-16 15:51:44,031 - INFO -     → Deep search (depth=1, unc=0.736)
+2025-11-16 15:51:44,143 - INFO -     → Recursive search for child
+2025-11-16 15:51:44,143 - INFO -     → Deep search (depth=1, unc=0.785)
+2025-11-16 15:51:44,183 - INFO -       → Recursive search for child
+2025-11-16 15:51:44,183 - INFO -       → Deep search (depth=2, unc=0.769)
+2025-11-16 15:51:44,287 - INFO -       → Recursive search for child
+2025-11-16 15:51:44,288 - INFO -       → Deep search (depth=2, unc=0.771)
+2025-11-16 15:51:44,325 - INFO -       → Recursive search for child
+2025-11-16 15:51:44,325 - INFO -       → Deep search (depth=2, unc=0.752)
+2025-11-16 15:51:44,353 - INFO -       → Recursive search for child
+2025-11-16 15:51:44,353 - INFO -       → Deep search (depth=2, unc=0.741)
+2025-11-16 15:51:44,376 - INFO -       → Recursive search for child
+2025-11-16 15:51:44,376 - INFO -       → Deep search (depth=2, unc=0.759)
+2025-11-16 15:51:44,398 - INFO -     → Recursive search for child
+2025-11-16 15:51:44,398 - INFO -     → Deep search (depth=1, unc=0.639)
+2025-11-16 15:51:44,423 - INFO -     → Recursive search for child
+2025-11-16 15:51:44,423 - INFO -     → Deep search (depth=1, unc=0.775)
+2025-11-16 15:51:44,446 - INFO - Move 81: DataGo (Black) plays L13 [unc=0.400, DEEP, 682ms]
+2025-11-16 15:51:44,496 - INFO - Move 82: KataGo (White) thinking...
+2025-11-16 15:51:44,627 - INFO - Move 82: KataGo (White) plays S1
+2025-11-16 15:51:44,677 - INFO - Move 83: DataGo (Black) thinking...
+2025-11-16 15:51:44,738 - INFO -   → Complex position detected (unc=0.399)
+2025-11-16 15:51:44,740 - INFO -   → No match found: 26f655ba8756, running deep search
+2025-11-16 15:51:44,741 - INFO -   → Deep search (depth=0, unc=0.399)
+2025-11-16 15:51:44,825 - INFO -     → Recursive search for child
+2025-11-16 15:51:44,825 - INFO -     → Deep search (depth=1, unc=0.710)
+2025-11-16 15:51:44,941 - INFO -       → Recursive search for child
+2025-11-16 15:51:44,942 - INFO -       → Deep search (depth=2, unc=0.732)
+2025-11-16 15:51:45,039 - INFO -       → Recursive search for child
+2025-11-16 15:51:45,039 - INFO -       → Deep search (depth=2, unc=0.741)
+2025-11-16 15:51:45,162 - INFO -       → Recursive search for child
+2025-11-16 15:51:45,162 - INFO -       → Deep search (depth=2, unc=0.795)
+2025-11-16 15:51:45,197 - INFO -     → Recursive search for child
+2025-11-16 15:51:45,197 - INFO -     → Deep search (depth=1, unc=0.773)
+2025-11-16 15:51:45,221 - INFO -     → Recursive search for child
+2025-11-16 15:51:45,221 - INFO -     → Deep search (depth=1, unc=0.761)
+2025-11-16 15:51:45,243 - INFO -     → Recursive search for child
+2025-11-16 15:51:45,243 - INFO -     → Deep search (depth=1, unc=0.771)
+2025-11-16 15:51:45,279 - INFO - Move 83: DataGo (Black) plays R1 [unc=0.399, DEEP, 602ms]
+2025-11-16 15:51:45,330 - INFO - Move 84: KataGo (White) thinking...
+2025-11-16 15:51:45,430 - INFO - Move 84: KataGo (White) plays Q9
+2025-11-16 15:51:45,480 - INFO - Move 85: DataGo (Black) thinking...
+2025-11-16 15:51:45,513 - INFO -   → Complex position detected (unc=0.400)
+2025-11-16 15:51:45,514 - INFO -   → No match found: 14ffb0e26d1a, running deep search
+2025-11-16 15:51:45,514 - INFO -   → Deep search (depth=0, unc=0.400)
+2025-11-16 15:51:45,631 - INFO -     → Recursive search for child
+2025-11-16 15:51:45,631 - INFO -     → Deep search (depth=1, unc=0.749)
+2025-11-16 15:51:45,743 - INFO -     → Recursive search for child
+2025-11-16 15:51:45,743 - INFO -     → Deep search (depth=1, unc=0.711)
+2025-11-16 15:51:45,853 - INFO -       → Recursive search for child
+2025-11-16 15:51:45,853 - INFO -       → Deep search (depth=2, unc=0.741)
+2025-11-16 15:51:45,964 - INFO -         → Recursive search for child
+2025-11-16 15:51:45,964 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:46,012 - INFO -         → Recursive search for child
+2025-11-16 15:51:46,012 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:46,032 - INFO -         → Recursive search for child
+2025-11-16 15:51:46,032 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:46,083 - INFO -         → Recursive search for child
+2025-11-16 15:51:46,083 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:46,103 - INFO -       → Recursive search for child
+2025-11-16 15:51:46,104 - INFO -       → Deep search (depth=2, unc=0.722)
+2025-11-16 15:51:46,177 - INFO -       → Recursive search for child
+2025-11-16 15:51:46,177 - INFO -       → Deep search (depth=2, unc=0.792)
+2025-11-16 15:51:46,198 - INFO -       → Recursive search for child
+2025-11-16 15:51:46,198 - INFO -       → Deep search (depth=2, unc=0.650)
+2025-11-16 15:51:46,220 - INFO -       → Recursive search for child
+2025-11-16 15:51:46,221 - INFO -       → Deep search (depth=2, unc=0.814)
+2025-11-16 15:51:46,239 - INFO -     → Recursive search for child
+2025-11-16 15:51:46,239 - INFO -     → Deep search (depth=1, unc=0.780)
+2025-11-16 15:51:46,259 - INFO -     → Recursive search for child
+2025-11-16 15:51:46,259 - INFO -     → Deep search (depth=1, unc=0.799)
+2025-11-16 15:51:46,274 - INFO -     → Recursive search for child
+2025-11-16 15:51:46,274 - INFO -     → Deep search (depth=1, unc=0.768)
+2025-11-16 15:51:46,291 - INFO - Move 85: DataGo (Black) plays Q10 [unc=0.400, DEEP, 810ms]
+2025-11-16 15:51:46,341 - INFO - Move 86: KataGo (White) thinking...
+2025-11-16 15:51:46,450 - INFO - Move 86: KataGo (White) plays G11
+2025-11-16 15:51:46,500 - INFO - Move 87: DataGo (Black) thinking...
+2025-11-16 15:51:46,564 - INFO -   → Complex position detected (unc=0.399)
+2025-11-16 15:51:46,567 - INFO -   → No match found: 01a969a6c177, running deep search
+2025-11-16 15:51:46,567 - INFO -   → Deep search (depth=0, unc=0.399)
+2025-11-16 15:51:46,688 - INFO - Move 87: DataGo (Black) plays pass [unc=0.399, DEEP, 188ms]
+2025-11-16 15:51:46,738 - INFO - Move 88: KataGo (White) thinking...
+2025-11-16 15:51:46,852 - INFO - Move 88: KataGo (White) plays K7
+2025-11-16 15:51:46,903 - INFO - Move 89: DataGo (Black) thinking...
+2025-11-16 15:51:46,945 - INFO -   → Complex position detected (unc=0.402)
+2025-11-16 15:51:46,948 - INFO -   → No match found: 497318f3970f, running deep search
+2025-11-16 15:51:46,948 - INFO -   → Deep search (depth=0, unc=0.402)
+2025-11-16 15:51:47,064 - INFO - Move 89: DataGo (Black) plays pass [unc=0.402, DEEP, 161ms]
+2025-11-16 15:51:47,114 - INFO - Move 90: KataGo (White) thinking...
+2025-11-16 15:51:47,220 - INFO - Move 90: KataGo (White) plays P14
+2025-11-16 15:51:47,270 - INFO - Move 91: DataGo (Black) thinking...
+2025-11-16 15:51:47,312 - INFO -   → Complex position detected (unc=0.403)
+2025-11-16 15:51:47,313 - INFO -   → No match found: 852218822c84, running deep search
+2025-11-16 15:51:47,313 - INFO -   → Deep search (depth=0, unc=0.403)
+2025-11-16 15:51:47,423 - INFO - Move 91: DataGo (Black) plays pass [unc=0.403, DEEP, 152ms]
+2025-11-16 15:51:47,473 - INFO - Move 92: KataGo (White) thinking...
+2025-11-16 15:51:47,570 - INFO - Move 92: KataGo (White) plays D7
+2025-11-16 15:51:47,621 - INFO - Move 93: DataGo (Black) thinking...
+2025-11-16 15:51:47,665 - INFO -   → Complex position detected (unc=0.404)
+2025-11-16 15:51:47,667 - INFO -   → No match found: b0d353b9a0ff, running deep search
+2025-11-16 15:51:47,668 - INFO -   → Deep search (depth=0, unc=0.404)
+2025-11-16 15:51:47,777 - INFO -     → Recursive search for child
+2025-11-16 15:51:47,777 - INFO -     → Deep search (depth=1, unc=0.721)
+2025-11-16 15:51:47,885 - INFO -     → Recursive search for child
+2025-11-16 15:51:47,885 - INFO -     → Deep search (depth=1, unc=0.760)
+2025-11-16 15:51:47,918 - INFO -       → Recursive search for child
+2025-11-16 15:51:47,919 - INFO -       → Deep search (depth=2, unc=0.788)
+2025-11-16 15:51:48,034 - INFO -       → Recursive search for child
+2025-11-16 15:51:48,034 - INFO -       → Deep search (depth=2, unc=0.786)
+2025-11-16 15:51:48,063 - INFO -       → Recursive search for child
+2025-11-16 15:51:48,063 - INFO -       → Deep search (depth=2, unc=0.767)
+2025-11-16 15:51:48,097 - INFO -       → Recursive search for child
+2025-11-16 15:51:48,097 - INFO -       → Deep search (depth=2, unc=0.743)
+2025-11-16 15:51:48,118 - INFO -         → Recursive search for child
+2025-11-16 15:51:48,118 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:48,167 - INFO -         → Recursive search for child
+2025-11-16 15:51:48,167 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:48,180 - INFO -         → Recursive search for child
+2025-11-16 15:51:48,180 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:48,191 - INFO -         → Recursive search for child
+2025-11-16 15:51:48,191 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:48,203 - INFO -         → Recursive search for child
+2025-11-16 15:51:48,203 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:48,221 - INFO -     → Recursive search for child
+2025-11-16 15:51:48,221 - INFO -     → Deep search (depth=1, unc=0.670)
+2025-11-16 15:51:48,289 - INFO -     → Recursive search for child
+2025-11-16 15:51:48,289 - INFO -     → Deep search (depth=1, unc=0.788)
+2025-11-16 15:51:48,324 - INFO - Move 93: DataGo (Black) plays T3 [unc=0.404, DEEP, 703ms]
+2025-11-16 15:51:48,375 - INFO - Move 94: KataGo (White) thinking...
+2025-11-16 15:51:48,463 - INFO - Move 94: KataGo (White) plays B4
+2025-11-16 15:51:48,513 - INFO - Move 95: DataGo (Black) thinking...
+2025-11-16 15:51:48,553 - INFO -   → Complex position detected (unc=0.404)
+2025-11-16 15:51:48,555 - INFO -   → No match found: 0b375f594185, running deep search
+2025-11-16 15:51:48,556 - INFO -   → Deep search (depth=0, unc=0.404)
+2025-11-16 15:51:48,669 - INFO - Move 95: DataGo (Black) plays pass [unc=0.404, DEEP, 155ms]
+2025-11-16 15:51:48,719 - INFO - Move 96: KataGo (White) thinking...
+2025-11-16 15:51:48,811 - INFO - Move 96: KataGo (White) plays O11
+2025-11-16 15:51:48,861 - INFO - Move 97: DataGo (Black) thinking...
+2025-11-16 15:51:48,903 - INFO -   → Complex position detected (unc=0.408)
+2025-11-16 15:51:48,906 - INFO -   → No match found: 1b782ff3a530, running deep search
+2025-11-16 15:51:48,906 - INFO -   → Deep search (depth=0, unc=0.408)
+2025-11-16 15:51:49,020 - INFO - Move 97: DataGo (Black) plays pass [unc=0.408, DEEP, 159ms]
+2025-11-16 15:51:49,070 - INFO - Move 98: KataGo (White) thinking...
+2025-11-16 15:51:49,164 - INFO - Move 98: KataGo (White) plays B14
+2025-11-16 15:51:49,215 - INFO - Move 99: DataGo (Black) thinking...
+2025-11-16 15:51:49,266 - INFO -   → Complex position detected (unc=0.407)
+2025-11-16 15:51:49,269 - INFO -   → No match found: 926a8e0d90d2, running deep search
+2025-11-16 15:51:49,269 - INFO -   → Deep search (depth=0, unc=0.407)
+2025-11-16 15:51:49,380 - INFO - Move 99: DataGo (Black) plays pass [unc=0.407, DEEP, 165ms]
+2025-11-16 15:51:49,430 - INFO - Move 100: KataGo (White) thinking...
+2025-11-16 15:51:49,526 - INFO - Move 100: KataGo (White) plays R2
+2025-11-16 15:51:49,577 - INFO - 
+Reached max moves (100). Scoring game...
+2025-11-16 15:51:49,787 - INFO - Final score: B+327.5
+2025-11-16 15:51:49,787 - INFO - DataGo (Black) wins by scoring!
+2025-11-16 15:51:49,787 - INFO - 
+Game 2 Statistics:
+2025-11-16 15:51:49,787 - INFO -   Moves played: 100
+2025-11-16 15:51:49,787 - INFO -   RAG queries: 65
+2025-11-16 15:51:49,788 - INFO -   RAG hits: 26
+2025-11-16 15:51:49,788 - INFO -   Exact matches: 26
+2025-11-16 15:51:49,788 - INFO -   Deep searches: 304
+2025-11-16 15:51:49,788 - INFO -   Recursive searches: 261
+2025-11-16 15:51:49,788 - INFO -   Unique positions: 582
+2025-11-16 15:51:49,788 - INFO -   Total contexts: 615
+2025-11-16 15:51:49,788 - INFO -   Average uncertainty: 0.377
+2025-11-16 15:51:49,788 - INFO - 
+======================================================================
+2025-11-16 15:51:49,788 - INFO - Game 3/3
+2025-11-16 15:51:49,788 - INFO - ======================================================================
+
+2025-11-16 15:51:49,788 - INFO - Move 1: DataGo (Black) thinking...
+2025-11-16 15:51:49,818 - INFO - Move 1: DataGo (Black) plays R16 [unc=0.347, 30ms]
+2025-11-16 15:51:49,869 - INFO - Move 2: KataGo (White) thinking...
+2025-11-16 15:51:49,884 - INFO - Move 2: KataGo (White) plays C4
+2025-11-16 15:51:49,934 - INFO - Move 3: DataGo (Black) thinking...
+2025-11-16 15:51:50,031 - INFO - Move 3: DataGo (Black) plays D17 [unc=0.349, 96ms]
+2025-11-16 15:51:50,081 - INFO - Move 4: KataGo (White) thinking...
+2025-11-16 15:51:50,178 - INFO - Move 4: KataGo (White) plays Q3
+2025-11-16 15:51:50,228 - INFO - Move 5: DataGo (Black) thinking...
+2025-11-16 15:51:50,307 - INFO - Move 5: DataGo (Black) plays E3 [unc=0.351, 79ms]
+2025-11-16 15:51:50,358 - INFO - Move 6: KataGo (White) thinking...
+2025-11-16 15:51:50,442 - INFO - Move 6: KataGo (White) plays R6
+2025-11-16 15:51:50,492 - INFO - Move 7: DataGo (Black) thinking...
+2025-11-16 15:51:50,582 - INFO - Move 7: DataGo (Black) plays C14 [unc=0.354, 89ms]
+2025-11-16 15:51:50,632 - INFO - Move 8: KataGo (White) thinking...
+2025-11-16 15:51:50,716 - INFO - Move 8: KataGo (White) plays P17
+2025-11-16 15:51:50,766 - INFO - Move 9: DataGo (Black) thinking...
+2025-11-16 15:51:50,854 - INFO - Move 9: DataGo (Black) plays N17 [unc=0.352, 88ms]
+2025-11-16 15:51:50,905 - INFO - Move 10: KataGo (White) thinking...
+2025-11-16 15:51:50,997 - INFO - Move 10: KataGo (White) plays D5
+2025-11-16 15:51:51,048 - INFO - Move 11: DataGo (Black) thinking...
+2025-11-16 15:51:51,148 - INFO - Move 11: DataGo (Black) plays H3 [unc=0.354, 100ms]
+2025-11-16 15:51:51,198 - INFO - Move 12: KataGo (White) thinking...
+2025-11-16 15:51:51,262 - INFO - Move 12: KataGo (White) plays F4
+2025-11-16 15:51:51,312 - INFO - Move 13: DataGo (Black) thinking...
+2025-11-16 15:51:51,376 - INFO - Move 13: DataGo (Black) plays F3 [unc=0.354, 64ms]
+2025-11-16 15:51:51,427 - INFO - Move 14: KataGo (White) thinking...
+2025-11-16 15:51:51,453 - INFO - Move 14: KataGo (White) plays Q15
+2025-11-16 15:51:51,503 - INFO - Move 15: DataGo (Black) thinking...
+2025-11-16 15:51:51,580 - INFO - Move 15: DataGo (Black) plays Q16 [unc=0.356, 76ms]
+2025-11-16 15:51:51,630 - INFO - Move 16: KataGo (White) thinking...
+2025-11-16 15:51:51,669 - INFO - Move 16: KataGo (White) plays P16
+2025-11-16 15:51:51,720 - INFO - Move 17: DataGo (Black) thinking...
+2025-11-16 15:51:51,723 - INFO - Move 17: DataGo (Black) plays P15 [unc=0.354, 3ms]
+2025-11-16 15:51:51,773 - INFO - Move 18: KataGo (White) thinking...
+2025-11-16 15:51:51,775 - INFO - Move 18: KataGo (White) plays O15
+2025-11-16 15:51:51,826 - INFO - Move 19: DataGo (Black) thinking...
+2025-11-16 15:51:51,922 - INFO - Move 19: DataGo (Black) plays P14 [unc=0.362, 96ms]
+2025-11-16 15:51:51,972 - INFO - Move 20: KataGo (White) thinking...
+2025-11-16 15:51:51,975 - INFO - Move 20: KataGo (White) plays N16
+2025-11-16 15:51:52,025 - INFO - Move 21: DataGo (Black) thinking...
+2025-11-16 15:51:52,030 - INFO - Move 21: DataGo (Black) plays M17 [unc=0.361, 5ms]
+2025-11-16 15:51:52,080 - INFO - Move 22: KataGo (White) thinking...
+2025-11-16 15:51:52,223 - INFO - Move 22: KataGo (White) plays R14
+2025-11-16 15:51:52,273 - INFO - Move 23: DataGo (Black) thinking...
+2025-11-16 15:51:52,314 - INFO - Move 23: DataGo (Black) plays Q12 [unc=0.362, 40ms]
+2025-11-16 15:51:52,364 - INFO - Move 24: KataGo (White) thinking...
+2025-11-16 15:51:52,422 - INFO - Move 24: KataGo (White) plays S14
+2025-11-16 15:51:52,472 - INFO - Move 25: DataGo (Black) thinking...
+2025-11-16 15:51:52,528 - INFO - Move 25: DataGo (Black) plays S12 [unc=0.365, 56ms]
+2025-11-16 15:51:52,578 - INFO - Move 26: KataGo (White) thinking...
+2025-11-16 15:51:52,614 - INFO - Move 26: KataGo (White) plays R11
+2025-11-16 15:51:52,664 - INFO - Move 27: DataGo (Black) thinking...
+2025-11-16 15:51:52,711 - INFO - Move 27: DataGo (Black) plays R12 [unc=0.367, 46ms]
+2025-11-16 15:51:52,761 - INFO - Move 28: KataGo (White) thinking...
+2025-11-16 15:51:52,813 - INFO - Move 28: KataGo (White) plays S16
+2025-11-16 15:51:52,863 - INFO - Move 29: DataGo (Black) thinking...
+2025-11-16 15:51:52,891 - INFO - Move 29: DataGo (Black) plays S17 [unc=0.367, 28ms]
+2025-11-16 15:51:52,942 - INFO - Move 30: KataGo (White) thinking...
+2025-11-16 15:51:52,958 - INFO - Move 30: KataGo (White) plays R15
+2025-11-16 15:51:53,008 - INFO - Move 31: DataGo (Black) thinking...
+2025-11-16 15:51:53,018 - INFO - Move 31: DataGo (Black) plays Q18 [unc=0.366, 9ms]
+2025-11-16 15:51:53,068 - INFO - Move 32: KataGo (White) thinking...
+2025-11-16 15:51:53,088 - INFO - Move 32: KataGo (White) plays P18
+2025-11-16 15:51:53,138 - INFO - Move 33: DataGo (Black) thinking...
+2025-11-16 15:51:53,154 - INFO -   → Complex position detected (unc=0.370)
+2025-11-16 15:51:53,156 - INFO -   → No match found: a9b59ee1a4ac, running deep search
+2025-11-16 15:51:53,156 - INFO -   → Deep search (depth=0, unc=0.370)
+2025-11-16 15:51:53,493 - INFO -     → Recursive search for child
+2025-11-16 15:51:53,493 - INFO -     → Deep search (depth=1, unc=0.655)
+2025-11-16 15:51:53,800 - INFO -       → Recursive search for child
+2025-11-16 15:51:53,800 - INFO -       → Deep search (depth=2, unc=0.710)
+2025-11-16 15:51:54,090 - INFO -         → Recursive search for child
+2025-11-16 15:51:54,090 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:54,221 - INFO -         → Recursive search for child
+2025-11-16 15:51:54,222 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:54,317 - INFO -         → Recursive search for child
+2025-11-16 15:51:54,317 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:54,370 - INFO -         → Recursive search for child
+2025-11-16 15:51:54,370 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:54,428 - INFO -         → Recursive search for child
+2025-11-16 15:51:54,428 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:54,488 - INFO -       → Recursive search for child
+2025-11-16 15:51:54,488 - INFO -       → Deep search (depth=2, unc=0.720)
+2025-11-16 15:51:54,619 - INFO -         → Recursive search for child
+2025-11-16 15:51:54,619 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:54,676 - INFO -         → Recursive search for child
+2025-11-16 15:51:54,676 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:54,732 - INFO -         → Recursive search for child
+2025-11-16 15:51:54,732 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:54,785 - INFO -         → Recursive search for child
+2025-11-16 15:51:54,785 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:54,841 - INFO -         → Recursive search for child
+2025-11-16 15:51:54,841 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:54,897 - INFO -       → Recursive search for child
+2025-11-16 15:51:54,897 - INFO -       → Deep search (depth=2, unc=0.707)
+2025-11-16 15:51:54,985 - INFO -       → Recursive search for child
+2025-11-16 15:51:54,985 - INFO -       → Deep search (depth=2, unc=0.709)
+2025-11-16 15:51:55,012 - INFO -       → Recursive search for child
+2025-11-16 15:51:55,012 - INFO -       → Deep search (depth=2, unc=0.736)
+2025-11-16 15:51:55,037 - INFO -     → Recursive search for child
+2025-11-16 15:51:55,037 - INFO -     → Deep search (depth=1, unc=0.681)
+2025-11-16 15:51:55,059 - INFO -       → Recursive search for child
+2025-11-16 15:51:55,059 - INFO -       → Deep search (depth=2, unc=0.641)
+2025-11-16 15:51:55,177 - INFO -         → Recursive search for child
+2025-11-16 15:51:55,177 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:55,212 - INFO -         → Recursive search for child
+2025-11-16 15:51:55,212 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:55,269 - INFO -         → Recursive search for child
+2025-11-16 15:51:55,269 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:55,302 - INFO -         → Recursive search for child
+2025-11-16 15:51:55,302 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:55,324 - INFO -         → Recursive search for child
+2025-11-16 15:51:55,324 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:55,355 - INFO -       → Recursive search for child
+2025-11-16 15:51:55,355 - INFO -       → Deep search (depth=2, unc=0.698)
+2025-11-16 15:51:55,444 - INFO -       → Recursive search for child
+2025-11-16 15:51:55,444 - INFO -       → Deep search (depth=2, unc=0.703)
+2025-11-16 15:51:55,493 - INFO -       → Recursive search for child
+2025-11-16 15:51:55,493 - INFO -       → Deep search (depth=2, unc=0.640)
+2025-11-16 15:51:55,548 - INFO -       → Recursive search for child
+2025-11-16 15:51:55,548 - INFO -       → Deep search (depth=2, unc=0.681)
+2025-11-16 15:51:55,609 - INFO -         → Recursive search for child
+2025-11-16 15:51:55,609 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:55,651 - INFO -         → Recursive search for child
+2025-11-16 15:51:55,651 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:55,705 - INFO -         → Recursive search for child
+2025-11-16 15:51:55,705 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:55,730 - INFO -         → Recursive search for child
+2025-11-16 15:51:55,730 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:55,768 - INFO -         → Recursive search for child
+2025-11-16 15:51:55,768 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:55,810 - INFO -     → Recursive search for child
+2025-11-16 15:51:55,810 - INFO -     → Deep search (depth=1, unc=0.712)
+2025-11-16 15:51:55,895 - INFO -       → Recursive search for child
+2025-11-16 15:51:55,895 - INFO -       → Deep search (depth=2, unc=0.690)
+2025-11-16 15:51:55,968 - INFO -         → Recursive search for child
+2025-11-16 15:51:55,968 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:56,011 - INFO -         → Recursive search for child
+2025-11-16 15:51:56,011 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:56,055 - INFO -         → Recursive search for child
+2025-11-16 15:51:56,056 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:56,096 - INFO -         → Recursive search for child
+2025-11-16 15:51:56,096 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:56,139 - INFO -         → Recursive search for child
+2025-11-16 15:51:56,139 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:56,180 - INFO -       → Recursive search for child
+2025-11-16 15:51:56,180 - INFO -       → Deep search (depth=2, unc=0.637)
+2025-11-16 15:51:56,246 - INFO -         → Recursive search for child
+2025-11-16 15:51:56,246 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:56,282 - INFO -         → Recursive search for child
+2025-11-16 15:51:56,282 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:56,324 - INFO -         → Recursive search for child
+2025-11-16 15:51:56,324 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:56,374 - INFO -         → Recursive search for child
+2025-11-16 15:51:56,374 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:56,416 - INFO -         → Recursive search for child
+2025-11-16 15:51:56,416 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:56,458 - INFO -       → Recursive search for child
+2025-11-16 15:51:56,458 - INFO -       → Deep search (depth=2, unc=0.691)
+2025-11-16 15:51:56,541 - INFO -         → Recursive search for child
+2025-11-16 15:51:56,541 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:56,580 - INFO -         → Recursive search for child
+2025-11-16 15:51:56,581 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:56,622 - INFO -         → Recursive search for child
+2025-11-16 15:51:56,622 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:56,651 - INFO -         → Recursive search for child
+2025-11-16 15:51:56,651 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:56,690 - INFO -       → Recursive search for child
+2025-11-16 15:51:56,690 - INFO -       → Deep search (depth=2, unc=0.690)
+2025-11-16 15:51:56,747 - INFO -         → Recursive search for child
+2025-11-16 15:51:56,748 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:56,785 - INFO -         → Recursive search for child
+2025-11-16 15:51:56,786 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:56,820 - INFO -         → Recursive search for child
+2025-11-16 15:51:56,821 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:56,849 - INFO -         → Recursive search for child
+2025-11-16 15:51:56,849 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:56,887 - INFO -         → Recursive search for child
+2025-11-16 15:51:56,887 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:56,924 - INFO -       → Recursive search for child
+2025-11-16 15:51:56,925 - INFO -       → Deep search (depth=2, unc=0.677)
+2025-11-16 15:51:57,010 - INFO -         → Recursive search for child
+2025-11-16 15:51:57,010 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:57,032 - INFO -         → Recursive search for child
+2025-11-16 15:51:57,032 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:57,044 - INFO -         → Recursive search for child
+2025-11-16 15:51:57,044 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:57,060 - INFO -         → Child cache hit: 7cf96e61328e
+2025-11-16 15:51:57,063 - INFO -     → Recursive search for child
+2025-11-16 15:51:57,063 - INFO -     → Deep search (depth=1, unc=0.677)
+2025-11-16 15:51:57,088 - INFO -     → Recursive search for child
+2025-11-16 15:51:57,088 - INFO -     → Deep search (depth=1, unc=0.669)
+2025-11-16 15:51:57,102 - INFO -       → Recursive search for child
+2025-11-16 15:51:57,102 - INFO -       → Deep search (depth=2, unc=0.663)
+2025-11-16 15:51:57,125 - INFO -       → Recursive search for child
+2025-11-16 15:51:57,125 - INFO -       → Deep search (depth=2, unc=0.674)
+2025-11-16 15:51:57,148 - INFO -         → Recursive search for child
+2025-11-16 15:51:57,148 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:57,180 - INFO -         → Recursive search for child
+2025-11-16 15:51:57,180 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:57,198 - INFO -         → Recursive search for child
+2025-11-16 15:51:57,198 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:57,228 - INFO -         → Recursive search for child
+2025-11-16 15:51:57,229 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:57,252 - INFO -         → Recursive search for child
+2025-11-16 15:51:57,252 - INFO -         → Max recursion depth reached
+2025-11-16 15:51:57,289 - INFO -       → Recursive search for child
+2025-11-16 15:51:57,289 - INFO -       → Deep search (depth=2, unc=0.707)
+2025-11-16 15:51:57,303 - INFO -       → Recursive search for child
+2025-11-16 15:51:57,303 - INFO -       → Deep search (depth=2, unc=0.721)
+2025-11-16 15:51:57,319 - INFO -       → Recursive search for child
+2025-11-16 15:51:57,319 - INFO -       → Deep search (depth=2, unc=0.704)
+2025-11-16 15:51:57,333 - INFO - Move 33: DataGo (Black) plays S18 [unc=0.370, DEEP, 4195ms]
+2025-11-16 15:51:57,383 - INFO - Move 34: KataGo (White) thinking...
+2025-11-16 15:51:57,405 - INFO - Move 34: KataGo (White) plays PASS
+2025-11-16 15:51:57,455 - INFO - Move 35: DataGo (Black) thinking...
+2025-11-16 15:51:57,464 - INFO - Move 35: DataGo (Black) plays PASS [unc=0.367, 8ms]
+2025-11-16 15:51:57,464 - INFO - 
+Both players passed. Game over.
+2025-11-16 15:51:57,464 - INFO - 
+Game 3 Statistics:
+2025-11-16 15:51:57,464 - INFO -   Moves played: 118
+2025-11-16 15:51:57,464 - INFO -   RAG queries: 66
+2025-11-16 15:51:57,464 - INFO -   RAG hits: 27
+2025-11-16 15:51:57,464 - INFO -   Exact matches: 27
+2025-11-16 15:51:57,464 - INFO -   Deep searches: 330
+2025-11-16 15:51:57,464 - INFO -   Recursive searches: 286
+2025-11-16 15:51:57,464 - INFO -   Unique positions: 649
+2025-11-16 15:51:57,464 - INFO -   Total contexts: 688
+2025-11-16 15:51:57,464 - INFO -   Average uncertainty: 0.374
+2025-11-16 15:51:57,464 - INFO - 
+Cleaning up...
+2025-11-16 15:51:58,932 - INFO - 
+======================================================================
+2025-11-16 15:51:58,933 - INFO - Overall Match Statistics
+2025-11-16 15:51:58,933 - INFO - ======================================================================
+2025-11-16 15:51:58,933 - INFO - Total moves: 118
+2025-11-16 15:51:58,933 - INFO - Total RAG queries: 66
+2025-11-16 15:51:58,933 - INFO - Total exact matches: 27
+2025-11-16 15:51:58,933 - INFO - Total deep searches: 330
+2025-11-16 15:51:58,933 - INFO - Total recursive searches: 286
+2025-11-16 15:51:58,933 - INFO - Unique positions stored: 649
+2025-11-16 15:51:58,933 - INFO - Total contexts: 688
+2025-11-16 15:51:58,933 - INFO - Avg contexts per position: 1.1
+2025-11-16 15:51:58,933 - INFO - 
+======================================================================
+2025-11-16 15:51:58,933 - INFO - Match Results
+2025-11-16 15:51:58,933 - INFO - ======================================================================
+2025-11-16 15:51:58,933 - INFO - Game 1: DataGo
+2025-11-16 15:51:58,933 - INFO - Game 2: DataGo
+2025-11-16 15:51:58,933 - INFO - Game 3: Draw
+2025-11-16 15:51:58,933 - INFO - 
+2025-11-16 15:51:58,933 - INFO - DataGo: 2 wins
+2025-11-16 15:51:58,933 - INFO - KataGo: 0 wins
+2025-11-16 15:51:58,933 - INFO - Draws: 1
+2025-11-16 15:51:58,933 - INFO - ======================================================================
