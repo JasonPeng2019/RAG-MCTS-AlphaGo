@@ -6,6 +6,7 @@ generation system for improved play on uncertain/complex positions.
 """
 
 from .datago_bot import DataGoBot
-from .gomill_player import GomillPlayer
+from .gtp_player import GTPPlayer
+from .gtp_controller import GTPController
 
-__all__ = ["DataGoBot", "GomillPlayer"]
+__all__ = ["DataGoBot", "GTPPlayer", "GTPController"]
