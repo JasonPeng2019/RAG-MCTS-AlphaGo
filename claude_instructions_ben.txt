@@ -4,19 +4,40 @@ RAG + MCTS deep search during self play be fast enough? Or if we augmented the R
 
 # storing to RAG
 1. Run through self-play games, and store the following information:
+
+Shallow search stats:
 {'sym hash': self.state_hash,
             'sym_hash': self.sym_hash,
             'policy': self.policy,
             'ownership': self.ownership,
             'winrate': self.winrate,
             'score_lead': self.score_lead,
-            'move_infos': self.move_infos,
+            'move_history': {list of history of moves},
+            'move_number': move number,
             'komi': self.komi,
-            'query_id': self.query_id
             'stone_count': self.stone_count #the stone count from the stone count function
-            'child nodes': {self.child_nodes #this would be a collection (hashmap of direct
+            'query_id': self.query_id
+            'child nodes': {self.child_nodes #this would be a collection / hashmap of direct
             child node explored by MCTS:
-            move: (value, policy)}
+            move: (value, policy value assigned to this index of child)}
+}
+
+RAG - complex position deep search storage results
+{
+  "sym_hash": "lookup_key",
+  "state_hash": "unique_id",
+  "policy": [362 floats],
+  "ownership": [361 floats],
+  "winrate": 0.547,
+  "move_number": move number,
+  "score_lead": 2.3,
+  "komi": 7.5,
+  "stone_count": 8,
+  "query_id": "query_123 - a UNIQUE query assigned for each position assigned",
+  "child_nodes": [
+    {"move": "X", "hash": "child1", "value": 0.52, policy: policy value assigned to this index of child},
+    ...
+  ]
 }
 
 2. For positions we have high uncertainty about, due to either A: lack of sufficient training data
@@ -62,13 +83,15 @@ first search.
 
 6. The RAG will populated in ONE WAY: online (in game) // offline implementation is in rag_store/game_analyzer, but method is OBSELETE.
 For offline, the process is as follows:
-Self-play (fast, 800 visits):
+Self-play (fast, 600 visits):
     -Collect all MCTS tree data : child node hashes, values, policies
     -Calculate E (policy entropy) and K (value variance) per position
     -Flag positions where (w1*E + w2*K) * phase > threshold
-        -Run deep MCTS (10,000+ visits) on each complex position
+        -Run deep MCTS (4,800 visits) on each complex position
         -Get refined: winrate, entropy, score_lead, ownership, moveInfos
-    -Write to JSON after each game
+    -Write each search result - shallow and deep; to separate JSONs after each game, where
+    objects with the same indices of the objects in the JSON are matching in sym_hash and correlate
+    with the position that was analyzed.
 Training games against baseline:
     -Query RAG by sym_hash
     -If found with high relevance (>90%): Blend stored policy/value into MCTS
@@ -79,21 +102,26 @@ Parameter iteration:
     -Re-filter same positions with new parameters (no re-analysis!)
     -Repeat until optimal
 
-{
-  "sym_hash": "lookup_key",
-  "state_hash": "unique_id",
-  "policy": [362 floats],
-  "ownership": [361 floats],
-  "winrate": 0.547,
-  "score_lead": 2.3,
-  "move_infos": [...],
-  "komi": 7.5,
-  "query_id": "query_123",
-  "child_nodes": [
-    {"hash": "child1", "value": 0.52, "pUCT": 1.23},
-    ...
-  ]
-}
+For in game/online, the RAG process is as follows:
+During game (standard 800 visits):
+    -Calculate E and K per position
+    -If complex (exceeds threshold):
+    -Query RAG by sym_hash
+    -If found + high relevance: Blend stored data
+    -If found + low relevance: Force best 2 stored moves as priority
+    -If NOT found: Flag for background deep analysis
+Background processing:
+    -After move completes, spawn background job
+    -Run deep MCTS (10,000 visits) on flagged position
+    -Add to RAG
+    -Prune least-used entries if storage full
+Dynamic updates:
+    -Track query frequency per entry
+    -Periodically prune unused positions
+    -Refresh frequently-used entries
+    -RAG grows with discovered complex positions
+
+
 
 
 
