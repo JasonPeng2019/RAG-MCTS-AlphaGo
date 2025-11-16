@@ -54,7 +54,7 @@ python test_gtp_katago.py
 Once your DataGo bot implementation is complete:
 ```bash
 cd "/scratch2/f004ndc/AlphaGo Project/RAG-MCTS-AlphaGo"
-source venv_new/bin/activate  # or your preferred venv
+source "../Go_env/bin/activate"
 
 python play_vs_katago.py \
     --config src/bot/config.yaml \
@@ -99,7 +99,7 @@ The custom GTP implementation is pure Python 3 and handles:
 
 - **First Run**: KataGo will auto-tune for your GPU (~2 minutes). This happens once.
 - **Model Strength**: The current model is small (10 blocks). Download larger models from katagotraining.org for stronger play.
-- **Python Environment**: Created `venv_new` with numpy and pyyaml installed.
+- **Python Environment**: Using `Go_env` in AlphaGo Project directory with numpy, pyyaml, and other dependencies installed.
 - **No More gomill**: All gomill dependencies removed. The codebase is now Python 3 compatible.
 
 ## Next Steps
@@ -118,8 +118,8 @@ To play games, you'll need to complete the DataGo bot implementation:
 
 ### Import Errors
 - Make sure you're in the project directory
-- Activate the virtual environment: `source venv_new/bin/activate`
-- Install dependencies: `pip install numpy pyyaml`
+- Activate the virtual environment: `source "../Go_env/bin/activate"`
+- Or use the Python directly: `"/scratch2/f004ndc/AlphaGo Project/Go_env/bin/python"`
 
 ### Path Issues
 - All paths in `config.yaml` are absolute
