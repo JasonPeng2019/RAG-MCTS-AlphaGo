@@ -450,16 +450,16 @@ logging:
 
 experimental:
   # Use GPU batch processing for MCTS expansion
-  use_gpu_batch: false
+  use_gpu_batch: true
   
   # GPU device ID (-1 for CPU)
-  gpu_device: 0
+  gpu_device: 4
   
   # Batch size for GPU processing
   gpu_batch_size: 64
   
   # Enable adaptive uncertainty thresholds based on game phase
-  adaptive_threshold: false
+  adaptive_threshold: true
   
   # Enable learning from opponent moves
   learn_from_opponent: false
