@@ -7,9 +7,9 @@ from __future__ import annotations
 
 from typing import List, Tuple, Dict
 import numpy as np
-from datago.src.memory.schema import MemoryEntry
-from datago.src.utils import symmetry
-from datago.src.memory.reachability import estimate_reachability
+from src.memory.schema import MemoryEntry
+from src.utils import symmetry
+from src.memory.reachability import estimate_reachability
 
 
 def rerank_neighbors(neighbors: List[Tuple[MemoryEntry, float]], current_policy: np.ndarray, alpha: float = 0.7, gamma: float = 0.3) -> List[Tuple[MemoryEntry, float]]:

@@ -29,7 +29,7 @@ import yaml
 
 # Import DataGo components
 from src.clients.katago_client import AnalysisResult
-from src.memory.index import MemoryIndex
+from src.memory.index import ANNIndex
 from src.memory.schema import MemoryEntry
 from src.blend.blend import (
     rerank_neighbors,
@@ -159,9 +159,15 @@ class DataGoBot:
         self.katago_process = self.network_evaluator.process
         
         # Initialize RAG database
-        self.rag_index = MemoryIndex(
-            db_path=self.config['rag_database']['database_path'],
-            index_type=self.config['rag_database']['ann']['index_type'],
+        logger.info("Initializing RAG database...")
+        rag_config = self.config['rag_database']
+        
+        # Use a default embedding dimension (sym_hash based, can be adjusted)
+        embedding_dim = rag_config.get('embedding_dim', 64)  # Default 64 for sym_hash
+        
+        self.rag_index = ANNIndex(
+            dim=embedding_dim,
+            space=rag_config['ann'].get('distance_metric', 'cosine'),
         )
         
         # Game state
