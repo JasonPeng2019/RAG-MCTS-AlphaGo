@@ -327,3 +327,21 @@ reportAnalysisWinratesAs = BLACK
 2025-11-15 17:14:24-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_421"}
 2025-11-15 17:14:24-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_422"}
 2025-11-15 17:14:24-0500: Error: {"error":"Could not parse board location: Q5","field":"moves","id":"query_423"}
+2025-11-15 17:37:14-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_597"}
+2025-11-15 17:37:14-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_598"}
+2025-11-15 17:37:14-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_599"}
+2025-11-15 17:37:14-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_600"}
+2025-11-15 17:37:14-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_601"}
+2025-11-15 17:37:14-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_602"}
+2025-11-15 17:37:14-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_603"}
+2025-11-15 17:37:14-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_604"}
+2025-11-15 17:37:14-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_605"}
+2025-11-15 17:37:14-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_606"}
+2025-11-15 17:37:14-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_607"}
+2025-11-15 17:37:14-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_608"}
+2025-11-15 17:37:14-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_609"}
+2025-11-15 17:37:14-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_610"}
+2025-11-15 17:37:14-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_611"}
+2025-11-15 17:37:14-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_612"}
+2025-11-15 17:37:14-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_613"}
+2025-11-15 17:37:14-0500: Error: {"error":"Illegal move 219: M12","field":"moves","id":"query_614"}

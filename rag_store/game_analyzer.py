@@ -272,7 +272,7 @@ if __name__ == "__main__":
                        help='Directory containing RAG JSON game files')
     parser.add_argument('--output-dir', default='./rag_output',
                        help='Directory to save output JSON database')
-    parser.add_argument('--max-visits', type=int, default=2500,
+    parser.add_argument('--max-visits', type=int, default=3800,
                        help='Maximum MCTS visits for analysis')
     parser.add_argument('--max-positions', type=int, default=None,
                        help='Maximum number of positions to process (for testing)')

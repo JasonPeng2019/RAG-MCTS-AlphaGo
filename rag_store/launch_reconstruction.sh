@@ -38,7 +38,7 @@ for i in {1..5}; do
             --csv '$CSV_FILE' \
             --json-dir '$JSON_DIR' \
             --output-dir '$OUTPUT_DIR' \
-            --max-visits 10000 \
+            --max-visits 3800 \
             --katago-path '../../build/katago' \
             --config '../../katago_repo/run/analysis.cfg' \
             --model '../../katago_repo/run/kata1-b28c512nbt-s11653980416-d5514111622.bin.gz'; \

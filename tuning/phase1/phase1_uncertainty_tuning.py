@@ -36,9 +36,10 @@ from scipy.special import softmax
 from scipy.stats import entropy
 import matplotlib.pyplot as plt
 
-# Optional: sklearn for NDCG metric
+# Optional: sklearn for NDCG metric and sigmoid model
 try:
-    from sklearn.metrics import ndcg_score
+    from sklearn.metrics import ndcg_score, roc_auc_score
+    from sklearn.linear_model import LogisticRegression
     HAS_SKLEARN = True
 except ImportError:
     HAS_SKLEARN = False
@@ -611,7 +612,157 @@ class Phase1Tuner:
         print("="*80)
         
         return optimal_config
-    
+
+    def optimize_parameters_sigmoid(self) -> UncertaintyConfig:
+        """
+        Optimize uncertainty parameters using sigmoid model with interaction terms.
+
+        Model: uncertainty = sigmoid(w_E*E*phase + w_K*K*phase + w_const)
+
+        Where:
+            - E: policy cross-entropy
+            - K: value sparseness
+            - phase: a*(stones/361) + b
+            - sigmoid(z) = 1 / (1 + exp(-z))
+
+        We learn: w_E, w_K, w_const, a, b
+        """
+        if not HAS_SKLEARN:
+            print("ERROR: sklearn is required for sigmoid optimization")
+            print("Falling back to standard optimization...")
+            return self.optimize_parameters()
+
+        print("\n" + "="*80)
+        print("SIGMOID OPTIMIZATION: Training sigmoid model with interactions")
+        print("="*80)
+
+        # Extract features and targets from training data
+        E = np.array([p.policy_cross_entropy for p in self.positions_train])
+        K = np.array([p.value_sparseness for p in self.positions_train])
+        S = np.array([p.stones_on_board for p in self.positions_train])
+        errors = np.array([p.combined_error for p in self.positions_train])
+
+        print(f"Training on {len(self.positions_train)} positions")
+        print(f"  E (policy cross-entropy) range: [{E.min():.3f}, {E.max():.3f}]")
+        print(f"  K (value sparseness) range: [{K.min():.3f}, {K.max():.3f}]")
+        print(f"  Errors range: [{errors.min():.6f}, {errors.max():.6f}]")
+
+        # Create binary labels: 1 if error is high, 0 if low
+        # Use median as threshold
+        error_threshold = np.median(errors)
+        y = (errors >= error_threshold).astype(int)
+        print(f"\nBinary classification:")
+        print(f"  Error threshold: {error_threshold:.6f}")
+        print(f"  High-error positions: {y.sum()} ({100*y.mean():.1f}%)")
+        print(f"  Low-error positions: {len(y) - y.sum()} ({100*(1-y.mean()):.1f}%)")
+
+        # Define objective function for phase parameters
+        def objective(phase_params):
+            """
+            Optimize phase parameters (a, b) for best sigmoid model.
+            Returns negative ROC-AUC (to minimize).
+            """
+            a, b = phase_params
+
+            # Compute phase multiplier
+            phase = a * (S / 361.0) + b
+
+            # Create interaction features: E*phase, K*phase
+            X_interactions = np.column_stack([
+                E * phase,  # Policy cross-entropy weighted by phase
+                K * phase   # Value sparseness weighted by phase
+            ])
+
+            # Train logistic regression on interaction features
+            model = LogisticRegression(
+                fit_intercept=True,  # Learn bias term
+                max_iter=1000,
+                random_state=42
+            )
+
+            try:
+                model.fit(X_interactions, y)
+
+                # Predict probabilities
+                y_pred_proba = model.predict_proba(X_interactions)[:, 1]
+
+                # Compute ROC-AUC (how well we separate high/low error)
+                auc = roc_auc_score(y, y_pred_proba)
+
+                # Return negative AUC (minimize to maximize)
+                return -auc
+            except:
+                return 1e6  # Penalty for invalid model
+
+        # Optimize phase parameters
+        print("\nOptimizing phase function parameters...")
+
+        # Initial guess and bounds
+        x0 = [0.0, 1.0]  # Start with constant phase
+        bounds = [
+            (-1.0, 1.0),  # a (slope)
+            (0.5, 1.5)    # b (intercept)
+        ]
+
+        result = minimize(
+            objective,
+            x0,
+            method='L-BFGS-B',
+            bounds=bounds,
+            options={'maxiter': 100, 'disp': True}
+        )
+
+        # Extract optimal phase parameters
+        a_opt, b_opt = result.x
+        phase_opt = a_opt * (S / 361.0) + b_opt
+
+        print(f"\nOptimal phase function: {a_opt:.4f}*s + {b_opt:.4f}")
+        print(f"ROC-AUC achieved: {-result.fun:.4f}")
+
+        # Train final logistic regression model with optimal phase
+        X_final = np.column_stack([
+            E * phase_opt,
+            K * phase_opt
+        ])
+
+        final_model = LogisticRegression(fit_intercept=True, max_iter=1000, random_state=42)
+        final_model.fit(X_final, y)
+
+        # Extract learned weights
+        w_E = final_model.coef_[0, 0]  # Weight for E*phase interaction
+        w_K = final_model.coef_[0, 1]  # Weight for K*phase interaction
+        w_const = final_model.intercept_[0]  # Bias term
+
+        print(f"\nLearned sigmoid model:")
+        print(f"  uncertainty = sigmoid({w_E:.4f}*E*phase + {w_K:.4f}*K*phase + {w_const:.4f})")
+
+        # Convert to w1, w2 format (normalized weights)
+        # w1 = weight for E, w2 = weight for K
+        w_total = abs(w_E) + abs(w_K)
+        if w_total > 0:
+            w1_opt = abs(w_E) / w_total
+            w2_opt = abs(w_K) / w_total
+        else:
+            w1_opt = 0.5
+            w2_opt = 0.5
+
+        optimal_config = UncertaintyConfig(
+            w1=w1_opt,
+            w2=w2_opt,
+            phase_function_type='linear',
+            phase_coefficients=[a_opt, b_opt]
+        )
+
+        print(f"\n" + "="*80)
+        print(f"SIGMOID OPTIMIZATION COMPLETE:")
+        print(f"  Normalized w1 (policy): {w1_opt:.4f}")
+        print(f"  Normalized w2 (value): {w2_opt:.4f}")
+        print(f"  Phase function: {a_opt:.4f}*s + {b_opt:.4f}")
+        print(f"  ROC-AUC: {-result.fun:.4f}")
+        print("="*80)
+
+        return optimal_config
+
     def find_storage_threshold(self, config: UncertaintyConfig,
                                target_percentiles: List[float] = [5, 10, 15, 20, 25]) -> Dict:
         """
@@ -756,6 +907,8 @@ class Phase1Tuner:
         # Step 1: Optimize parameters
         if method == 'optimize':
             best_config = self.optimize_parameters()
+        elif method == 'sigmoid':
+            best_config = self.optimize_parameters_sigmoid()
         else:
             best_config, _ = self.grid_search()
         
@@ -805,8 +958,8 @@ def main():
                        help="Path to deep MCTS JSON database (5000+ visits)")
     parser.add_argument("--output-dir", type=str, 
                        default="./tuning_results/phase1_supervised")
-    parser.add_argument("--method", choices=["grid", "optimize"], default="grid",
-                       help="Optimization method: grid (thorough) or optimize (fast)")
+    parser.add_argument("--method", choices=["grid", "optimize", "sigmoid"], default="grid",
+                       help="Optimization method: grid (thorough), optimize (fast), or sigmoid (ML-based)")
     parser.add_argument("--train-split", type=float, default=0.8,
                        help="Fraction of data for training (rest for validation)")
     
