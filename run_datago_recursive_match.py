@@ -351,11 +351,35 @@ class RecursiveDataGoPlayer:
         Run deep augmented MCTS search on complex position.
         
         Recursively applies deep search to child positions if they are complex.
+        ALWAYS checks RAG cache before running expensive deep search.
         """
         if recursion_depth >= self.max_recursion_depth:
             logger.info(f"  {'  ' * recursion_depth}→ Max recursion depth reached")
             return self._run_standard_search(board_state, visits=self.standard_visits)
         
+        # FIRST: Check if this position is already in RAG cache
+        position_hash = board_state.get_sym_hash()
+        cached = self.query_rag_exact(position_hash)
+        
+        if cached and recursion_depth > 0:  # Use cache for recursive calls
+            logger.info(f"  {'  ' * recursion_depth}→ Cache hit for position: {position_hash[:12]}")
+            ctx = cached.get_best_context(self.stones_on_board, uncertainty)
+            if ctx:
+                self.stats['rag_hits'] += 1
+                self.stats['exact_matches'] += 1
+                # Return cached analysis as result
+                return {
+                    'best_move': ctx['move'],
+                    'policy': ctx['policy'],
+                    'winrate': ctx['winrate'],
+                    'score_lead': ctx['score_lead'],
+                    'visits': ctx['deep_visits'],
+                    'deep_visits': ctx['deep_visits'],
+                    'cached': True,
+                    'child_positions': [],
+                }
+        
+        # Cache miss - run actual deep search
         self.stats['deep_searches'] += 1
         if recursion_depth > 0:
             self.stats['recursive_searches'] += 1
@@ -416,14 +440,14 @@ class RecursiveDataGoPlayer:
     
     def _run_standard_search(self, board_state: BoardState, visits: int = 0) -> Dict[str, Any]:
         """
-        Run MCTS search using KataGo.
+        Run MCTS search using KataGo with REAL neural network analysis.
         
         Args:
             board_state: Current board state
             visits: Number of visits to use (0 = use default)
         
         Returns:
-            Dict with analysis results including child positions
+            Dict with analysis results including child positions with REAL NN priors
         """
         if visits == 0:
             visits = self.standard_visits
@@ -432,88 +456,103 @@ class RecursiveDataGoPlayer:
             # Set KataGo's maxVisits parameter before search
             self.katago.set_max_visits(visits)
             
-            # Use genmove to get best move with the specified visit count
-            move = self.katago.genmove("B")
+            # Use kata-genmove_analyze to get move AND real NN analysis in one call
+            move, analysis = self.katago.genmove_analyze("b")
+            
             if not move:
+                logger.error("genmove_analyze failed to return move")
                 return self._create_fallback_analysis()
             
-            # Create synthetic policy distribution (simplified for testing)
-            # In production, would extract from actual KataGo analysis
             board_size = board_state.board_size
-            policy = np.random.dirichlet(np.ones(board_size ** 2))
             
-            # Normalize policy
-            policy /= (policy.sum() + 1e-9)
+            # Extract REAL policy from analysis
+            if analysis and 'moveInfos' in analysis:
+                policy = self.extract_policy_from_analysis(analysis)
+                logger.debug(f"✓ Using REAL policy from KataGo NN (moveInfos: {len(analysis['moveInfos'])})")
+            else:
+                # Fallback: uniform policy if analysis fails
+                logger.warning("⚠ No analysis data, using uniform policy")
+                policy = np.ones(board_size ** 2) / (board_size ** 2)
             
-            # Create synthetic children for recursive testing
+            # Extract REAL data from analysis
+            winrate = 0.5
+            score_lead = 0.0
+            
+            if analysis and 'rootInfo' in analysis:
+                root = analysis['rootInfo']
+                winrate = root.get('winrate', 0.5)
+                score_lead = root.get('scoreLead', 0.0)
+            
+            # Create child positions from REAL moveInfos
             children = []
-            # Generate a few plausible next moves
-            candidate_moves = [move]  # Start with the actual best move
             
-            # Add a few more synthetic moves for recursion testing
-            for offset in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
-                try:
-                    if move and move.upper() not in ['PASS', 'RESIGN']:
-                        col_letter = move[0].upper()
-                        row_str = move[1:]
-                        col = ord(col_letter) - ord('A')
-                        if col >= 8:
-                            col -= 1
-                        row = board_size - int(row_str)
-                        
-                        new_col = col + offset[0]
-                        new_row = row + offset[1]
-                        
-                        if 0 <= new_col < board_size and 0 <= new_row < board_size:
-                            new_col_letter = chr(ord('A') + new_col + (1 if new_col >= 8 else 0))
-                            new_move = f"{new_col_letter}{board_size - new_row}"
-                            candidate_moves.append(new_move)
-                except:
-                    pass
-            
-            # Create child positions
-            for i, child_move in enumerate(candidate_moves[:5]):
-                if not child_move or child_move.upper() in ['PASS', 'RESIGN']:
-                    continue
+            if analysis and 'moveInfos' in analysis:
+                # Use REAL candidate moves from KataGo's analysis
+                move_infos = analysis['moveInfos'][:5]  # Top 5 moves
                 
+                for i, move_info in enumerate(move_infos):
+                    child_move = move_info.get('move')
+                    if not child_move or child_move.upper() in ['PASS', 'RESIGN']:
+                        continue
+                    
+                    try:
+                        # Create child board state
+                        child_board = board_state.copy()
+                        child_board.play_move(child_move, 1)  # Black move
+                        
+                        # Extract REAL NN data for this child
+                        child_prior = move_info.get('prior', 0.0)
+                        child_visits = move_info.get('visits', 0)
+                        child_winrate = move_info.get('winrate', 0.5)
+                        child_score_lead = move_info.get('scoreLead', 0.0)
+                        
+                        # Calculate uncertainty using REAL policy (we already have it)
+                        # Use the current policy + moveInfos for uncertainty
+                        child_uncertainty = self.calculate_uncertainty(policy, move_infos)
+                        
+                        children.append({
+                            'position': child_board,
+                            'move': child_move,
+                            'uncertainty': child_uncertainty,
+                            'visits': child_visits,
+                            'winrate': child_winrate,
+                            'score_lead': child_score_lead,
+                            'prior': child_prior,
+                        })
+                    except Exception as e:
+                        logger.debug(f"Error creating child position: {e}")
+                        continue
+            else:
+                # Fallback: if no analysis, create one child with best move
+                logger.warning("No moveInfos available, creating single child with best move")
                 try:
-                    # Create child board state
                     child_board = board_state.copy()
-                    child_board.play_move(child_move, 1)  # Black move
+                    child_board.play_move(move, 1)
                     
-                    # Calculate synthetic uncertainty for child
-                    # Use random policy for simulation
-                    child_policy = np.random.dirichlet(np.ones(board_size ** 2))
-                    child_policy /= (child_policy.sum() + 1e-9)
-                    
-                    child_visits_dist = np.random.dirichlet(np.ones(10))
-                    child_move_info = [
-                        {'move': child_move, 'visits': int(100 * child_visits_dist[j])}
-                        for j in range(min(10, len(child_visits_dist)))
-                    ]
-                    
-                    child_uncertainty = self.calculate_uncertainty(child_policy, child_move_info)
+                    # Use uniform uncertainty as fallback
+                    child_uncertainty = 0.5
                     
                     children.append({
                         'position': child_board,
-                        'move': child_move,
+                        'move': move,
                         'uncertainty': child_uncertainty,
-                        'visits': visits // 5,  # Distribute visits
-                        'winrate': 0.5 + np.random.normal(0, 0.05),
-                        'prior': 0.1 / (i + 1),
+                        'visits': visits,
+                        'winrate': winrate,
+                        'score_lead': score_lead,
+                        'prior': 1.0,
                     })
                 except Exception as e:
-                    logger.debug(f"Error creating child position: {e}")
-                    continue
+                    logger.debug(f"Error creating fallback child: {e}")
             
             return {
                 'best_move': move,
                 'policy': policy,
-                'winrate': 0.5,
-                'score_lead': 0.0,
+                'winrate': winrate,
+                'score_lead': score_lead,
                 'visits': visits,
                 'deep_visits': 0,
                 'child_positions': children,
+                'moveInfos': analysis.get('moveInfos', []) if analysis else [],
             }
         
         except Exception as e:

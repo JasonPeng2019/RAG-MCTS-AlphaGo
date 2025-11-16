@@ -162,10 +162,10 @@ rag_query:
   # Positions with uncertainty > threshold will trigger RAG lookup
   # Tuned in Phase 1c using percentile-based approach
   # This will map to top X% of uncertain positions (e.g., 0.15 = top 15%)
-  # Set to ~95th percentile to capture only most complex positions (~5% activation rate)
-  # Based on observed uncertainty range (0.35-0.374), threshold at 0.370 targets top ~5-10%
-  # This captures only the most critical decision points in the game
-  uncertainty_threshold: 0.370
+  # NOTE: With REAL NN outputs (not synthetic), uncertainty is much lower!
+  # Real NN uncertainty range: 0.05-0.21 (vs synthetic: 0.35-0.40)
+  # Set to 0.150 to capture top ~5-10% of positions with real NN data
+  uncertainty_threshold: 0.150
   
   # Deep search threshold offset (added to uncertainty_threshold)
   # Controls when to trigger expensive recursive deep search
