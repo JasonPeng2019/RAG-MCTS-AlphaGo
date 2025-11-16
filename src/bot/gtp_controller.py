@@ -58,7 +58,8 @@ class GTPController:
             self.process.stdin.write(command + "\n")
             self.process.stdin.flush()
             
-            # Read response - skip any output lines until we see = or ?
+            # Read response - capture info lines AND final response
+            info_lines = []
             response_lines = []
             success = False
             found_response = False
@@ -70,12 +71,17 @@ class GTPController:
                 
                 line = line.strip()
                 
-                # Skip empty lines and info lines before the response
+                # Skip empty lines
                 if not line:
                     continue
-                    
+                
                 logger.debug(f"GTP < {line}")
                 
+                # Capture "info" lines (from kata-genmove_analyze etc)
+                if line.startswith('info '):
+                    info_lines.append(line)
+                    continue
+                    
                 # GTP responses start with = (success) or ? (error)
                 if line.startswith('=') or line.startswith('?'):
                     success = line.startswith('=')
@@ -96,7 +102,9 @@ class GTPController:
                     found_response = True
                     break
             
-            response = '\n'.join(response_lines)
+            # Combine info lines and response
+            all_lines = info_lines + response_lines
+            response = '\n'.join(all_lines)
             return success, response
             
         except Exception as e:
@@ -197,41 +205,103 @@ class GTPController:
             logger.warning(f"Failed to set maxVisits: {response}")
             return False
     
-    def kata_analyze(self, color: str = "b", max_moves: int = 30) -> Optional[Dict]:
+    def genmove_analyze(self, color: str = "b") -> Tuple[Optional[str], Optional[Dict]]:
         """
-        Run KataGo's kata-analyze command for detailed position analysis.
+        Run KataGo's kata-genmove_analyze command.
         
-        This uses the simpler lz-analyze format which is more compatible.
+        This generates a move AND provides detailed analysis in one command.
+        Returns real neural network outputs including policy, value, moveInfos, etc.
         
         Args:
             color: Color to move ('b' or 'w')
-            max_moves: Maximum number of moves to analyze
             
         Returns:
-            Dict with analysis results, or None on error
+            Tuple of (move_string, analysis_dict) or (None, None) on error
         """
-        # Use lz-analyze which is simpler and more reliable
-        command = f"lz-analyze {color} {max_moves}"
+        # Use kata-genmove_analyze which combines genmove + analysis
+        command = f"kata-genmove_analyze {color}"
         success, response = self.send_command(command)
         
         if success and response:
             try:
-                # lz-analyze returns JSON-like format
-                # Parse it into a dict
-                import json
-                # Response might be multi-line JSON
-                for line in response.split('\n'):
+                # Response format: multiple "info move ..." entries (may be on one long line!)
+                # Split by "info move" to separate each move's data
+                move_infos = []
+                root_info = {}
+                
+                # Split response by "info move" to get individual move entries
+                parts = response.split('info move ')
+                
+                for part in parts:
+                    if not part.strip():
+                        continue
+                    
+                    # Reconstruct the info line
+                    line = 'info move ' + part
                     line = line.strip()
-                    if line and line.startswith('{'):
-                        try:
-                            return json.loads(line)
-                        except json.JSONDecodeError:
+                    if not line or not line.startswith('info'):
+                        continue
+                    
+                    # Parse info line: "info move Q16 visits 249 winrate 0.54 ..."
+                    parts = line.split()
+                    if len(parts) < 4 or parts[1] != 'move':
+                        continue
+                    
+                    # Parse key-value pairs
+                    info_dict = {}
+                    i = 1  # Start after "info"
+                    while i < len(parts):
+                        key = parts[i]
+                        
+                        # Handle "move" specially - next part is the move string
+                        if key == 'move' and i + 1 < len(parts):
+                            info_dict['move'] = parts[i + 1]
+                            i += 2
                             continue
+                        
+                        # Handle other key-value pairs
+                        if i + 1 < len(parts):
+                            value = parts[i + 1]
+                            try:
+                                # Try to parse as number
+                                if '.' in value or 'e' in value.lower():
+                                    value = float(value)
+                                else:
+                                    try:
+                                        value = int(value)
+                                    except ValueError:
+                                        pass  # Keep as string
+                            except ValueError:
+                                pass  # Keep as string
+                            info_dict[key] = value
+                            i += 2
+                        else:
+                            i += 1
+                    
+                    if 'move' in info_dict:
+                        move_infos.append(info_dict)
+                    
+                    # First move info is also the root/best move
+                    if not root_info and move_infos:
+                        root_info = info_dict.copy()
+                
+                if move_infos:
+                    # Extract best move (first in list)
+                    best_move = move_infos[0].get('move')
+                    
+                    # Build analysis dict in format similar to kata-analyze
+                    analysis = {
+                        'moveInfos': move_infos,
+                        'rootInfo': root_info,
+                    }
+                    
+                    return best_move, analysis
+                
             except Exception as e:
-                logger.error(f"Error parsing lz-analyze response: {e}")
+                logger.error(f"Error parsing kata-genmove_analyze response: {e}")
         
-        logger.warning(f"lz-analyze failed, using fallback genmove")
-        return None
+        logger.warning(f"kata-genmove_analyze failed")
+        return None, None
     
     def __del__(self):
         """Cleanup when object is destroyed."""
