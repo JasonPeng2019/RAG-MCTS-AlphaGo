@@ -58,33 +58,46 @@ class GTPController:
             self.process.stdin.write(command + "\n")
             self.process.stdin.flush()
             
-            # Read response
+            # Read response - skip any output lines until we see = or ?
             response_lines = []
-            while True:
+            success = False
+            found_response = False
+            
+            while not found_response:
                 line = self.process.stdout.readline()
                 if not line:
                     break
                 
                 line = line.strip()
+                
+                # Skip empty lines and info lines before the response
+                if not line:
+                    continue
+                    
                 logger.debug(f"GTP < {line}")
                 
                 # GTP responses start with = (success) or ? (error)
                 if line.startswith('=') or line.startswith('?'):
                     success = line.startswith('=')
+                    # Extract response text after = or ?
+                    response_text = line[1:].strip()
+                    if response_text:
+                        response_lines.append(response_text)
+                    
                     # Continue reading until blank line
                     while True:
-                        next_line = self.process.stdout.readline().strip()
-                        if not next_line:
+                        next_line = self.process.stdout.readline()
+                        if not next_line or not next_line.strip():
                             break
-                        response_lines.append(next_line)
+                        stripped = next_line.strip()
+                        if stripped:
+                            response_lines.append(stripped)
                     
-                    response = '\n'.join(response_lines)
-                    return success, response
-                elif line:
-                    response_lines.append(line)
+                    found_response = True
+                    break
             
-            # If we get here, something went wrong
-            return False, "No response from engine"
+            response = '\n'.join(response_lines)
+            return success, response
             
         except Exception as e:
             logger.error(f"Error communicating with engine: {e}")

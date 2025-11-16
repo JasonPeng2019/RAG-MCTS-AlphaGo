@@ -23,7 +23,7 @@ try:
 except Exception:
     HAS_HNSW = False
 
-from datago.src.memory.schema import MemoryEntry
+from src.memory.schema import MemoryEntry
 
 
 class ANNIndex:
@@ -178,7 +178,7 @@ if __name__ == "__main__":
     # smoke test
     import numpy as np
     idx = ANNIndex(dim=16)
-    from datago.src.memory.schema import MemoryEntry
+    from src.memory.schema import MemoryEntry
     for i in range(10):
         e = MemoryEntry.create(embed=np.random.randn(16).astype(np.float32), canonical_board=f"b{i}", best_moves=[])
         idx.add(e)

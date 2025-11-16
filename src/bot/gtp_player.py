@@ -40,6 +40,11 @@ class GTPPlayer:
         self.board_size = board_size
         self.komi = komi
         self.move_history = []
+        
+        # Initialize the bot's game state
+        player_color = 1 if self.color.lower() in ['black', 'b'] else -1
+        self.bot.new_game(board_size=board_size, komi=komi, player_color=player_color)
+        
         logger.info(f"Game setup: {board_size}x{board_size}, komi={komi}")
     
     def generate_move(self) -> MoveDecision:
