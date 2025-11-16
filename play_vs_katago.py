@@ -2,10 +2,10 @@
 """
 play_vs_katago.py
 
-Simple script to play DataGo bot vs pure KataGo using gomill.
+Simple script to play DataGo bot vs pure KataGo using custom GTP implementation.
 
 Usage:
-    python play_vs_katago.py --datago-color black --games 1
+    python play_vs_katago.py --katago-executable <path> --katago-model <path> --katago-config <path> --games 1
 """
 
 import argparse
@@ -13,14 +13,9 @@ import logging
 import sys
 from pathlib import Path
 
-try:
-    from gomill import gtp_controller, gtp_games
-except ImportError:
-    print("ERROR: gomill not installed. Run: pip install gomill")
-    sys.exit(1)
-
 from src.bot.datago_bot import DataGoBot
-from src.bot.gomill_player import GomillPlayer
+from src.bot.gtp_player import GTPPlayer
+from src.bot.gtp_controller import GTPController
 
 logging.basicConfig(
     level=logging.INFO,
@@ -63,7 +58,7 @@ def play_match(
     # Initialize DataGo bot
     logger.info("Initializing DataGo bot...")
     datago_bot = DataGoBot(config_path)
-    datago_player = GomillPlayer(datago_bot, color=datago_color[0])
+    datago_player = GTPPlayer(datago_bot, color=datago_color)
     
     # Initialize KataGo GTP controller
     logger.info("Starting KataGo opponent...")
@@ -73,7 +68,7 @@ def play_match(
         '-model', katago_model,
         '-config', katago_config,
     ]
-    katago_player = gtp_controller.Gtp_controller(command=katago_cmd)
+    katago_player = GTPController(command=katago_cmd)
     
     # Determine player assignments
     if datago_color.lower() == "black":
@@ -101,9 +96,9 @@ def play_match(
             # Setup game
             datago_player.setup_game(board_size, komi)
             
-            katago_player.do_command("boardsize", [str(board_size)])
-            katago_player.do_command("clear_board", [])
-            katago_player.do_command("komi", [str(komi)])
+            katago_player.boardsize(board_size)
+            katago_player.clear_board()
+            katago_player.komi(komi)
             
             move_number = 0
             game_over = False
@@ -126,7 +121,7 @@ def play_match(
                     opponent = black_player
                 
                 # Generate move
-                if isinstance(current_player, GomillPlayer):
+                if isinstance(current_player, GTPPlayer):
                     # DataGo bot
                     decision = current_player.generate_move()
                     move = decision.move
@@ -136,8 +131,11 @@ def play_match(
                     )
                 else:
                     # KataGo via GTP
-                    response = current_player.do_command("genmove", [current_color])
-                    move = response.upper()
+                    move = current_player.genmove(current_color)
+                    if not move:
+                        logger.error("KataGo failed to generate move")
+                        break
+                    move = move.upper()
                     logger.info(f"Move {move_number}: {player_name}({current_color}) plays {move}")
                 
                 # Check for game end
@@ -154,9 +152,9 @@ def play_match(
                 
                 if not game_over:
                     # Play move on both sides
-                    if isinstance(current_player, GomillPlayer):
+                    if isinstance(current_player, GTPPlayer):
                         current_player.play_move(current_color.lower(), move)
-                        opponent.do_command("play", [current_color, move])
+                        opponent.play(current_color, move)
                     else:
                         opponent.play_move(current_color.lower(), move)
                 

@@ -246,13 +246,13 @@ recursion:
 
 katago:
   # Path to KataGo executable
-  executable_path: "/path/to/katago"
+  executable_path: "/scratch2/f004ndc/AlphaGo Project/KataGo/cpp/katago"
   
   # Path to KataGo model file
-  model_path: "/path/to/model.bin.gz"
+  model_path: "/scratch2/f004ndc/AlphaGo Project/KataGo/models/g170e-b10c128-s1141046784-d204142634.bin.gz"
   
   # Path to KataGo config file
-  config_path: "/path/to/gtp_config.cfg"
+  config_path: "/scratch2/f004ndc/AlphaGo Project/KataGo/configs/gtp_800visits.cfg"
   
   # Number of MCTS visits for standard (shallow) search
   # This is used during normal gameplay
@@ -453,7 +453,7 @@ experimental:
   use_gpu_batch: true
   
   # GPU device ID (-1 for CPU)
-  gpu_device: 4
+  gpu_device: 7
   
   # Batch size for GPU processing
   gpu_batch_size: 64
