@@ -3,20 +3,43 @@ The only thing we are training is the RAG parameters. ~~> Question: Will trainin
 RAG + MCTS deep search during self play be fast enough? Or if we augmented the RAG offline, 
 
 # storing to RAG
-1. Run through self-play games, and store the following information:
 {'sym hash': self.state_hash,
             'sym_hash': self.sym_hash,
-            'policy': self.policy,
-            'ownership': self.ownership,
+            'player to move': self.player_to_move,
+            'symmetry_index': self.sym_index,
             'winrate': self.winrate,
-            'score_lead': self.score_lead,
-            'move_infos': self.move_infos,
+            'score_lead': self.score_lead
+            'move_number': move number,
             'komi': self.komi,
             'query_id': self.query_id
             'stone_count': self.stone_count #the stone count from the stone count function
-            'child nodes': {self.child_nodes #this would be a collection (hashmap of direct
+             "best move:" {sym index, sym_hash, move},
+             'policy': self.policy,
+            'ownership': self.ownership,
+            'move_history': {list of history of moves},
+            'child nodes': {self.child_nodes #this would be a collection / hashmap of direct
             child node explored by MCTS:
-            move: (value, policy)}
+            move: (value, policy value assigned to this index of child)}
+}
+
+RAG - complex position deep search storage results
+  { 
+           'sym_hash': self.sym_hash,
+            'state_hash': self.state_hash,
+            'player to move': self.player_to_move,
+            'symmetry_index': self.sym_index,
+            'winrate': self.winrate,
+            'score_lead': self.score_lead
+            'move_number': move number,
+            'komi': self.komi,
+            'query_id': self.query_id
+            'stone_count': self.stone_count #the stone count from the stone count function
+             "best move:" {sym index, sym_hash, move},
+             'policy': self.policy,
+            'ownership': self.ownership,
+            'child nodes': {self.child_nodes #this would be a collection / hashmap of direct
+            child node explored by MCTS:
+            move: (value, policy value assigned to this index of child)}
 }
 
 2. For positions we have high uncertainty about, due to either A: lack of sufficient training data
@@ -79,25 +102,6 @@ Parameter iteration:
     -Re-filter same positions with new parameters (no re-analysis!)
     -Repeat until optimal
 
-For in game/online, the RAG process is as follows:
-During game (standard 800 visits):
-    -Calculate E and K per position
-    -If complex (exceeds threshold):
-    -Query RAG by sym_hash
-    -If found + high relevance: Blend stored data
-    -If found + low relevance: Force best 2 stored moves as priority
-    -If NOT found: Flag for background deep analysis
-Background processing:
-    -After move completes, spawn background job
-    -Run deep MCTS (10,000 visits) on flagged position
-    -Add to RAG
-    -Prune least-used entries if storage full
-Dynamic updates:
-    -Track query frequency per entry
-    -Periodically prune unused positions
-    -Refresh frequently-used entries
-    -RAG grows with discovered complex positions
-
 {
   "sym_hash": "lookup_key",
   "state_hash": "unique_id",
@@ -108,6 +112,7 @@ Dynamic updates:
   "move_infos": [...],
   "komi": 7.5,
   "query_id": "query_123",
+  "best child": {hash, move},
   "child_nodes": [
     {"hash": "child1", "value": 0.52, "pUCT": 1.23},
     ...
