@@ -1,0 +1,8 @@
+to construct json:
+
+construct JSON according to format, then when naming JSON, name in format
+RAG_raw_data_game_(game id);
+
+
+Then make a CSV file and accumulate all the json filenames
+with JSON name startign with "RAG_raw" and list them in each columnn

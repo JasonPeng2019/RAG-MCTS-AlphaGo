@@ -1,0 +1,192 @@
+2025-11-16 15:26:24,054 - INFO - ======================================================================
+2025-11-16 15:26:24,054 - INFO - DataGo Bot vs KataGo Match (Recursive Deep Search + RAG)
+2025-11-16 15:26:24,054 - INFO - ======================================================================
+2025-11-16 15:26:24,054 - INFO - Games: 1, Max moves per game: 40
+2025-11-16 15:26:24,055 - INFO - Deep search threshold: 0.39999999999999997
+2025-11-16 15:26:24,055 - INFO - Max recursion depth: 2
+2025-11-16 15:26:24,055 - INFO - Deep MCTS visits: 10000
+2025-11-16 15:26:24,055 - INFO - 
+2025-11-16 15:26:24,055 - INFO - Starting KataGo GTP on GPU 7...
+2025-11-16 15:26:24,055 - INFO - Starting GTP engine: /scratch2/f004ndc/AlphaGo Project/KataGo/cpp/katago gtp -model /scratch2/f004ndc/AlphaGo Project/KataGo/models/g170e-b10c128-s1141046784-d204142634.bin.gz -config /scratch2/f004ndc/AlphaGo Project/KataGo/configs/gtp_800visits.cfg
+2025-11-16 15:26:24,056 - INFO - Initializing RAG database with multi-context support...
+2025-11-16 15:26:24,056 - INFO - Recursion depth: 2
+2025-11-16 15:26:24,056 - INFO - Deep search threshold: 0.350
+2025-11-16 15:26:24,056 - INFO - 
+======================================================================
+2025-11-16 15:26:24,056 - INFO - Game 1/1
+2025-11-16 15:26:24,056 - INFO - ======================================================================
+
+2025-11-16 15:26:26,498 - INFO - Move 1: DataGo (Black) thinking...
+2025-11-16 15:26:28,985 - INFO -   → Complex position detected (unc=0.350)
+2025-11-16 15:26:28,985 - INFO -   → No match found: hash_89631, running deep search
+2025-11-16 15:26:28,985 - INFO -   → Deep search (depth=0, unc=0.350)
+2025-11-16 15:26:28,985 - INFO - Move 1: DataGo (Black) plays D4 [unc=0.350, DEEP, 2488ms]
+2025-11-16 15:26:29,036 - INFO - Move 2: KataGo (White) thinking...
+2025-11-16 15:26:29,292 - INFO - Move 2: KataGo (White) plays D3
+2025-11-16 15:26:29,342 - INFO - Move 3: DataGo (Black) thinking...
+2025-11-16 15:26:29,886 - INFO -   → Complex position detected (unc=0.352)
+2025-11-16 15:26:29,886 - INFO -   → No match found: hash_908404, running deep search
+2025-11-16 15:26:29,886 - INFO -   → Deep search (depth=0, unc=0.352)
+2025-11-16 15:26:29,886 - INFO - Move 3: DataGo (Black) plays D4 [unc=0.352, DEEP, 544ms]
+2025-11-16 15:26:29,937 - INFO - Move 4: KataGo (White) thinking...
+2025-11-16 15:26:30,453 - INFO - Move 4: KataGo (White) plays Q4
+2025-11-16 15:26:30,503 - INFO - Move 5: DataGo (Black) thinking...
+2025-11-16 15:26:30,869 - INFO - Move 5: DataGo (Black) plays C5 [unc=0.350, 366ms]
+2025-11-16 15:26:30,919 - INFO - Move 6: KataGo (White) thinking...
+2025-11-16 15:26:31,367 - INFO - Move 6: KataGo (White) plays P17
+2025-11-16 15:26:31,418 - INFO - Move 7: DataGo (Black) thinking...
+2025-11-16 15:26:31,850 - INFO -   → Complex position detected (unc=0.353)
+2025-11-16 15:26:31,850 - INFO -   → No match found: hash_293259, running deep search
+2025-11-16 15:26:31,850 - INFO -   → Deep search (depth=0, unc=0.353)
+2025-11-16 15:26:31,851 - INFO - Move 7: DataGo (Black) plays D4 [unc=0.353, DEEP, 433ms]
+2025-11-16 15:26:31,901 - INFO - Move 8: KataGo (White) thinking...
+2025-11-16 15:26:32,275 - INFO - Move 8: KataGo (White) plays E3
+2025-11-16 15:26:32,326 - INFO - Move 9: DataGo (Black) thinking...
+2025-11-16 15:26:32,376 - INFO -   → Complex position detected (unc=0.354)
+2025-11-16 15:26:32,377 - INFO -   → No match found: hash_554520, running deep search
+2025-11-16 15:26:32,377 - INFO -   → Deep search (depth=0, unc=0.354)
+2025-11-16 15:26:32,377 - INFO - Move 9: DataGo (Black) plays D4 [unc=0.354, DEEP, 51ms]
+2025-11-16 15:26:32,427 - INFO - Move 10: KataGo (White) thinking...
+2025-11-16 15:26:32,444 - INFO - Move 10: KataGo (White) plays G3
+2025-11-16 15:26:32,494 - INFO - Move 11: DataGo (Black) thinking...
+2025-11-16 15:26:32,572 - INFO -   → Complex position detected (unc=0.355)
+2025-11-16 15:26:32,572 - INFO -   → No match found: hash_214793, running deep search
+2025-11-16 15:26:32,572 - INFO -   → Deep search (depth=0, unc=0.355)
+2025-11-16 15:26:32,572 - INFO - Move 11: DataGo (Black) plays D4 [unc=0.355, DEEP, 78ms]
+2025-11-16 15:26:32,623 - INFO - Move 12: KataGo (White) thinking...
+2025-11-16 15:26:33,107 - INFO - Move 12: KataGo (White) plays Q15
+2025-11-16 15:26:33,157 - INFO - Move 13: DataGo (Black) thinking...
+2025-11-16 15:26:33,356 - INFO -   → Complex position detected (unc=0.356)
+2025-11-16 15:26:33,356 - INFO -   → No match found: hash_119338, running deep search
+2025-11-16 15:26:33,356 - INFO -   → Deep search (depth=0, unc=0.356)
+2025-11-16 15:26:33,357 - INFO - Move 13: DataGo (Black) plays D4 [unc=0.356, DEEP, 199ms]
+2025-11-16 15:26:33,407 - INFO - Move 14: KataGo (White) thinking...
+2025-11-16 15:26:33,457 - INFO - Move 14: KataGo (White) plays Q14
+2025-11-16 15:26:33,508 - INFO - Move 15: DataGo (Black) thinking...
+2025-11-16 15:26:33,523 - INFO -   → Complex position detected (unc=0.355)
+2025-11-16 15:26:33,523 - INFO -   → No match found: hash_357506, running deep search
+2025-11-16 15:26:33,523 - INFO -   → Deep search (depth=0, unc=0.355)
+2025-11-16 15:26:33,523 - INFO - Move 15: DataGo (Black) plays D4 [unc=0.355, DEEP, 15ms]
+2025-11-16 15:26:33,574 - INFO - Move 16: KataGo (White) thinking...
+2025-11-16 15:26:33,699 - INFO - Move 16: KataGo (White) plays G4
+2025-11-16 15:26:33,749 - INFO - Move 17: DataGo (Black) thinking...
+2025-11-16 15:26:34,146 - INFO -   → Complex position detected (unc=0.359)
+2025-11-16 15:26:34,146 - INFO -   → No match found: hash_676187, running deep search
+2025-11-16 15:26:34,146 - INFO -   → Deep search (depth=0, unc=0.359)
+2025-11-16 15:26:34,146 - INFO - Move 17: DataGo (Black) plays D4 [unc=0.359, DEEP, 397ms]
+2025-11-16 15:26:34,197 - INFO - Move 18: KataGo (White) thinking...
+2025-11-16 15:26:34,720 - INFO - Move 18: KataGo (White) plays M17
+2025-11-16 15:26:34,770 - INFO - Move 19: DataGo (Black) thinking...
+2025-11-16 15:26:35,087 - INFO -   → Complex position detected (unc=0.359)
+2025-11-16 15:26:35,087 - INFO -   → No match found: hash_269537, running deep search
+2025-11-16 15:26:35,087 - INFO -   → Deep search (depth=0, unc=0.359)
+2025-11-16 15:26:35,088 - INFO - Move 19: DataGo (Black) plays D4 [unc=0.359, DEEP, 318ms]
+2025-11-16 15:26:35,138 - INFO - Move 20: KataGo (White) thinking...
+2025-11-16 15:26:35,597 - INFO - Move 20: KataGo (White) plays G6
+2025-11-16 15:26:35,647 - INFO - Move 21: DataGo (Black) thinking...
+2025-11-16 15:26:36,049 - INFO -   → Complex position detected (unc=0.362)
+2025-11-16 15:26:36,049 - INFO -   → No match found: hash_670879, running deep search
+2025-11-16 15:26:36,049 - INFO -   → Deep search (depth=0, unc=0.362)
+2025-11-16 15:26:36,049 - INFO - Move 21: DataGo (Black) plays D4 [unc=0.362, DEEP, 402ms]
+2025-11-16 15:26:36,099 - INFO - Move 22: KataGo (White) thinking...
+2025-11-16 15:26:36,221 - INFO - Move 22: KataGo (White) plays H6
+2025-11-16 15:26:36,271 - INFO - Move 23: DataGo (Black) thinking...
+2025-11-16 15:26:36,313 - INFO -   → Complex position detected (unc=0.363)
+2025-11-16 15:26:36,313 - INFO -   → No match found: hash_577171, running deep search
+2025-11-16 15:26:36,313 - INFO -   → Deep search (depth=0, unc=0.363)
+2025-11-16 15:26:36,313 - INFO - Move 23: DataGo (Black) plays D4 [unc=0.363, DEEP, 42ms]
+2025-11-16 15:26:36,363 - INFO - Move 24: KataGo (White) thinking...
+2025-11-16 15:26:36,564 - INFO - Move 24: KataGo (White) plays O3
+2025-11-16 15:26:36,615 - INFO - Move 25: DataGo (Black) thinking...
+2025-11-16 15:26:36,881 - INFO -   → Complex position detected (unc=0.364)
+2025-11-16 15:26:36,881 - INFO -   → No match found: hash_658916, running deep search
+2025-11-16 15:26:36,881 - INFO -   → Deep search (depth=0, unc=0.364)
+2025-11-16 15:26:36,881 - INFO - Move 25: DataGo (Black) plays D4 [unc=0.364, DEEP, 266ms]
+2025-11-16 15:26:36,932 - INFO - Move 26: KataGo (White) thinking...
+2025-11-16 15:26:37,143 - INFO - Move 26: KataGo (White) plays L17
+2025-11-16 15:26:37,194 - INFO - Move 27: DataGo (Black) thinking...
+2025-11-16 15:26:37,520 - INFO -   → Complex position detected (unc=0.365)
+2025-11-16 15:26:37,520 - INFO -   → No match found: hash_355990, running deep search
+2025-11-16 15:26:37,520 - INFO -   → Deep search (depth=0, unc=0.365)
+2025-11-16 15:26:37,521 - INFO - Move 27: DataGo (Black) plays D4 [unc=0.365, DEEP, 327ms]
+2025-11-16 15:26:37,571 - INFO - Move 28: KataGo (White) thinking...
+2025-11-16 15:26:37,613 - INFO - Move 28: KataGo (White) plays J18
+2025-11-16 15:26:37,664 - INFO - Move 29: DataGo (Black) thinking...
+2025-11-16 15:26:37,900 - INFO -   → Complex position detected (unc=0.368)
+2025-11-16 15:26:37,900 - INFO -   → No match found: hash_941238, running deep search
+2025-11-16 15:26:37,900 - INFO -   → Deep search (depth=0, unc=0.368)
+2025-11-16 15:26:37,900 - INFO - Move 29: DataGo (Black) plays D4 [unc=0.368, DEEP, 237ms]
+2025-11-16 15:26:37,951 - INFO - Move 30: KataGo (White) thinking...
+2025-11-16 15:26:38,069 - INFO - Move 30: KataGo (White) plays H17
+2025-11-16 15:26:38,120 - INFO - Move 31: DataGo (Black) thinking...
+2025-11-16 15:26:38,403 - INFO -   → Complex position detected (unc=0.367)
+2025-11-16 15:26:38,403 - INFO -   → No match found: hash_300825, running deep search
+2025-11-16 15:26:38,403 - INFO -   → Deep search (depth=0, unc=0.367)
+2025-11-16 15:26:38,403 - INFO - Move 31: DataGo (Black) plays D4 [unc=0.367, DEEP, 284ms]
+2025-11-16 15:26:38,454 - INFO - Move 32: KataGo (White) thinking...
+2025-11-16 15:26:38,588 - INFO - Move 32: KataGo (White) plays G18
+2025-11-16 15:26:38,638 - INFO - Move 33: DataGo (Black) thinking...
+2025-11-16 15:26:39,003 - INFO -   → Complex position detected (unc=0.370)
+2025-11-16 15:26:39,003 - INFO -   → No match found: hash_217570, running deep search
+2025-11-16 15:26:39,003 - INFO -   → Deep search (depth=0, unc=0.370)
+2025-11-16 15:26:39,004 - INFO - Move 33: DataGo (Black) plays D4 [unc=0.370, DEEP, 365ms]
+2025-11-16 15:26:39,054 - INFO - Move 34: KataGo (White) thinking...
+2025-11-16 15:26:39,251 - INFO - Move 34: KataGo (White) plays Q13
+2025-11-16 15:26:39,301 - INFO - Move 35: DataGo (Black) thinking...
+2025-11-16 15:26:39,676 - INFO -   → Complex position detected (unc=0.370)
+2025-11-16 15:26:39,676 - INFO -   → No match found: hash_838041, running deep search
+2025-11-16 15:26:39,676 - INFO -   → Deep search (depth=0, unc=0.370)
+2025-11-16 15:26:39,677 - INFO - Move 35: DataGo (Black) plays D4 [unc=0.370, DEEP, 375ms]
+2025-11-16 15:26:39,727 - INFO - Move 36: KataGo (White) thinking...
+2025-11-16 15:26:39,753 - INFO - Move 36: KataGo (White) plays K17
+2025-11-16 15:26:39,803 - INFO - Move 37: DataGo (Black) thinking...
+2025-11-16 15:26:40,000 - INFO -   → Complex position detected (unc=0.369)
+2025-11-16 15:26:40,000 - INFO -   → No match found: hash_843504, running deep search
+2025-11-16 15:26:40,000 - INFO -   → Deep search (depth=0, unc=0.369)
+2025-11-16 15:26:40,001 - INFO - Move 37: DataGo (Black) plays D4 [unc=0.369, DEEP, 197ms]
+2025-11-16 15:26:40,051 - INFO - Move 38: KataGo (White) thinking...
+2025-11-16 15:26:40,098 - INFO - Move 38: KataGo (White) plays R14
+2025-11-16 15:26:40,149 - INFO - Move 39: DataGo (Black) thinking...
+2025-11-16 15:26:40,432 - INFO -   → Complex position detected (unc=0.374)
+2025-11-16 15:26:40,432 - INFO -   → No match found: hash_46399, running deep search
+2025-11-16 15:26:40,432 - INFO -   → Deep search (depth=0, unc=0.374)
+2025-11-16 15:26:40,433 - INFO - Move 39: DataGo (Black) plays D4 [unc=0.374, DEEP, 284ms]
+2025-11-16 15:26:40,483 - INFO - Move 40: KataGo (White) thinking...
+2025-11-16 15:26:40,487 - INFO - Move 40: KataGo (White) plays Q12
+2025-11-16 15:26:40,537 - INFO - 
+Reached max moves (40). Draw.
+2025-11-16 15:26:40,537 - INFO - 
+Game 1 Statistics:
+2025-11-16 15:26:40,537 - INFO -   Moves played: 20
+2025-11-16 15:26:40,537 - INFO -   RAG queries: 19
+2025-11-16 15:26:40,537 - INFO -   RAG hits: 0
+2025-11-16 15:26:40,537 - INFO -   Exact matches: 0
+2025-11-16 15:26:40,537 - INFO -   Deep searches: 19
+2025-11-16 15:26:40,537 - INFO -   Recursive searches: 0
+2025-11-16 15:26:40,537 - INFO -   Unique positions: 19
+2025-11-16 15:26:40,537 - INFO -   Total contexts: 19
+2025-11-16 15:26:40,537 - INFO -   Average uncertainty: 0.361
+2025-11-16 15:26:40,537 - INFO - 
+Cleaning up...
+2025-11-16 15:26:40,802 - INFO - 
+======================================================================
+2025-11-16 15:26:40,802 - INFO - Overall Match Statistics
+2025-11-16 15:26:40,802 - INFO - ======================================================================
+2025-11-16 15:26:40,802 - INFO - Total moves: 20
+2025-11-16 15:26:40,802 - INFO - Total RAG queries: 19
+2025-11-16 15:26:40,802 - INFO - Total exact matches: 0
+2025-11-16 15:26:40,802 - INFO - Total deep searches: 19
+2025-11-16 15:26:40,802 - INFO - Total recursive searches: 0
+2025-11-16 15:26:40,802 - INFO - Unique positions stored: 19
+2025-11-16 15:26:40,802 - INFO - Total contexts: 19
+2025-11-16 15:26:40,802 - INFO - Avg contexts per position: 1.0
+2025-11-16 15:26:40,802 - INFO - 
+======================================================================
+2025-11-16 15:26:40,802 - INFO - Match Results
+2025-11-16 15:26:40,802 - INFO - ======================================================================
+2025-11-16 15:26:40,802 - INFO - Game 1: Draw
+2025-11-16 15:26:40,802 - INFO - 
+2025-11-16 15:26:40,802 - INFO - DataGo: 0 wins
+2025-11-16 15:26:40,803 - INFO - KataGo: 0 wins
+2025-11-16 15:26:40,803 - INFO - Draws: 1
+2025-11-16 15:26:40,803 - INFO - ======================================================================

@@ -21,6 +21,7 @@ import time
 import math
 import json
 import hashlib
+import re
 import numpy as np
 import yaml
 from pathlib import Path
@@ -40,6 +41,67 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+
+def format_move_for_gtp(move: str) -> Optional[str]:
+    """Convert a move string into a GTP-friendly token (handles PASS/RESIGN)."""
+    if not move:
+        return None
+    upper = move.upper()
+    if upper == "PASS":
+        return "pass"
+    if upper == "RESIGN":
+        return None
+    return upper
+
+
+def parse_final_score_text(score_text: str) -> Optional[Tuple[str, str]]:
+    """
+    Parse KataGo final_score output like 'B+5.5' or 'W+Resign'.
+    
+    Returns:
+        Tuple(color, margin) where color is 'B' or 'W'.
+    """
+    if not score_text:
+        return None
+    text = score_text.strip().upper()
+    if not text:
+        return None
+    text = text.split()[0]
+    match = re.match(r'^([BW])\+([0-9]+(?:\.[0-9]+)?|RESIGN|R)$', text)
+    if match:
+        color, margin = match.groups()
+        if margin == 'R':
+            margin = 'RESIGN'
+        return color, margin
+    return None
+
+
+def determine_final_result(engine: GTPController, attempts: int = 3, delay: float = 0.5) -> Tuple[Optional[str], Optional[str]]:
+    """
+    Try to fetch and parse final_score from KataGo, retrying on failure.
+    
+    Returns:
+        (winner_name, normalized_score) or (None, None) if unsuccessful.
+    """
+    for attempt in range(1, attempts + 1):
+        success, score_result = engine.send_command("final_score")
+        if success and score_result:
+            parsed = parse_final_score_text(score_result)
+            if parsed:
+                color, margin = parsed
+                normalized = f"{color}+{margin}"
+                winner = "DataGo" if color == 'B' else "KataGo"
+                return winner, normalized
+            else:
+                logger.warning(f"final_score returned unrecognized format: '{score_result}'")
+        else:
+            logger.warning("final_score command failed or returned empty result")
+        
+        if attempt < attempts:
+            logger.info(f"Retrying final_score ({attempt}/{attempts})...")
+            time.sleep(delay)
+    return None, None
 
 
 class BoardState:
@@ -821,8 +883,18 @@ def run_match(
                 elif move == "PASS":
                     passes += 1
                     if passes >= 2:
-                        logger.info("\nBoth players passed. Game over.")
-                        results.append("Draw")
+                        logger.info("\nBoth players passed. Scoring final board...")
+                        winner, normalized_score = determine_final_result(katago)
+                        if winner and normalized_score:
+                            logger.info(f"Final score: {normalized_score}")
+                            if winner == "DataGo":
+                                logger.info("DataGo (Black) wins by scoring!")
+                            else:
+                                logger.info("KataGo (White) wins by scoring!")
+                            results.append(winner)
+                        else:
+                            logger.info("Could not determine score after retries. Recording as Draw.")
+                            results.append("Draw")
                         break
                 else:
                     passes = 0
@@ -831,22 +903,16 @@ def run_match(
             
             if move_number >= max_moves:
                 logger.info(f"\nReached max moves ({max_moves}). Scoring game...")
-                # Use KataGo to score the final position
-                success, score_result = katago.send_command("final_score")
-                if success and score_result:
-                    logger.info(f"Final score: {score_result}")
-                    # Parse score (format: "B+5.5" or "W+2.5")
-                    if score_result.startswith('B+'):
+                winner, normalized_score = determine_final_result(katago)
+                if winner and normalized_score:
+                    logger.info(f"Final score: {normalized_score}")
+                    if winner == "DataGo":
                         logger.info("DataGo (Black) wins by scoring!")
-                        results.append("DataGo")
-                    elif score_result.startswith('W+'):
-                        logger.info("KataGo (White) wins by scoring!")
-                        results.append("KataGo")
                     else:
-                        logger.info(f"Draw by score")
-                        results.append("Draw")
+                        logger.info("KataGo (White) wins by scoring!")
+                    results.append(winner)
                 else:
-                    logger.info("Could not determine score. Recording as Draw.")
+                    logger.info("Could not determine score after retries. Recording as Draw.")
                     results.append("Draw")
             
             # Print game statistics
