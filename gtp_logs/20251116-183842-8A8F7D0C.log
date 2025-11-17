@@ -17370,3 +17370,203 @@ B9  : T  89.97c W 100.00c S -10.03c (+305.8 L +308.7) LCB -260.03c P  1.37% WF  
 2025-11-16 19:23:51-0500: = 
 2025-11-16 19:23:51-0500: Controller: kata-genmove_analyze b
 2025-11-16 19:23:51-0500: =
+2025-11-16 19:24:00-0500: MoveNum: 0 HASH: 154A5D5B9C3BE31FE1B44D8F5610D6F4
+   A B C D E F G H J K L M N O P Q R S T
+19 X . . . . . . . . . X X . X X . . . .
+18 X X X . . . . . . X . X X X . X X X .
+17 . X . X X X X . . X X X . . X X . X .
+16 . X X X . . . . . . . X . . X X X X .
+15 . X X . X . . . . . . . . . . . . X X
+14 X X X X X . . . . . . . . . . . X . X
+13 . X X . . . . . . . . . . . . . X X X
+12 . X X X . . . . . X . . . . . . X X .
+11 . X . X . . . . . X . . . . . . X X X
+10 . X X X . . . . . X . . . . . X X . .
+ 9 X . X X . . . . . . . . . . . . . . .
+ 8 X X X . . . . . . . X . . . . . . . .
+ 7 . X . . . . . . . . . . . . . . . . .
+ 6 X . X X . . . . . . . . . . . X . . .
+ 5 . X X X X . . . . . . . . . . X . . .
+ 4 . . X X . X . . . X X . . . . X . . .
+ 3 . X . X X X . . X X X . . . X X X X .
+ 2 . X X X . . . . X . X . . . . . X . X
+ 1 X X . . . . . . . X . . . . . . . X .
+
+koPOSITIONALscoreAREAtaxNONEsui1komi7.5
+Time taken: 9.7285
+Root visits: 344
+New playouts: 344
+NN rows: 244
+NN batches: 237
+NN avg batch size: 1.02954
+PlayoutDoublingAdvantage: -2.75
+PV: pass S6 S5 O2
+Tree:
+: T 112.13c W 100.00c S  10.22c (+330.7 L +331.3) N     344  --  pass S6 S5 O2
+---Black(^)---
+pss : T 117.69c W 100.00c S  15.55c (+337.0 L +337.1) LCB  114.50c P 23.85% WF 1031.1 PSV    1001 N     239  --  pass S6 S5 O2
+D7  : T  90.41c W 100.00c S  -9.59c (+306.6 L +309.2) LCB -259.79c P  2.97% WF   2.5 PSV       2 N       1  --  D7
+O17 : T  90.35c W 100.00c S  -9.65c (+306.3 L +308.9) LCB -259.85c P  2.21% WF   2.5 PSV       2 N       1  --  O17
+K2  : T  90.17c W 100.00c S  -9.83c (+305.8 L +308.5) LCB -259.83c P  2.13% WF   2.5 PSV       1 N       1  --  K2
+L1  : T  90.01c W 100.00c S  -9.99c (+305.5 L +308.1) LCB -259.99c P  1.73% WF   2.5 PSV       1 N       1  --  L1
+F16 : T  90.38c W 100.00c S  -9.62c (+306.5 L +309.2) LCB -259.83c P  1.68% WF   2.5 PSV       1 N       1  --  F16
+J1  : T  90.14c W 100.00c S  -9.86c (+305.8 L +308.4) LCB -259.86c P  1.40% WF   2.5 PSV       1 N       1  --  J1
+E13 : T  90.14c W 100.00c S  -9.86c (+305.9 L +308.6) LCB -260.06c P  1.35% WF   2.5 PSV       1 N       1  --  E13
+O16 : T  90.06c W 100.00c S  -9.94c (+305.7 L +308.5) LCB -260.13c P  1.22% WF   2.6 PSV       1 N       1  --  O16
+Q15 : T  89.97c W 100.00c S -10.03c (+305.4 L +308.1) LCB -260.22c P  0.99% WF   2.6 PSV       0 N       1  --  Q15
+
+2025-11-16 19:24:00-0500: play pass
+2025-11-16 19:24:00-0500: Controller: kata-set-param maxVisits 800
+2025-11-16 19:24:00-0500: = 
+2025-11-16 19:24:00-0500: Controller: kata-genmove_analyze b
+2025-11-16 19:24:00-0500: =
+2025-11-16 19:24:02-0500: MoveNum: 0 HASH: 154A5D5B9C3BE31FE1B44D8F5610D6F4
+   A B C D E F G H J K L M N O P Q R S T
+19 X . . . . . . . . . X X . X X . . . .
+18 X X X . . . . . . X . X X X . X X X .
+17 . X . X X X X . . X X X . . X X . X .
+16 . X X X . . . . . . . X . . X X X X .
+15 . X X . X . . . . . . . . . . . . X X
+14 X X X X X . . . . . . . . . . . X . X
+13 . X X . . . . . . . . . . . . . X X X
+12 . X X X . . . . . X . . . . . . X X .
+11 . X . X . . . . . X . . . . . . X X X
+10 . X X X . . . . . X . . . . . X X . .
+ 9 X . X X . . . . . . . . . . . . . . .
+ 8 X X X . . . . . . . X . . . . . . . .
+ 7 . X . . . . . . . . . . . . . . . . .
+ 6 X . X X . . . . . . . . . . . X . . .
+ 5 . X X X X . . . . . . . . . . X . . .
+ 4 . . X X . X . . . X X . . . . X . . .
+ 3 . X . X X X . . X X X . . . X X X X .
+ 2 . X X X . . . . X . X . . . . . X . X
+ 1 X X . . . . . . . X . . . . . . . X .
+
+koPOSITIONALscoreAREAtaxNONEsui1komi7.5
+Time taken: 1.64629
+Root visits: 344
+New playouts: 344
+NN rows: 33
+NN batches: 27
+NN avg batch size: 1.22222
+PlayoutDoublingAdvantage: -2.75
+PV: pass S5 S6 S7
+Tree:
+: T 112.73c W 100.00c S  10.95c (+331.7 L +332.2) N     344  --  pass S5 S6 S7
+---Black(^)---
+pss : T 118.06c W 100.00c S  16.24c (+337.7 L +337.7) LCB  115.15c P 23.85% WF 1094.3 PSV    1064 N     239  --  pass S5 S6 S7
+D7  : T  90.41c W 100.00c S  -9.59c (+306.6 L +309.2) LCB -259.79c P  2.97% WF   2.5 PSV       2 N       1  --  D7
+O17 : T  90.35c W 100.00c S  -9.65c (+306.3 L +308.9) LCB -259.85c P  2.21% WF   2.5 PSV       2 N       1  --  O17
+K2  : T  90.17c W 100.00c S  -9.83c (+305.8 L +308.5) LCB -259.83c P  2.13% WF   2.5 PSV       1 N       1  --  K2
+L1  : T  90.01c W 100.00c S  -9.99c (+305.5 L +308.1) LCB -259.99c P  1.73% WF   2.5 PSV       1 N       1  --  L1
+F16 : T  90.38c W 100.00c S  -9.62c (+306.5 L +309.2) LCB -259.83c P  1.68% WF   2.5 PSV       1 N       1  --  F16
+J1  : T  90.14c W 100.00c S  -9.86c (+305.8 L +308.4) LCB -259.86c P  1.40% WF   2.5 PSV       1 N       1  --  J1
+E13 : T  90.14c W 100.00c S  -9.86c (+305.9 L +308.6) LCB -260.06c P  1.35% WF   2.5 PSV       1 N       1  --  E13
+O16 : T  90.06c W 100.00c S  -9.94c (+305.7 L +308.5) LCB -260.13c P  1.22% WF   2.6 PSV       1 N       1  --  O16
+Q15 : T  89.97c W 100.00c S -10.03c (+305.4 L +308.1) LCB -260.22c P  0.99% WF   2.6 PSV       0 N       1  --  Q15
+
+2025-11-16 19:24:02-0500: play pass
+2025-11-16 19:24:02-0500: Controller: kata-set-param maxVisits 800
+2025-11-16 19:24:02-0500: = 
+2025-11-16 19:24:02-0500: Controller: kata-genmove_analyze b
+2025-11-16 19:24:02-0500: =
+2025-11-16 19:24:03-0500: MoveNum: 0 HASH: 154A5D5B9C3BE31FE1B44D8F5610D6F4
+   A B C D E F G H J K L M N O P Q R S T
+19 X . . . . . . . . . X X . X X . . . .
+18 X X X . . . . . . X . X X X . X X X .
+17 . X . X X X X . . X X X . . X X . X .
+16 . X X X . . . . . . . X . . X X X X .
+15 . X X . X . . . . . . . . . . . . X X
+14 X X X X X . . . . . . . . . . . X . X
+13 . X X . . . . . . . . . . . . . X X X
+12 . X X X . . . . . X . . . . . . X X .
+11 . X . X . . . . . X . . . . . . X X X
+10 . X X X . . . . . X . . . . . X X . .
+ 9 X . X X . . . . . . . . . . . . . . .
+ 8 X X X . . . . . . . X . . . . . . . .
+ 7 . X . . . . . . . . . . . . . . . . .
+ 6 X . X X . . . . . . . . . . . X . . .
+ 5 . X X X X . . . . . . . . . . X . . .
+ 4 . . X X . X . . . X X . . . . X . . .
+ 3 . X . X X X . . X X X . . . X X X X .
+ 2 . X X X . . . . X . X . . . . . X . X
+ 1 X X . . . . . . . X . . . . . . . X .
+
+koPOSITIONALscoreAREAtaxNONEsui1komi7.5
+Time taken: 1.1799
+Root visits: 339
+New playouts: 339
+NN rows: 15
+NN batches: 14
+NN avg batch size: 1.07143
+PlayoutDoublingAdvantage: -2.75
+PV: pass S9 R9 G2
+Tree:
+: T 112.92c W 100.00c S  10.86c (+331.5 L +332.1) N     339  --  pass S9 R9 G2
+---Black(^)---
+pss : T 118.19c W 100.00c S  16.00c (+337.5 L +337.5) LCB  115.30c P 23.85% WF 1071.6 PSV    1043 N     238  --  pass S9 R9 G2
+D7  : T  90.41c W 100.00c S  -9.59c (+306.6 L +309.2) LCB -259.79c P  2.97% WF   2.5 PSV       2 N       1  --  D7
+O17 : T  90.35c W 100.00c S  -9.65c (+306.3 L +308.9) LCB -259.85c P  2.21% WF   2.5 PSV       1 N       1  --  O17
+K2  : T  90.17c W 100.00c S  -9.83c (+305.8 L +308.5) LCB -259.83c P  2.13% WF   2.5 PSV       1 N       1  --  K2
+L1  : T  90.01c W 100.00c S  -9.99c (+305.5 L +308.1) LCB -259.99c P  1.73% WF   2.5 PSV       1 N       1  --  L1
+F16 : T  90.38c W 100.00c S  -9.62c (+306.5 L +309.2) LCB -259.83c P  1.68% WF   2.5 PSV       1 N       1  --  F16
+J1  : T  90.14c W 100.00c S  -9.86c (+305.8 L +308.4) LCB -259.86c P  1.40% WF   2.5 PSV       1 N       1  --  J1
+E13 : T  90.14c W 100.00c S  -9.86c (+305.9 L +308.6) LCB -260.06c P  1.35% WF   2.5 PSV       1 N       1  --  E13
+O16 : T  90.06c W 100.00c S  -9.94c (+305.7 L +308.5) LCB -260.13c P  1.22% WF   2.6 PSV       1 N       1  --  O16
+Q15 : T  89.97c W 100.00c S -10.03c (+305.4 L +308.1) LCB -260.22c P  0.99% WF   2.6 PSV       0 N       1  --  Q15
+
+2025-11-16 19:24:03-0500: play pass
+2025-11-16 19:24:03-0500: Controller: kata-set-param maxVisits 800
+2025-11-16 19:24:03-0500: = 
+2025-11-16 19:24:03-0500: Controller: kata-genmove_analyze b
+2025-11-16 19:24:03-0500: =
+2025-11-16 19:24:04-0500: MoveNum: 0 HASH: 154A5D5B9C3BE31FE1B44D8F5610D6F4
+   A B C D E F G H J K L M N O P Q R S T
+19 X . . . . . . . . . X X . X X . . . .
+18 X X X . . . . . . X . X X X . X X X .
+17 . X . X X X X . . X X X . . X X . X .
+16 . X X X . . . . . . . X . . X X X X .
+15 . X X . X . . . . . . . . . . . . X X
+14 X X X X X . . . . . . . . . . . X . X
+13 . X X . . . . . . . . . . . . . X X X
+12 . X X X . . . . . X . . . . . . X X .
+11 . X . X . . . . . X . . . . . . X X X
+10 . X X X . . . . . X . . . . . X X . .
+ 9 X . X X . . . . . . . . . . . . . . .
+ 8 X X X . . . . . . . X . . . . . . . .
+ 7 . X . . . . . . . . . . . . . . . . .
+ 6 X . X X . . . . . . . . . . . X . . .
+ 5 . X X X X . . . . . . . . . . X . . .
+ 4 . . X X . X . . . X X . . . . X . . .
+ 3 . X . X X X . . X X X . . . X X X X .
+ 2 . X X X . . . . X . X . . . . . X . X
+ 1 X X . . . . . . . X . . . . . . . X .
+
+koPOSITIONALscoreAREAtaxNONEsui1komi7.5
+Time taken: 0.66354
+Root visits: 332
+New playouts: 332
+NN rows: 6
+NN batches: 6
+NN avg batch size: 1
+PlayoutDoublingAdvantage: -2.75
+PV: pass S9 R9 G2
+Tree:
+: T 112.96c W 100.00c S  10.81c (+331.5 L +332.0) N     332  --  pass S9 R9 G2
+---Black(^)---
+pss : T 118.56c W 100.00c S  16.27c (+337.7 L +337.7) LCB  115.81c P 23.85% WF 1039.6 PSV    1010 N     228  --  pass S9 R9 G2
+D7  : T  90.41c W 100.00c S  -9.59c (+306.6 L +309.2) LCB -259.79c P  2.97% WF   2.5 PSV       2 N       1  --  D7
+O17 : T  90.35c W 100.00c S  -9.65c (+306.3 L +308.9) LCB -259.85c P  2.21% WF   2.5 PSV       1 N       1  --  O17
+K2  : T  90.17c W 100.00c S  -9.83c (+305.8 L +308.5) LCB -259.83c P  2.13% WF   2.5 PSV       1 N       1  --  K2
+L1  : T  90.01c W 100.00c S  -9.99c (+305.5 L +308.1) LCB -259.99c P  1.73% WF   2.5 PSV       1 N       1  --  L1
+F16 : T  90.38c W 100.00c S  -9.62c (+306.5 L +309.2) LCB -259.83c P  1.68% WF   2.5 PSV       1 N       1  --  F16
+J1  : T  90.14c W 100.00c S  -9.86c (+305.8 L +308.4) LCB -259.86c P  1.40% WF   2.5 PSV       1 N       1  --  J1
+E13 : T  90.14c W 100.00c S  -9.86c (+305.9 L +308.6) LCB -260.06c P  1.35% WF   2.5 PSV       1 N       1  --  E13
+O16 : T  90.06c W 100.00c S  -9.94c (+305.7 L +308.5) LCB -260.13c P  1.22% WF   2.6 PSV       1 N       1  --  O16
+Q15 : T  89.97c W 100.00c S -10.03c (+305.4 L +308.1) LCB -260.22c P  0.99% WF   2.6 PSV       0 N       1  --  Q15
+
+2025-11-16 19:24:04-0500: play pass
+2025-11-16 19:24:04-0500: Controller: kata-set-param maxVisits 2000
+2025-11-16 19:24:04-0500: = 
+2025-11-16 19:24:04-0500: Controller: kata-genmove_analyze b
+2025-11-16 19:24:04-0500: =
