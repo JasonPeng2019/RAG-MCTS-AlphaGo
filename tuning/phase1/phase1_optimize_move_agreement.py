@@ -27,7 +27,7 @@ from dataclasses import dataclass
 from scipy.stats import pearsonr
 from scipy.optimize import minimize
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score, accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 from sklearn.model_selection import train_test_split
 
 
@@ -44,15 +44,18 @@ class PositionData:
     K: float  # value_variance
 
     # Shallow search
+    shallow_best_move: str
     shallow_value: float
     shallow_prior: float
 
     # Deep search
+    deep_best_move: str
     deep_value: float
     deep_prior: float
 
-    # Target variable
+    # Target variables
     cosine_similarity: float  # Cosine similarity between shallow and deep
+    move_agreement: int  # 1 if moves agree (same), 0 if moves disagree (different)
 
 
 @dataclass
@@ -205,6 +208,9 @@ def load_rag_data(rag_data_dir: Path) -> List[PositionData]:
                 deep_vec = np.array([deep_value, deep_prior])
                 cos_sim = cosine_similarity(shallow_vec, deep_vec)
 
+                # Determine move agreement: 1 if same, 0 if different
+                move_agreement = 1 if shallow_best_move == deep_best_move else 0
+
                 # Create position data
                 pos = PositionData(
                     game_id=game_id,
@@ -213,11 +219,14 @@ def load_rag_data(rag_data_dir: Path) -> List[PositionData]:
                     stones_on_board=flagged_pos.get("stone_count", {}).get("total", 0),
                     E=E,
                     K=K,
+                    shallow_best_move=shallow_best_move,
                     shallow_value=shallow_value,
                     shallow_prior=shallow_prior,
+                    deep_best_move=deep_best_move,
                     deep_value=deep_value,
                     deep_prior=deep_prior,
-                    cosine_similarity=cos_sim
+                    cosine_similarity=cos_sim,
+                    move_agreement=move_agreement
                 )
                 all_positions.append(pos)
 
@@ -270,7 +279,7 @@ def grid_search(positions_train: List[PositionData]) -> Tuple[UncertaintyConfig,
 
     # Test each phase function
     for phase_name, phase_func in PHASE_FUNCTIONS.items():
-        print(f"\n  Testing phase function: {phase_name}")
+        print(f"\n  → Testing phase function: {phase_name}")
 
         # Compute phase values
         phase = phase_func(S)
@@ -325,8 +334,9 @@ def grid_search(positions_train: List[PositionData]) -> Tuple[UncertaintyConfig,
             print(f"  {phase_name:<10s}: w1={cfg.w1:.4f}, w2={cfg.w2:.4f} → corr={best_for_phase['correlation']:.4f}")
 
     print(f"\n" + "="*80)
-    print(f"✓ OVERALL BEST CONFIG: {best_config}")
+    print(f"✓ OVERALL BEST CONFIG FROM GRID SEARCH: {best_config}")
     print(f"  Correlation: {best_score:.4f}")
+    print(f"  ✓ SELECTED PHASE FUNCTION: {best_config.phase_function_name}")
     print("="*80)
 
     return best_config, best_score, best_config.phase_function_name
@@ -358,7 +368,7 @@ def linear_regression_optimization(
 
     print(f"\nTraining on {len(positions_train)} positions")
     print(f"  Target: Cosine similarity (mean={cos_sim.mean():.4f}, std={cos_sim.std():.4f})")
-    print(f"  Using phase function: {phase_function_name}")
+    print(f"  ✓ Using phase function: {phase_function_name}")
 
     # Get phase function
     phase_func = PHASE_FUNCTIONS[phase_function_name]
@@ -423,23 +433,75 @@ def linear_regression_optimization(
     }
 
     print(f"\n" + "-"*80)
-    print("TRAINING SET PERFORMANCE:")
+    print("TRAINING SET PERFORMANCE (Regression):")
     print("-"*80)
     print(f"  R² Score:        {metrics['r2']:>10.4f}")
     print(f"  MSE:             {metrics['mse']:>10.6f}")
     print(f"  MAE:             {metrics['mae']:>10.6f}")
     print(f"  Correlation:     {metrics['correlation']:>10.4f}")
 
+    # Find optimal threshold for binary classification on training set
+    move_agreement = np.array([p.move_agreement for p in positions_train])
+    optimal_threshold, train_accuracy = find_optimal_threshold(move_agreement, y_pred)
+
+    metrics['threshold'] = optimal_threshold
+    metrics['accuracy'] = train_accuracy
+
+    print(f"\n" + "-"*80)
+    print("TRAINING SET PERFORMANCE (Binary Classification):")
+    print("-"*80)
+    print(f"  Optimal Threshold: {optimal_threshold:>10.4f}")
+    print(f"  Accuracy:          {train_accuracy:>10.4f}  ({100*train_accuracy:.2f}% correct)")
+
     return final_config, final_model, metrics
+
+
+def find_optimal_threshold(
+    y_true_agreement: np.ndarray,
+    y_pred_cosine: np.ndarray
+) -> Tuple[float, float]:
+    """
+    Find the optimal cosine similarity threshold that best separates
+    move agreement (1) from disagreement (0).
+
+    Args:
+        y_true_agreement: Binary labels (1 = moves agree, 0 = moves disagree)
+        y_pred_cosine: Predicted cosine similarity values
+
+    Returns:
+        Tuple of (optimal_threshold, best_accuracy)
+    """
+    # Try different thresholds
+    thresholds = np.linspace(y_pred_cosine.min(), y_pred_cosine.max(), 100)
+    best_threshold = None
+    best_accuracy = 0.0
+
+    for threshold in thresholds:
+        # If predicted cosine >= threshold, predict agreement (1), else disagreement (0)
+        y_pred_binary = (y_pred_cosine >= threshold).astype(int)
+        accuracy = accuracy_score(y_true_agreement, y_pred_binary)
+
+        if accuracy > best_accuracy:
+            best_accuracy = accuracy
+            best_threshold = threshold
+
+    return best_threshold, best_accuracy
 
 
 def evaluate_model(
     model: LinearRegression,
     config: UncertaintyConfig,
-    positions_test: List[PositionData]
+    positions_test: List[PositionData],
+    threshold: Optional[float] = None
 ) -> Dict:
     """
-    Evaluate model on test set.
+    Evaluate model on test set with both regression and classification metrics.
+
+    Args:
+        model: Trained linear regression model
+        config: Uncertainty configuration
+        positions_test: Test set positions
+        threshold: Optional threshold for binary classification (if None, will be computed)
 
     Returns:
         Dictionary of evaluation metrics
@@ -447,12 +509,14 @@ def evaluate_model(
     print("\n" + "="*80)
     print("TEST SET EVALUATION")
     print("="*80)
+    print(f"  ✓ Evaluating with phase function: {config.phase_function_name}")
 
     # Extract arrays
     E = np.array([p.E for p in positions_test])
     K = np.array([p.K for p in positions_test])
     S = np.array([p.stones_on_board for p in positions_test])
     cos_sim = np.array([p.cosine_similarity for p in positions_test])
+    move_agreement = np.array([p.move_agreement for p in positions_test])
 
     # Compute phase
     phase_func = PHASE_FUNCTIONS[config.phase_function_name]
@@ -464,40 +528,81 @@ def evaluate_model(
         K * phase
     ])
 
-    # Predictions
-    y_pred = model.predict(X)
+    # Predictions (cosine similarity)
+    y_pred_cosine = model.predict(X)
 
-    # Metrics
+    # Regression metrics
     metrics = {
-        'r2': r2_score(cos_sim, y_pred),
-        'mse': mean_squared_error(cos_sim, y_pred),
-        'mae': mean_absolute_error(cos_sim, y_pred),
-        'correlation': pearsonr(cos_sim, y_pred)[0]
+        'r2': r2_score(cos_sim, y_pred_cosine),
+        'mse': mean_squared_error(cos_sim, y_pred_cosine),
+        'mae': mean_absolute_error(cos_sim, y_pred_cosine),
+        'correlation': pearsonr(cos_sim, y_pred_cosine)[0]
     }
 
     print(f"\nTest set: {len(positions_test)} positions")
     print(f"  Cosine similarity: mean={cos_sim.mean():.4f}, std={cos_sim.std():.4f}")
+    print(f"  Move agreement: {move_agreement.sum()}/{len(move_agreement)} positions ({100*move_agreement.mean():.1f}% agree)")
 
     print(f"\n" + "-"*80)
-    print("PERFORMANCE METRICS:")
+    print("REGRESSION METRICS (Cosine Similarity Prediction):")
     print("-"*80)
     print(f"  R² Score:        {metrics['r2']:>10.4f}")
     print(f"  MSE:             {metrics['mse']:>10.6f}")
     print(f"  MAE:             {metrics['mae']:>10.6f}")
     print(f"  Correlation:     {metrics['correlation']:>10.4f}")
 
+    # Binary classification metrics
+    # Find optimal threshold if not provided
+    if threshold is None:
+        threshold, _ = find_optimal_threshold(move_agreement, y_pred_cosine)
+
+    # Convert predictions to binary (1 = agree, 0 = disagree)
+    y_pred_binary = (y_pred_cosine >= threshold).astype(int)
+
+    # Compute classification metrics
+    accuracy = accuracy_score(move_agreement, y_pred_binary)
+    precision = precision_score(move_agreement, y_pred_binary, zero_division=0)
+    recall = recall_score(move_agreement, y_pred_binary, zero_division=0)
+    f1 = f1_score(move_agreement, y_pred_binary, zero_division=0)
+    cm = confusion_matrix(move_agreement, y_pred_binary)
+
+    metrics['threshold'] = threshold
+    metrics['accuracy'] = accuracy
+    metrics['precision'] = precision
+    metrics['recall'] = recall
+    metrics['f1'] = f1
+    metrics['confusion_matrix'] = cm
+
+    print(f"\n" + "-"*80)
+    print("BINARY CLASSIFICATION METRICS (Move Agreement Prediction):")
+    print("-"*80)
+    print(f"  Threshold:       {threshold:>10.4f}  (cosine similarity cutoff)")
+    print(f"  Accuracy:        {accuracy:>10.4f}  ({100*accuracy:.2f}% correct)")
+    print(f"  Precision:       {precision:>10.4f}  (when predicting agreement, how often correct)")
+    print(f"  Recall:          {recall:>10.4f}  (of all agreements, how many found)")
+    print(f"  F1 Score:        {f1:>10.4f}  (harmonic mean of precision & recall)")
+
+    print(f"\n  Confusion Matrix:")
+    print(f"                    Predicted")
+    print(f"                    Disagree (0)  Agree (1)")
+    print(f"  Actual Disagree:  {cm[0,0]:>6}       {cm[0,1]:>6}")
+    print(f"  Actual Agree:     {cm[1,0]:>6}       {cm[1,1]:>6}")
+
     # Show some example predictions
     print(f"\n" + "-"*80)
     print("SAMPLE PREDICTIONS:")
     print("-"*80)
-    print(f"{'Actual':<10} {'Predicted':<10} {'Error':<10} {'E':<8} {'K':<10} {'Stones':<8}")
+    print(f"{'Actual':<8} {'Pred':<8} {'Error':<8} {'Agree?':<8} {'Pred?':<8} {'Correct?':<10} {'E':<8} {'K':<10}")
     print("-"*80)
 
-    for i in range(min(10, len(positions_test))):
-        actual = cos_sim[i]
-        predicted = y_pred[i]
-        error = abs(actual - predicted)
-        print(f"{actual:<10.4f} {predicted:<10.4f} {error:<10.4f} {E[i]:<8.3f} {K[i]:<10.6f} {S[i]:<8}")
+    for i in range(min(15, len(positions_test))):
+        actual_cos = cos_sim[i]
+        pred_cos = y_pred_cosine[i]
+        error = abs(actual_cos - pred_cos)
+        actual_agree = 'Same' if move_agreement[i] == 1 else 'Diff'
+        pred_agree = 'Same' if y_pred_binary[i] == 1 else 'Diff'
+        correct = '✓' if move_agreement[i] == y_pred_binary[i] else '✗'
+        print(f"{actual_cos:<8.4f} {pred_cos:<8.4f} {error:<8.4f} {actual_agree:<8} {pred_agree:<8} {correct:<10} {E[i]:<8.3f} {K[i]:<10.6f}")
 
     return metrics
 
@@ -508,31 +613,66 @@ def main():
     print("PHASE 1: OPTIMIZE COSINE SIMILARITY PREDICTION")
     print("="*80)
 
-    # Load data
-    rag_data_dir = Path("/scratch2/f004h1v/alphago_project/selfplay_output/gpu1/rag_data")
+    # Define training data directories (all GPUs)
+    train_data_dirs = [
+        Path("../../selfplay_output/gpu1/rag_data"),
+        Path("../../selfplay_output/gpu1/rag_data_o"),
+        Path("../../selfplay_output/gpu2/rag_data"),
+        Path("../../selfplay_output/gpu2/rag_data_o"),
+        Path("../../selfplay_output/gpu3/rag_data"),
+        Path("../../selfplay_output/gpu3/rag_data_o"),
+    ]
 
-    if not rag_data_dir.exists():
-        print(f"✗ Directory not found: {rag_data_dir}")
+    # Define test data directories (gpu1 only)
+    test_data_dirs = [
+        Path("../../selfplay_output/gpu1/rag_data"),
+        Path("../../selfplay_output/gpu1/rag_data_o"),
+    ]
+
+    # Load training data
+    print("\n" + "="*80)
+    print("LOADING TRAINING DATA")
+    print("="*80)
+    positions_train = []
+    for data_dir in train_data_dirs:
+        if data_dir.exists():
+            print(f"\nLoading from: {data_dir}")
+            positions = load_rag_data(data_dir)
+            positions_train.extend(positions)
+            print(f"  ✓ Loaded {len(positions)} positions from this directory")
+        else:
+            print(f"\n⚠ Directory not found: {data_dir}")
+
+    if not positions_train:
+        print("\n✗ No training data loaded!")
         return
 
-    print(f"\nLoading data from: {rag_data_dir}")
-    positions = load_rag_data(rag_data_dir)
+    print(f"\n✓ Total training positions loaded: {len(positions_train)}")
 
-    if not positions:
-        print("✗ No data loaded!")
+    # Load test data
+    print("\n" + "="*80)
+    print("LOADING TEST DATA")
+    print("="*80)
+    positions_test = []
+    for data_dir in test_data_dirs:
+        if data_dir.exists():
+            print(f"\nLoading from: {data_dir}")
+            positions = load_rag_data(data_dir)
+            positions_test.extend(positions)
+            print(f"  ✓ Loaded {len(positions)} positions from this directory")
+        else:
+            print(f"\n⚠ Directory not found: {data_dir}")
+
+    if not positions_test:
+        print("\n✗ No test data loaded!")
         return
 
-    print(f"\n✓ Loaded {len(positions)} positions")
-
-    # Split into train/test
-    positions_train, positions_test = train_test_split(
-        positions,
-        test_size=0.2,
-        random_state=42
-    )
-
+    print(f"\n✓ Total test positions loaded: {len(positions_test)}")
+    print(f"\n" + "="*80)
+    print(f"DATASET SUMMARY:")
     print(f"  Training set: {len(positions_train)} positions")
     print(f"  Test set:     {len(positions_test)} positions")
+    print("="*80)
 
     # Step 1: Grid search to find best phase function and initial w1
     best_grid_config, grid_score, best_phase_name = grid_search(positions_train)
@@ -544,8 +684,13 @@ def main():
         initial_w1=best_grid_config.w1
     )
 
-    # Step 3: Evaluate on test set
-    test_metrics = evaluate_model(final_model, final_config, positions_test)
+    # Step 3: Evaluate on test set (using threshold from training)
+    test_metrics = evaluate_model(
+        final_model,
+        final_config,
+        positions_test,
+        threshold=train_metrics['threshold']
+    )
 
     # Final summary
     print("\n" + "="*80)
@@ -557,19 +702,32 @@ def main():
     print(f"  w2 (value variance): {final_config.w2:.6f}  ({final_config.w2*100:.2f}%)")
 
     print(f"\nPhase function:")
-    print(f"  Type: {final_config.phase_function_name}")
+    print(f"  ✓ FINAL SELECTED TYPE: {final_config.phase_function_name}")
 
     print(f"\nUncertainty Formula:")
     print(f"  uncertainty = ({final_config.w1:.4f} × E + {final_config.w2:.4f} × K) × phase_{final_config.phase_function_name}(s)")
 
-    print(f"\nPerformance Summary:")
+    print(f"\nClassification Threshold:")
+    print(f"  Cosine similarity threshold: {train_metrics['threshold']:.4f}")
+    print(f"  (Predicted cosine >= {train_metrics['threshold']:.4f} → moves AGREE)")
+    print(f"  (Predicted cosine <  {train_metrics['threshold']:.4f} → moves DISAGREE)")
+
+    print(f"\nRegression Performance Summary:")
     print(f"  Training R²:         {train_metrics['r2']:.4f}")
     print(f"  Test R²:             {test_metrics['r2']:.4f}")
     print(f"  Training MAE:        {train_metrics['mae']:.6f}")
     print(f"  Test MAE:            {test_metrics['mae']:.6f}")
 
+    print(f"\nMove Agreement Prediction (Binary Classification):")
+    print(f"  Training Accuracy:   {train_metrics['accuracy']:.4f}  ({100*train_metrics['accuracy']:.2f}%)")
+    print(f"  Test Accuracy:       {test_metrics['accuracy']:.4f}  ({100*test_metrics['accuracy']:.2f}%)")
+    print(f"  Test Precision:      {test_metrics['precision']:.4f}")
+    print(f"  Test Recall:         {test_metrics['recall']:.4f}")
+    print(f"  Test F1 Score:       {test_metrics['f1']:.4f}")
+
     print("\n" + "="*80)
     print("✓ Optimization complete!")
+    print(f"✓ The model correctly predicts move agreement {100*test_metrics['accuracy']:.2f}% of the time!")
     print("="*80)
 
 
