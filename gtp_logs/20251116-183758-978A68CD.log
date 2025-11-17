@@ -1,0 +1,140 @@
+2025-11-16 18:37:58-0500: Running with following config:
+allowResignation = true
+lagBuffer = 1.0
+logAllGTPCommunication = true
+logDir = gtp_logs
+logSearchInfo = true
+logSearchInfoForChosenMove = false
+logToStderr = false
+maxTimePondering = 60.0
+maxVisits = 500
+numSearchThreads = 24
+ponderingEnabled = false
+resignConsecTurns = 3
+resignThreshold = -0.90
+rules = tromp-taylor
+searchFactorAfterOnePass = 0.50
+searchFactorAfterTwoPass = 0.25
+searchFactorWhenWinning = 0.40
+searchFactorWhenWinningThreshold = 0.95
+
+2025-11-16 18:37:58-0500: GTP Engine starting...
+2025-11-16 18:37:58-0500: KataGo v1.16.4
+2025-11-16 18:37:58-0500: Using TrompTaylor rules initially, unless GTP/GUI overrides this
+2025-11-16 18:37:58-0500: Using 24 CPU thread(s) for search
+2025-11-16 18:37:58-0500: nnRandSeed0 = 17458314074505549743
+2025-11-16 18:37:58-0500: After dedups: nnModelFile0 = /scratch2/f003x5w/RAGFlow-Datago/datago/../katago_repo/run/default_model.bin.gz useFP16 auto useNHWC auto
+2025-11-16 18:37:58-0500: Initializing neural net buffer to be size 19 * 19 exactly
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 0: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 0: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 1: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 1: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 2: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 4: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 4: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 2: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 3: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 3: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 5: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 5: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 6: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 6: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 7: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 7: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 8: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 8: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 9: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 9: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 10: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 10: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 11: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 11: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 12: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 12: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 13: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 13: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 14: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 14: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 16: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 16: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 15: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 15: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 17: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 17: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 18: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 18: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 19: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 19: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 21: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 21: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 20: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 20: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 22: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 22: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 23: Model version 15
+2025-11-16 18:38:01-0500: Eigen (CPU) backend thread 23: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:03-0500: Loaded neural net with nnXLen 19 nnYLen 19
+2025-11-16 18:38:03-0500: Initializing board with boardXSize 19 boardYSize 19
+2025-11-16 18:38:03-0500: Loaded config /scratch2/f003x5w/RAGFlow-Datago/datago/../katago_repo/run/default_gtp.cfg
+2025-11-16 18:38:03-0500: Loaded model /scratch2/f003x5w/RAGFlow-Datago/datago/../katago_repo/run/default_model.bin.gz
+2025-11-16 18:38:03-0500: Model name: kata1-b28c512nbt-s11653980416-d5514111622
+2025-11-16 18:38:03-0500: GTP ready, beginning main protocol loop
+2025-11-16 18:38:03-0500: Controller: boardsize 19
+2025-11-16 18:38:03-0500: = 
+2025-11-16 18:38:03-0500: Controller: clear_board
+2025-11-16 18:38:03-0500: = 
+2025-11-16 18:38:03-0500: Controller: komi 7.5
+2025-11-16 18:38:03-0500: = 
+2025-11-16 18:38:03-0500: Controller: kata-set-param maxVisits 800
+2025-11-16 18:38:03-0500: = 
+2025-11-16 18:38:03-0500: Controller: kata-genmove_analyze b
+2025-11-16 18:38:03-0500: =
+2025-11-16 18:38:28-0500: MoveNum: 0 HASH: CDCBC1F514D7E680FACD226074256633
+   A B C D E F G H J K L M N O P Q R S T
+19 . . . . . . . . . . . . . . . . . . .
+18 . . . . . . . . . . . . . . . . . . .
+17 . . . . . . . . . . . . . . . . . . .
+16 . . . . . . . . . . . . . . . . @ . .
+15 . . . . . . . . . . . . . . . . . . .
+14 . . . . . . . . . . . . . . . . . . .
+13 . . . . . . . . . . . . . . . . . . .
+12 . . . . . . . . . . . . . . . . . . .
+11 . . . . . . . . . . . . . . . . . . .
+10 . . . . . . . . . . . . . . . . . . .
+ 9 . . . . . . . . . . . . . . . . . . .
+ 8 . . . . . . . . . . . . . . . . . . .
+ 7 . . . . . . . . . . . . . . . . . . .
+ 6 . . . . . . . . . . . . . . . . . . .
+ 5 . . . . . . . . . . . . . . . . . . .
+ 4 . . . . . . . . . . . . . . . . . . .
+ 3 . . . . . . . . . . . . . . . . . . .
+ 2 . . . . . . . . . . . . . . . . . . .
+ 1 . . . . . . . . . . . . . . . . . . .
+
+koPOSITIONALscoreAREAtaxNONEsui1komi7.5
+Time taken: 24.5934
+Root visits: 823
+New playouts: 823
+NN rows: 753
+NN batches: 750
+NN avg batch size: 1.004
+PV: R16 D16 D3 Q4 O17 C5 F4 D9 F17 D14
+Tree:
+: T -33.16c W -32.49c S  -0.82c ( -1.6 L  -0.9) N     823  --  R16 D16 D3 Q4 O17 C5 F4
+---Black(^)---
+R16 : T -31.30c W -30.96c S  -0.66c ( -1.5 L  -0.8) LCB  -31.79c P  9.22% WF 1051.8 PSV    1038 N     339  --  R16 D16 D3 Q4 O17 C5 F4 D9
+Q16 : T -31.96c W -31.26c S  -0.72c ( -1.5 L  -0.9) LCB  -32.56c P  2.85% WF 910.3 PSV      79 N     304  --  Q16 D16 Q3 D4 O17 R5 O4 R14
+Q15 : T -34.34c W -33.55c S  -0.92c ( -1.7 L  -1.0) LCB  -36.23c P  1.32% WF 178.4 PSV      10 N      59  --  Q15 D16 Q17 Q3 D4 R6 C17 C16
+R17 : T -36.81c W -35.80c S  -1.07c ( -1.9 L  -1.0) LCB  -39.94c P  0.52% WF  65.5 PSV       2 N      22  --  R17 Q4 C4 D17
+R15 : T -37.79c W -36.72c S  -1.11c ( -1.9 L  -1.1) LCB  -41.83c P  0.49% WF  43.3 PSV       1 N      15  --  R15 D16 Q3 D3 Q17
+Q10 : T -45.42c W -43.12c S  -1.75c ( -2.5 L  -1.5) LCB  -73.88c P  0.02% WF   9.1 PSV       0 N       5  --  Q10 Q16 Q3
+K10 : T -44.39c W -42.52c S  -1.87c ( -2.6 L  -1.6) LCB  -72.30c P  0.02% WF   9.2 PSV       0 N       5  --  K10 Q16
+Q11 : T -45.43c W -43.53c S  -1.83c ( -2.6 L  -1.6) LCB  -88.73c P  0.02% WF   8.2 PSV       0 N       4  --  Q11 Q16 Q4
+L10 : T -45.61c W -43.60c S  -1.97c ( -2.7 L  -1.7) LCB  -88.49c P  0.02% WF   7.6 PSV       0 N       4  --  L10 Q16 D4
+R11 : T -45.82c W -43.96c S  -1.82c ( -2.6 L  -1.5) LCB  -88.92c P  0.01% WF   7.0 PSV       0 N       4  --  R11 Q17 Q3
+
+2025-11-16 18:38:28-0500: play R16
+2025-11-16 18:38:28-0500: Controller: kata-set-param maxVisits 2000
+2025-11-16 18:38:28-0500: = 
+2025-11-16 18:38:28-0500: Controller: kata-genmove_analyze b
+2025-11-16 18:38:28-0500: =
