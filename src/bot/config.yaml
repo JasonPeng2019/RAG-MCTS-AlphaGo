@@ -193,7 +193,7 @@ deep_mcts:
   # Trade-off: deeper = better quality but slower
   # Tuned in Phase 2
   # Recommended: 2000-5000 for balance, 10000+ for maximum quality
-  max_visits: 2000
+  max_visits: 300
   
   # Policy convergence threshold
   # Stop early if policy changes by less than this amount
@@ -268,7 +268,7 @@ katago:
   
   # Number of MCTS visits for standard (shallow) search
   # This is used during normal gameplay
-  visits: 800
+  visits: 100
   
   # Maximum time per move (seconds)
   # Set to 0 for no time limit
@@ -301,7 +301,7 @@ katago:
 
 rag_database:
   # Path to RAG database JSON file
-  database_path: "./rag_store/rag_output/rag_database.json"
+  database_path: "selfplay_output"
   
   # ANN index configuration
   ann:
