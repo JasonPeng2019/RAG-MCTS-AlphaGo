@@ -1,0 +1,577 @@
+#!/usr/bin/env python3
+"""
+Phase 1 Uncertainty Tuning - Optimize Cosine Similarity Prediction
+
+This script optimizes w1, w2, and phase function type to predict
+the cosine similarity between shallow and deep search results.
+
+Approach:
+1. Grid search over w1 and different phase functions to find best combination
+2. Linear regression to optimize weights for predicting cosine similarity
+3. Target: Cosine similarity between (shallow_value, shallow_prior) and (deep_value, deep_prior)
+
+Phase functions tested:
+- s (linear)
+- 1/s (inverse)
+- s^2 (quadratic)
+- 1/(s^2) (inverse quadratic)
+- e^(s) (exponential growth)
+- e^(-s) (exponential decay)
+"""
+
+import json
+import numpy as np
+from pathlib import Path
+from typing import List, Dict, Tuple, Optional, Callable
+from dataclasses import dataclass
+from scipy.stats import pearsonr
+from scipy.optimize import minimize
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+from sklearn.model_selection import train_test_split
+
+
+@dataclass
+class PositionData:
+    """Data extracted from a flagged position"""
+    game_id: str
+    query_id: str
+    move_number: int
+    stones_on_board: int
+
+    # Uncertainty metrics
+    E: float  # policy_entropy
+    K: float  # value_variance
+
+    # Shallow search
+    shallow_value: float
+    shallow_prior: float
+
+    # Deep search
+    deep_value: float
+    deep_prior: float
+
+    # Target variable
+    cosine_similarity: float  # Cosine similarity between shallow and deep
+
+
+@dataclass
+class UncertaintyConfig:
+    """Configuration for uncertainty formula"""
+    w1: float  # Weight for policy entropy (E)
+    w2: float  # Weight for value variance (K)
+    phase_function_name: str  # Name of phase function
+
+    def __str__(self):
+        return f"w1={self.w1:.4f}, w2={self.w2:.4f}, phase={self.phase_function_name}"
+
+
+# Define phase functions
+def phase_linear(s: np.ndarray) -> np.ndarray:
+    """Phase = s/361"""
+    return s / 361.0
+
+
+def phase_inverse(s: np.ndarray) -> np.ndarray:
+    """Phase = 1/s (handle s=0 case)"""
+    result = np.ones_like(s, dtype=float)
+    mask = s > 0
+    result[mask] = 1.0 / s[mask]
+    result[~mask] = 10.0  # Large value for s=0
+    return result
+
+
+def phase_quadratic(s: np.ndarray) -> np.ndarray:
+    """Phase = (s/361)^2"""
+    return (s / 361.0) ** 2
+
+
+def phase_inverse_quadratic(s: np.ndarray) -> np.ndarray:
+    """Phase = 1/(s^2) (handle s=0 case)"""
+    result = np.ones_like(s, dtype=float)
+    mask = s > 0
+    result[mask] = 1.0 / (s[mask] ** 2)
+    result[~mask] = 100.0  # Large value for s=0
+    return result
+
+
+def phase_exp_growth(s: np.ndarray) -> np.ndarray:
+    """Phase = e^(s/361) - 1"""
+    return np.exp(s / 361.0) - 1.0
+
+
+def phase_exp_decay(s: np.ndarray) -> np.ndarray:
+    """Phase = e^(-s/361)"""
+    return np.exp(-s / 361.0)
+
+
+# Dictionary of phase functions
+PHASE_FUNCTIONS = {
+    's': phase_linear,
+    '1/s': phase_inverse,
+    's^2': phase_quadratic,
+    '1/(s^2)': phase_inverse_quadratic,
+    'e^(s)': phase_exp_growth,
+    'e^(-s)': phase_exp_decay
+}
+
+
+def cosine_similarity(v1: np.ndarray, v2: np.ndarray) -> float:
+    """
+    Compute cosine similarity between two vectors.
+
+    Args:
+        v1: First vector [value, prior]
+        v2: Second vector [value, prior]
+
+    Returns:
+        Cosine similarity in range [-1, 1]
+    """
+    dot_product = np.dot(v1, v2)
+    norm1 = np.linalg.norm(v1)
+    norm2 = np.linalg.norm(v2)
+
+    if norm1 == 0 or norm2 == 0:
+        return 0.0
+
+    return dot_product / (norm1 * norm2)
+
+
+def load_rag_data(rag_data_dir: Path) -> List[PositionData]:
+    """
+    Load all RAG data from JSON files and compute cosine similarity.
+
+    Returns:
+        List of PositionData objects
+    """
+    all_positions = []
+    json_files = list(rag_data_dir.glob("RAG_rawdata_game_*.json"))
+
+    print(f"Loading data from {len(json_files)} JSON files...")
+
+    for json_file in json_files:
+        try:
+            with open(json_file, 'r') as f:
+                data = json.load(f)
+
+            game_id = data.get("game_id", "")
+            flagged_positions = data.get("flagged_positions", [])
+
+            for flagged_pos in flagged_positions:
+                # Extract uncertainty metrics
+                uncertainty = flagged_pos.get("uncertainty_metrics", {})
+                E = uncertainty.get("policy_entropy")
+                K = uncertainty.get("value_variance")
+
+                if E is None or K is None:
+                    continue
+
+                # Extract shallow search data
+                shallow_best_move = flagged_pos.get("best_move", {}).get("move")
+                shallow_children = flagged_pos.get("children", [])
+
+                shallow_value = None
+                shallow_prior = None
+                for child in shallow_children:
+                    if child.get("move") == shallow_best_move:
+                        shallow_value = child.get("value")
+                        shallow_prior = child.get("prior")
+                        break
+
+                # Extract deep search data
+                deep_result = flagged_pos.get("deep_result", {})
+
+                if not deep_result.get("available") or deep_result.get("status") != "ok":
+                    continue
+
+                deep_best_move = deep_result.get("best_move", {}).get("move")
+                deep_children = deep_result.get("children", [])
+
+                deep_value = None
+                deep_prior = None
+                for child in deep_children:
+                    if child.get("move") == deep_best_move:
+                        deep_value = child.get("value")
+                        deep_prior = child.get("prior")
+                        break
+
+                # Check if we have all required data
+                if (shallow_value is None or shallow_prior is None or
+                    deep_value is None or deep_prior is None):
+                    continue
+
+                # Compute cosine similarity
+                shallow_vec = np.array([shallow_value, shallow_prior])
+                deep_vec = np.array([deep_value, deep_prior])
+                cos_sim = cosine_similarity(shallow_vec, deep_vec)
+
+                # Create position data
+                pos = PositionData(
+                    game_id=game_id,
+                    query_id=flagged_pos.get("query_id", ""),
+                    move_number=flagged_pos.get("move_number", 0),
+                    stones_on_board=flagged_pos.get("stone_count", {}).get("total", 0),
+                    E=E,
+                    K=K,
+                    shallow_value=shallow_value,
+                    shallow_prior=shallow_prior,
+                    deep_value=deep_value,
+                    deep_prior=deep_prior,
+                    cosine_similarity=cos_sim
+                )
+                all_positions.append(pos)
+
+        except Exception as e:
+            print(f"  Error loading {json_file.name}: {e}")
+            continue
+
+    return all_positions
+
+
+def grid_search(positions_train: List[PositionData]) -> Tuple[UncertaintyConfig, float, str]:
+    """
+    Grid search over w1 and different phase functions.
+    Goal: Find parameters where uncertainty correlates with LOW cosine similarity
+    (high uncertainty → shallow and deep disagree more)
+
+    Returns:
+        Best configuration, correlation score, and phase function name
+    """
+    print("\n" + "="*80)
+    print("GRID SEARCH: Testing w1 weights × phase functions")
+    print("="*80)
+
+    # Extract arrays
+    E = np.array([p.E for p in positions_train])
+    K = np.array([p.K for p in positions_train])
+    S = np.array([p.stones_on_board for p in positions_train])
+    cos_sim = np.array([p.cosine_similarity for p in positions_train])
+
+    print(f"\nTraining set: {len(positions_train)} positions")
+    print(f"  E range: [{E.min():.3f}, {E.max():.3f}]")
+    print(f"  K range: [{K.min():.6f}, {K.max():.6f}]")
+    print(f"  Stones range: [{S.min()}, {S.max()}]")
+    print(f"  Cosine similarity range: [{cos_sim.min():.4f}, {cos_sim.max():.4f}]")
+    print(f"  Cosine similarity mean: {cos_sim.mean():.4f}")
+
+    # Define grid
+    w1_values = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 0.99]
+
+    total_configs = len(w1_values) * len(PHASE_FUNCTIONS)
+
+    print(f"\nGrid dimensions:")
+    print(f"  w1 values: {len(w1_values)} → {w1_values}")
+    print(f"  Phase functions: {len(PHASE_FUNCTIONS)} → {list(PHASE_FUNCTIONS.keys())}")
+    print(f"  Total combinations: {total_configs}")
+
+    best_config = None
+    best_score = -float('inf')
+    all_results = []
+
+    # Test each phase function
+    for phase_name, phase_func in PHASE_FUNCTIONS.items():
+        print(f"\n  Testing phase function: {phase_name}")
+
+        # Compute phase values
+        phase = phase_func(S)
+
+        # Test each w1 value
+        for w1 in w1_values:
+            w2 = 1.0 - w1
+            config = UncertaintyConfig(w1=w1, w2=w2, phase_function_name=phase_name)
+
+            # Compute uncertainty scores
+            uncertainty = (w1 * E + w2 * K) * phase
+
+            # High uncertainty should correlate with LOW cosine similarity
+            # So we want negative correlation
+            try:
+                corr, _ = pearsonr(-uncertainty, cos_sim)
+                if np.isnan(corr):
+                    corr = 0.0
+            except:
+                corr = 0.0
+
+            all_results.append({
+                'config': config,
+                'correlation': corr,
+                'phase_name': phase_name
+            })
+
+            if corr > best_score:
+                best_score = corr
+                best_config = config
+
+    # Sort by correlation
+    all_results.sort(key=lambda x: x['correlation'], reverse=True)
+
+    # Print top 15
+    print(f"\n" + "-"*80)
+    print("TOP 15 CONFIGURATIONS (across all phase functions):")
+    print("-"*80)
+    for i, result in enumerate(all_results[:15]):
+        cfg = result['config']
+        print(f"  {i+1:2d}. w1={cfg.w1:.4f}, w2={cfg.w2:.4f}, phase={cfg.phase_function_name:<10s} → corr={result['correlation']:.4f}")
+
+    # Show best for each phase function
+    print(f"\n" + "-"*80)
+    print("BEST CONFIGURATION PER PHASE FUNCTION:")
+    print("-"*80)
+    for phase_name in PHASE_FUNCTIONS.keys():
+        phase_results = [r for r in all_results if r['phase_name'] == phase_name]
+        if phase_results:
+            best_for_phase = phase_results[0]
+            cfg = best_for_phase['config']
+            print(f"  {phase_name:<10s}: w1={cfg.w1:.4f}, w2={cfg.w2:.4f} → corr={best_for_phase['correlation']:.4f}")
+
+    print(f"\n" + "="*80)
+    print(f"✓ OVERALL BEST CONFIG: {best_config}")
+    print(f"  Correlation: {best_score:.4f}")
+    print("="*80)
+
+    return best_config, best_score, best_config.phase_function_name
+
+
+def linear_regression_optimization(
+    positions_train: List[PositionData],
+    phase_function_name: str,
+    initial_w1: float = 0.5
+) -> Tuple[UncertaintyConfig, LinearRegression, Dict]:
+    """
+    Optimize weights using linear regression with a fixed phase function.
+
+    The model predicts cosine similarity from uncertainty features.
+    We use the best phase function from grid search and learn optimal w1, w2 weights.
+
+    Returns:
+        Tuple of (optimized config, trained model, evaluation metrics)
+    """
+    print("\n" + "="*80)
+    print("LINEAR REGRESSION OPTIMIZATION")
+    print("="*80)
+
+    # Extract arrays
+    E = np.array([p.E for p in positions_train])
+    K = np.array([p.K for p in positions_train])
+    S = np.array([p.stones_on_board for p in positions_train])
+    cos_sim = np.array([p.cosine_similarity for p in positions_train])
+
+    print(f"\nTraining on {len(positions_train)} positions")
+    print(f"  Target: Cosine similarity (mean={cos_sim.mean():.4f}, std={cos_sim.std():.4f})")
+    print(f"  Using phase function: {phase_function_name}")
+
+    # Get phase function
+    phase_func = PHASE_FUNCTIONS[phase_function_name]
+    phase = phase_func(S)
+
+    print(f"\nPhase multiplier statistics:")
+    print(f"  Mean:  {phase.mean():.4f}")
+    print(f"  Std:   {phase.std():.4f}")
+    print(f"  Min:   {phase.min():.4f}")
+    print(f"  Max:   {phase.max():.4f}")
+
+    # Show phase values at different game stages
+    print(f"\nPhase multiplier at different game stages:")
+    for stones in [0, 1, 50, 100, 150, 200, 300, 361]:
+        phase_val = phase_func(np.array([stones]))[0]
+        print(f"  Stones={stones:3d}: phase={phase_val:.4f}")
+
+    # Train linear regression with interaction features
+    X_final = np.column_stack([
+        E * phase,  # Policy entropy weighted by phase
+        K * phase   # Value variance weighted by phase
+    ])
+
+    final_model = LinearRegression(fit_intercept=True)
+    final_model.fit(X_final, cos_sim)
+
+    # Extract learned weights
+    w1_raw = final_model.coef_[0]
+    w2_raw = final_model.coef_[1]
+
+    # Normalize weights to sum to 1 (keeping signs)
+    total_weight = abs(w1_raw) + abs(w2_raw)
+    w1_normalized = abs(w1_raw) / total_weight
+    w2_normalized = abs(w2_raw) / total_weight
+
+    print(f"\n" + "-"*80)
+    print("OPTIMIZED WEIGHTS (from Linear Regression):")
+    print("-"*80)
+    print(f"  Raw coefficients:")
+    print(f"    w1 (policy entropy): {w1_raw:>10.6f}")
+    print(f"    w2 (value variance): {w2_raw:>10.6f}")
+    print(f"    Intercept:           {final_model.intercept_:>10.6f}")
+    print(f"\n  Normalized weights (w1 + w2 = 1):")
+    print(f"    w1 (policy entropy): {w1_normalized:>10.6f}  ({w1_normalized*100:>6.2f}%)")
+    print(f"    w2 (value variance): {w2_normalized:>10.6f}  ({w2_normalized*100:>6.2f}%)")
+
+    # Create final config
+    final_config = UncertaintyConfig(
+        w1=w1_normalized,
+        w2=w2_normalized,
+        phase_function_name=phase_function_name
+    )
+
+    # Evaluate on training set
+    y_pred = final_model.predict(X_final)
+
+    metrics = {
+        'r2': r2_score(cos_sim, y_pred),
+        'mse': mean_squared_error(cos_sim, y_pred),
+        'mae': mean_absolute_error(cos_sim, y_pred),
+        'correlation': pearsonr(cos_sim, y_pred)[0]
+    }
+
+    print(f"\n" + "-"*80)
+    print("TRAINING SET PERFORMANCE:")
+    print("-"*80)
+    print(f"  R² Score:        {metrics['r2']:>10.4f}")
+    print(f"  MSE:             {metrics['mse']:>10.6f}")
+    print(f"  MAE:             {metrics['mae']:>10.6f}")
+    print(f"  Correlation:     {metrics['correlation']:>10.4f}")
+
+    return final_config, final_model, metrics
+
+
+def evaluate_model(
+    model: LinearRegression,
+    config: UncertaintyConfig,
+    positions_test: List[PositionData]
+) -> Dict:
+    """
+    Evaluate model on test set.
+
+    Returns:
+        Dictionary of evaluation metrics
+    """
+    print("\n" + "="*80)
+    print("TEST SET EVALUATION")
+    print("="*80)
+
+    # Extract arrays
+    E = np.array([p.E for p in positions_test])
+    K = np.array([p.K for p in positions_test])
+    S = np.array([p.stones_on_board for p in positions_test])
+    cos_sim = np.array([p.cosine_similarity for p in positions_test])
+
+    # Compute phase
+    phase_func = PHASE_FUNCTIONS[config.phase_function_name]
+    phase = phase_func(S)
+
+    # Create features
+    X = np.column_stack([
+        E * phase,
+        K * phase
+    ])
+
+    # Predictions
+    y_pred = model.predict(X)
+
+    # Metrics
+    metrics = {
+        'r2': r2_score(cos_sim, y_pred),
+        'mse': mean_squared_error(cos_sim, y_pred),
+        'mae': mean_absolute_error(cos_sim, y_pred),
+        'correlation': pearsonr(cos_sim, y_pred)[0]
+    }
+
+    print(f"\nTest set: {len(positions_test)} positions")
+    print(f"  Cosine similarity: mean={cos_sim.mean():.4f}, std={cos_sim.std():.4f}")
+
+    print(f"\n" + "-"*80)
+    print("PERFORMANCE METRICS:")
+    print("-"*80)
+    print(f"  R² Score:        {metrics['r2']:>10.4f}")
+    print(f"  MSE:             {metrics['mse']:>10.6f}")
+    print(f"  MAE:             {metrics['mae']:>10.6f}")
+    print(f"  Correlation:     {metrics['correlation']:>10.4f}")
+
+    # Show some example predictions
+    print(f"\n" + "-"*80)
+    print("SAMPLE PREDICTIONS:")
+    print("-"*80)
+    print(f"{'Actual':<10} {'Predicted':<10} {'Error':<10} {'E':<8} {'K':<10} {'Stones':<8}")
+    print("-"*80)
+
+    for i in range(min(10, len(positions_test))):
+        actual = cos_sim[i]
+        predicted = y_pred[i]
+        error = abs(actual - predicted)
+        print(f"{actual:<10.4f} {predicted:<10.4f} {error:<10.4f} {E[i]:<8.3f} {K[i]:<10.6f} {S[i]:<8}")
+
+    return metrics
+
+
+def main():
+    """Main execution"""
+    print("="*80)
+    print("PHASE 1: OPTIMIZE COSINE SIMILARITY PREDICTION")
+    print("="*80)
+
+    # Load data
+    rag_data_dir = Path("/scratch2/f004h1v/alphago_project/selfplay_output/gpu1/rag_data")
+
+    if not rag_data_dir.exists():
+        print(f"✗ Directory not found: {rag_data_dir}")
+        return
+
+    print(f"\nLoading data from: {rag_data_dir}")
+    positions = load_rag_data(rag_data_dir)
+
+    if not positions:
+        print("✗ No data loaded!")
+        return
+
+    print(f"\n✓ Loaded {len(positions)} positions")
+
+    # Split into train/test
+    positions_train, positions_test = train_test_split(
+        positions,
+        test_size=0.2,
+        random_state=42
+    )
+
+    print(f"  Training set: {len(positions_train)} positions")
+    print(f"  Test set:     {len(positions_test)} positions")
+
+    # Step 1: Grid search to find best phase function and initial w1
+    best_grid_config, grid_score, best_phase_name = grid_search(positions_train)
+
+    # Step 2: Linear regression optimization with best phase function
+    final_config, final_model, train_metrics = linear_regression_optimization(
+        positions_train,
+        phase_function_name=best_phase_name,
+        initial_w1=best_grid_config.w1
+    )
+
+    # Step 3: Evaluate on test set
+    test_metrics = evaluate_model(final_model, final_config, positions_test)
+
+    # Final summary
+    print("\n" + "="*80)
+    print("FINAL OPTIMIZED CONFIGURATION")
+    print("="*80)
+
+    print(f"\nWeights:")
+    print(f"  w1 (policy entropy): {final_config.w1:.6f}  ({final_config.w1*100:.2f}%)")
+    print(f"  w2 (value variance): {final_config.w2:.6f}  ({final_config.w2*100:.2f}%)")
+
+    print(f"\nPhase function:")
+    print(f"  Type: {final_config.phase_function_name}")
+
+    print(f"\nUncertainty Formula:")
+    print(f"  uncertainty = ({final_config.w1:.4f} × E + {final_config.w2:.4f} × K) × phase_{final_config.phase_function_name}(s)")
+
+    print(f"\nPerformance Summary:")
+    print(f"  Training R²:         {train_metrics['r2']:.4f}")
+    print(f"  Test R²:             {test_metrics['r2']:.4f}")
+    print(f"  Training MAE:        {train_metrics['mae']:.6f}")
+    print(f"  Test MAE:            {test_metrics['mae']:.6f}")
+
+    print("\n" + "="*80)
+    print("✓ Optimization complete!")
+    print("="*80)
+
+
+if __name__ == "__main__":
+    main()
