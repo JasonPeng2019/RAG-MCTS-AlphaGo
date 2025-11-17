@@ -13,13 +13,14 @@ echo "  Games:   10"
 echo "  Max moves: 100"
 echo ""
 
-cd "/scratch2/f004ndc/AlphaGo Project/RAG-MCTS-AlphaGo"
-source /scratch2/f004ndc/AlphaGo\ Project/Go_env/bin/activate
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$SCRIPT_DIR"
+source "$SCRIPT_DIR/extra_files/Go_env/bin/activate"
 
 python3 run_datago_recursive_match.py \
-    --katago-executable "/scratch2/f004ndc/AlphaGo Project/KataGo/cpp/katago" \
-    --katago-model "/scratch2/f004ndc/AlphaGo Project/KataGo/models/g170e-b10c128-s1141046784-d204142634.bin.gz" \
-    --katago-config "/scratch2/f004ndc/AlphaGo Project/KataGo/configs/gtp_800visits.cfg" \
+    --katago-executable "$SCRIPT_DIR/../katago_repo/KataGo/cpp/build-eigen/katago" \
+    --katago-model "$SCRIPT_DIR/../katago_repo/run/default_model.bin.gz" \
+    --katago-config "$SCRIPT_DIR/../katago_repo/run/default_gtp.cfg" \
     --config "src/bot/config.yaml" \
     --games 10 \
     --max-moves 100 \

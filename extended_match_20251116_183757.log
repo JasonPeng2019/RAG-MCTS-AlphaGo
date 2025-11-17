@@ -1,0 +1,23 @@
+2025-11-16 18:37:58,095 - INFO - ======================================================================
+2025-11-16 18:37:58,095 - INFO - DataGo Bot vs KataGo Match (Recursive Deep Search + RAG)
+2025-11-16 18:37:58,095 - INFO - ======================================================================
+2025-11-16 18:37:58,095 - INFO - Games: 10, Max moves per game: 100
+2025-11-16 18:37:58,095 - INFO - Deep search threshold: 0.2
+2025-11-16 18:37:58,095 - INFO - Max recursion depth: 3
+2025-11-16 18:37:58,095 - INFO - Deep MCTS visits: 2000
+2025-11-16 18:37:58,095 - INFO - 
+2025-11-16 18:37:58,095 - INFO - Starting KataGo GTP on GPU 7...
+2025-11-16 18:37:58,095 - INFO - Starting GTP engine: /scratch2/f003x5w/RAGFlow-Datago/datago/../katago_repo/KataGo/cpp/build-eigen/katago gtp -model /scratch2/f003x5w/RAGFlow-Datago/datago/../katago_repo/run/default_model.bin.gz -config /scratch2/f003x5w/RAGFlow-Datago/datago/../katago_repo/run/default_gtp.cfg
+2025-11-16 18:37:58,096 - INFO - Initializing RAG database with multi-context support...
+2025-11-16 18:37:58,096 - INFO - Recursion depth: 3
+2025-11-16 18:37:58,096 - INFO - Deep search threshold: 0.150
+2025-11-16 18:37:58,096 - INFO - Deep search visits: 2000, Standard visits: 800
+2025-11-16 18:37:58,096 - INFO - 
+======================================================================
+2025-11-16 18:37:58,096 - INFO - Game 1/10
+2025-11-16 18:37:58,096 - INFO - ======================================================================
+
+2025-11-16 18:38:03,512 - INFO - Move 1: DataGo (Black) thinking...
+2025-11-16 18:38:28,111 - INFO -   → Complex position detected (unc=0.196)
+2025-11-16 18:38:28,112 - INFO -   → No match found: fe8837bac731, running deep search
+2025-11-16 18:38:28,113 - INFO -   → Deep search (depth=0, unc=0.196)
