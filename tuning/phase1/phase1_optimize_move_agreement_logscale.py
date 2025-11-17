@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
 """
-Phase 1 Uncertainty Tuning - Optimize Cosine Similarity Prediction
+Phase 1 Uncertainty Tuning - Optimize Cosine Similarity Prediction (LOG-SCALED VERSION)
 
 This script optimizes w1, w2, and phase function type to predict
 the cosine similarity between shallow and deep search results.
 
+LOG-SCALING APPROACH:
+- Transforms cosine similarity using log(1 + cos_sim + 1) to reduce influence of outliers
+- This gives more even distribution across the y-axis
+- Predictions are transformed back to original scale for evaluation
+
 Approach:
 1. Grid search over w1 and different phase functions to find best combination
-2. Linear regression to optimize weights for predicting cosine similarity
+2. Linear regression to optimize weights for predicting LOG-SCALED cosine similarity
 3. Target: Cosine similarity between (shallow_value, shallow_prior) and (deep_value, deep_prior)
 
 Phase functions tested:
@@ -111,13 +116,48 @@ def phase_exp_decay(s: np.ndarray) -> np.ndarray:
 
 # Dictionary of phase functions
 PHASE_FUNCTIONS = {
-    #'s': phase_linear,
+    's': phase_linear,
     '1/s': phase_inverse,
-    #'s^2': phase_quadratic,
-    #'1/(s^2)': phase_inverse_quadratic,
-    #'e^(s)': phase_exp_growth,
-    #'e^(-s)': phase_exp_decay
+    's^2': phase_quadratic,
+    '1/(s^2)': phase_inverse_quadratic,
+    'e^(s)': phase_exp_growth,
+    'e^(-s)': phase_exp_decay
 }
+
+
+def log_transform_cosine(cos_sim: np.ndarray) -> np.ndarray:
+    """
+    Transform cosine similarity to log scale to reduce influence of outliers.
+
+    Since cosine similarity can be in [-1, 1], we shift it to [0, 2] first,
+    then apply log(1 + x) transformation.
+
+    Args:
+        cos_sim: Cosine similarity values in range [-1, 1]
+
+    Returns:
+        Log-transformed values
+    """
+    # Shift to [0, 2] range
+    shifted = cos_sim + 1.0
+    # Apply log transformation: log(1 + x)
+    return np.log1p(shifted)
+
+
+def inverse_log_transform_cosine(log_cos_sim: np.ndarray) -> np.ndarray:
+    """
+    Inverse transform from log scale back to original cosine similarity scale.
+
+    Args:
+        log_cos_sim: Log-transformed cosine similarity values
+
+    Returns:
+        Original cosine similarity values in range [-1, 1]
+    """
+    # Inverse of log(1 + x) is exp(y) - 1
+    shifted = np.expm1(log_cos_sim)
+    # Shift back to [-1, 1] range
+    return shifted - 1.0
 
 
 def cosine_similarity(v1: np.ndarray, v2: np.ndarray) -> float:
@@ -257,12 +297,17 @@ def grid_search(positions_train: List[PositionData]) -> Tuple[UncertaintyConfig,
     S = np.array([p.stones_on_board for p in positions_train])
     cos_sim = np.array([p.cosine_similarity for p in positions_train])
 
+    # Apply log transformation to cosine similarity
+    log_cos_sim = log_transform_cosine(cos_sim)
+
     print(f"\nTraining set: {len(positions_train)} positions")
     print(f"  E range: [{E.min():.3f}, {E.max():.3f}]")
     print(f"  K range: [{K.min():.6f}, {K.max():.6f}]")
     print(f"  Stones range: [{S.min()}, {S.max()}]")
     print(f"  Cosine similarity range: [{cos_sim.min():.4f}, {cos_sim.max():.4f}]")
     print(f"  Cosine similarity mean: {cos_sim.mean():.4f}")
+    print(f"  LOG-TRANSFORMED cos_sim range: [{log_cos_sim.min():.4f}, {log_cos_sim.max():.4f}]")
+    print(f"  LOG-TRANSFORMED cos_sim mean: {log_cos_sim.mean():.4f}")
 
     # Define grid
     w1_values = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 0.99]
@@ -293,10 +338,10 @@ def grid_search(positions_train: List[PositionData]) -> Tuple[UncertaintyConfig,
             # Compute uncertainty scores
             uncertainty = (w1 * E + w2 * K) * phase
 
-            # High uncertainty should correlate with LOW cosine similarity
+            # High uncertainty should correlate with LOW cosine similarity (or LOW log-cosine)
             # So we want negative correlation
             try:
-                corr, _ = pearsonr(-uncertainty, cos_sim)
+                corr, _ = pearsonr(-uncertainty, log_cos_sim)
                 if np.isnan(corr):
                     corr = 0.0
             except:
@@ -367,8 +412,12 @@ def linear_regression_optimization(
     S = np.array([p.stones_on_board for p in positions_train])
     cos_sim = np.array([p.cosine_similarity for p in positions_train])
 
+    # Apply log transformation to target variable
+    log_cos_sim = log_transform_cosine(cos_sim)
+
     print(f"\nTraining on {len(positions_train)} positions")
     print(f"  Target: Cosine similarity (mean={cos_sim.mean():.4f}, std={cos_sim.std():.4f})")
+    print(f"  LOG-TRANSFORMED target (mean={log_cos_sim.mean():.4f}, std={log_cos_sim.std():.4f})")
     print(f"  ✓ Using phase function: {phase_function_name}")
 
     # Get phase function
@@ -394,7 +443,8 @@ def linear_regression_optimization(
     ])
 
     final_model = LinearRegression(fit_intercept=True)
-    final_model.fit(X_final, cos_sim)
+    # Train on LOG-TRANSFORMED target
+    final_model.fit(X_final, log_cos_sim)
 
     # Extract learned weights
     w1_raw = final_model.coef_[0]
@@ -424,7 +474,9 @@ def linear_regression_optimization(
     )
 
     # Evaluate on training set
-    y_pred = final_model.predict(X_final)
+    y_pred_log = final_model.predict(X_final)
+    # Transform back to original scale for evaluation
+    y_pred = inverse_log_transform_cosine(y_pred_log)
 
     metrics = {
         'r2': r2_score(cos_sim, y_pred),
@@ -434,7 +486,7 @@ def linear_regression_optimization(
     }
 
     print(f"\n" + "-"*80)
-    print("TRAINING SET PERFORMANCE (Regression):")
+    print("TRAINING SET PERFORMANCE (Regression - on original scale):")
     print("-"*80)
     print(f"  R² Score:        {metrics['r2']:>10.4f}")
     print(f"  MSE:             {metrics['mse']:>10.6f}")
@@ -493,7 +545,7 @@ def find_optimal_threshold(
             best_threshold = threshold
             best_accuracy = accuracy
 
-    return .996, best_accuracy
+    return .9665, best_accuracy
 
 
 def evaluate_model(
@@ -537,9 +589,11 @@ def evaluate_model(
     ])
 
     # Predictions (cosine similarity)
-    y_pred_cosine = model.predict(X)
+    # Model predicts log-transformed values, so transform back
+    y_pred_log = model.predict(X)
+    y_pred_cosine = inverse_log_transform_cosine(y_pred_log)
 
-    # Regression metrics
+    # Regression metrics (on original scale)
     metrics = {
         'r2': r2_score(cos_sim, y_pred_cosine),
         'mse': mean_squared_error(cos_sim, y_pred_cosine),
@@ -634,6 +688,7 @@ def evaluate_model(
 def plot_correlations(positions: List[PositionData], output_dir: Path = Path(".")):
     """
     Create scatter plots of E vs cosine similarity, K vs cosine similarity, and stone count vs cosine similarity.
+    Plots both original scale and log-transformed scale.
 
     Args:
         positions: List of position data
@@ -648,66 +703,94 @@ def plot_correlations(positions: List[PositionData], output_dir: Path = Path("."
     K = np.array([p.K for p in positions])
     S = np.array([p.stones_on_board for p in positions])
     cos_sim = np.array([p.cosine_similarity for p in positions])
+    log_cos_sim = log_transform_cosine(cos_sim)
 
-    # Compute correlations
+    # Compute correlations for original scale
     corr_E, p_value_E = pearsonr(E, cos_sim)
     corr_K, p_value_K = pearsonr(K, cos_sim)
     corr_S, p_value_S = pearsonr(S, cos_sim)
 
-    print(f"\nCorrelations with cosine similarity:")
+    # Compute correlations for log scale
+    corr_E_log, p_value_E_log = pearsonr(E, log_cos_sim)
+    corr_K_log, p_value_K_log = pearsonr(K, log_cos_sim)
+    corr_S_log, p_value_S_log = pearsonr(S, log_cos_sim)
+
+    print(f"\nCorrelations with cosine similarity (ORIGINAL SCALE):")
     print(f"  E (policy entropy):  r={corr_E:>8.4f}, p={p_value_E:.6f}")
     print(f"  K (value variance):  r={corr_K:>8.4f}, p={p_value_K:.6f}")
     print(f"  S (stone count):     r={corr_S:>8.4f}, p={p_value_S:.6f}")
 
-    # Create figure with three subplots
-    fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(18, 5))
+    print(f"\nCorrelations with cosine similarity (LOG-TRANSFORMED SCALE):")
+    print(f"  E (policy entropy):  r={corr_E_log:>8.4f}, p={p_value_E_log:.6f}")
+    print(f"  K (value variance):  r={corr_K_log:>8.4f}, p={p_value_K_log:.6f}")
+    print(f"  S (stone count):     r={corr_S_log:>8.4f}, p={p_value_S_log:.6f}")
 
-    # Plot E vs cosine similarity
-    ax1.scatter(E, cos_sim, alpha=0.5, s=10)
-    ax1.set_xlabel('Policy Entropy (E)', fontsize=12)
-    ax1.set_ylabel('Cosine Similarity', fontsize=12)
-    ax1.set_title(f'E vs Cosine Similarity\n(r={corr_E:.4f}, p={p_value_E:.6f})', fontsize=14)
-    ax1.grid(True, alpha=0.3)
+    # Create figure with two rows and three columns
+    fig, axes = plt.subplots(2, 3, figsize=(18, 10))
 
-    # Add trend line for E
+    # Row 1: Original scale
+    # E vs cosine similarity (original)
+    axes[0, 0].scatter(E, cos_sim, alpha=0.5, s=10)
+    axes[0, 0].set_xlabel('Policy Entropy (E)', fontsize=12)
+    axes[0, 0].set_ylabel('Cosine Similarity', fontsize=12)
+    axes[0, 0].set_title(f'E vs Cosine Similarity (Original)\n(r={corr_E:.4f})', fontsize=12)
+    axes[0, 0].grid(True, alpha=0.3)
     z_E = np.polyfit(E, cos_sim, 1)
-    p_E = np.poly1d(z_E)
     E_sorted = np.sort(E)
-    ax1.plot(E_sorted, p_E(E_sorted), "r--", linewidth=2, label=f'y={z_E[0]:.4f}x+{z_E[1]:.4f}')
-    ax1.legend()
+    axes[0, 0].plot(E_sorted, np.polyval(z_E, E_sorted), "r--", linewidth=2)
 
-    # Plot K vs cosine similarity
-    ax2.scatter(K, cos_sim, alpha=0.5, s=10, color='orange')
-    ax2.set_xlabel('Value Variance (K)', fontsize=12)
-    ax2.set_ylabel('Cosine Similarity', fontsize=12)
-    ax2.set_title(f'K vs Cosine Similarity\n(r={corr_K:.4f}, p={p_value_K:.6f})', fontsize=14)
-    ax2.grid(True, alpha=0.3)
-
-    # Add trend line for K
+    # K vs cosine similarity (original)
+    axes[0, 1].scatter(K, cos_sim, alpha=0.5, s=10, color='orange')
+    axes[0, 1].set_xlabel('Value Variance (K)', fontsize=12)
+    axes[0, 1].set_ylabel('Cosine Similarity', fontsize=12)
+    axes[0, 1].set_title(f'K vs Cosine Similarity (Original)\n(r={corr_K:.4f})', fontsize=12)
+    axes[0, 1].grid(True, alpha=0.3)
     z_K = np.polyfit(K, cos_sim, 1)
-    p_K = np.poly1d(z_K)
     K_sorted = np.sort(K)
-    ax2.plot(K_sorted, p_K(K_sorted), "r--", linewidth=2, label=f'y={z_K[0]:.4f}x+{z_K[1]:.4f}')
-    ax2.legend()
+    axes[0, 1].plot(K_sorted, np.polyval(z_K, K_sorted), "r--", linewidth=2)
 
-    # Plot S vs cosine similarity
-    ax3.scatter(S, cos_sim, alpha=0.5, s=10, color='green')
-    ax3.set_xlabel('Stone Count (S)', fontsize=12)
-    ax3.set_ylabel('Cosine Similarity', fontsize=12)
-    ax3.set_title(f'Stone Count vs Cosine Similarity\n(r={corr_S:.4f}, p={p_value_S:.6f})', fontsize=14)
-    ax3.grid(True, alpha=0.3)
-
-    # Add trend line for S
+    # S vs cosine similarity (original)
+    axes[0, 2].scatter(S, cos_sim, alpha=0.5, s=10, color='green')
+    axes[0, 2].set_xlabel('Stone Count (S)', fontsize=12)
+    axes[0, 2].set_ylabel('Cosine Similarity', fontsize=12)
+    axes[0, 2].set_title(f'S vs Cosine Similarity (Original)\n(r={corr_S:.4f})', fontsize=12)
+    axes[0, 2].grid(True, alpha=0.3)
     z_S = np.polyfit(S, cos_sim, 1)
-    p_S = np.poly1d(z_S)
     S_sorted = np.sort(S)
-    ax3.plot(S_sorted, p_S(S_sorted), "r--", linewidth=2, label=f'y={z_S[0]:.4f}x+{z_S[1]:.4f}')
-    ax3.legend()
+    axes[0, 2].plot(S_sorted, np.polyval(z_S, S_sorted), "r--", linewidth=2)
+
+    # Row 2: Log-transformed scale
+    # E vs log cosine similarity
+    axes[1, 0].scatter(E, log_cos_sim, alpha=0.5, s=10)
+    axes[1, 0].set_xlabel('Policy Entropy (E)', fontsize=12)
+    axes[1, 0].set_ylabel('Log(Cosine Similarity)', fontsize=12)
+    axes[1, 0].set_title(f'E vs Log(Cosine Similarity)\n(r={corr_E_log:.4f})', fontsize=12)
+    axes[1, 0].grid(True, alpha=0.3)
+    z_E_log = np.polyfit(E, log_cos_sim, 1)
+    axes[1, 0].plot(E_sorted, np.polyval(z_E_log, E_sorted), "r--", linewidth=2)
+
+    # K vs log cosine similarity
+    axes[1, 1].scatter(K, log_cos_sim, alpha=0.5, s=10, color='orange')
+    axes[1, 1].set_xlabel('Value Variance (K)', fontsize=12)
+    axes[1, 1].set_ylabel('Log(Cosine Similarity)', fontsize=12)
+    axes[1, 1].set_title(f'K vs Log(Cosine Similarity)\n(r={corr_K_log:.4f})', fontsize=12)
+    axes[1, 1].grid(True, alpha=0.3)
+    z_K_log = np.polyfit(K, log_cos_sim, 1)
+    axes[1, 1].plot(K_sorted, np.polyval(z_K_log, K_sorted), "r--", linewidth=2)
+
+    # S vs log cosine similarity
+    axes[1, 2].scatter(S, log_cos_sim, alpha=0.5, s=10, color='green')
+    axes[1, 2].set_xlabel('Stone Count (S)', fontsize=12)
+    axes[1, 2].set_ylabel('Log(Cosine Similarity)', fontsize=12)
+    axes[1, 2].set_title(f'S vs Log(Cosine Similarity)\n(r={corr_S_log:.4f})', fontsize=12)
+    axes[1, 2].grid(True, alpha=0.3)
+    z_S_log = np.polyfit(S, log_cos_sim, 1)
+    axes[1, 2].plot(S_sorted, np.polyval(z_S_log, S_sorted), "r--", linewidth=2)
 
     plt.tight_layout()
 
     # Save plot
-    output_path = output_dir / "correlation_plots.png"
+    output_path = output_dir / "correlation_plots_logscale.png"
     plt.savefig(output_path, dpi=150, bbox_inches='tight')
     print(f"\n✓ Plots saved to: {output_path}")
 
@@ -778,47 +861,10 @@ def main():
         return
 
     print(f"\n✓ Total test positions loaded: {len(positions_test)}")
-
-    # Balance the training set by undersampling the agree class
-    print("\n" + "="*80)
-    print("BALANCING TRAINING SET")
-    print("="*80)
-
-    # Separate agree and disagree cases
-    positions_agree = [p for p in positions_train if p.move_agreement == 1]
-    positions_disagree = [p for p in positions_train if p.move_agreement == 0]
-
-    print(f"\nBefore balancing:")
-    print(f"  Agree cases:    {len(positions_agree)} ({100*len(positions_agree)/len(positions_train):.1f}%)")
-    print(f"  Disagree cases: {len(positions_disagree)} ({100*len(positions_disagree)/len(positions_train):.1f}%)")
-    print(f"  Total:          {len(positions_train)}")
-
-    # Undersample the majority class (agree) to match minority class (disagree)
-    num_disagree = len(positions_disagree)
-
-    if len(positions_agree) > num_disagree:
-        # Randomly sample from agree cases
-        import random
-        random.seed(42)  # For reproducibility
-        positions_agree_sampled = random.sample(positions_agree, num_disagree)
-
-        # Combine balanced dataset
-        positions_train = positions_agree_sampled + positions_disagree
-
-        # Shuffle the combined list
-        random.shuffle(positions_train)
-
-        print(f"\nAfter balancing (undersampling agree cases):")
-        print(f"  Agree cases:    {len(positions_agree_sampled)} ({100*len(positions_agree_sampled)/len(positions_train):.1f}%)")
-        print(f"  Disagree cases: {len(positions_disagree)} ({100*len(positions_disagree)/len(positions_train):.1f}%)")
-        print(f"  Total:          {len(positions_train)}")
-    else:
-        print(f"\n⚠ No balancing needed - disagree cases are already more common or equal")
-
     print(f"\n" + "="*80)
     print(f"DATASET SUMMARY:")
-    print(f"  Training set: {len(positions_train)} positions (balanced)")
-    print(f"  Test set:     {len(positions_test)} positions (unbalanced)")
+    print(f"  Training set: {len(positions_train)} positions")
+    print(f"  Test set:     {len(positions_test)} positions")
     print("="*80)
 
     # Create correlation plots

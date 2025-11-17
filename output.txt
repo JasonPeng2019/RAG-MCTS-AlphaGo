@@ -1,0 +1,261 @@
+================================================================================
+PHASE 1: OPTIMIZE COSINE SIMILARITY PREDICTION
+================================================================================
+
+================================================================================
+LOADING TRAINING DATA
+================================================================================
+
+Loading from: ../../selfplay_output/gpu1/rag_data
+Loading data from 16 JSON files...
+  ✓ Loaded 317 positions from this directory
+
+Loading from: ../../selfplay_output/gpu1/rag_data_o
+Loading data from 44 JSON files...
+  ✓ Loaded 1891 positions from this directory
+
+Loading from: ../../selfplay_output/gpu2/rag_data
+Loading data from 10 JSON files...
+  ✓ Loaded 222 positions from this directory
+
+Loading from: ../../selfplay_output/gpu2/rag_data_o
+Loading data from 35 JSON files...
+  ✓ Loaded 1261 positions from this directory
+
+Loading from: ../../selfplay_output/gpu3/rag_data
+Loading data from 8 JSON files...
+  ✓ Loaded 162 positions from this directory
+
+Loading from: ../../selfplay_output/gpu3/rag_data_o
+Loading data from 43 JSON files...
+  ✓ Loaded 1755 positions from this directory
+
+✓ Total training positions loaded: 5608
+
+================================================================================
+LOADING TEST DATA
+================================================================================
+
+Loading from: ../../selfplay_output/gpu5/rag_data
+Loading data from 7 JSON files...
+  ✓ Loaded 118 positions from this directory
+
+Loading from: ../../selfplay_output/gpu5/rag_data_o
+Loading data from 41 JSON files...
+  ✓ Loaded 1519 positions from this directory
+
+✓ Total test positions loaded: 1637
+
+================================================================================
+BALANCING TRAINING SET
+================================================================================
+
+Before balancing:
+  Agree cases:    4599 (82.0%)
+  Disagree cases: 1009 (18.0%)
+  Total:          5608
+
+After balancing (undersampling agree cases):
+  Agree cases:    1009 (50.0%)
+  Disagree cases: 1009 (50.0%)
+  Total:          2018
+
+================================================================================
+DATASET SUMMARY:
+  Training set: 2018 positions (balanced)
+  Test set:     1637 positions (unbalanced)
+================================================================================
+
+================================================================================
+GRID SEARCH: Testing w1 weights × phase functions
+================================================================================
+
+Training set: 2018 positions
+  E range: [0.020, 4.050]
+  K range: [0.000000, 0.976958]
+  Stones range: [0, 237]
+  Cosine similarity range: [-0.8674, 1.0000]
+  Cosine similarity mean: 0.9453
+
+Grid dimensions:
+  w1 values: 11 → [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 0.99]
+  Phase functions: 1 → ['1/s']
+  Total combinations: 11
+
+  → Testing phase function: 1/s
+
+--------------------------------------------------------------------------------
+TOP 15 CONFIGURATIONS (across all phase functions):
+--------------------------------------------------------------------------------
+   1. w1=0.9900, w2=0.0100, phase=1/s        → corr=-0.0386
+   2. w1=0.9500, w2=0.0500, phase=1/s        → corr=-0.0386
+   3. w1=0.9000, w2=0.1000, phase=1/s        → corr=-0.0386
+   4. w1=0.8000, w2=0.2000, phase=1/s        → corr=-0.0386
+   5. w1=0.7000, w2=0.3000, phase=1/s        → corr=-0.0386
+   6. w1=0.6000, w2=0.4000, phase=1/s        → corr=-0.0386
+   7. w1=0.5000, w2=0.5000, phase=1/s        → corr=-0.0386
+   8. w1=0.4000, w2=0.6000, phase=1/s        → corr=-0.0386
+   9. w1=0.3000, w2=0.7000, phase=1/s        → corr=-0.0386
+  10. w1=0.2000, w2=0.8000, phase=1/s        → corr=-0.0386
+  11. w1=0.1000, w2=0.9000, phase=1/s        → corr=-0.0387
+
+--------------------------------------------------------------------------------
+BEST CONFIGURATION PER PHASE FUNCTION:
+--------------------------------------------------------------------------------
+  1/s       : w1=0.9900, w2=0.0100 → corr=-0.0386
+
+================================================================================
+✓ OVERALL BEST CONFIG FROM GRID SEARCH: w1=0.9900, w2=0.0100, phase=1/s
+  Correlation: -0.0386
+  ✓ SELECTED PHASE FUNCTION: 1/s
+================================================================================
+
+================================================================================
+LINEAR REGRESSION OPTIMIZATION
+================================================================================
+
+Training on 2018 positions
+  Target: Cosine similarity (mean=0.9453, std=0.1558)
+  ✓ Using phase function: 1/s
+
+Phase multiplier statistics:
+  Mean:  0.1563
+  Std:   1.0841
+  Min:   0.0042
+  Max:   10.0000
+
+Phase multiplier at different game stages:
+  Stones=  0: phase=10.0000
+  Stones=  1: phase=1.0000
+  Stones= 50: phase=0.0200
+  Stones=100: phase=0.0100
+  Stones=150: phase=0.0067
+  Stones=200: phase=0.0050
+  Stones=300: phase=0.0033
+  Stones=361: phase=0.0028
+
+--------------------------------------------------------------------------------
+OPTIMIZED WEIGHTS (from Linear Regression):
+--------------------------------------------------------------------------------
+  Raw coefficients:
+    w1 (policy entropy):   0.002601
+    w2 (value variance):   0.026525
+    Intercept:             0.944429
+
+  Normalized weights (w1 + w2 = 1):
+    w1 (policy entropy):   0.089300  (  8.93%)
+    w2 (value variance):   0.910700  ( 91.07%)
+
+--------------------------------------------------------------------------------
+TRAINING SET PERFORMANCE (Regression):
+--------------------------------------------------------------------------------
+  R² Score:            0.0015
+  MSE:               0.024248
+  MAE:               0.077721
+  Correlation:         0.0387
+
+--------------------------------------------------------------------------------
+TRAINING SET PERFORMANCE (Binary Classification):
+--------------------------------------------------------------------------------
+  Optimal Threshold:     0.9960
+  Accuracy:              0.5000  (50.00% correct)
+
+================================================================================
+TEST SET EVALUATION
+================================================================================
+  ✓ Evaluating with phase function: 1/s
+
+Test set: 1637 positions
+  Cosine similarity: mean=0.9702, std=0.1128
+  Move agreement: 1312/1637 positions (80.1% agree)
+
+--------------------------------------------------------------------------------
+REGRESSION METRICS (Cosine Similarity Prediction):
+--------------------------------------------------------------------------------
+  R² Score:           -0.0505
+  MSE:               0.013362
+  MAE:               0.066097
+  Correlation:         0.0190
+
+--------------------------------------------------------------------------------
+BINARY CLASSIFICATION METRICS (Move Agreement Prediction):
+--------------------------------------------------------------------------------
+  Threshold:           0.9960  (cosine similarity cutoff)
+
+  Prediction Counts:
+    Predicted AGREE:          4  (0.2%)
+    Predicted DISAGREE:    1633  (99.8%)
+
+  Actual Counts:
+    Actual AGREE:          1312  (80.1%)
+    Actual DISAGREE:        325  (19.9%)
+
+  Performance Metrics:
+    Accuracy:            0.1973  (19.73% correct)
+    Precision:           0.2500  (when predicting agreement, how often correct)
+    Recall:              0.0008  (of all agreements, how many found)
+    F1 Score:            0.0015  (harmonic mean of precision & recall)
+
+  Confusion Matrix:
+                    Predicted
+                    Disagree (0)  Agree (1)
+  Actual Disagree:     322            3
+  Actual Agree:       1311            1
+
+--------------------------------------------------------------------------------
+SAMPLE PREDICTIONS:
+--------------------------------------------------------------------------------
+Actual   Pred     Error    Agree?   Pred?    Correct?   E        K         
+--------------------------------------------------------------------------------
+1.0000   0.9934   0.0066   Diff     Diff     ✓          1.881    0.000091  
+0.9999   0.9506   0.0493   Diff     Diff     ✓          2.354    0.000021  
+0.9993   0.9445   0.0548   Same     Diff     ✗          0.080    0.000000  
+0.9998   0.9447   0.0551   Same     Diff     ✗          0.958    0.000422  
+0.9993   0.9445   0.0548   Same     Diff     ✗          0.369    0.000423  
+0.9914   0.9446   0.0468   Diff     Diff     ✓          0.901    0.040548  
+0.9918   0.9447   0.0472   Diff     Diff     ✓          1.471    0.048941  
+0.9536   0.9446   0.0091   Diff     Diff     ✓          1.325    0.005488  
+0.9986   0.9445   0.0541   Same     Diff     ✗          0.696    0.033501  
+0.9987   0.9445   0.0542   Same     Diff     ✗          0.285    0.021823  
+0.9985   0.9446   0.0539   Diff     Diff     ✓          1.871    0.041214  
+1.0000   0.9448   0.0552   Same     Diff     ✗          1.434    0.412875  
+1.0000   0.9445   0.0555   Same     Diff     ✗          1.113    0.000371  
+0.9999   0.9449   0.0551   Same     Diff     ✗          1.631    0.544983  
+1.0000   0.9445   0.0555   Same     Diff     ✗          1.453    0.000001  
+
+================================================================================
+FINAL OPTIMIZED CONFIGURATION
+================================================================================
+
+Weights:
+  w1 (policy entropy): 0.089300  (8.93%)
+  w2 (value variance): 0.910700  (91.07%)
+
+Phase function:
+  ✓ FINAL SELECTED TYPE: 1/s
+
+Uncertainty Formula:
+  uncertainty = (0.0893 × E + 0.9107 × K) × phase_1/s(s)
+
+Classification Threshold:
+  Cosine similarity threshold: 0.9960
+  (Predicted cosine >= 0.9960 → moves AGREE)
+  (Predicted cosine <  0.9960 → moves DISAGREE)
+
+Regression Performance Summary:
+  Training R²:         0.0015
+  Test R²:             -0.0505
+  Training MAE:        0.077721
+  Test MAE:            0.066097
+
+Move Agreement Prediction (Binary Classification):
+  Training Accuracy:   0.5000  (50.00%)
+  Test Accuracy:       0.1973  (19.73%)
+  Test Precision:      0.2500
+  Test Recall:         0.0008
+  Test F1 Score:       0.0015
+
+================================================================================
+✓ Optimization complete!
+✓ The model correctly predicts move agreement 19.73% of the time!
+================================================================================

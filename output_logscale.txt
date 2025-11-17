@@ -1,0 +1,95 @@
+================================================================================
+PHASE 1: OPTIMIZE COSINE SIMILARITY PREDICTION
+================================================================================
+
+================================================================================
+LOADING TRAINING DATA
+================================================================================
+
+Loading from: ../../selfplay_output/gpu1/rag_data
+Loading data from 16 JSON files...
+  ✓ Loaded 317 positions from this directory
+
+Loading from: ../../selfplay_output/gpu1/rag_data_o
+Loading data from 44 JSON files...
+  ✓ Loaded 1891 positions from this directory
+
+Loading from: ../../selfplay_output/gpu2/rag_data
+Loading data from 10 JSON files...
+  ✓ Loaded 222 positions from this directory
+
+Loading from: ../../selfplay_output/gpu2/rag_data_o
+Loading data from 35 JSON files...
+  ✓ Loaded 1261 positions from this directory
+
+Loading from: ../../selfplay_output/gpu3/rag_data
+Loading data from 8 JSON files...
+  ✓ Loaded 162 positions from this directory
+
+Loading from: ../../selfplay_output/gpu3/rag_data_o
+Loading data from 43 JSON files...
+  ✓ Loaded 1755 positions from this directory
+
+✓ Total training positions loaded: 5608
+
+================================================================================
+LOADING TEST DATA
+================================================================================
+
+Loading from: ../../selfplay_output/gpu1/rag_data
+Loading data from 16 JSON files...
+  ✓ Loaded 317 positions from this directory
+
+Loading from: ../../selfplay_output/gpu1/rag_data_o
+Loading data from 44 JSON files...
+  ✓ Loaded 1891 positions from this directory
+
+✓ Total test positions loaded: 2208
+
+================================================================================
+DATASET SUMMARY:
+  Training set: 5608 positions
+  Test set:     2208 positions
+================================================================================
+
+================================================================================
+CREATING CORRELATION PLOTS
+================================================================================
+
+Correlations with cosine similarity (ORIGINAL SCALE):
+  E (policy entropy):  r=  0.0368, p=0.005896
+  K (value variance):  r= -0.0118, p=0.376127
+  S (stone count):     r=  0.0577, p=0.000015
+
+Correlations with cosine similarity (LOG-TRANSFORMED SCALE):
+  E (policy entropy):  r=  0.0309, p=0.020563
+  K (value variance):  r= -0.0104, p=0.435102
+  S (stone count):     r=  0.0507, p=0.000148
+
+✓ Plots saved to: tuning/phase1/correlation_plots_logscale.png
+Traceback (most recent call last):
+  File "/Users/oliravaneswaramoorthy/Projects/GO_PROJECT/RAGFlow-Datago/datago/RAG-MCTS-AlphaGo/tuning/phase1/phase1_optimize_move_agreement_logscale.py", line 932, in <module>
+    main()
+    ~~~~^^
+  File "/Users/oliravaneswaramoorthy/Projects/GO_PROJECT/RAGFlow-Datago/datago/RAG-MCTS-AlphaGo/tuning/phase1/phase1_optimize_move_agreement_logscale.py", line 872, in main
+    plot_correlations(positions_train, output_dir=output_dir)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/oliravaneswaramoorthy/Projects/GO_PROJECT/RAGFlow-Datago/datago/RAG-MCTS-AlphaGo/tuning/phase1/phase1_optimize_move_agreement_logscale.py", line 798, in plot_correlations
+    plt.show()
+    ~~~~~~~~^^
+  File "/Users/oliravaneswaramoorthy/Projects/GO_PROJECT/RAGFlow-Datago/datago/RAG-MCTS-AlphaGo/.venv/lib/python3.13/site-packages/matplotlib/pyplot.py", line 613, in show
+    return _get_backend_mod().show(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/oliravaneswaramoorthy/Projects/GO_PROJECT/RAGFlow-Datago/datago/RAG-MCTS-AlphaGo/.venv/lib/python3.13/site-packages/matplotlib/backend_bases.py", line 3550, in show
+    cls.mainloop()
+    ~~~~~~~~~~~~^^
+  File "/Users/oliravaneswaramoorthy/Projects/GO_PROJECT/RAGFlow-Datago/datago/RAG-MCTS-AlphaGo/.venv/lib/python3.13/site-packages/matplotlib/backends/backend_macosx.py", line 179, in start_main_loop
+    with _allow_interrupt_macos():
+         ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 148, in __exit__
+    next(self.gen)
+    ~~~~^^^^^^^^^^
+  File "/Users/oliravaneswaramoorthy/Projects/GO_PROJECT/RAGFlow-Datago/datago/RAG-MCTS-AlphaGo/.venv/lib/python3.13/site-packages/matplotlib/backend_bases.py", line 1660, in _allow_interrupt
+    old_sigint_handler(*handler_args)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+KeyboardInterrupt
