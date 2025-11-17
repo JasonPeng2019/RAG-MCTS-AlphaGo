@@ -1,0 +1,65 @@
+2025-11-16 14:28:03,870 - INFO - ======================================================================
+2025-11-16 14:28:03,870 - INFO - DataGo Bot vs KataGo Match (Full RAG Pipeline)
+2025-11-16 14:28:03,870 - INFO - ======================================================================
+2025-11-16 14:28:03,870 - INFO - Games: 1, Max moves per game: 100
+2025-11-16 14:28:03,870 - INFO - Uncertainty threshold: 0.35
+2025-11-16 14:28:03,870 - INFO - Relevance threshold: 0.95
+2025-11-16 14:28:03,870 - INFO - Blending beta: 0.4
+2025-11-16 14:28:03,870 - INFO - 
+2025-11-16 14:28:03,870 - INFO - Black: DataGo (RAG-enhanced)
+2025-11-16 14:28:03,870 - INFO - White: KataGo (pure)
+2025-11-16 14:28:03,870 - INFO - 
+2025-11-16 14:28:03,870 - INFO - Starting KataGo GTP on GPU 7...
+2025-11-16 14:28:03,871 - INFO - Starting GTP engine: ../KataGo/cpp/katago gtp -model ../KataGo/models/g170e-b10c128-s1141046784-d204142634.bin.gz -config ../KataGo/configs/gtp_800visits.cfg
+2025-11-16 14:28:03,871 - INFO - Initializing RAG database...
+2025-11-16 14:28:03,871 - INFO - Loading RAG database from rag_store/rag_output/rag_database.json
+2025-11-16 14:28:03,871 - INFO - 
+======================================================================
+2025-11-16 14:28:03,871 - INFO - Game 1/1
+2025-11-16 14:28:03,871 - INFO - ======================================================================
+
+2025-11-16 14:28:05,985 - INFO - Move 1: DataGo (Black) thinking...
+2025-11-16 14:28:06,115 - INFO - Move 1: DataGo (Black) plays R16 [unc=0.349, 130ms]
+2025-11-16 14:28:06,165 - INFO - Move 2: KataGo (White) thinking...
+2025-11-16 14:28:06,234 - INFO - Move 2: KataGo (White) plays Q4
+2025-11-16 14:28:06,285 - INFO - Move 3: DataGo (Black) thinking...
+2025-11-16 14:28:06,396 - INFO - Move 3: DataGo (Black) plays C16 [unc=0.348, 111ms]
+2025-11-16 14:28:06,446 - INFO - Move 4: KataGo (White) thinking...
+2025-11-16 14:28:06,585 - INFO - Move 4: KataGo (White) plays D4
+2025-11-16 14:28:06,635 - INFO - Move 5: DataGo (Black) thinking...
+2025-11-16 14:28:06,790 - INFO -   → High uncertainty (0.352), querying RAG...
+2025-11-16 14:28:06,790 - ERROR - Error in game 1: 'ANNIndex' object has no attribute 'query'
+Traceback (most recent call last):
+  File "/scratch2/f004ndc/AlphaGo Project/RAG-MCTS-AlphaGo/run_datago_match.py", line 331, in run_match
+    move, metadata = datago.generate_move()
+                     ^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch2/f004ndc/AlphaGo Project/RAG-MCTS-AlphaGo/run_datago_match.py", line 235, in generate_move
+    neighbor = self.query_rag(position_hash, policy)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch2/f004ndc/AlphaGo Project/RAG-MCTS-AlphaGo/run_datago_match.py", line 143, in query_rag
+    neighbors = self.rag_index.query(embedding, k=1)
+                ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ANNIndex' object has no attribute 'query'
+2025-11-16 14:28:06,791 - INFO - 
+Cleaning up...
+2025-11-16 14:28:07,807 - INFO - 
+======================================================================
+2025-11-16 14:28:07,807 - INFO - Overall Match Statistics
+2025-11-16 14:28:07,807 - INFO - ======================================================================
+2025-11-16 14:28:07,808 - INFO - Total moves: 3
+2025-11-16 14:28:07,808 - INFO - Total RAG queries: 1
+2025-11-16 14:28:07,808 - INFO - Total RAG hits: 0
+2025-11-16 14:28:07,808 - INFO - High relevance hits: 0
+2025-11-16 14:28:07,808 - INFO - Forced explorations: 0
+2025-11-16 14:28:07,808 - INFO - Average uncertainty: 0.350
+2025-11-16 14:28:07,808 - INFO - RAG query rate: 33.3%
+2025-11-16 14:28:07,808 - INFO - 
+======================================================================
+2025-11-16 14:28:07,808 - INFO - Match Results
+2025-11-16 14:28:07,808 - INFO - ======================================================================
+2025-11-16 14:28:07,808 - INFO - Game 1: Error
+2025-11-16 14:28:07,808 - INFO - 
+2025-11-16 14:28:07,808 - INFO - DataGo: 0 wins
+2025-11-16 14:28:07,808 - INFO - KataGo: 0 wins
+2025-11-16 14:28:07,808 - INFO - Draws: 0
+2025-11-16 14:28:07,808 - INFO - ======================================================================

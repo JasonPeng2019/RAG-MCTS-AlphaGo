@@ -1,202 +1,521 @@
-# datago Implementation TODO
+# RAG-MCTS-AlphaGo TODO
 
-This document collects the implementation plan, design details, parameter defaults, and actionable tasks for integrating a retrieval-augmented (RAG) vector memory with KataGo's MCTS and CNNs. It consolidates the design discussed previously: entropy-gated retrieval, k-NN + rerank by reachability/parent-child structural boost, blending for expansion and simulation, storing complex simulation states, and pruning by unreachability.
-
-## Goals / high level
-- Use entropy of the policy distribution to gate retrieval and augmentation at expansion and (selective) simulation nodes.
-- Retrieve K nearest neighbors (ANN) for a position embedding, rerank neighbors by a reachability-based metric and a structural parent/child boost.
-- Use reranked neighbors to build a retrieval prior P_nn(a) aligned to the current orientation, then blend with network priors during expansion and simulation.
-- During simulations, capture complex/high-entropy positions into a buffer and add them to persistent memory in batches.
-- When memory population exceeds M_max, run a prune/add cycle using the same reachability-based rerank metric so that "unreachable" states are pruned.
+**Last Updated:** November 16, 2025  
+**Project Status:** Functional but incomplete - System uses real KataGo NN outputs and achieves 80% win rate, but RAG policy blending is NOT implemented
 
 ---
 
-## Recommended approach
-1. Prototype non-invasively using KataGo's JSON analysis engine. Use the policy logits/value to build embeddings and iterate quickly in Python.
-2. After validating benefit, optionally integrate into KataGo C++ for lower-latency, production use (expose internal CNN activations or embed FAISS in C++ or call a local retrieval service via IPC).
+## Critical Issues (Priority 1) 🔴
 
----
+### 1. **PROBABILITY DISTRIBUTION BLENDING NOT IMPLEMENTED**
+**Status:** ❌ **CRITICAL GAP**
 
-## Actionable steps (ordered)
+The system currently retrieves cached analyses from RAG but does NOT blend policies. This means:
+- Config has `beta: 0.4` but it's unused
+- Retrieved `ctx['policy']` is fetched but never blended with network policy
+- Bot wins purely from adaptive visit counts (800 → 2000), not knowledge reuse
+- This is NOT a true "RAG-augmented" system - just storage with cache optimization
 
-1) Decide integration approach (quick)
-- Choose non-invasive prototype first (JSON analysis outputs). Document the eventual path to C++ integration if needed.
-
-2) Prototype embedding extraction (implement first)
-- File: `src/clients/katago_client.py` (or similar).
-- Tasks:
-  - Parse KataGo JSON analysis outputs (policy and value) from `katago analysis` or JSON analysis engine.
-  - Canonicalize board orientation (rotate/reflect to canonical form) before embedding.
-  - Construct embedding options:
-    - Simple: normalized policy vector (size up to 19x19 = 361), plus value scalar.
-    - Improved: logits if available; optional small learned MLP projection to reduce dim.
-  - Add utilities to map neighbor moves (canonical orientation) back to current orientation.
-- Test: run on a small SGF dataset, generate embeddings for a few hundred positions.
-
-3) Build ANN index and persistent storage (`src/memory`)
-- Choose implementation: FAISS (fast, mature) or hnswlib (simple HNSW interface). Both are fine; FAISS recommended if you expect GPU later.
-- Design entry schema (per entry metadata):
-  - id: uuid
-  - embed: float[d]
-  - canonical_state: compact board fingerprint
-  - best_moves: list[(move, prob)]
-  - metadata: {visits, last_seen_ts, importance, outcome_stats}
-- Implement:
-  - in-memory index wrapper (add, retrieve, remove)
-  - persistent snapshot/save/load of index and metadata under `data/memory/`
-  - shard format for large memories
-- Smoke test: add ~500 curated positions from `data/sgf`, query and inspect returned neighbors.
-
-4) Implement gating & retrieval (`src/gating` + `src/blend`)
-- Gate: compute normalized entropy H_norm = H(P)/ln(#legal_moves)
-  - H_trigger default: 0.7
-  - H_store default: 0.9
-- Retrieval interface: `retrieve(embed, K=16) -> list[Neighbor]` where Neighbor contains id, score, canonical_state, best_moves, metadata.
-- Reranking:
-  - For each neighbor compute:
-    - reachability r ∈ [0,1]
-    - structural boost s (e.g., s=2.0 if parent/child, else s=1.0)
-  - Combined weight w = α * r + γ * s (recommended α=0.7, γ=0.3). Normalize w across neighbors.
-  - Map neighbor best_moves into current orientation and aggregate to form retrieval prior P_nn(a).
-- Blending:
-  - Expansion: P_blend = normalize((1 - β_exp) * P_net + β_exp * P_nn)  (β_exp default = 0.4)
-  - Simulation: P_sim = normalize((1 - β_sim) * P_current + β_sim * P_nn) (β_sim default = 0.15)
-  - Limit blending to top-N moves (N=16) to keep effect focused.
-
-5) Reachability estimator (`src/memory/reachability.py`)
-- Options (increasing cost/accuracy):
-  A) Parent/child exact check and move-distance heuristic (cheap).
-  B) Policy-vector similarity (cosine) between current and candidate (cheap-medium).
-  C) Short policy-guided rollouts to check empirical reachability (expensive; use for top candidates only).
-  D) Learned model trained to predict reach-in-D moves (offline data required).
-- Practical starting approach: B + A (policy similarity + parent/child boost). Later, for top-k candidates, run short rollouts to refine r.
-- API: `estimate_reachability(current_state, candidate_state, budget=None) -> float`.
-
-6) Expansion augmentation (hook points)
-- Non-invasive prototype options:
-  - Implement a custom MCTS harness that uses the KataGo network for evaluation but runs its own MCTS loop (allows blending at expansion/simulation without C++ changes).
-  - Or orchestrate approximate expansion by re-simulating: evaluate root, if H > threshold, retrieve and inject blends into next decisions in harness.
-- C++ integration:
-  - Add a call in the expansion code path (search/search.cpp or equivalent) to request P_nn and blend with node priors before pushing children.
-  - Retrieval/ANN options:
-    - In-process: embed FAISS or hnswlib and the memory in C++.
-    - Out-of-process: create a low-latency local RPC (unix domain socket / gRPC) service written in Python/C++ to handle retrieve/rerank.
-- Pseudocode (conceptual):
-```
-if entropy(node.policy) > H_trigger:
-    embed = extract_embedding(node)
-    neighbors = memory.retrieve(embed, K)
-    reranked = rerank(neighbors, node)
-    P_nn = build_prior(reranked, node)
-    node.prior = blend(node.prior, P_nn, beta_exp)
+**What's needed:**
+```python
+# In generate_move() after line 683 (when cache hit found):
+if best_ctx:
+    # Extract policies
+    network_policy = analysis['policy']  # From current 800-visit search
+    rag_policy = best_ctx['policy']      # From cached 2000-visit search
+    
+    # Blend policies
+    beta = self.config['blending']['beta']  # 0.4
+    blended_policy = (1 - beta) * network_policy + beta * rag_policy
+    blended_policy /= blended_policy.sum()  # Normalize
+    
+    # Use blended policy to:
+    # Option A: Rerank moves by blended probabilities
+    # Option B: Force explore top RAG move if different from network move
+    # Option C: Modify MCTS priors (requires deeper integration)
 ```
 
-7) Simulation augmentation and storing
-- During simulation, at each node if H > H_trigger (or other complexity metric), do light retrieval and blend with β_sim.
-- Storing rule: if H >= H_store or |value_net - rollout_value| > disagreement_threshold (e.g., 0.2), capture a compact entry:
-  - (embed, canonical_state, best_move_hint, metadata)
-  - Append to a buffer.
-- Buffer flush: on reaching BATCH_SIZE (e.g., 128) or low CPU load, add to persistent memory and update index.
-- Ensure deduplication on insertion (by canonical_state fingerprint).
+**Files to modify:**
+- `run_datago_recursive_match.py` (lines 678-688 in `generate_move()`)
+- Add `blend_policies()` helper function
+- Use `reranking_alpha` and `reranking_gamma` for move reranking
 
-8) Maintenance, pruning and lifecycle
-- When memory size > M_max (e.g., 5000), trigger prune/add:
-  - For each entry compute importance score (recentness, retrieval frequency, utility), and reachability score using the same rerank metric (w = α * r + γ * s).
-  - Combined score = λ_imp * importance + λ_reach * avg_reachability
-  - Prune bottom p_prune (e.g., 15%) which will be the "most unreachable" according to the rerank metric.
-  - Insert buffered new entries, reindex, and snapshot shards.
-- Reindexing: schedule offline or staggered to avoid search latency spikes.
-
-9) Tests, metrics, ablations
-- Unit tests:
-  - embedding canonicalization and mapping
-  - retrieval-to-action mapping and orientation alignment
-  - rerank weight math and pruning selection
-  - reachability estimator behavior on synthetic pairs
-- Experiments:
-  - Baseline KataGo vs Root-only RAG vs Expansion+Simulation RAG
-  - Metrics: winrate, avg entropy distribution, retrieval influence rate, query latency
-- Ablations: vary β_exp, β_sim, H_trigger, reachability method, K.
-
-10) Performance considerations
-- Gate aggressively to limit retrieval calls (entropy thresholding, max retrievals per search).
-- Cache retrieval responses per state fingerprint.
-- Use local in-process index for production; use a fast local RPC for experimentation.
-- For heavy reachability checks, restrict to top few neighbors only.
+**Expected impact:**
+- Current: 80% win rate (2000 vs 800 visits = brute force)
+- With blending: 85-95% win rate (knowledge reuse + adaptive visits)
 
 ---
 
-## Suggested file scaffolding (starter)
-- `src/clients/katago_client.py`  -- handles JSON analysis, embedding extraction, canonicalization
-- `src/memory/index.py`          -- ANN wrapper, add/retrieve/remove, persistence
-- `src/memory/schema.py`         -- entry schema and metadata handling
-- `src/memory/reachability.py`   -- reachability estimation utilities
-- `src/gating/gate.py`           -- entropy gates, thresholds
-- `src/blend/blend.py`           -- rerank, prior construction, blending functions
-- `scripts/run_rag_harness.py`   -- prototype harness to run matches or tests using the RAG augmentation (non-invasive)
+## High Priority (Priority 2) 🟡
+
+### 2. **Force Exploration of RAG Moves**
+**Status:** ⚠️ Partially configured
+
+Config has `force_exploration_top_n: 1` but unclear if implemented.
+
+**What's needed:**
+- When RAG returns different move than network, force explore it
+- Track whether forced moves improve outcomes
+- Adjust exploration rate based on RAG confidence
+
+**Files:** `run_datago_recursive_match.py`
 
 ---
 
-## Parameter defaults (initial)
-- embedding_dim = 128
-- K = 16
-- β_exp = 0.4
-- β_sim = 0.15
-- H_trigger = 0.7 (normalized entropy)
-- H_store = 0.9
-- M_max = 5000
-- p_prune = 0.15
-- reachability weights: α = 0.7, γ = 0.3
+### 3. **Move Quality Metrics**
+**Status:** ❌ Not implemented
+
+Currently only track win rate, but need:
+- Move agreement rate (RAG vs network)
+- Move quality score (compare to 10k-visit ground truth)
+- Position complexity correlation with RAG effectiveness
+- Cache hit rate vs move outcome
+
+**Files:** Add to `run_datago_recursive_match.py` statistics tracking
 
 ---
 
-## Data formats
-- Memory entry JSON example:
+### 4. **Reachability-Based Neighbor Reranking**
+**Status:** ⚠️ Configured but not fully implemented
+
+Config has `reranking_alpha: 0.7` and `reranking_gamma: 0.3` but:
+- No policy similarity calculation between current and retrieved positions
+- No parent/child structural boost
+- Simple exact hash matching only
+
+**What's needed:**
+```python
+def rerank_neighbors(neighbors, current_policy, current_position):
+    for neighbor in neighbors:
+        # Reachability: policy similarity
+        r = cosine_similarity(current_policy, neighbor['policy'])
+        
+        # Structural boost: parent/child relationship
+        s = 2.0 if is_parent_child(current_position, neighbor) else 1.0
+        
+        # Combined weight
+        alpha = 0.7
+        gamma = 0.3
+        w = alpha * r + gamma * s
+        
+        neighbor['rerank_score'] = w
+    
+    return sorted(neighbors, key=lambda x: x['rerank_score'], reverse=True)
 ```
-{
-  "id": "uuid4",
-  "embed": [0.012, -0.34, ...],
-  "canonical_board": "<19x19 string>",
-  "best_moves": [{"move":"D4","prob":0.45}],
-  "visits":120,
-  "last_seen":169xxx,
-  "winrate":0.41,
-  "importance":0.72
-}
-```
-- Keep FAISS/HNSW index file alongside a metadata mapping file for indices -> entry metadata.
+
+**Files:** Add to `src/memory/` or `run_datago_recursive_match.py`
 
 ---
 
-## Pseudocode snippets
-- Expansion blending
+## Original Design Goals (For Reference)
+
+### High-level Architecture
+- Use entropy of policy distribution to gate retrieval at expansion/simulation nodes
+- Retrieve K nearest neighbors (ANN), rerank by reachability + structural boost
+- **Blend retrieved priors with network priors during expansion** (NOT IMPLEMENTED)
+- Store complex positions during simulations
+- Prune unreachable states when memory exceeds M_max
+
+---
+
+## Medium Priority (Priority 3) 🟢
+
+### 5. **Uncertainty Threshold Tuning**
+**Status:** ✅ Mostly complete (fixed for real NN)
+
+- Current: `0.150` (adjusted from `0.370` for real NN outputs)
+- Real NN uncertainty range: 0.05-0.21
+- Synthetic data range was: 0.35-0.40
+
+**Potential improvements:**
+- Dynamic threshold based on game phase
+- Separate thresholds for query vs store
+- Track uncertainty distribution over games
+
+**Files:** `src/bot/config.yaml`, `run_datago_recursive_match.py`
+
+---
+
+### 6. **Memory Pruning and Lifecycle Management**
+**Status:** ❌ Not implemented
+
+Currently stores indefinitely (1070+ positions). Need:
+- Trigger pruning when memory > M_max (e.g., 5000 entries)
+- Prune by combined score: importance + reachability
+- Track retrieval frequency and outcome correlation
+- Remove "unreachable" or low-value positions
+
+**What's needed:**
+```python
+def prune_memory(self, max_size=5000, prune_fraction=0.15):
+    if len(self.position_db) > max_size:
+        # Score each entry
+        scores = []
+        for sym_hash, pos_ctx in self.position_db.items():
+            importance = pos_ctx.retrieval_count * 0.5 + pos_ctx.win_rate * 0.5
+            reachability = estimate_avg_reachability(pos_ctx)
+            score = 0.6 * importance + 0.4 * reachability
+            scores.append((sym_hash, score))
+        
+        # Remove bottom 15%
+        scores.sort(key=lambda x: x[1])
+        to_remove = int(len(scores) * prune_fraction)
+        for sym_hash, _ in scores[:to_remove]:
+            del self.position_db[sym_hash]
+            # Also remove from ANN index
 ```
+
+**Files:** Add to `run_datago_recursive_match.py`
+
+---
+
+### 7. **Embedding Improvements**
+**Status:** ⚠️ Basic implementation
+
+Current: Uses first 64 elements of policy as embedding
+Issues:
+- No learned projection
+- No incorporation of value/winrate
+- No game phase information
+
+**Potential improvements:**
+- Add value scalar to embedding
+- Include game phase (move number / stones on board)
+- Use learned MLP to project to better space
+- Experiment with different embedding dimensions
+
+**Files:** `run_datago_recursive_match.py` (store_position method)
+
+---
+
+### 8. **Performance Optimization**
+**Status:** ⚠️ Partially optimized
+
+Current optimizations:
+- ✅ Cache checking before deep search (saves ~1-2s per hit)
+- ✅ Exact hash matching (O(1) lookup)
+
+**Potential improvements:**
+- Cache retrieval responses per state fingerprint
+- Batch ANN queries when possible
+- Limit maximum retrievals per search
+- Profile critical paths (genmove_analyze, RAG query, deep search)
+
+**Files:** `run_datago_recursive_match.py`, `src/memory/`
+
+---
+
+## Completed Work ✅
+
+### Already Implemented:
+1. ✅ **Real Neural Network Integration**
+   - Replaced synthetic `np.random.dirichlet()` with `kata-genmove_analyze`
+   - Fixed GTP parser to handle multi-move info lines
+   - Extracts real policy, winrate, priors, visits from KataGo
+
+2. ✅ **Uncertainty Calculation**
+   - Normalized entropy of policy distribution
+   - Visit dispersion and top-move confidence
+   - Adjusted threshold from 0.370 → 0.150 for real NN
+
+3. ✅ **RAG Storage and Retrieval**
+   - Position database with exact hash matching
+   - Stores 1070+ positions with 2000-visit analyses
+   - Context selection by game phase and uncertainty
+
+4. ✅ **Recursive Deep Search**
+   - Adaptive visit counts (800 standard, 2000 deep)
+   - Recursion up to depth 3
+   - Child position analysis with caching
+
+5. ✅ **Cache Optimization**
+   - Check cache BEFORE expensive deep search
+   - "Child cache hit" optimization saves redundant searches
+   - 660% cache hit rate (1 query → 6.6 uses)
+
+6. ✅ **Performance Validation**
+   - 80% win rate vs pure KataGo (8-2-2 record)
+   - 2.3x more efficient than synthetic data approach
+   - Average 2446 visits/move (vs 6029 with synthetic)
+
+7. ✅ **Documentation**
+   - SYNTHETIC_VS_REAL_NN_COMPARISON.md
+   - BOT_IMPLEMENTATION.md
+   - IMPLEMENTATION_SUMMARY.md
+
+---
+
+## Actionable Implementation Plan
+
+### Phase 1: Implement Probability Blending (CRITICAL)
+**Estimated effort:** 2-4 hours
+
+1. Add `blend_policies()` helper function
+2. Modify `generate_move()` to blend when cache hit
+3. Implement move reranking by blended probabilities
+4. Add logging for blend weight and move changes
+5. Test with 10-game match
+
+**Success criteria:**
+- Blended policy used in move selection
+- Log shows "Using blended policy (beta=0.4)"
+- Win rate improves or stays at 80%+
+
+---
+
+### Phase 2: Move Quality Metrics
+**Estimated effort:** 2-3 hours
+
+1. Track move agreement (RAG vs network)
+2. Compare moves to high-visit ground truth
+3. Analyze position complexity vs RAG effectiveness
+4. Add metrics to match summary
+
+**Success criteria:**
+- Statistics show when RAG improves moves
+- Identify position types where RAG helps most
+
+---
+
+### Phase 3: Neighbor Reranking
+**Estimated effort:** 3-5 hours
+
+1. Implement policy similarity (cosine)
+2. Add parent/child relationship detection
+3. Combine reachability + structural boost
+4. Rerank neighbors before aggregation
+
+**Success criteria:**
+- Top neighbors have high policy similarity
+- Parent/child positions prioritized
+- Aggregated policy more relevant
+
+---
+
+### Phase 4: Memory Management
+**Estimated effort:** 4-6 hours
+
+1. Implement pruning trigger (max_size)
+2. Score entries by importance + reachability
+3. Remove bottom N%
+4. Update ANN index
+5. Add periodic snapshots
+
+**Success criteria:**
+- Memory stays under max_size
+- High-value positions retained
+- Low-value positions pruned
+
+---
+
+## Configuration Reference
+
+### Current Settings (src/bot/config.yaml)
+```yaml
+uncertainty_threshold: 0.150  # Adjusted for real NN
+deep_mcts:
+  max_visits: 2000
+katago:
+  visits: 800
+blending:
+  beta: 0.4                   # ⚠️ NOT USED YET
+  reranking_alpha: 0.7        # ⚠️ NOT USED YET
+  reranking_gamma: 0.3        # ⚠️ NOT USED YET
+  top_n_neighbors: 1
+recursion:
+  max_recursion_depth: 3
+  force_exploration_top_n: 1  # ⚠️ UNCLEAR IF IMPLEMENTED
+```
+
+---
+
+## Testing Protocol
+
+### Before Each Change:
+1. Run baseline match: `./test_recursive_search.sh`
+2. Record win rate, visits/move, RAG activation rate
+3. Check logs for errors
+
+### After Each Change:
+1. Run same test
+2. Compare metrics
+3. Verify improvement or equal performance
+4. Document findings
+
+### Key Metrics:
+- Win rate (target: 80%+)
+- Average visits per move (lower = better efficiency)
+- RAG activation rate (5% is good for threshold 0.150)
+- Cache hit rate (660% is excellent)
+- Move agreement rate (new)
+- Move quality score (new)
+
+---
+
+## Original Design Goals (Reference)
+
+### High-level Architecture (from initial TODO)
+- ✅ Use entropy to gate retrieval
+- ✅ Store complex positions in RAG database
+- ✅ Retrieve K nearest neighbors with ANN
+- ⚠️ Rerank by reachability + structural boost (PARTIAL)
+- ❌ **Blend retrieved priors with network priors** (CRITICAL MISSING)
+- ❌ Prune unreachable states when memory exceeds M_max
+
+### Implementation Approach
+
+- ✅ Non-invasive Python prototype (current implementation)
+- ⚠️ Future: C++ integration for lower latency
+
+### Remaining Original Design Components
+
+**Reachability Estimator Options:**
+- A) Parent/child exact check + move-distance heuristic (cheap)
+- B) Policy-vector similarity (cosine) - **RECOMMENDED NEXT**
+- C) Short policy-guided rollouts (expensive)
+- D) Learned model (requires offline training)
+
+**Blending Strategy:**
+```python
+# Expansion (NOT IMPLEMENTED YET)
 if entropy(P) > H_trigger:
     neighbors = memory.retrieve(embed, K)
-    reranked = rerank(neighbors, current_state)
+    reranked = rerank(neighbors, current_state)  # Use alpha, gamma
     P_nn = map_neighbors_to_actions(reranked)
-    P_blend = normalize((1 - beta_exp) * P_net + beta_exp * P_nn)
-    use P_blend for expansion priors
+    P_blend = normalize((1 - beta) * P_net + beta * P_nn)
+    use P_blend for move selection
 ```
 
-- Simulation storing
-```
-if entropy(P) >= H_store or abs(value_net - rollout_value) > disagreement_thresh:
-    buffer.append({embed, canonical_state, action_hint, metadata})
-if len(buffer) >= BATCH_SIZE:
-    memory.batch_add(buffer)
-    buffer.clear()
-```
+**Simulation Storing (BASIC VERSION IMPLEMENTED):**
+- Current: Store when uncertainty > threshold
+- Missing: Store when |value_net - rollout_value| > disagreement threshold
+- Missing: Batch buffer flushing
 
 ---
 
-## Next steps you can ask me to do
-- Scaffold the Python modules and small unit tests (I can create the files and run quick smoke checks).
-- Produce concrete C++ hook locations in the KataGo repo (I can search the repo and point to specific files and functions to modify).
-- Create a minimal local retrieval service (Python) and example client usage from C++ via a small IPC/gRPC example.
+## File Structure
+
+### Current Implementation:
+- ✅ `src/bot/gtp_controller.py` - GTP protocol, kata-genmove_analyze
+- ✅ `src/gating/gate.py` - Entropy calculation and gates
+- ✅ `src/memory/rag_memory.py` - ANN index, retrieval
+- ✅ `run_datago_recursive_match.py` - Main bot logic
+- ✅ `src/bot/config.yaml` - Configuration
+
+### Missing/Incomplete:
+- ❌ `src/blend/blend.py` - Policy blending functions
+- ⚠️ `src/memory/reachability.py` - Reachability estimation (basic only)
+- ⚠️ Move reranking logic (configured but not used)
 
 ---
 
-Prepared by: datago design notes
+## Known Issues
 
-(If you want this in a different filename or to store in a tracker, tell me where and I'll move or duplicate it.)
+### 1. **No Policy Blending** (CRITICAL)
+- **Impact:** Bot doesn't use RAG knowledge for move improvement
+- **Current behavior:** Cache hit → use cached move directly
+- **Should be:** Cache hit → blend policies → improve move selection
+
+### 2. **Uncertainty Calculation May Need Refinement**
+- Current formula works but could incorporate:
+  - Value uncertainty
+  - Score lead uncertainty
+  - Historical position difficulty
+
+### 3. **Memory Growth Unbounded**
+- Currently 1070 positions stored, no pruning
+- Will eventually need pruning at ~5000+ entries
+
+### 4. **No Move Outcome Tracking**
+- Don't track whether RAG moves win more often
+- Can't validate RAG effectiveness empirically
+
+### 5. **GTP Parser Assumes Specific Format**
+- Works for KataGo v1.16.4
+- May break with different versions
+- No fallback for malformed responses
+
+---
+
+## Performance Benchmarks
+
+### Current System (Nov 16, 2025):
+- **Win rate:** 80% (8-2-2 vs KataGo)
+- **Avg visits/move:** 2446 (vs 6029 synthetic)
+- **RAG activation:** 5.1% (23 queries / 454 moves)
+- **Cache hit rate:** 660% (152 hits / 23 queries)
+- **Avg uncertainty:** 0.080
+- **Unique positions:** 1070
+- **Efficiency ratio:** 0.149 (vs 0.262 synthetic)
+
+### Target Metrics with Blending:
+- **Win rate:** 85-95%
+- **Avg visits/move:** 2000-2400 (maintain or improve)
+- **RAG activation:** 5-10%
+- **Cache hit rate:** 500%+
+- **Move quality:** Measurable improvement in complex positions
+
+---
+
+## Development Roadmap
+
+### Immediate (Next Session):
+1. Implement policy blending in `generate_move()`
+2. Add logging for blend operations
+3. Run 10-game test match
+4. Validate win rate improvement
+
+### Short Term (1-2 weeks):
+1. Implement move quality metrics
+2. Add neighbor reranking by policy similarity
+3. Track RAG move outcomes
+4. Create ablation study framework
+
+### Medium Term (1 month):
+1. Implement memory pruning
+2. Add embedding improvements
+3. Optimize performance bottlenecks
+4. Expand test coverage
+
+### Long Term (Future):
+1. Learned reachability model
+2. C++ integration for production
+3. Multi-opponent training
+4. Adaptive parameter tuning
+
+---
+
+## Questions to Resolve
+
+1. **When forced to use RAG move, how much to trust it?**
+   - Current: Use cached move directly
+   - Should we blend confidence with network confidence?
+
+2. **Should we store losing positions?**
+   - Pro: Learn what NOT to do
+   - Con: Pollutes memory with bad patterns
+
+3. **How to handle symmetries in embedding space?**
+   - Current: Uses sym_hash for exact match
+   - Could use rotation-invariant embeddings
+
+4. **Should recursion depth affect blending weight?**
+   - Deeper = less reliable network analysis?
+   - Could increase beta at higher depths
+
+5. **How to evaluate RAG effectiveness offline?**
+   - Compare to multi-visit ground truth?
+   - Measure knowledge transfer across games?
+
+---
+
+## References
+
+- **SYNTHETIC_VS_REAL_NN_COMPARISON.md** - Performance analysis
+- **BOT_IMPLEMENTATION.md** - Architecture details
+- **IMPLEMENTATION_SUMMARY.md** - System overview
+- **src/bot/config.yaml** - Current configuration
+
+---
+
+**Next Immediate Action:** Implement probability distribution blending in `generate_move()` to actually use the RAG-retrieved policies for move improvement.

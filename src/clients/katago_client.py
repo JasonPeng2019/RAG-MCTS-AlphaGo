@@ -18,7 +18,7 @@ import numpy as np
 from dataclasses import dataclass
 from typing import Any, Dict, List, Tuple, Optional
 import uuid
-from datago.src.utils import symmetry
+from src.utils import symmetry
 
 
 @dataclass
