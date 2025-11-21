@@ -3,14 +3,17 @@
 # Usage: source activate_env.sh
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-GO_ENV_PATH="$SCRIPT_DIR/../Go_env"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+PARENT_ROOT="$(cd "$REPO_ROOT/.." && pwd)"
+VENV_PATH="$PARENT_ROOT/Go_env"
 
-if [ -f "$GO_ENV_PATH/bin/activate" ]; then
-    source "$GO_ENV_PATH/bin/activate"
+if [ -f "$VENV_PATH/bin/activate" ]; then
+    # shellcheck source=/dev/null
+    source "$VENV_PATH/bin/activate"
     echo "✓ Go_env activated"
     echo "Python: $(which python)"
-    echo "Location: $GO_ENV_PATH"
+    echo "Location: $VENV_PATH"
 else
-    echo "Error: Go_env not found at $GO_ENV_PATH"
+    echo "Error: Go_env not found at $VENV_PATH"
     exit 1
 fi

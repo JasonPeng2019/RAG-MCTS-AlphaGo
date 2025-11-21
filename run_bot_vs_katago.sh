@@ -2,9 +2,17 @@
 # run_bot_vs_katago.sh
 # Run DataGo bot vs KataGo on GPU 7 in tmux
 
+set -euo pipefail
+
 SESSION_NAME="datago_vs_katago"
-PROJECT_DIR="/scratch2/f004ndc/AlphaGo Project/RAG-MCTS-AlphaGo"
-GO_ENV="/scratch2/f004ndc/AlphaGo Project/Go_env/bin/activate"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+PARENT_ROOT="$(cd "$REPO_ROOT/.." && pwd)"
+PROJECT_DIR="$SCRIPT_DIR"
+GO_ENV="$PARENT_ROOT/Go_env/bin/activate"
+KATAGO_EXE="$REPO_ROOT/katago_repo/KataGo/cpp/build-opencl/katago"
+MODEL_PATH="$REPO_ROOT/katago_repo/run/default_model.bin.gz"
+CONFIG_PATH="$REPO_ROOT/katago_repo/run/gtp_800visits.cfg"
 
 # Kill existing session if it exists
 tmux kill-session -t $SESSION_NAME 2>/dev/null
@@ -22,9 +30,9 @@ tmux send-keys -t $SESSION_NAME "" C-m
 # Uncomment this line when ready to run:
 tmux send-keys -t $SESSION_NAME "python play_vs_katago.py \
   --config src/bot/config.yaml \
-  --katago-executable '/scratch2/f004ndc/AlphaGo Project/KataGo/cpp/katago' \
-  --katago-model '/scratch2/f004ndc/AlphaGo Project/KataGo/models/g170e-b10c128-s1141046784-d204142634.bin.gz' \
-  --katago-config '/scratch2/f004ndc/AlphaGo Project/KataGo/configs/gtp_800visits.cfg' \
+  --katago-executable '$KATAGO_EXE' \
+  --katago-model '$MODEL_PATH' \
+  --katago-config '$CONFIG_PATH' \
   --datago-color black \
   --games 1" C-m
 

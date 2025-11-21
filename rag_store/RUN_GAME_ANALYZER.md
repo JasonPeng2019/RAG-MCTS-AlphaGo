@@ -16,10 +16,10 @@ The game analyzer:
 
 ```bash
 # Activate Python environment (REQUIRED)
-source /scratch2/f004h1v/alphago_project/venv/bin/activate
+source /scratch2/f003x5w/old_RAG/Go_env/bin/activate
 
 # Make sure you're in the right directory
-cd /scratch2/f004h1v/alphago_project/datago/rag_store
+cd /scratch2/f003x5w/old_RAG/RAGFlow-Datago/datago/rag_store
 
 # Verify sgfmill is installed
 python -c "import sgfmill; print('sgfmill OK')"
@@ -28,9 +28,9 @@ python -c "import sgfmill; print('sgfmill OK')"
 ## Running on GPU 7
 
 ```bash
-# STEP 1: Activate venv first!
-source /scratch2/f004h1v/alphago_project/venv/bin/activate
-cd /scratch2/f004h1v/alphago_project/datago/rag_store
+# STEP 1: Activate Go_env first!
+source /scratch2/f003x5w/old_RAG/Go_env/bin/activate
+cd /scratch2/f003x5w/old_RAG/RAGFlow-Datago/datago/rag_store
 
 # STEP 2: Run full analysis with 800 visits (production)
 CUDA_VISIBLE_DEVICES=7 python game_analyzer.py \

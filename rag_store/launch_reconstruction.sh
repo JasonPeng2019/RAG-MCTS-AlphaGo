@@ -4,10 +4,19 @@
 # Runs deep MCTS analysis on 5 GPUs simultaneously
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+WORKSPACE_ROOT="$(cd "$PROJECT_ROOT/.." && pwd)"
+GO_ENV_ACTIVATE="$WORKSPACE_ROOT/Go_env/bin/activate"
 cd "$SCRIPT_DIR"
 
 # Activate virtual environment
-source ../../venv/bin/activate
+if [ -f "$GO_ENV_ACTIVATE" ]; then
+    # shellcheck source=/dev/null
+    source "$GO_ENV_ACTIVATE"
+else
+    echo "Go_env not found at $GO_ENV_ACTIVATE" >&2
+    exit 1
+fi
 
 # GPU assignments (based on nvidia-smi availability)
 declare -a GPUS=(7 5 3 1 2)
@@ -33,7 +42,7 @@ for i in {1..5}; do
     # Create new tmux session and run analyzer
     tmux new-session -d -s "$SESSION_NAME" bash -c "
         cd '$SCRIPT_DIR' && \
-        source ../../venv/bin/activate && \
+        source '$GO_ENV_ACTIVATE' && \
         CUDA_VISIBLE_DEVICES=$GPU python game_analyzer.py \
             --csv '$CSV_FILE' \
             --json-dir '$JSON_DIR' \

@@ -188,7 +188,7 @@ class PositionContext:
 class RecursiveDataGoPlayer:
     """DataGo player with recursive deep search and RAG integration."""
     
-    def __init__(self, config: Dict[str, Any], katago: GTPController):
+    def __init__(self, config: Dict[str, Any], katago: GTPController, verbose_recursive: bool = True):
         self.config = config
         self.katago = katago
         
@@ -239,6 +239,12 @@ class RecursiveDataGoPlayer:
         logger.info(f"Recursion depth: {self.max_recursion_depth}")
         logger.info(f"Deep search threshold: {self.deep_search_threshold:.3f}")
         logger.info(f"Deep search visits: {self.deep_visits}, Standard visits: {self.standard_visits}")
+
+        self.verbose_recursive = verbose_recursive
+
+    def _log_recursive(self, message: str):
+        if self.verbose_recursive:
+            logger.info(message)
     
     def calculate_uncertainty(self, policy: np.ndarray, move_info: List[Dict]) -> float:
         """Calculate uncertainty score using config parameters."""
@@ -354,7 +360,7 @@ class RecursiveDataGoPlayer:
         ALWAYS checks RAG cache before running expensive deep search.
         """
         if recursion_depth >= self.max_recursion_depth:
-            logger.info(f"  {'  ' * recursion_depth}→ Max recursion depth reached")
+            self._log_recursive(f"  {'  ' * recursion_depth}→ Max recursion depth reached")
             return self._run_standard_search(board_state, visits=self.standard_visits)
         
         # FIRST: Check if this position is already in RAG cache
@@ -362,7 +368,7 @@ class RecursiveDataGoPlayer:
         cached = self.query_rag_exact(position_hash)
         
         if cached and recursion_depth > 0:  # Use cache for recursive calls
-            logger.info(f"  {'  ' * recursion_depth}→ Cache hit for position: {position_hash[:12]}")
+            self._log_recursive(f"  {'  ' * recursion_depth}→ Cache hit for position: {position_hash[:12]}")
             ctx = cached.get_best_context(self.stones_on_board, uncertainty)
             if ctx:
                 self.stats['rag_hits'] += 1
@@ -384,7 +390,7 @@ class RecursiveDataGoPlayer:
         if recursion_depth > 0:
             self.stats['recursive_searches'] += 1
         
-        logger.info(f"  {'  ' * recursion_depth}→ Deep search (depth={recursion_depth}, unc={uncertainty:.3f})")
+        self._log_recursive(f"  {'  ' * recursion_depth}→ Deep search (depth={recursion_depth}, unc={uncertainty:.3f})")
         
         # Run deep MCTS with more visits
         result = self._run_standard_search(board_state, visits=self.deep_visits)
@@ -408,7 +414,7 @@ class RecursiveDataGoPlayer:
                     cached = self.query_rag_exact(child_hash)
                     
                     if cached:
-                        logger.info(f"  {'  ' * (recursion_depth+1)}→ Child cache hit: {child_hash[:12]}")
+                        self._log_recursive(f"  {'  ' * (recursion_depth+1)}→ Child cache hit: {child_hash[:12]}")
                         ctx = cached.get_best_context(self.stones_on_board, child_uncertainty)
                         if ctx:
                             child['cached_analysis'] = ctx
@@ -416,7 +422,7 @@ class RecursiveDataGoPlayer:
                             self.stats['exact_matches'] += 1
                     else:
                         # Recursively analyze child
-                        logger.info(f"  {'  ' * (recursion_depth+1)}→ Recursive search for child")
+                        self._log_recursive(f"  {'  ' * (recursion_depth+1)}→ Recursive search for child")
                         child_analysis = self.run_deep_augmented_search(
                             child_board,
                             child_uncertainty,
@@ -656,7 +662,7 @@ class RecursiveDataGoPlayer:
         contexts_count = 0
         
         if uncertainty > self.deep_search_threshold:
-            logger.info(f"  → Complex position detected (unc={uncertainty:.3f})")
+            self._log_recursive(f"  → Complex position detected (unc={uncertainty:.3f})")
             
             # Create sym_hash from current board state
             sym_hash = self.board_state.get_sym_hash()
@@ -678,17 +684,17 @@ class RecursiveDataGoPlayer:
                 if best_ctx:
                     self.stats['exact_matches'] += 1
                     exact_match = True
-                    logger.info(f"  → Exact match found: {sym_hash[:12]} ({contexts_count} contexts)")
-                    logger.info(f"  → Using cached analysis (deep_visits={best_ctx['deep_visits']})")
+                    self._log_recursive(f"  → Exact match found: {sym_hash[:12]} ({contexts_count} contexts)")
+                    self._log_recursive(f"  → Using cached analysis (deep_visits={best_ctx['deep_visits']})")
                     move = best_ctx['move']
                 else:
-                    logger.info(f"  → Position found but no good context, running deep search")
+                    self._log_recursive(f"  → Position found but no good context, running deep search")
                     deep_searched = True
                     deep_analysis = self.run_deep_augmented_search(self.board_state, uncertainty, 0)
                     move = deep_analysis['best_move']
                     self.store_position(sym_hash, move, uncertainty, deep_analysis)
             else:
-                logger.info(f"  → No match found: {sym_hash[:12]}, running deep search")
+                self._log_recursive(f"  → No match found: {sym_hash[:12]}, running deep search")
                 deep_searched = True
                 # No match - run deep augmented search
                 deep_analysis = self.run_deep_augmented_search(self.board_state, uncertainty, 0)
@@ -730,6 +736,7 @@ def run_match(
     config_path: str,
     num_games: int = 1,
     max_moves: int = 200,
+    verbose_recursive: bool = False,
 ):
     """Run DataGo vs KataGo match with recursive deep search."""
     # Load config
@@ -756,7 +763,8 @@ def run_match(
     katago = GTPController(command=cmd)
     
     # Initialize DataGo player
-    datago = RecursiveDataGoPlayer(config, katago)
+    verbose_flag = verbose_recursive or config.get('logging', {}).get('verbose_recursive_match', False)
+    datago = RecursiveDataGoPlayer(config, katago, verbose_recursive=verbose_flag)
     
     results = []
     
@@ -910,6 +918,7 @@ def main():
     parser.add_argument('--config', required=True, help='DataGo config.yaml')
     parser.add_argument('--games', type=int, default=1, help='Number of games (default: 1)')
     parser.add_argument('--max-moves', type=int, default=200, help='Max moves per game (default: 200)')
+    parser.add_argument('--verbose-recursion', action='store_true', help='Show detailed recursive/deep-search logs')
     
     args = parser.parse_args()
     
@@ -920,6 +929,7 @@ def main():
         config_path=args.config,
         num_games=args.games,
         max_moves=args.max_moves,
+        verbose_recursive=args.verbose_recursion,
     )
 
 

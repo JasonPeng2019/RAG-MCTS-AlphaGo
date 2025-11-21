@@ -165,7 +165,7 @@ rag_query:
   # NOTE: With REAL NN outputs (not synthetic), uncertainty is much lower!
   # Real NN uncertainty range: 0.05-0.21 (vs synthetic: 0.35-0.40)
   # Set to 0.150 to capture top ~5-10% of positions with real NN data
-  uncertainty_threshold: 0.150
+  uncertainty_threshold: 0.125
   
   # Deep search threshold offset (added to uncertainty_threshold)
   # Controls when to trigger expensive recursive deep search
@@ -193,7 +193,7 @@ deep_mcts:
   # Trade-off: deeper = better quality but slower
   # Tuned in Phase 2
   # Recommended: 2000-5000 for balance, 10000+ for maximum quality
-  max_visits: 2000
+  max_visits: 800
   
   # Policy convergence threshold
   # Stop early if policy changes by less than this amount
@@ -208,10 +208,10 @@ deep_mcts:
   value_convergence_threshold: 0.02
   
   # Check convergence every N visits
-  convergence_check_interval: 500
+  convergence_check_interval: 200
   
   # Minimum visits before checking convergence
-  min_visits_before_convergence: 2000
+  min_visits_before_convergence: 400
 
 # ============================================================================
 # PHASE 3: BLENDING & RECURSION PARAMETERS
@@ -258,17 +258,18 @@ recursion:
 
 katago:
   # Path to KataGo executable
-  executable_path: "/scratch2/f004ndc/AlphaGo Project/KataGo/cpp/katago"
+  executable_path: "/scratch2/f003x5w/old_RAG/RAGFlow-Datago/katago_repo/KataGo/cpp/build-opencl/katago"
   
   # Path to KataGo model file
-  model_path: "/scratch2/f004ndc/AlphaGo Project/KataGo/models/g170e-b10c128-s1141046784-d204142634.bin.gz"
+  model_path: "/scratch2/f003x5w/old_RAG/RAGFlow-Datago/katago_repo/run/default_model.bin.gz"
   
   # Path to KataGo config file
-  config_path: "/scratch2/f004ndc/AlphaGo Project/KataGo/configs/gtp_800visits.cfg"
+  config_path: "/scratch2/f003x5w/old_RAG/RAGFlow-Datago/katago_repo/run/gtp_800visits.cfg"
+
   
   # Number of MCTS visits for standard (shallow) search
   # This is used during normal gameplay
-  visits: 800
+  visits: 100
   
   # Maximum time per move (seconds)
   # Set to 0 for no time limit
@@ -433,7 +434,7 @@ online_learning:
 
 logging:
   # Log level: "DEBUG", "INFO", "WARNING", "ERROR"
-  level: "INFO"
+  level: "WARNING"
   
   # Log file path (set to null to disable file logging)
   log_file: "./logs/datago_bot.log"
@@ -443,6 +444,12 @@ logging:
   
   # Enable RAG query logging
   log_rag_queries: true
+
+  # Emit detailed deep-search logging
+  log_deep_search: false
+
+  # Verbose recursive match logging (for run_datago_recursive_match.py)
+  verbose_recursive_match: false
   
   # Enable performance profiling
   enable_profiling: false

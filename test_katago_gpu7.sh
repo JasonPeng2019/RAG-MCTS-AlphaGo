@@ -2,10 +2,16 @@
 # test_katago_gpu7.sh
 # Quick test to verify KataGo works on GPU 7
 
+set -euo pipefail
+
 echo "Testing KataGo on GPU 7..."
 echo "================================"
 
-cd "/scratch2/f004ndc/AlphaGo Project/RAG-MCTS-AlphaGo"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+PARENT_ROOT="$(cd "$REPO_ROOT/.." && pwd)"
+cd "$SCRIPT_DIR"
 
-# Test with the updated config
-"/scratch2/f004ndc/AlphaGo Project/Go_env/bin/python" test_gtp_katago.py 2>&1 | tail -30
+PYTHON_BIN="$PARENT_ROOT/Go_env/bin/python"
+
+"$PYTHON_BIN" test_gtp_katago.py 2>&1 | tail -30

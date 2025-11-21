@@ -1,0 +1,372 @@
+2025-11-16 23:41:57,536 - INFO - ======================================================================
+2025-11-16 23:41:57,536 - INFO - DataGo Bot vs KataGo Match (Recursive Deep Search + RAG)
+2025-11-16 23:41:57,536 - INFO - ======================================================================
+2025-11-16 23:41:57,536 - INFO - Games: 10, Max moves per game: 100
+2025-11-16 23:41:57,537 - INFO - Deep search threshold: 0.2
+2025-11-16 23:41:57,537 - INFO - Max recursion depth: 3
+2025-11-16 23:41:57,537 - INFO - Deep MCTS visits: 2000
+2025-11-16 23:41:57,537 - INFO - 
+2025-11-16 23:41:57,537 - INFO - Starting KataGo GTP on GPU 7...
+2025-11-16 23:41:57,537 - INFO - Starting GTP engine: /scratch2/f003x5w/old_RAG/RAGFlow-Datago/katago_repo/KataGo/cpp/build-opencl/katago gtp -model /scratch2/f003x5w/old_RAG/RAGFlow-Datago/katago_repo/run/default_model.bin.gz -config /scratch2/f003x5w/old_RAG/RAGFlow-Datago/katago_repo/run/gtp_800visits.cfg
+2025-11-16 23:41:57,537 - INFO - Initializing RAG database with multi-context support...
+2025-11-16 23:41:57,537 - INFO - Recursion depth: 3
+2025-11-16 23:41:57,537 - INFO - Deep search threshold: 0.150
+2025-11-16 23:41:57,537 - INFO - Deep search visits: 2000, Standard visits: 800
+2025-11-16 23:41:57,537 - INFO - 
+======================================================================
+2025-11-16 23:41:57,537 - INFO - Game 1/10
+2025-11-16 23:41:57,537 - INFO - ======================================================================
+
+2025-11-16 23:42:02,638 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,638 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,638 - INFO - Move 1: DataGo (Black) thinking...
+2025-11-16 23:42:02,639 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,639 - WARNING - Failed to set maxVisits: [Errno 32] Broken pipe
+2025-11-16 23:42:02,639 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,639 - WARNING - kata-genmove_analyze failed
+2025-11-16 23:42:02,639 - ERROR - genmove_analyze failed to return move
+2025-11-16 23:42:02,639 - INFO -   → Complex position detected (unc=0.348)
+2025-11-16 23:42:02,640 - INFO -   → No match found: fe8837bac731, running deep search
+2025-11-16 23:42:02,641 - INFO -   → Deep search (depth=0, unc=0.348)
+2025-11-16 23:42:02,641 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,641 - WARNING - Failed to set maxVisits: [Errno 32] Broken pipe
+2025-11-16 23:42:02,641 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,641 - WARNING - kata-genmove_analyze failed
+2025-11-16 23:42:02,641 - ERROR - genmove_analyze failed to return move
+2025-11-16 23:42:02,641 - INFO - Move 1: DataGo (Black) plays pass [unc=0.348, DEEP, 3ms]
+2025-11-16 23:42:02,691 - INFO - Move 2: KataGo (White) thinking...
+2025-11-16 23:42:02,692 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,692 - ERROR - genmove failed: [Errno 32] Broken pipe
+2025-11-16 23:42:02,692 - ERROR - Failed to get move
+2025-11-16 23:42:02,692 - INFO - 
+Game 1 Statistics:
+2025-11-16 23:42:02,692 - INFO -   Moves played: 1
+2025-11-16 23:42:02,692 - INFO -   RAG queries: 1
+2025-11-16 23:42:02,692 - INFO -   RAG hits: 0
+2025-11-16 23:42:02,692 - INFO -   Exact matches: 0
+2025-11-16 23:42:02,692 - INFO -   Deep searches: 1
+2025-11-16 23:42:02,692 - INFO -   Recursive searches: 0
+2025-11-16 23:42:02,692 - INFO -   Unique positions: 1
+2025-11-16 23:42:02,692 - INFO -   Total contexts: 1
+2025-11-16 23:42:02,692 - INFO -   Average uncertainty: 0.348
+2025-11-16 23:42:02,692 - INFO - 
+======================================================================
+2025-11-16 23:42:02,692 - INFO - Game 2/10
+2025-11-16 23:42:02,692 - INFO - ======================================================================
+
+2025-11-16 23:42:02,692 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,692 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,692 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,692 - INFO - Move 1: DataGo (Black) thinking...
+2025-11-16 23:42:02,692 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,692 - WARNING - Failed to set maxVisits: [Errno 32] Broken pipe
+2025-11-16 23:42:02,692 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,692 - WARNING - kata-genmove_analyze failed
+2025-11-16 23:42:02,692 - ERROR - genmove_analyze failed to return move
+2025-11-16 23:42:02,692 - INFO -   → Complex position detected (unc=0.347)
+2025-11-16 23:42:02,694 - INFO -   → Exact match found: fe8837bac731 (1 contexts)
+2025-11-16 23:42:02,694 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 23:42:02,694 - INFO - Move 1: DataGo (Black) plays pass [unc=0.347, CACHED(1), 2ms]
+2025-11-16 23:42:02,744 - INFO - Move 2: KataGo (White) thinking...
+2025-11-16 23:42:02,744 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,744 - ERROR - genmove failed: [Errno 32] Broken pipe
+2025-11-16 23:42:02,744 - ERROR - Failed to get move
+2025-11-16 23:42:02,744 - INFO - 
+Game 2 Statistics:
+2025-11-16 23:42:02,744 - INFO -   Moves played: 2
+2025-11-16 23:42:02,744 - INFO -   RAG queries: 2
+2025-11-16 23:42:02,744 - INFO -   RAG hits: 1
+2025-11-16 23:42:02,745 - INFO -   Exact matches: 1
+2025-11-16 23:42:02,745 - INFO -   Deep searches: 1
+2025-11-16 23:42:02,745 - INFO -   Recursive searches: 0
+2025-11-16 23:42:02,745 - INFO -   Unique positions: 1
+2025-11-16 23:42:02,745 - INFO -   Total contexts: 1
+2025-11-16 23:42:02,745 - INFO -   Average uncertainty: 0.348
+2025-11-16 23:42:02,745 - INFO - 
+======================================================================
+2025-11-16 23:42:02,745 - INFO - Game 3/10
+2025-11-16 23:42:02,745 - INFO - ======================================================================
+
+2025-11-16 23:42:02,745 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,745 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,745 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,745 - INFO - Move 1: DataGo (Black) thinking...
+2025-11-16 23:42:02,745 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,745 - WARNING - Failed to set maxVisits: [Errno 32] Broken pipe
+2025-11-16 23:42:02,745 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,745 - WARNING - kata-genmove_analyze failed
+2025-11-16 23:42:02,745 - ERROR - genmove_analyze failed to return move
+2025-11-16 23:42:02,745 - INFO -   → Complex position detected (unc=0.351)
+2025-11-16 23:42:02,746 - INFO -   → Exact match found: fe8837bac731 (1 contexts)
+2025-11-16 23:42:02,747 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 23:42:02,747 - INFO - Move 1: DataGo (Black) plays pass [unc=0.351, CACHED(1), 2ms]
+2025-11-16 23:42:02,797 - INFO - Move 2: KataGo (White) thinking...
+2025-11-16 23:42:02,797 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,797 - ERROR - genmove failed: [Errno 32] Broken pipe
+2025-11-16 23:42:02,797 - ERROR - Failed to get move
+2025-11-16 23:42:02,797 - INFO - 
+Game 3 Statistics:
+2025-11-16 23:42:02,797 - INFO -   Moves played: 3
+2025-11-16 23:42:02,797 - INFO -   RAG queries: 3
+2025-11-16 23:42:02,797 - INFO -   RAG hits: 2
+2025-11-16 23:42:02,797 - INFO -   Exact matches: 2
+2025-11-16 23:42:02,797 - INFO -   Deep searches: 1
+2025-11-16 23:42:02,797 - INFO -   Recursive searches: 0
+2025-11-16 23:42:02,797 - INFO -   Unique positions: 1
+2025-11-16 23:42:02,797 - INFO -   Total contexts: 1
+2025-11-16 23:42:02,797 - INFO -   Average uncertainty: 0.349
+2025-11-16 23:42:02,797 - INFO - 
+======================================================================
+2025-11-16 23:42:02,797 - INFO - Game 4/10
+2025-11-16 23:42:02,797 - INFO - ======================================================================
+
+2025-11-16 23:42:02,797 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,797 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,797 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,798 - INFO - Move 1: DataGo (Black) thinking...
+2025-11-16 23:42:02,798 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,798 - WARNING - Failed to set maxVisits: [Errno 32] Broken pipe
+2025-11-16 23:42:02,798 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,798 - WARNING - kata-genmove_analyze failed
+2025-11-16 23:42:02,798 - ERROR - genmove_analyze failed to return move
+2025-11-16 23:42:02,798 - INFO -   → Complex position detected (unc=0.350)
+2025-11-16 23:42:02,800 - INFO -   → Exact match found: fe8837bac731 (1 contexts)
+2025-11-16 23:42:02,800 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 23:42:02,800 - INFO - Move 1: DataGo (Black) plays pass [unc=0.350, CACHED(1), 3ms]
+2025-11-16 23:42:02,851 - INFO - Move 2: KataGo (White) thinking...
+2025-11-16 23:42:02,851 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,851 - ERROR - genmove failed: [Errno 32] Broken pipe
+2025-11-16 23:42:02,851 - ERROR - Failed to get move
+2025-11-16 23:42:02,851 - INFO - 
+Game 4 Statistics:
+2025-11-16 23:42:02,851 - INFO -   Moves played: 4
+2025-11-16 23:42:02,851 - INFO -   RAG queries: 4
+2025-11-16 23:42:02,851 - INFO -   RAG hits: 3
+2025-11-16 23:42:02,851 - INFO -   Exact matches: 3
+2025-11-16 23:42:02,851 - INFO -   Deep searches: 1
+2025-11-16 23:42:02,851 - INFO -   Recursive searches: 0
+2025-11-16 23:42:02,851 - INFO -   Unique positions: 1
+2025-11-16 23:42:02,851 - INFO -   Total contexts: 1
+2025-11-16 23:42:02,851 - INFO -   Average uncertainty: 0.349
+2025-11-16 23:42:02,851 - INFO - 
+======================================================================
+2025-11-16 23:42:02,851 - INFO - Game 5/10
+2025-11-16 23:42:02,851 - INFO - ======================================================================
+
+2025-11-16 23:42:02,851 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,851 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,851 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,851 - INFO - Move 1: DataGo (Black) thinking...
+2025-11-16 23:42:02,851 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,851 - WARNING - Failed to set maxVisits: [Errno 32] Broken pipe
+2025-11-16 23:42:02,851 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,852 - WARNING - kata-genmove_analyze failed
+2025-11-16 23:42:02,852 - ERROR - genmove_analyze failed to return move
+2025-11-16 23:42:02,852 - INFO -   → Complex position detected (unc=0.345)
+2025-11-16 23:42:02,854 - INFO -   → Exact match found: fe8837bac731 (1 contexts)
+2025-11-16 23:42:02,854 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 23:42:02,854 - INFO - Move 1: DataGo (Black) plays pass [unc=0.345, CACHED(1), 3ms]
+2025-11-16 23:42:02,904 - INFO - Move 2: KataGo (White) thinking...
+2025-11-16 23:42:02,905 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,905 - ERROR - genmove failed: [Errno 32] Broken pipe
+2025-11-16 23:42:02,905 - ERROR - Failed to get move
+2025-11-16 23:42:02,905 - INFO - 
+Game 5 Statistics:
+2025-11-16 23:42:02,905 - INFO -   Moves played: 5
+2025-11-16 23:42:02,905 - INFO -   RAG queries: 5
+2025-11-16 23:42:02,905 - INFO -   RAG hits: 4
+2025-11-16 23:42:02,905 - INFO -   Exact matches: 4
+2025-11-16 23:42:02,905 - INFO -   Deep searches: 1
+2025-11-16 23:42:02,905 - INFO -   Recursive searches: 0
+2025-11-16 23:42:02,905 - INFO -   Unique positions: 1
+2025-11-16 23:42:02,905 - INFO -   Total contexts: 1
+2025-11-16 23:42:02,905 - INFO -   Average uncertainty: 0.348
+2025-11-16 23:42:02,905 - INFO - 
+======================================================================
+2025-11-16 23:42:02,905 - INFO - Game 6/10
+2025-11-16 23:42:02,905 - INFO - ======================================================================
+
+2025-11-16 23:42:02,905 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,905 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,905 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,906 - INFO - Move 1: DataGo (Black) thinking...
+2025-11-16 23:42:02,906 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,906 - WARNING - Failed to set maxVisits: [Errno 32] Broken pipe
+2025-11-16 23:42:02,906 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,906 - WARNING - kata-genmove_analyze failed
+2025-11-16 23:42:02,906 - ERROR - genmove_analyze failed to return move
+2025-11-16 23:42:02,906 - INFO -   → Complex position detected (unc=0.346)
+2025-11-16 23:42:02,908 - INFO -   → Exact match found: fe8837bac731 (1 contexts)
+2025-11-16 23:42:02,908 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 23:42:02,908 - INFO - Move 1: DataGo (Black) plays pass [unc=0.346, CACHED(1), 3ms]
+2025-11-16 23:42:02,959 - INFO - Move 2: KataGo (White) thinking...
+2025-11-16 23:42:02,959 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,959 - ERROR - genmove failed: [Errno 32] Broken pipe
+2025-11-16 23:42:02,959 - ERROR - Failed to get move
+2025-11-16 23:42:02,959 - INFO - 
+Game 6 Statistics:
+2025-11-16 23:42:02,959 - INFO -   Moves played: 6
+2025-11-16 23:42:02,959 - INFO -   RAG queries: 6
+2025-11-16 23:42:02,959 - INFO -   RAG hits: 5
+2025-11-16 23:42:02,959 - INFO -   Exact matches: 5
+2025-11-16 23:42:02,959 - INFO -   Deep searches: 1
+2025-11-16 23:42:02,959 - INFO -   Recursive searches: 0
+2025-11-16 23:42:02,959 - INFO -   Unique positions: 1
+2025-11-16 23:42:02,959 - INFO -   Total contexts: 1
+2025-11-16 23:42:02,959 - INFO -   Average uncertainty: 0.348
+2025-11-16 23:42:02,959 - INFO - 
+======================================================================
+2025-11-16 23:42:02,959 - INFO - Game 7/10
+2025-11-16 23:42:02,959 - INFO - ======================================================================
+
+2025-11-16 23:42:02,959 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,959 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,959 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,959 - INFO - Move 1: DataGo (Black) thinking...
+2025-11-16 23:42:02,959 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,959 - WARNING - Failed to set maxVisits: [Errno 32] Broken pipe
+2025-11-16 23:42:02,960 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:02,960 - WARNING - kata-genmove_analyze failed
+2025-11-16 23:42:02,960 - ERROR - genmove_analyze failed to return move
+2025-11-16 23:42:02,960 - INFO -   → Complex position detected (unc=0.345)
+2025-11-16 23:42:02,962 - INFO -   → Exact match found: fe8837bac731 (1 contexts)
+2025-11-16 23:42:02,962 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 23:42:02,962 - INFO - Move 1: DataGo (Black) plays pass [unc=0.345, CACHED(1), 3ms]
+2025-11-16 23:42:03,013 - INFO - Move 2: KataGo (White) thinking...
+2025-11-16 23:42:03,013 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:03,013 - ERROR - genmove failed: [Errno 32] Broken pipe
+2025-11-16 23:42:03,013 - ERROR - Failed to get move
+2025-11-16 23:42:03,013 - INFO - 
+Game 7 Statistics:
+2025-11-16 23:42:03,013 - INFO -   Moves played: 7
+2025-11-16 23:42:03,013 - INFO -   RAG queries: 7
+2025-11-16 23:42:03,013 - INFO -   RAG hits: 6
+2025-11-16 23:42:03,013 - INFO -   Exact matches: 6
+2025-11-16 23:42:03,013 - INFO -   Deep searches: 1
+2025-11-16 23:42:03,013 - INFO -   Recursive searches: 0
+2025-11-16 23:42:03,013 - INFO -   Unique positions: 1
+2025-11-16 23:42:03,013 - INFO -   Total contexts: 1
+2025-11-16 23:42:03,013 - INFO -   Average uncertainty: 0.348
+2025-11-16 23:42:03,013 - INFO - 
+======================================================================
+2025-11-16 23:42:03,013 - INFO - Game 8/10
+2025-11-16 23:42:03,013 - INFO - ======================================================================
+
+2025-11-16 23:42:03,013 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:03,013 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:03,013 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:03,013 - INFO - Move 1: DataGo (Black) thinking...
+2025-11-16 23:42:03,014 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:03,014 - WARNING - Failed to set maxVisits: [Errno 32] Broken pipe
+2025-11-16 23:42:03,014 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:03,014 - WARNING - kata-genmove_analyze failed
+2025-11-16 23:42:03,014 - ERROR - genmove_analyze failed to return move
+2025-11-16 23:42:03,014 - INFO -   → Complex position detected (unc=0.346)
+2025-11-16 23:42:03,016 - INFO -   → Exact match found: fe8837bac731 (1 contexts)
+2025-11-16 23:42:03,016 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 23:42:03,016 - INFO - Move 1: DataGo (Black) plays pass [unc=0.346, CACHED(1), 3ms]
+2025-11-16 23:42:03,067 - INFO - Move 2: KataGo (White) thinking...
+2025-11-16 23:42:03,067 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:03,067 - ERROR - genmove failed: [Errno 32] Broken pipe
+2025-11-16 23:42:03,067 - ERROR - Failed to get move
+2025-11-16 23:42:03,067 - INFO - 
+Game 8 Statistics:
+2025-11-16 23:42:03,067 - INFO -   Moves played: 8
+2025-11-16 23:42:03,067 - INFO -   RAG queries: 8
+2025-11-16 23:42:03,067 - INFO -   RAG hits: 7
+2025-11-16 23:42:03,067 - INFO -   Exact matches: 7
+2025-11-16 23:42:03,067 - INFO -   Deep searches: 1
+2025-11-16 23:42:03,067 - INFO -   Recursive searches: 0
+2025-11-16 23:42:03,067 - INFO -   Unique positions: 1
+2025-11-16 23:42:03,067 - INFO -   Total contexts: 1
+2025-11-16 23:42:03,067 - INFO -   Average uncertainty: 0.347
+2025-11-16 23:42:03,067 - INFO - 
+======================================================================
+2025-11-16 23:42:03,067 - INFO - Game 9/10
+2025-11-16 23:42:03,067 - INFO - ======================================================================
+
+2025-11-16 23:42:03,067 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:03,067 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:03,067 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:03,067 - INFO - Move 1: DataGo (Black) thinking...
+2025-11-16 23:42:03,067 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:03,067 - WARNING - Failed to set maxVisits: [Errno 32] Broken pipe
+2025-11-16 23:42:03,067 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:03,067 - WARNING - kata-genmove_analyze failed
+2025-11-16 23:42:03,068 - ERROR - genmove_analyze failed to return move
+2025-11-16 23:42:03,068 - INFO -   → Complex position detected (unc=0.346)
+2025-11-16 23:42:03,070 - INFO -   → Exact match found: fe8837bac731 (1 contexts)
+2025-11-16 23:42:03,070 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 23:42:03,070 - INFO - Move 1: DataGo (Black) plays pass [unc=0.346, CACHED(1), 3ms]
+2025-11-16 23:42:03,120 - INFO - Move 2: KataGo (White) thinking...
+2025-11-16 23:42:03,121 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:03,121 - ERROR - genmove failed: [Errno 32] Broken pipe
+2025-11-16 23:42:03,121 - ERROR - Failed to get move
+2025-11-16 23:42:03,121 - INFO - 
+Game 9 Statistics:
+2025-11-16 23:42:03,121 - INFO -   Moves played: 9
+2025-11-16 23:42:03,121 - INFO -   RAG queries: 9
+2025-11-16 23:42:03,121 - INFO -   RAG hits: 8
+2025-11-16 23:42:03,121 - INFO -   Exact matches: 8
+2025-11-16 23:42:03,121 - INFO -   Deep searches: 1
+2025-11-16 23:42:03,121 - INFO -   Recursive searches: 0
+2025-11-16 23:42:03,121 - INFO -   Unique positions: 1
+2025-11-16 23:42:03,121 - INFO -   Total contexts: 1
+2025-11-16 23:42:03,121 - INFO -   Average uncertainty: 0.347
+2025-11-16 23:42:03,121 - INFO - 
+======================================================================
+2025-11-16 23:42:03,121 - INFO - Game 10/10
+2025-11-16 23:42:03,121 - INFO - ======================================================================
+
+2025-11-16 23:42:03,121 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:03,121 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:03,121 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:03,121 - INFO - Move 1: DataGo (Black) thinking...
+2025-11-16 23:42:03,121 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:03,121 - WARNING - Failed to set maxVisits: [Errno 32] Broken pipe
+2025-11-16 23:42:03,121 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:03,121 - WARNING - kata-genmove_analyze failed
+2025-11-16 23:42:03,122 - ERROR - genmove_analyze failed to return move
+2025-11-16 23:42:03,122 - INFO -   → Complex position detected (unc=0.347)
+2025-11-16 23:42:03,124 - INFO -   → Exact match found: fe8837bac731 (1 contexts)
+2025-11-16 23:42:03,125 - INFO -   → Using cached analysis (deep_visits=2000)
+2025-11-16 23:42:03,125 - INFO - Move 1: DataGo (Black) plays pass [unc=0.347, CACHED(1), 3ms]
+2025-11-16 23:42:03,175 - INFO - Move 2: KataGo (White) thinking...
+2025-11-16 23:42:03,175 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:03,175 - ERROR - genmove failed: [Errno 32] Broken pipe
+2025-11-16 23:42:03,175 - ERROR - Failed to get move
+2025-11-16 23:42:03,175 - INFO - 
+Game 10 Statistics:
+2025-11-16 23:42:03,175 - INFO -   Moves played: 10
+2025-11-16 23:42:03,175 - INFO -   RAG queries: 10
+2025-11-16 23:42:03,175 - INFO -   RAG hits: 9
+2025-11-16 23:42:03,175 - INFO -   Exact matches: 9
+2025-11-16 23:42:03,175 - INFO -   Deep searches: 1
+2025-11-16 23:42:03,175 - INFO -   Recursive searches: 0
+2025-11-16 23:42:03,175 - INFO -   Unique positions: 1
+2025-11-16 23:42:03,175 - INFO -   Total contexts: 1
+2025-11-16 23:42:03,175 - INFO -   Average uncertainty: 0.347
+2025-11-16 23:42:03,175 - INFO - 
+Cleaning up...
+2025-11-16 23:42:03,175 - ERROR - Error communicating with engine: [Errno 32] Broken pipe
+2025-11-16 23:42:03,176 - INFO - 
+======================================================================
+2025-11-16 23:42:03,176 - INFO - Overall Match Statistics
+2025-11-16 23:42:03,176 - INFO - ======================================================================
+2025-11-16 23:42:03,176 - INFO - Total moves: 10
+2025-11-16 23:42:03,176 - INFO - Total RAG queries: 10
+2025-11-16 23:42:03,176 - INFO - Total exact matches: 9
+2025-11-16 23:42:03,176 - INFO - Total deep searches: 1
+2025-11-16 23:42:03,176 - INFO - Total recursive searches: 0
+2025-11-16 23:42:03,176 - INFO - Unique positions stored: 1
+2025-11-16 23:42:03,176 - INFO - Total contexts: 1
+2025-11-16 23:42:03,176 - INFO - Avg contexts per position: 1.0
+2025-11-16 23:42:03,176 - INFO - 
+======================================================================
+2025-11-16 23:42:03,176 - INFO - Match Results
+2025-11-16 23:42:03,176 - INFO - ======================================================================
+2025-11-16 23:42:03,176 - INFO - 
+2025-11-16 23:42:03,176 - INFO - DataGo: 0 wins
+2025-11-16 23:42:03,176 - INFO - KataGo: 0 wins
+2025-11-16 23:42:03,176 - INFO - Draws: 0
+2025-11-16 23:42:03,176 - INFO - ======================================================================

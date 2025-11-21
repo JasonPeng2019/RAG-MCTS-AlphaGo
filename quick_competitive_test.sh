@@ -1,22 +1,35 @@
 #!/bin/bash
 # Quick competitive test: 3 games to validate performance advantage
-set -e
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+PARENT_ROOT="$(cd "$REPO_ROOT/.." && pwd)"
+PROJECT_DIR="$SCRIPT_DIR"
+KATAGO_EXE="$REPO_ROOT/katago_repo/KataGo/cpp/build-opencl/katago"
+MODEL_PATH="$REPO_ROOT/katago_repo/run/default_model.bin.gz"
+CONFIG_PATH="$REPO_ROOT/katago_repo/run/gtp_800visits.cfg"
+PYTHON_BIN="$PARENT_ROOT/Go_env/bin/python"
+VENV_ACTIVATE="$PARENT_ROOT/Go_env/bin/activate"
 
 echo "======================================================================"
 echo "DataGo vs KataGo - Quick Test (3 games)"
 echo "======================================================================"
 echo ""
 
-cd "/scratch2/f004ndc/AlphaGo Project/RAG-MCTS-AlphaGo"
+cd "$PROJECT_DIR"
 
 # Activate virtual environment
-source /scratch2/f004ndc/AlphaGo\ Project/Go_env/bin/activate
+if [ -f "$VENV_ACTIVATE" ]; then
+  # shellcheck source=/dev/null
+  source "$VENV_ACTIVATE"
+fi
 
 # Run 3 quick games
-python3 run_datago_recursive_match.py \
-    --katago-executable "/scratch2/f004ndc/AlphaGo Project/KataGo/cpp/katago" \
-    --katago-model "/scratch2/f004ndc/AlphaGo Project/KataGo/models/g170e-b10c128-s1141046784-d204142634.bin.gz" \
-    --katago-config "/scratch2/f004ndc/AlphaGo Project/KataGo/configs/gtp_800visits.cfg" \
+"$PYTHON_BIN" run_datago_recursive_match.py \
+    --katago-executable "$KATAGO_EXE" \
+    --katago-model "$MODEL_PATH" \
+    --katago-config "$CONFIG_PATH" \
     --config "src/bot/config.yaml" \
     --games 3 \
     --max-moves 100 \

@@ -29,34 +29,32 @@ This directory contains supplementary files needed for the DataGo RAG-MCTS syste
 
 **Purpose:** Isolated Python environment with all dependencies for DataGo.
 
-**⚠️ IMPORTANT: This should be deployed OUTSIDE the RAG-MCTS-AlphaGo folder!**
+> **Note:** The archived `Go_env` contains absolute paths from the original machine (`/scratch2/f004ndc/...`). In this workspace the folder has already been moved to `/scratch2/f003x5w/old_RAG/Go_env`. If you re-clone elsewhere, copy `extra_files/Go_env` out of the repo or recreate it following the steps below.
 
-**Recommended Structure:**
+**⚠️ IMPORTANT:** keep the virtual environment outside your git-tracked source directory. On this workspace the environment has already been deployed for you at `/scratch2/f003x5w/old_RAG/Go_env`.
+
+**Recommended Structure (current machine):**
 ```
-/scratch2/f004ndc/AlphaGo Project/
-├── KataGo/                    # KataGo installation
-│   ├── cpp/katago            # KataGo binary
-│   ├── models/               # Neural network models
-│   └── configs/              # ← Copy extra_files/configs/ here
-├── Go_env/                    # ← Move extra_files/Go_env/ here
-│   ├── bin/
-│   ├── lib/
-│   └── ...
-└── RAG-MCTS-AlphaGo/         # This repository
-    ├── src/
-    ├── run_datago_recursive_match.py
-    └── ...
+/scratch2/f003x5w/old_RAG/RAGFlow-Datago/
+├── datago/                      # DataGo source + scripts
+├── katago_repo/                 # KataGo repo, builds, and run folder
+│   ├── KataGo/cpp/build-opencl/katago
+│   └── run/ (models, configs, logs)
+├── ../Go_env/                   # Python virtual environment (already moved outside repo)
+└── ...
 ```
 
-**Why outside?**
+If you need to recreate the environment, follow the steps below; otherwise just activate the provided `/scratch2/f003x5w/old_RAG/Go_env`.
+
+**Why outside / separate?**
 - Virtual environments are large (~500MB+)
 - Should not be version controlled
 - Can be shared across multiple projects
 - Easier to recreate/update independently
 
-**Activation:**
+**Activation (already provisioned):**
 ```bash
-source /scratch2/f004ndc/AlphaGo\ Project/Go_env/bin/activate
+source /scratch2/f003x5w/old_RAG/Go_env/bin/activate
 ```
 
 **Dependencies Included:**
@@ -76,14 +74,14 @@ source /scratch2/f004ndc/AlphaGo\ Project/Go_env/bin/activate
 
 2. **Move Virtual Environment:**
    ```bash
-   # If Go_env is currently inside extra_files/
-   mv extra_files/Go_env /scratch2/f004ndc/AlphaGo\ Project/
-   
-   # Or create new virtual environment:
-   cd /scratch2/f004ndc/AlphaGo\ Project/
+   # Already moved for you:
+   #   /scratch2/f003x5w/old_RAG/Go_env
+
+   # To recreate it if needed:
+   cd /scratch2/f003x5w/old_RAG
    python3 -m venv Go_env
    source Go_env/bin/activate
-   pip install -r RAG-MCTS-AlphaGo/requirements.txt
+   pip install -r RAGFlow-Datago/datago/requirements.txt
    ```
 
 3. **Update Config Paths:**
@@ -101,7 +99,7 @@ Test that everything is configured correctly:
 
 ```bash
 # Activate environment
-source /scratch2/f004ndc/AlphaGo\ Project/Go_env/bin/activate
+   source /scratch2/f003x5w/old_RAG/Go_env/bin/activate
 
 # Run quick test
 cd RAG-MCTS-AlphaGo
@@ -137,11 +135,11 @@ ls -la /path/to/KataGo/configs/gtp_800visits.cfg
 **Problem:** Import errors
 ```bash
 # Recreate virtual environment:
-cd /scratch2/f004ndc/AlphaGo\ Project/
+cd /scratch2/f003x5w/old_RAG
 rm -rf Go_env
 python3 -m venv Go_env
 source Go_env/bin/activate
-cd RAG-MCTS-AlphaGo
+cd RAGFlow-Datago/datago
 pip install -r requirements.txt
 ```
 

@@ -7,18 +7,18 @@ Successfully set up your Go bot to play against KataGo without the gomill depend
 ## What Was Done
 
 ### 1. ✅ Compiled KataGo
-- **Location**: `/scratch2/f004ndc/AlphaGo Project/KataGo/cpp/katago`
+- **Location**: `/scratch2/f003x5w/old_RAG/RAGFlow-Datago/katago_repo/KataGo/cpp/build-opencl/katago`
 - **Backend**: OpenCL (for GPU acceleration)
 - **Version**: KataGo v1.16.4
 - **Status**: Compiled and GPU-tuned successfully
 
 ### 2. ✅ Downloaded Neural Network Model
-- **Location**: `/scratch2/f004ndc/AlphaGo Project/KataGo/models/g170e-b10c128-s1141046784-d204142634.bin.gz`
+- **Location**: `/scratch2/f003x5w/old_RAG/RAGFlow-Datago/katago_repo/run/default_model.bin.gz`
 - **Source**: KataGo test models (10-block network)
 - **Note**: You can download stronger models from https://katagotraining.org/ if needed
 
 ### 3. ✅ Created KataGo Configuration
-- **Location**: `/scratch2/f004ndc/AlphaGo Project/KataGo/configs/gtp_800visits.cfg`
+- **Location**: `/scratch2/f003x5w/old_RAG/RAGFlow-Datago/katago_repo/run/gtp_800visits.cfg`
 - **Settings**: Configured for 800 visits per move (matching your bot's settings)
 
 ### 4. ✅ Removed gomill Dependency
@@ -46,21 +46,21 @@ Replaced gomill (Python 2 only) with custom GTP implementation:
 
 ### Test KataGo GTP Interface
 ```bash
-cd "/scratch2/f004ndc/AlphaGo Project/RAG-MCTS-AlphaGo"
+cd "/scratch2/f003x5w/old_RAG/RAGFlow-Datago/datago"
 python test_gtp_katago.py
 ```
 
 ### Play DataGo vs KataGo
 Once your DataGo bot implementation is complete:
 ```bash
-cd "/scratch2/f004ndc/AlphaGo Project/RAG-MCTS-AlphaGo"
-source "../Go_env/bin/activate"
+cd "/scratch2/f003x5w/old_RAG/RAGFlow-Datago/datago"
+source "/scratch2/f003x5w/old_RAG/Go_env/bin/activate"
 
 python play_vs_katago.py \
     --config src/bot/config.yaml \
-    --katago-executable "/scratch2/f004ndc/AlphaGo Project/KataGo/cpp/katago" \
-    --katago-model "/scratch2/f004ndc/AlphaGo Project/KataGo/models/g170e-b10c128-s1141046784-d204142634.bin.gz" \
-    --katago-config "/scratch2/f004ndc/AlphaGo Project/KataGo/configs/gtp_800visits.cfg" \
+    --katago-executable "/scratch2/f003x5w/old_RAG/RAGFlow-Datago/katago_repo/KataGo/cpp/build-opencl/katago" \
+    --katago-model "/scratch2/f003x5w/old_RAG/RAGFlow-Datago/katago_repo/run/default_model.bin.gz" \
+    --katago-config "/scratch2/f003x5w/old_RAG/RAGFlow-Datago/katago_repo/run/gtp_800visits.cfg" \
     --datago-color black \
     --games 1
 ```
@@ -76,9 +76,9 @@ python play_vs_katago.py \
 ### DataGo Bot Config (src/bot/config.yaml)
 ```yaml
 katago:
-  executable_path: "/scratch2/f004ndc/AlphaGo Project/KataGo/cpp/katago"
-  model_path: "/scratch2/f004ndc/AlphaGo Project/KataGo/models/g170e-b10c128-s1141046784-d204142634.bin.gz"
-  config_path: "/scratch2/f004ndc/AlphaGo Project/KataGo/configs/gtp_800visits.cfg"
+  executable_path: "/scratch2/f003x5w/old_RAG/RAGFlow-Datago/katago_repo/KataGo/cpp/build-opencl/katago"
+  model_path: "/scratch2/f003x5w/old_RAG/RAGFlow-Datago/katago_repo/run/default_model.bin.gz"
+  config_path: "/scratch2/f003x5w/old_RAG/RAGFlow-Datago/katago_repo/run/gtp_800visits.cfg"
   visits: 800
 ```
 
@@ -99,7 +99,7 @@ The custom GTP implementation is pure Python 3 and handles:
 
 - **First Run**: KataGo will auto-tune for your GPU (~2 minutes). This happens once.
 - **Model Strength**: The current model is small (10 blocks). Download larger models from katagotraining.org for stronger play.
-- **Python Environment**: Using `Go_env` in AlphaGo Project directory with numpy, pyyaml, and other dependencies installed.
+- **Python Environment**: Using `/scratch2/f003x5w/old_RAG/Go_env` with numpy, pyyaml, and other dependencies installed.
 - **No More gomill**: All gomill dependencies removed. The codebase is now Python 3 compatible.
 
 ## Next Steps
@@ -118,8 +118,8 @@ To play games, you'll need to complete the DataGo bot implementation:
 
 ### Import Errors
 - Make sure you're in the project directory
-- Activate the virtual environment: `source "../Go_env/bin/activate"`
-- Or use the Python directly: `"/scratch2/f004ndc/AlphaGo Project/Go_env/bin/python"`
+- Activate the virtual environment: `source "/scratch2/f003x5w/old_RAG/Go_env/bin/activate"`
+- Or use the Python directly: `"/scratch2/f003x5w/old_RAG/Go_env/bin/python"`
 
 ### Path Issues
 - All paths in `config.yaml` are absolute
@@ -129,8 +129,8 @@ To play games, you'll need to complete the DataGo bot implementation:
 ## Files Summary
 
 ### Created:
-- `/scratch2/f004ndc/AlphaGo Project/KataGo/cpp/katago` (compiled executable)
-- `/scratch2/f004ndc/AlphaGo Project/KataGo/configs/gtp_800visits.cfg`
+- `/scratch2/f003x5w/old_RAG/RAGFlow-Datago/katago_repo/KataGo/cpp/build-opencl/katago` (compiled executable)
+- `/scratch2/f003x5w/old_RAG/RAGFlow-Datago/katago_repo/run/gtp_800visits.cfg`
 - `src/bot/gtp_controller.py`
 - `src/bot/gtp_player.py`
 - `test_gtp_katago.py`

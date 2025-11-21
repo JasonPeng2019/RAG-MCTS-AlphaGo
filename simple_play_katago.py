@@ -9,6 +9,7 @@ This avoids the complex DataGo bot for initial testing.
 import sys
 import logging
 from pathlib import Path
+import argparse
 
 sys.path.insert(0, str(Path(__file__).parent))
 
@@ -21,12 +22,20 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def play_simple_game():
+def resolve_defaults():
+    """Resolve default KataGo paths relative to repository root."""
+    script_dir = Path(__file__).resolve().parent
+    repo_root = script_dir.parent
+    katago_repo = repo_root / "katago_repo"
+    return {
+        "katago_exe": katago_repo / "KataGo" / "cpp" / "build-opencl" / "katago",
+        "model_path": katago_repo / "run" / "default_model.bin.gz",
+        "config_path": katago_repo / "run" / "gtp_800visits.cfg",
+    }
+
+
+def play_simple_game(katago_exe: Path, model_path: Path, config_path: Path):
     """Play a simple self-play game with two KataGo instances."""
-    
-    katago_exe = "/scratch2/f004ndc/AlphaGo Project/KataGo/cpp/katago"
-    model_path = "/scratch2/f004ndc/AlphaGo Project/KataGo/models/g170e-b10c128-s1141046784-d204142634.bin.gz"
-    config_path = "/scratch2/f004ndc/AlphaGo Project/KataGo/configs/gtp_800visits.cfg"
     
     logger.info("=" * 70)
     logger.info("KataGo Self-Play Test on GPU 7")
@@ -34,7 +43,7 @@ def play_simple_game():
     
     # Start two KataGo instances
     logger.info("Starting KataGo Black...")
-    cmd = [katago_exe, 'gtp', '-model', model_path, '-config', config_path]
+    cmd = [str(katago_exe), 'gtp', '-model', str(model_path), '-config', str(config_path)]
     black = GTPController(cmd)
     
     logger.info("Starting KataGo White...")
@@ -92,8 +101,15 @@ def play_simple_game():
 
 
 if __name__ == '__main__':
+    defaults = resolve_defaults()
+    parser = argparse.ArgumentParser(description="Simple KataGo self-play test.")
+    parser.add_argument("--katago-executable", type=Path, default=defaults["katago_exe"])
+    parser.add_argument("--katago-model", type=Path, default=defaults["model_path"])
+    parser.add_argument("--katago-config", type=Path, default=defaults["config_path"])
+    args = parser.parse_args()
+
     try:
-        play_simple_game()
+        play_simple_game(args.katago_executable, args.katago_model, args.katago_config)
     except KeyboardInterrupt:
         logger.info("\nGame interrupted by user")
     except Exception as e:

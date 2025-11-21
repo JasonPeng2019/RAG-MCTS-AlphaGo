@@ -14,9 +14,9 @@ Each has a corresponding CSV: `rag_files_list_1.csv` through `rag_files_list_5.c
 ## Launch All 5 GPUs in Parallel
 
 ```bash
-# First, activate venv
-source /scratch2/f004h1v/alphago_project/venv/bin/activate
-cd /scratch2/f004h1v/alphago_project/datago/rag_store
+# First, activate Go_env
+source /scratch2/f003x5w/old_RAG/Go_env/bin/activate
+cd /scratch2/f003x5w/old_RAG/RAGFlow-Datago/datago/rag_store
 
 # Launch all 5 analyzers in parallel on GPUs 1, 2, 3, 5, 7
 for i in 1 2 3 5 7; do
@@ -28,8 +28,8 @@ for i in 1 2 3 5 7; do
     if [ $i -eq 7 ]; then split_id=5; fi
     
     tmux new -d -s "rag-analyzer-${split_id}" bash -c "
-        source /scratch2/f004h1v/alphago_project/venv/bin/activate
-        cd /scratch2/f004h1v/alphago_project/datago/rag_store
+        source /scratch2/f003x5w/old_RAG/Go_env/bin/activate
+        cd /scratch2/f003x5w/old_RAG/RAGFlow-Datago/datago/rag_store
         CUDA_VISIBLE_DEVICES=${gpu_id} python game_analyzer.py \
           --csv rag_files_list_${split_id}.csv \
           --json-dir ../../build/rag_data_${split_id} \
@@ -43,42 +43,42 @@ done
 ## Simpler Copy-Paste Version
 
 ```bash
-# Activate venv first
-source /scratch2/f004h1v/alphago_project/venv/bin/activate
-cd /scratch2/f004h1v/alphago_project/datago/rag_store
+# Activate Go_env first
+source /scratch2/f003x5w/old_RAG/Go_env/bin/activate
+cd /scratch2/f003x5w/old_RAG/RAGFlow-Datago/datago/rag_store
 
 # GPU 1 - Split 1
 tmux new -d -s rag-analyzer-1 bash -c "
-source /scratch2/f004h1v/alphago_project/venv/bin/activate
-cd /scratch2/f004h1v/alphago_project/datago/rag_store
+source /scratch2/f003x5w/old_RAG/Go_env/bin/activate
+cd /scratch2/f003x5w/old_RAG/RAGFlow-Datago/datago/rag_store
 CUDA_VISIBLE_DEVICES=1 python game_analyzer.py --csv rag_files_list_1.csv --json-dir ../../build/rag_data_1 --output-dir ./rag_output_1 --max-visits 2400
 "
 
 # GPU 2 - Split 2
 tmux new -d -s rag-analyzer-2 bash -c "
-source /scratch2/f004h1v/alphago_project/venv/bin/activate
-cd /scratch2/f004h1v/alphago_project/datago/rag_store
+source /scratch2/f003x5w/old_RAG/Go_env/bin/activate
+cd /scratch2/f003x5w/old_RAG/RAGFlow-Datago/datago/rag_store
 CUDA_VISIBLE_DEVICES=2 python game_analyzer.py --csv rag_files_list_2.csv --json-dir ../../build/rag_data_2 --output-dir ./rag_output_2 --max-visits 2400
 "
 
 # GPU 3 - Split 3
 tmux new -d -s rag-analyzer-3 bash -c "
-source /scratch2/f004h1v/alphago_project/venv/bin/activate
-cd /scratch2/f004h1v/alphago_project/datago/rag_store
+source /scratch2/f003x5w/old_RAG/Go_env/bin/activate
+cd /scratch2/f003x5w/old_RAG/RAGFlow-Datago/datago/rag_store
 CUDA_VISIBLE_DEVICES=3 python game_analyzer.py --csv rag_files_list_3.csv --json-dir ../../build/rag_data_3 --output-dir ./rag_output_3 --max-visits 2400
 "
 
 # GPU 5 - Split 4
 tmux new -d -s rag-analyzer-4 bash -c "
-source /scratch2/f004h1v/alphago_project/venv/bin/activate
-cd /scratch2/f004h1v/alphago_project/datago/rag_store
+source /scratch2/f003x5w/old_RAG/Go_env/bin/activate
+cd /scratch2/f003x5w/old_RAG/RAGFlow-Datago/datago/rag_store
 CUDA_VISIBLE_DEVICES=5 python game_analyzer.py --csv rag_files_list_4.csv --json-dir ../../build/rag_data_4 --output-dir ./rag_output_4 --max-visits 2400
 "
 
 # GPU 7 - Split 5
 tmux new -d -s rag-analyzer-5 bash -c "
-source /scratch2/f004h1v/alphago_project/venv/bin/activate
-cd /scratch2/f004h1v/alphago_project/datago/rag_store
+source /scratch2/f003x5w/old_RAG/Go_env/bin/activate
+cd /scratch2/f003x5w/old_RAG/RAGFlow-Datago/datago/rag_store
 CUDA_VISIBLE_DEVICES=7 python game_analyzer.py --csv rag_files_list_5.csv --json-dir ../../build/rag_data_5 --output-dir ./rag_output_5 --max-visits 2400
 "
 
@@ -121,7 +121,7 @@ done
 Once all analyzers finish, merge the 5 output files:
 
 ```bash
-cd /scratch2/f004h1v/alphago_project/datago/rag_store
+cd /scratch2/f003x5w/old_RAG/RAGFlow-Datago/datago/rag_store
 
 # Merge all JSON databases into one
 python3 << 'EOF'
@@ -169,8 +169,8 @@ tmux kill-session -t rag-analyzer-3
 
 # Restart (example for split 3 on GPU 3)
 tmux new -d -s rag-analyzer-3 bash -c "
-source /scratch2/f004h1v/alphago_project/venv/bin/activate
-cd /scratch2/f004h1v/alphago_project/datago/rag_store
+source /scratch2/f003x5w/old_RAG/Go_env/bin/activate
+cd /scratch2/f003x5w/old_RAG/RAGFlow-Datago/datago/rag_store
 CUDA_VISIBLE_DEVICES=3 python game_analyzer.py --csv rag_files_list_3.csv --json-dir ../../build/rag_data_3 --output-dir ./rag_output_3 --max-visits 2400
 "
 ```

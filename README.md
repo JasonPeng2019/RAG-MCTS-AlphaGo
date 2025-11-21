@@ -18,8 +18,8 @@ Initial structure (proposed)
   - tmp/                      # Scratch outputs, plots
 
 Dependencies
-- Python 3.12+ (use the project venv):
-  source /scratch2/f004h1v/alphago_project/venv/bin/activate
+- Python 3.12+ (use the pre-built Go_env):
+  source /scratch2/f003x5w/old_RAG/Go_env/bin/activate
 - Add when implementing:
   pip install faiss-cpu or faiss-gpu  # per host setup
   pip install numpy pandas tqdm pyyaml rich
@@ -87,7 +87,7 @@ Milestones (from the 4-week plan)
    - Small leaf blending; light encoder tune; finalize report.
 
 How to start development here
-1) Set up dependencies in venv.
+1) Activate `/scratch2/f003x5w/old_RAG/Go_env` (or recreate it if needed).
 2) Create src/clients to talk to analysis engine; write a minimal request/response loop.
 3) Implement entropy estimation + logging for a test set of positions.
 4) Stand up FAISS index with a tiny memory; build prior from neighbors.
@@ -96,5 +96,3 @@ How to start development here
 References
 - KataGo GitHub: https://github.com/lightvector/KataGo
 - Networks (models): https://katagotraining.org/networks/
-
-

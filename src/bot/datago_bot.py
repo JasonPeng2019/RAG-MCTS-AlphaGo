@@ -136,6 +136,7 @@ class DataGoBot:
         
         # Initialize logging
         self._setup_logging()
+        self.log_deep_search = self.config.get('logging', {}).get('log_deep_search', True)
         
         # Log experimental features if enabled
         self._log_experimental_features()
@@ -216,6 +217,7 @@ class DataGoBot:
         logging.basicConfig(
             level=log_level,
             handlers=handlers,
+            force=True,
         )
     
     def _log_experimental_features(self):
@@ -850,7 +852,8 @@ class DataGoBot:
         check_interval = deep_config['convergence_check_interval']
         min_visits = deep_config['min_visits_before_convergence']
         
-        logger.info(f"Starting deep MCTS search with max {max_visits} visits")
+        if self.log_deep_search:
+            logger.info(f"Starting deep MCTS search with max {max_visits} visits")
         
         # Track previous results for convergence checking
         prev_policy_array = None
@@ -885,17 +888,19 @@ class DataGoBot:
                 # Compute value change
                 value_change = abs(value - prev_value)
                 
-                logger.debug(
-                    f"Deep MCTS @ {current_visits} visits: "
-                    f"policy_change={policy_change:.4f}, value_change={value_change:.4f}"
-                )
+                if self.log_deep_search:
+                    logger.debug(
+                        f"Deep MCTS @ {current_visits} visits: "
+                        f"policy_change={policy_change:.4f}, value_change={value_change:.4f}"
+                    )
                 
                 # Check if converged
                 if policy_change < policy_threshold and value_change < value_threshold:
-                    logger.info(
-                        f"Deep MCTS converged at {current_visits} visits "
-                        f"(policy_change={policy_change:.4f}, value_change={value_change:.4f})"
-                    )
+                    if self.log_deep_search:
+                        logger.info(
+                            f"Deep MCTS converged at {current_visits} visits "
+                            f"(policy_change={policy_change:.4f}, value_change={value_change:.4f})"
+                        )
                     self.stats['deep_searches'] += 1
                     return move_probs, value, stats
             
@@ -907,7 +912,8 @@ class DataGoBot:
             current_visits = min(current_visits + check_interval, max_visits)
         
         # Reached max visits without convergence
-        logger.info(f"Deep MCTS completed {max_visits} visits (max reached)")
+        if self.log_deep_search:
+            logger.info(f"Deep MCTS completed {max_visits} visits (max reached)")
         self.stats['deep_searches'] += 1
         
         return move_probs, value, stats

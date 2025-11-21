@@ -10,6 +10,7 @@ import logging
 import subprocess
 from pathlib import Path
 from typing import Tuple, List
+import argparse
 
 # Inline GTP controller to avoid import issues
 class SimpleGTPController:
@@ -87,13 +88,19 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def test_katago_gtp():
+def resolve_default_paths() -> Tuple[Path, Path, Path]:
+    """Resolve default KataGo paths relative to repository root."""
+    script_dir = Path(__file__).resolve().parent
+    repo_root = script_dir.parent
+    katago_repo = repo_root / "katago_repo"
+    katago_exe = katago_repo / "KataGo" / "cpp" / "build-opencl" / "katago"
+    model_path = katago_repo / "run" / "default_model.bin.gz"
+    config_path = katago_repo / "run" / "gtp_800visits.cfg"
+    return katago_exe, model_path, config_path
+
+
+def test_katago_gtp(katago_exe: Path, model_path: Path, config_path: Path):
     """Test KataGo GTP interface."""
-    
-    # Paths from config
-    katago_exe = "/scratch2/f004ndc/AlphaGo Project/KataGo/cpp/katago"
-    model_path = "/scratch2/f004ndc/AlphaGo Project/KataGo/models/g170e-b10c128-s1141046784-d204142634.bin.gz"
-    config_path = "/scratch2/f004ndc/AlphaGo Project/KataGo/configs/gtp_800visits.cfg"
     
     logger.info("=" * 70)
     logger.info("Testing KataGo GTP Interface")
@@ -101,7 +108,7 @@ def test_katago_gtp():
     
     # Check files exist
     for name, path in [("Executable", katago_exe), ("Model", model_path), ("Config", config_path)]:
-        if not Path(path).exists():
+        if not path.exists():
             logger.error(f"{name} not found at: {path}")
             return False
     
@@ -110,7 +117,7 @@ def test_katago_gtp():
     
     # Create GTP controller
     logger.info("Starting KataGo...")
-    cmd = [katago_exe, 'gtp', '-model', model_path, '-config', config_path]
+    cmd = [str(katago_exe), 'gtp', '-model', str(model_path), '-config', str(config_path)]
     
     try:
         katago = SimpleGTPController(cmd)
@@ -163,5 +170,28 @@ def test_katago_gtp():
 
 
 if __name__ == '__main__':
-    success = test_katago_gtp()
+    default_exe, default_model, default_config = resolve_default_paths()
+
+    parser = argparse.ArgumentParser(description="Test KataGo GTP interface.")
+    parser.add_argument(
+        "--katago-executable",
+        type=Path,
+        default=default_exe,
+        help="Path to KataGo executable (default: %(default)s)",
+    )
+    parser.add_argument(
+        "--katago-model",
+        type=Path,
+        default=default_model,
+        help="Path to KataGo model (default: %(default)s)",
+    )
+    parser.add_argument(
+        "--katago-config",
+        type=Path,
+        default=default_config,
+        help="Path to KataGo config (default: %(default)s)",
+    )
+    args = parser.parse_args()
+
+    success = test_katago_gtp(args.katago_executable, args.katago_model, args.katago_config)
     sys.exit(0 if success else 1)

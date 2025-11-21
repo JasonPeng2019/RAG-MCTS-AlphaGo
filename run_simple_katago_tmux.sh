@@ -2,9 +2,14 @@
 # run_simple_katago_tmux.sh
 # Run simple KataGo vs KataGo test on GPU 7 in tmux
 
+set -euo pipefail
+
 SESSION_NAME="katago_gpu7_test"
-PROJECT_DIR="/scratch2/f004ndc/AlphaGo Project/RAG-MCTS-AlphaGo"
-GO_ENV="/scratch2/f004ndc/AlphaGo Project/Go_env/bin/activate"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+PARENT_ROOT="$(cd "$REPO_ROOT/.." && pwd)"
+PROJECT_DIR="$SCRIPT_DIR"
+GO_ENV="$PARENT_ROOT/Go_env/bin/activate"
 
 # Kill existing session if it exists
 tmux kill-session -t $SESSION_NAME 2>/dev/null

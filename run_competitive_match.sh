@@ -3,7 +3,18 @@
 # DataGo uses 800 visits standard + 2000 visits deep search
 # KataGo uses 800 visits constant
 
-set -e
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+PARENT_ROOT="$(cd "$REPO_ROOT/.." && pwd)"
+PROJECT_DIR="$SCRIPT_DIR"
+KATAGO_EXE="$REPO_ROOT/katago_repo/KataGo/cpp/build-opencl/katago"
+MODEL_PATH="$REPO_ROOT/katago_repo/run/default_model.bin.gz"
+CONFIG_PATH="$REPO_ROOT/katago_repo/run/gtp_800visits.cfg"
+GO_ENV_DIR="$PARENT_ROOT/Go_env"
+PYTHON_BIN="$GO_ENV_DIR/bin/python"
+VENV_ACTIVATE="$GO_ENV_DIR/bin/activate"
 
 echo "======================================================================"
 echo "DataGo vs KataGo Competitive Match"
@@ -19,16 +30,22 @@ echo "Expected: DataGo should win more due to adaptive deep search"
 echo "======================================================================"
 echo ""
 
-cd "/scratch2/f004ndc/AlphaGo Project/RAG-MCTS-AlphaGo"
+cd "$PROJECT_DIR"
 
 # Activate virtual environment
-source /scratch2/f004ndc/AlphaGo\ Project/Go_env/bin/activate
+if [ -f "$VENV_ACTIVATE" ]; then
+  # shellcheck source=/dev/null
+  source "$VENV_ACTIVATE"
+else
+  echo "ERROR: Go_env virtual environment not found at $VENV_ACTIVATE" >&2
+  exit 1
+fi
 
 # Run the match
-python3 run_datago_recursive_match.py \
-    --katago-executable "/scratch2/f004ndc/AlphaGo Project/KataGo/cpp/katago" \
-    --katago-model "/scratch2/f004ndc/AlphaGo Project/KataGo/models/g170e-b10c128-s1141046784-d204142634.bin.gz" \
-    --katago-config "/scratch2/f004ndc/AlphaGo Project/KataGo/configs/gtp_800visits.cfg" \
+"$PYTHON_BIN" run_datago_recursive_match.py \
+    --katago-executable "$KATAGO_EXE" \
+    --katago-model "$MODEL_PATH" \
+    --katago-config "$CONFIG_PATH" \
     --config "src/bot/config.yaml" \
     --games 10 \
     --max-moves 200 \

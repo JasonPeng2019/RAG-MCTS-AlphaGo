@@ -203,12 +203,12 @@ Statistics:
 
 ### Command Line:
 ```bash
-source ../Go_env/bin/activate
+source /scratch2/f003x5w/old_RAG/Go_env/bin/activate
 
 python run_datago_match.py \
-  --katago-executable ../KataGo/cpp/katago \
-  --katago-model ../KataGo/models/g170e-b10c128-s1141046784-d204142634.bin.gz \
-  --katago-config ../KataGo/configs/gtp_800visits.cfg \
+  --katago-executable ../katago_repo/KataGo/cpp/build-opencl/katago \
+  --katago-model ../katago_repo/run/default_model.bin.gz \
+  --katago-config ../katago_repo/run/gtp_800visits.cfg \
   --config src/bot/config.yaml \
   --games 3 \
   --max-moves 250
