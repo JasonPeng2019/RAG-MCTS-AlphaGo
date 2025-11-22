@@ -1,3 +1,4 @@
 selfplay_output/added_entries.json filter=lfs diff=lfs merge=lfs -text
+archives/backups/old_folders/rag_store/rag_store/rag_output_5_done/rag_database.json filter=lfs diff=lfs merge=lfs -text
 selfplay_output/** filter=lfs diff=lfs merge=lfs -text
 archives/**/*.json filter=lfs diff=lfs merge=lfs -text
