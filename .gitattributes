@@ -1,3 +1,2 @@
-rag_store/rag_output_*_done/*.json filter=lfs diff=lfs merge=lfs -text
 selfplay_output/** filter=lfs diff=lfs merge=lfs -text
 archives/**/*.json filter=lfs diff=lfs merge=lfs -text

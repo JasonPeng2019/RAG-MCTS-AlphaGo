@@ -161,13 +161,20 @@ class PositionContext:
         current_policy: Optional[np.ndarray],
         current_komi: float,
         current_score_lead: float,
-    ) -> Optional[Dict[str, Any]]:
-        """Get most relevant context using cosine similarity on phase/policy and komi/score penalties."""
+        visits_normalizer: float,
+        visits_weight: float = 0.3,
+    ) -> Tuple[Optional[Dict[str, Any]], float]:
+        """
+        Score cached contexts against the current position.
+        
+        Returns:
+            Tuple of (best_context_or_None, best_score)
+        """
         if not self.contexts:
-            return None
+            return None, float("-inf")
         
         best_context = None
-        best_score = -1e9
+        best_score = float("-inf")
         current_phase_norm = current_phase / 361.0
         phase_weight = 0.5
         policy_weight = 0.4
@@ -194,19 +201,23 @@ class PositionContext:
             ctx_meta = ctx['metadata'] or {}
             raw_entry = ctx_meta.get('raw_entry') or {}
             ctx_komi = raw_entry.get('komi', ctx_meta.get('komi', current_komi))
+            visits_norm = max(visits_normalizer, 1.0)
+            visits_score = min(ctx['deep_visits'] / visits_norm, 1.0)
             score = (
                 phase_weight * phase_cos +
-                policy_weight * policy_cos -
+                policy_weight * policy_cos +
+                visits_weight * visits_score -
                 komi_penalty_weight * abs(ctx_komi - current_komi) -
                 score_penalty_weight * abs(ctx['score_lead'] - current_score_lead)
             )
             
             logger.debug(
-                "Context scoring sym_hash=%s move=%s phase_cos=%.3f policy_cos=%.3f komi_delta=%.2f score_delta=%.2f total=%.3f",
+                "Context scoring sym_hash=%s move=%s phase_cos=%.3f policy_cos=%.3f visits_score=%.3f komi_delta=%.2f score_delta=%.2f total=%.3f",
                 ctx['metadata'].get('source', 'cache'),
                 ctx['move'],
                 phase_cos,
                 policy_cos,
+                visits_score,
                 ctx_komi - current_komi,
                 ctx['score_lead'] - current_score_lead,
                 score,
@@ -216,7 +227,7 @@ class PositionContext:
                 best_score = score
                 best_context = ctx
         
-        return best_context
+        return best_context, best_score
 
 
 class RecursiveDataGoPlayer:
@@ -266,6 +277,8 @@ class RecursiveDataGoPlayer:
         # Deep MCTS settings
         self.deep_visits = config['deep_mcts']['max_visits']
         self.standard_visits = config['katago']['visits']
+        self.visits_normalizer = max(1, self.deep_visits)
+        self.min_rag_relevance = config['rag_query'].get('min_relevance', 0.5)
         
         # Statistics
         self.stats = {
@@ -386,7 +399,27 @@ class RecursiveDataGoPlayer:
         """Load a single selfplay-style JSON file."""
         try:
             with open(json_path, 'r') as f:
-                data = json.load(f)
+                try:
+                    data = json.load(f)
+                except json.JSONDecodeError:
+                    f.seek(0)
+                    entries = []
+                    for line in f:
+                        line = line.strip()
+                        if not line:
+                            continue
+                        try:
+                            entries.append(json.loads(line))
+                        except json.JSONDecodeError:
+                            logger.warning(f"Skipping malformed line in {json_path}")
+                    if not entries:
+                        return 0, 0
+                    data = {
+                        'settings': {
+                            'board_size': entries[0].get('history_context', {}).get('board_x_size', 19)
+                        },
+                        'flagged_positions': entries,
+                    }
         except Exception as exc:
             logger.warning(f"Skipping {json_path}: {exc}")
             return 0, 0
@@ -706,13 +739,14 @@ class RecursiveDataGoPlayer:
         
         if cached and recursion_depth > 0:  # Use cache for recursive calls
             logger.info(f"  {'  ' * recursion_depth}→ Cache hit for position: {position_hash[:12]}")
-            ctx = cached.get_best_context(
+            ctx, ctx_score = cached.get_best_context(
                 current_phase=int(np.abs(board_state.board).sum()),
                 current_policy=None,
                 current_komi=self.config['katago'].get('komi', 7.5),
                 current_score_lead=0.0,
+                visits_normalizer=self.visits_normalizer,
             )
-            if ctx:
+            if ctx and ctx_score >= self.min_rag_relevance:
                 self.stats['rag_hits'] += 1
                 self.stats['exact_matches'] += 1
                 # Return cached analysis as result
@@ -726,6 +760,10 @@ class RecursiveDataGoPlayer:
                     'cached': True,
                     'child_positions': [],
                 }
+            else:
+                logger.info(
+                    f"  {'  ' * recursion_depth}→ Cache entry score {ctx_score:.3f} < min {self.min_rag_relevance:.3f}, continuing search"
+                )
         
         # Cache miss - run actual deep search
         self.stats['deep_searches'] += 1
@@ -765,16 +803,21 @@ class RecursiveDataGoPlayer:
                         child_policy = child.get('policy')
                         if child_policy is None:
                             child_policy = result_policy
-                        ctx = cached.get_best_context(
+                        ctx, ctx_score = cached.get_best_context(
                             child_phase,
                             child_policy,
                             self.config['katago'].get('komi', 7.5),
                             child.get('score_lead', 0.0),
+                            self.visits_normalizer,
                         )
-                        if ctx:
+                        if ctx and ctx_score >= self.min_rag_relevance:
                             child['cached_analysis'] = ctx
                             self.stats['rag_hits'] += 1
                             self.stats['exact_matches'] += 1
+                        else:
+                            logger.info(
+                                f"  {'  ' * (recursion_depth+1)}→ Child context discarded (score={ctx_score:.3f} < {self.min_rag_relevance:.3f})"
+                            )
                     else:
                         # Recursively analyze child
                         logger.info(f"  {'  ' * (recursion_depth+1)}→ Recursive search for child")
@@ -1075,23 +1118,26 @@ class RecursiveDataGoPlayer:
                     ctx_meta = entry['metadata'] or {}
                     raw_entry = ctx_meta.get('raw_entry') or {}
                     ctx_komi = raw_entry.get('komi', ctx_meta.get('komi', current_komi))
+                    visits_score = min(entry['deep_visits'] / max(self.visits_normalizer, 1.0), 1.0)
                     logger.info(
-                        "    Context[%d] move=%s phase=%d deep=%d phase_cos=%.3f policy_cos=%.3f komi_delta=%.2f",
+                        "    Context[%d] move=%s phase=%d deep=%d phase_cos=%.3f policy_cos=%.3f visits=%.3f komi_delta=%.2f",
                         idx,
                         entry['move'],
                         entry['game_phase'],
                         entry['deep_visits'],
                         phase_cos,
                         policy_cos,
+                        visits_score,
                         ctx_komi - current_komi,
                     )
-                forced_ctx = cached.get_best_context(
+                forced_ctx, forced_score = cached.get_best_context(
                     self.stones_on_board,
                     policy,
                     current_komi,
                     score_lead,
+                    self.visits_normalizer,
                 )
-                if forced_ctx:
+                if forced_ctx and forced_score >= self.min_rag_relevance:
                     move = forced_ctx['move']
                     rag_queried = True
                     rag_hit = True
@@ -1102,13 +1148,18 @@ class RecursiveDataGoPlayer:
                         'forced_context': forced_ctx['metadata'].get('source'),
                     })
                     logger.info(
-                        "  → Forced RAG move %s (deep_visits=%d)",
+                        "  → Forced RAG move %s (deep_visits=%d, score=%.3f)",
                         move,
                         forced_ctx['deep_visits'],
+                        forced_score,
                     )
                     # Continue to board update below
                 else:
-                    logger.warning("  → Forced retrieval failed to select context")
+                    logger.warning(
+                        "  → Forced retrieval rejected context (score=%.3f, min=%.3f)",
+                        forced_score,
+                        self.min_rag_relevance,
+                    )
             else:
                 logger.warning("  → Forced sym_hash %s not found in RAG cache", sym_hash)
 
@@ -1129,21 +1180,26 @@ class RecursiveDataGoPlayer:
                 contexts_count = len(cached.contexts)
                 
                 # Get best matching context
-                best_ctx = cached.get_best_context(
+                best_ctx, best_score = cached.get_best_context(
                     self.stones_on_board,
                     policy,
                     current_komi,
                     score_lead,
+                    self.visits_normalizer,
                 )
                 
-                if best_ctx:
+                if best_ctx and best_score >= self.min_rag_relevance:
                     self.stats['exact_matches'] += 1
                     exact_match = True
                     logger.info(f"  → Exact match found: {sym_hash[:12]} ({contexts_count} contexts)")
-                    logger.info(f"  → Using cached analysis (deep_visits={best_ctx['deep_visits']})")
+                    logger.info(
+                        f"  → Using cached analysis (deep_visits={best_ctx['deep_visits']}, score={best_score:.3f})"
+                    )
                     move = best_ctx['move']
                 else:
-                    logger.info(f"  → Position found but no good context, running deep search")
+                    logger.info(
+                        f"  → Position found but score {best_score:.3f} < min {self.min_rag_relevance:.3f}, running deep search"
+                    )
                     deep_searched = True
                     deep_analysis = self.run_deep_augmented_search(self.board_state, uncertainty, 0)
                     move = deep_analysis['best_move']
@@ -1295,7 +1351,21 @@ def run_match(
                     passes += 1
                     if passes >= 2:
                         logger.info("\nBoth players passed. Game over.")
-                        results.append("Draw")
+                        success, score_result = katago.send_command("final_score")
+                        if success and score_result:
+                            logger.info(f"Final score: {score_result}")
+                            if score_result.startswith('B+'):
+                                logger.info("DataGo (Black) wins by scoring!")
+                                results.append("DataGo")
+                            elif score_result.startswith('W+'):
+                                logger.info("KataGo (White) wins by scoring!")
+                                results.append("KataGo")
+                            else:
+                                logger.info("Draw by score")
+                                results.append("Draw")
+                        else:
+                            logger.info("Score calculation failed, recording as fail.")
+                            results.append("Fail")
                         break
                 else:
                     passes = 0

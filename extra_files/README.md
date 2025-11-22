@@ -29,34 +29,24 @@ This directory contains supplementary files needed for the DataGo RAG-MCTS syste
 
 **Purpose:** Isolated Python environment with all dependencies for DataGo.
 
-**⚠️ IMPORTANT: This should be deployed OUTSIDE the RAG-MCTS-AlphaGo folder!**
-
-**Recommended Structure:**
+**Recommended Structure (current workspace):**
 ```
-/scratch2/f004ndc/AlphaGo Project/
-├── KataGo/                    # KataGo installation
-│   ├── cpp/katago            # KataGo binary
-│   ├── models/               # Neural network models
-│   └── configs/              # ← Copy extra_files/configs/ here
-├── Go_env/                    # ← Move extra_files/Go_env/ here
-│   ├── bin/
-│   ├── lib/
-│   └── ...
-└── RAG-MCTS-AlphaGo/         # This repository
-    ├── src/
-    ├── run_datago_recursive_match.py
-    └── ...
+RAGFlow-Datago/
+├── Go_env/                      # ← Virtualenv lives alongside the codebase (ignored by git)
+├── katago_repo/                 # Bundled KataGo build + configs
+├── src/, testing/, rag_store/, …
+└── extra_files/                 # Archive of Go_env + configs for redeployment
 ```
 
-**Why outside?**
+**Why keep it separate?**
 - Virtual environments are large (~500MB+)
 - Should not be version controlled
 - Can be shared across multiple projects
 - Easier to recreate/update independently
 
-**Activation:**
+**Activation (assuming the layout above):**
 ```bash
-source /scratch2/f004ndc/AlphaGo\ Project/Go_env/bin/activate
+source Go_env/bin/activate
 ```
 
 **Dependencies Included:**
@@ -74,25 +64,25 @@ source /scratch2/f004ndc/AlphaGo\ Project/Go_env/bin/activate
    cp -r extra_files/configs /path/to/KataGo/
    ```
 
-2. **Move Virtual Environment:**
+2. **Move Virtual Environment (if you use the archived copy):**
    ```bash
-   # If Go_env is currently inside extra_files/
-   mv extra_files/Go_env /scratch2/f004ndc/AlphaGo\ Project/
-   
-   # Or create new virtual environment:
-   cd /scratch2/f004ndc/AlphaGo\ Project/
+   mv extra_files/Go_env Go_env
+   ```
+   Or create a fresh one next to the repo:
+   ```bash
+   cd ..
    python3 -m venv Go_env
    source Go_env/bin/activate
-   pip install -r RAG-MCTS-AlphaGo/requirements.txt
+   pip install -r RAGFlow-Datago/requirements.txt
    ```
 
 3. **Update Config Paths:**
    Edit `src/bot/config.yaml` to point to correct paths:
    ```yaml
    katago:
-     executable_path: "/path/to/KataGo/cpp/katago"
-     model_path: "/path/to/KataGo/models/model.bin.gz"
-     config_path: "/path/to/KataGo/configs/gtp_800visits.cfg"
+     executable_path: "./katago_repo/KataGo/cpp/build-opencl/katago"
+     model_path: "./katago_repo/run/default_model.bin.gz"
+     config_path: "./katago_repo/run/gtp_800visits.cfg"
    ```
 
 ### Verification
@@ -101,11 +91,11 @@ Test that everything is configured correctly:
 
 ```bash
 # Activate environment
-source /scratch2/f004ndc/AlphaGo\ Project/Go_env/bin/activate
+source Go_env/bin/activate
 
 # Run quick test
-cd RAG-MCTS-AlphaGo
-./quick_competitive_test.sh
+cd RAGFlow-Datago
+./testing/quick_competitive_test.sh
 ```
 
 Expected output:
@@ -137,11 +127,11 @@ ls -la /path/to/KataGo/configs/gtp_800visits.cfg
 **Problem:** Import errors
 ```bash
 # Recreate virtual environment:
-cd /scratch2/f004ndc/AlphaGo\ Project/
+cd ..
 rm -rf Go_env
 python3 -m venv Go_env
 source Go_env/bin/activate
-cd RAG-MCTS-AlphaGo
+cd RAGFlow-Datago
 pip install -r requirements.txt
 ```
 

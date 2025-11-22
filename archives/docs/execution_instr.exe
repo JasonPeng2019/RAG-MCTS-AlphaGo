@@ -1,0 +1,15 @@
+# 1. Go to the project’s datago directory.
+cd /scratch2/f003x5w/RAGFlow-Datago/datago
+
+# 2. Activate the virtual environment you created earlier.
+source ../Go_env/bin/activate
+
+# 3. Run the match, teeing output to a log.
+python run_datago_recursive_match.py \
+  --katago-executable ../katago_base/KataGo/cpp/build-opencl/katago \
+  --katago-model ../katago_base/KataGo/cpp/tests/models/g170e-b10c128-s1141046784-d204142634.bin.gz \
+  --katago-config ../katago_base/KataGo/configs/gtp_800visits.cfg \
+  --config src/bot/config.yaml \
+  --games 10 \
+  --max-moves 200 \
+  2>&1 | tee match_$(date +%Y%m%d_%H%M%S).log

@@ -1,0 +1,20 @@
+2025-11-21 19:26:32,374 - INFO - ======================================================================
+2025-11-21 19:26:32,374 - INFO - DataGo Bot vs KataGo Match (Recursive Deep Search + RAG)
+2025-11-21 19:26:32,374 - INFO - ======================================================================
+2025-11-21 19:26:32,374 - INFO - Games: 10, Max moves per game: 200
+2025-11-21 19:26:32,374 - INFO - Deep search threshold: 0.2
+2025-11-21 19:26:32,374 - INFO - Max recursion depth: 3
+2025-11-21 19:26:32,374 - INFO - Deep MCTS visits: 1000
+2025-11-21 19:26:32,374 - INFO - 
+2025-11-21 19:26:32,374 - INFO - Starting KataGo GTP on GPU 7...
+2025-11-21 19:26:32,374 - INFO - Starting GTP engine: ./katago_base/KataGo/cpp/build-opencl/katago gtp -model ./katago_base/KataGo/cpp/tests/models/g170e-b10c128-s1141046784-d204142634.bin.gz -config ./katago_base/KataGo/configs/gtp_800visits.cfg
+2025-11-21 19:26:32,375 - INFO - Initializing RAG database with multi-context support...
+2025-11-21 19:26:32,375 - INFO - No RAG data found at rag_store/rag_output/rag_database.json, starting empty cache
+2025-11-21 19:26:32,375 - INFO - Recursion depth: 3
+2025-11-21 19:26:32,375 - INFO - Deep search threshold: 0.150
+2025-11-21 19:26:32,375 - INFO - Deep search visits: 1000, Standard visits: 200
+2025-11-21 19:26:32,375 - INFO - 
+======================================================================
+2025-11-21 19:26:32,375 - INFO - Game 1/10
+2025-11-21 19:26:32,375 - INFO - ======================================================================
+

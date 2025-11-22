@@ -1,0 +1,28 @@
+2025-11-21 18:11:17-0500: Running with following config:
+conservativePass = true
+lagBuffer = 1.0
+logAllGTPCommunication = true
+logDir = gtp_logs
+logSearchInfo = true
+logToStderr = false
+maxVisits = 200
+nnCacheSizePowerOfTwo = 20
+nnMutexPoolSizePowerOfTwo = 16
+numSearchThreads = 6
+openclGpuToUse = 7
+ponderingEnabled = false
+preventCleanupPhase = true
+rootSymmetryPruning = true
+rules = tromp-taylor
+searchFactorAfterOnePass = 0.50
+searchFactorAfterTwoPass = 0.25
+searchFactorWhenWinning = 0.40
+searchFactorWhenWinningThreshold = 0.95
+
+2025-11-21 18:11:17-0500: GTP Engine starting...
+2025-11-21 18:11:17-0500: KataGo v1.16.4
+2025-11-21 18:11:17-0500: Using TrompTaylor rules initially, unless GTP/GUI overrides this
+2025-11-21 18:11:17-0500: Using 6 CPU thread(s) for search
+2025-11-21 18:11:17-0500: nnRandSeed0 = 8323130213482608746
+2025-11-21 18:11:17-0500: After dedups: nnModelFile0 = ../katago_base/KataGo/models/g170e-b10c128-s1141046784-d204142634.bin.gz useFP16 auto useNHWC auto
+2025-11-21 18:11:17-0500: Initializing neural net buffer to be size 19 * 19 exactly

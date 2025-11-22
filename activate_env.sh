@@ -3,7 +3,7 @@
 # Usage: source activate_env.sh
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-GO_ENV_PATH="$SCRIPT_DIR/../Go_env"
+GO_ENV_PATH="$SCRIPT_DIR/Go_env"
 
 if [ -f "$GO_ENV_PATH/bin/activate" ]; then
     source "$GO_ENV_PATH/bin/activate"

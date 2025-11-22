@@ -193,7 +193,7 @@ deep_mcts:
   # Trade-off: deeper = better quality but slower
   # Tuned in Phase 2
   # Recommended: 2000-5000 for balance, 10000+ for maximum quality
-  max_visits: 300
+  max_visits: 1000
   
   # Policy convergence threshold
   # Stop early if policy changes by less than this amount
@@ -257,18 +257,13 @@ recursion:
 # Settings for KataGo engine integration
 
 katago:
-  # Path to KataGo executable
-  executable_path: "/scratch2/f004ndc/AlphaGo Project/KataGo/cpp/katago"
-  
-  # Path to KataGo model file
-  model_path: "/scratch2/f004ndc/AlphaGo Project/KataGo/models/g170e-b10c128-s1141046784-d204142634.bin.gz"
-  
-  # Path to KataGo config file
-  config_path: "/scratch2/f004ndc/AlphaGo Project/KataGo/configs/gtp_800visits.cfg"
+  executable_path: "./katago_repo/KataGo/cpp/build-opencl/katago"
+  model_path: "./katago_repo/run/default_model.bin.gz"
+  config_path: "./katago_repo/run/gtp_800visits.cfg"
   
   # Number of MCTS visits for standard (shallow) search
   # This is used during normal gameplay
-  visits: 100
+  visits: 200
   
   # Maximum time per move (seconds)
   # Set to 0 for no time limit
@@ -300,8 +295,9 @@ katago:
 # Settings for the retrieval-augmented generation database
 
 rag_database:
-  # Path to RAG database JSON file
-  database_path: "selfplay_output"
+  # Path to cached RAG data; can be a directory containing selfplay JSONs
+  # or a single bundled database file.
+  database_path: "./selfplay_output"
   
   # ANN index configuration
   ann:

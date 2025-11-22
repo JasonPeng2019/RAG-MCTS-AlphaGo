@@ -1,0 +1,2 @@
+# Hashes of file build rules.
+f2002b29744b6f4b99942970868dad6d program/gitinfoupdated.h

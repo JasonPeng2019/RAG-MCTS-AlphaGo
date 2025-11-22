@@ -49,7 +49,7 @@ The test used 5 synthetic positions with:
 Your code is ready to use with real data! To run with actual ground truth:
 
 ```bash
-cd /scratch2/f004h1v/alphago_project/datago/tuning/phase1
+cd /scratch2/f003x5w/RAGFlow-Datago/tuning/phase1
 
 # With grid search (recommended for thorough search)
 python phase1_uncertainty_tuning.py \

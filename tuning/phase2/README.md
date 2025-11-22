@@ -35,13 +35,13 @@ How it works (offline mode)
 * `phase2_recursion.py` loads the best deep-search config and sweeps the
   recursion depth `N`, estimating compute cost and residual error.
 * `run_phase2.sh` orchestrates the offline workflow.  It assumes the working
-  directory is `datago/tuning/`.
+  directory is the repo root (`RAGFlow-Datago/`) so relative paths resolve against `tuning/`.
 
 Usage
 -----
 
 ```bash
-# From datago/tuning:
+# From RAGFlow-Datago:
 phase2/run_phase2.sh
 ```
 
@@ -50,7 +50,7 @@ phase2/run_phase2.sh
 To smoke-test Phase 2 without Phase 1 logs:
 
 ```bash
-cd datago/tuning
+cd RAGFlow-Datago
 python phase2/make_dummy_offline_positions.py --output-dir ./tuning_results/offline_positions
 python phase2/smoke_test.py  # optional quick check
 phase2/run_phase2.sh

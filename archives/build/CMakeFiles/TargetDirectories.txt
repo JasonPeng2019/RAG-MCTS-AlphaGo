@@ -1,0 +1,3 @@
+/scratch2/f003x5w/RAGFlow-Datago/CMakeFiles/katago.dir
+/scratch2/f003x5w/RAGFlow-Datago/CMakeFiles/edit_cache.dir
+/scratch2/f003x5w/RAGFlow-Datago/CMakeFiles/rebuild_cache.dir

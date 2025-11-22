@@ -1,0 +1,632 @@
+2025-11-21 19:26:11,619 - INFO - ======================================================================
+2025-11-21 19:26:11,619 - INFO - DataGo Bot vs KataGo Match (Recursive Deep Search + RAG)
+2025-11-21 19:26:11,619 - INFO - ======================================================================
+2025-11-21 19:26:11,619 - INFO - Games: 10, Max moves per game: 200
+2025-11-21 19:26:11,619 - INFO - Deep search threshold: 0.2
+2025-11-21 19:26:11,619 - INFO - Max recursion depth: 3
+2025-11-21 19:26:11,619 - INFO - Deep MCTS visits: 1000
+2025-11-21 19:26:11,619 - INFO - 
+2025-11-21 19:26:11,619 - INFO - Starting KataGo GTP on GPU 7...
+2025-11-21 19:26:11,619 - INFO - Starting GTP engine: ./katago_base/KataGo/cpp/build-opencl/katago gtp -model ./katago_base/KataGo/cpp/tests/models/g170e-b10c128-s1141046784-d204142634.bin.gz -config ./katago_base/KataGo/configs/gtp_800visits.cfg
+2025-11-21 19:26:11,619 - INFO - Initializing RAG database with multi-context support...
+2025-11-21 19:26:11,620 - INFO - No RAG data found at rag_store/rag_output/rag_database.json, starting empty cache
+2025-11-21 19:26:11,620 - INFO - Recursion depth: 3
+2025-11-21 19:26:11,620 - INFO - Deep search threshold: 0.150
+2025-11-21 19:26:11,620 - INFO - Deep search visits: 1000, Standard visits: 200
+2025-11-21 19:26:11,620 - INFO - 
+======================================================================
+2025-11-21 19:26:11,620 - INFO - Game 1/10
+2025-11-21 19:26:11,620 - INFO - ======================================================================
+
+2025-11-21 19:26:13,840 - INFO - Move 1: DataGo (Black) thinking...
+2025-11-21 19:26:13,887 - INFO -   → Complex position detected (unc=0.182)
+2025-11-21 19:26:13,888 - INFO -   → No match found: fe8837bac731, running deep search
+2025-11-21 19:26:13,889 - INFO -   → Deep search (depth=0, unc=0.182)
+2025-11-21 19:26:14,014 - INFO -     → Recursive search for child
+2025-11-21 19:26:14,017 - INFO -     → Deep search (depth=1, unc=0.538)
+2025-11-21 19:26:14,177 - INFO -       → Recursive search for child
+2025-11-21 19:26:14,179 - INFO -       → Deep search (depth=2, unc=0.537)
+2025-11-21 19:26:14,363 - INFO -         → Recursive search for child
+2025-11-21 19:26:14,363 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:14,411 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:14,414 - INFO -         → Recursive search for child
+2025-11-21 19:26:14,414 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:14,449 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:14,451 - INFO -         → Recursive search for child
+2025-11-21 19:26:14,451 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:14,477 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:14,480 - INFO -         → Recursive search for child
+2025-11-21 19:26:14,480 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:14,504 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:14,507 - INFO -         → Recursive search for child
+2025-11-21 19:26:14,507 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:14,530 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:14,532 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:14,534 - INFO -       → Recursive search for child
+2025-11-21 19:26:14,537 - INFO -       → Deep search (depth=2, unc=0.537)
+2025-11-21 19:26:14,631 - INFO -         → Recursive search for child
+2025-11-21 19:26:14,631 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:14,655 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:14,657 - INFO -         → Recursive search for child
+2025-11-21 19:26:14,657 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:14,680 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:14,683 - INFO -         → Recursive search for child
+2025-11-21 19:26:14,683 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:14,706 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:14,708 - INFO -         → Recursive search for child
+2025-11-21 19:26:14,709 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:14,730 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:14,733 - INFO -         → Child cache hit: e49d631d57d1
+2025-11-21 19:26:14,733 - INFO -         → Child context discarded (score=-1.059 < 0.500)
+2025-11-21 19:26:14,735 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:14,737 - INFO -       → Recursive search for child
+2025-11-21 19:26:14,740 - INFO -       → Deep search (depth=2, unc=0.537)
+2025-11-21 19:26:14,814 - INFO -         → Recursive search for child
+2025-11-21 19:26:14,814 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:14,838 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:14,841 - INFO -         → Recursive search for child
+2025-11-21 19:26:14,841 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:14,849 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:14,852 - INFO -         → Recursive search for child
+2025-11-21 19:26:14,852 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:14,858 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:14,860 - INFO -         → Recursive search for child
+2025-11-21 19:26:14,860 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:14,865 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:14,867 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:14,870 - INFO -       → Child cache hit: 14f90fd2c712
+2025-11-21 19:26:14,870 - INFO -       → Child context discarded (score=-4.822 < 0.500)
+2025-11-21 19:26:14,872 - INFO -       → Recursive search for child
+2025-11-21 19:26:14,875 - INFO -       → Deep search (depth=2, unc=0.537)
+2025-11-21 19:26:14,927 - INFO -         → Recursive search for child
+2025-11-21 19:26:14,927 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:14,932 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:14,934 - INFO -         → Recursive search for child
+2025-11-21 19:26:14,934 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:14,938 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:14,941 - INFO -         → Recursive search for child
+2025-11-21 19:26:14,941 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:14,945 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:14,948 - INFO -         → Recursive search for child
+2025-11-21 19:26:14,948 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:14,951 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:14,953 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:14,955 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:14,957 - INFO -     → Child cache hit: 9cbe904cde37
+2025-11-21 19:26:14,960 - INFO -     → Child cache hit: 9cbe904cde37
+2025-11-21 19:26:14,962 - INFO -     → Recursive search for child
+2025-11-21 19:26:14,965 - INFO -     → Deep search (depth=1, unc=0.538)
+2025-11-21 19:26:14,980 - INFO -       → Recursive search for child
+2025-11-21 19:26:14,982 - INFO -       → Deep search (depth=2, unc=0.430)
+2025-11-21 19:26:14,996 - INFO -         → Recursive search for child
+2025-11-21 19:26:14,996 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:15,001 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:15,003 - INFO -         → Recursive search for child
+2025-11-21 19:26:15,004 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:15,008 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:15,010 - INFO -         → Recursive search for child
+2025-11-21 19:26:15,010 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:15,014 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:15,017 - INFO -         → Recursive search for child
+2025-11-21 19:26:15,017 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:15,021 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:15,023 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:15,026 - INFO -       → Recursive search for child
+2025-11-21 19:26:15,028 - INFO -       → Deep search (depth=2, unc=0.430)
+2025-11-21 19:26:15,044 - INFO -         → Recursive search for child
+2025-11-21 19:26:15,045 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:15,049 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:15,052 - INFO -         → Child cache hit: 7e903808ed19
+2025-11-21 19:26:15,054 - INFO -         → Recursive search for child
+2025-11-21 19:26:15,054 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:15,058 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:15,061 - INFO -         → Recursive search for child
+2025-11-21 19:26:15,061 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:15,065 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:15,067 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:15,069 - INFO -       → Recursive search for child
+2025-11-21 19:26:15,072 - INFO -       → Deep search (depth=2, unc=0.430)
+2025-11-21 19:26:15,085 - INFO -         → Child cache hit: 64ddf25e43b0
+2025-11-21 19:26:15,087 - INFO -         → Child cache hit: b9e3aa85e267
+2025-11-21 19:26:15,090 - INFO -         → Recursive search for child
+2025-11-21 19:26:15,090 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:15,095 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:15,098 - INFO -         → Recursive search for child
+2025-11-21 19:26:15,098 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:15,133 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:15,135 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:15,137 - INFO -       → Recursive search for child
+2025-11-21 19:26:15,140 - INFO -       → Deep search (depth=2, unc=0.430)
+2025-11-21 19:26:15,220 - INFO -         → Recursive search for child
+2025-11-21 19:26:15,221 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:15,226 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:15,229 - INFO -         → Recursive search for child
+2025-11-21 19:26:15,229 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:15,234 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:15,236 - INFO -         → Recursive search for child
+2025-11-21 19:26:15,236 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:15,242 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:15,245 - INFO -         → Recursive search for child
+2025-11-21 19:26:15,245 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:15,250 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:15,251 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:15,253 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:15,256 - INFO -     → Child cache hit: 60c3202aea42
+2025-11-21 19:26:15,256 - INFO -     → Child context discarded (score=-5.362 < 0.500)
+2025-11-21 19:26:15,257 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:15,258 - INFO - Move 1: DataGo (Black) plays D16 [unc=0.182, DEEP, 1417ms]
+2025-11-21 19:26:15,308 - INFO - Move 2: KataGo (White) thinking...
+2025-11-21 19:26:15,316 - INFO - Move 2: KataGo (White) plays D17
+2025-11-21 19:26:15,366 - INFO - Move 3: DataGo (Black) thinking...
+2025-11-21 19:26:15,385 - INFO - Move 3: DataGo (Black) plays PASS [unc=0.089, 19ms]
+2025-11-21 19:26:15,435 - INFO - Move 4: KataGo (White) thinking...
+2025-11-21 19:26:15,492 - INFO - Move 4: KataGo (White) plays F17
+2025-11-21 19:26:15,542 - INFO - Move 5: DataGo (Black) thinking...
+2025-11-21 19:26:15,563 - INFO - Move 5: DataGo (Black) plays PASS [unc=0.073, 21ms]
+2025-11-21 19:26:15,613 - INFO - Move 6: KataGo (White) thinking...
+2025-11-21 19:26:15,639 - INFO - Move 6: KataGo (White) plays C3
+2025-11-21 19:26:15,690 - INFO - Move 7: DataGo (Black) thinking...
+2025-11-21 19:26:15,715 - INFO - Move 7: DataGo (Black) plays C17 [unc=0.109, 25ms]
+2025-11-21 19:26:15,765 - INFO - Move 8: KataGo (White) thinking...
+2025-11-21 19:26:15,830 - INFO - Move 8: KataGo (White) plays C4
+2025-11-21 19:26:15,880 - INFO - Move 9: DataGo (Black) thinking...
+2025-11-21 19:26:15,890 - INFO - Move 9: DataGo (Black) plays D5 [unc=0.098, 9ms]
+2025-11-21 19:26:15,940 - INFO - Move 10: KataGo (White) thinking...
+2025-11-21 19:26:15,996 - INFO - Move 10: KataGo (White) plays C6
+2025-11-21 19:26:16,046 - INFO - Move 11: DataGo (Black) thinking...
+2025-11-21 19:26:16,058 - INFO - Move 11: DataGo (Black) plays D3 [unc=0.081, 12ms]
+2025-11-21 19:26:16,109 - INFO - Move 12: KataGo (White) thinking...
+2025-11-21 19:26:16,168 - INFO - Move 12: KataGo (White) plays D6
+2025-11-21 19:26:16,219 - INFO - Move 13: DataGo (Black) thinking...
+2025-11-21 19:26:16,242 - INFO - Move 13: DataGo (Black) plays C5 [unc=0.015, 23ms]
+2025-11-21 19:26:16,292 - INFO - Move 14: KataGo (White) thinking...
+2025-11-21 19:26:16,344 - INFO - Move 14: KataGo (White) plays B5
+2025-11-21 19:26:16,395 - INFO - Move 15: DataGo (Black) thinking...
+2025-11-21 19:26:16,402 - INFO - Move 15: DataGo (Black) plays B4 [unc=0.079, 8ms]
+2025-11-21 19:26:16,453 - INFO - Move 16: KataGo (White) thinking...
+2025-11-21 19:26:16,494 - INFO - Move 16: KataGo (White) plays B3
+2025-11-21 19:26:16,544 - INFO - Move 17: DataGo (Black) thinking...
+2025-11-21 19:26:16,555 - INFO - Move 17: DataGo (Black) plays B6 [unc=0.030, 10ms]
+2025-11-21 19:26:16,605 - INFO - Move 18: KataGo (White) thinking...
+2025-11-21 19:26:16,636 - INFO - Move 18: KataGo (White) plays A4
+2025-11-21 19:26:16,687 - INFO - Move 19: DataGo (Black) thinking...
+2025-11-21 19:26:16,693 - INFO - Move 19: DataGo (Black) plays B7 [unc=0.047, 6ms]
+2025-11-21 19:26:16,743 - INFO - Move 20: KataGo (White) thinking...
+2025-11-21 19:26:16,763 - INFO - Move 20: KataGo (White) plays E6
+2025-11-21 19:26:16,814 - INFO - Move 21: DataGo (Black) thinking...
+2025-11-21 19:26:16,826 - INFO - Move 21: DataGo (Black) plays D8 [unc=0.080, 12ms]
+2025-11-21 19:26:16,876 - INFO - Move 22: KataGo (White) thinking...
+2025-11-21 19:26:16,935 - INFO - Move 22: KataGo (White) plays J17
+2025-11-21 19:26:16,985 - INFO - Move 23: DataGo (Black) thinking...
+2025-11-21 19:26:17,005 - INFO - Move 23: DataGo (Black) plays J16 [unc=0.067, 20ms]
+2025-11-21 19:26:17,056 - INFO - Move 24: KataGo (White) thinking...
+2025-11-21 19:26:17,119 - INFO - Move 24: KataGo (White) plays K17
+2025-11-21 19:26:17,170 - INFO - Move 25: DataGo (Black) thinking...
+2025-11-21 19:26:17,179 - INFO - Move 25: DataGo (Black) plays H17 [unc=0.059, 9ms]
+2025-11-21 19:26:17,229 - INFO - Move 26: KataGo (White) thinking...
+2025-11-21 19:26:17,291 - INFO - Move 26: KataGo (White) plays G17
+2025-11-21 19:26:17,341 - INFO - Move 27: DataGo (Black) thinking...
+2025-11-21 19:26:17,351 - INFO - Move 27: DataGo (Black) plays F16 [unc=0.096, 10ms]
+2025-11-21 19:26:17,401 - INFO - Move 28: KataGo (White) thinking...
+2025-11-21 19:26:17,462 - INFO - Move 28: KataGo (White) plays M17
+2025-11-21 19:26:17,512 - INFO - Move 29: DataGo (Black) thinking...
+2025-11-21 19:26:17,528 - INFO - Move 29: DataGo (Black) plays M16 [unc=0.060, 15ms]
+2025-11-21 19:26:17,578 - INFO - Move 30: KataGo (White) thinking...
+2025-11-21 19:26:17,643 - INFO - Move 30: KataGo (White) plays N16
+2025-11-21 19:26:17,693 - INFO - Move 31: DataGo (Black) thinking...
+2025-11-21 19:26:17,705 - INFO - Move 31: DataGo (Black) plays L16 [unc=0.079, 11ms]
+2025-11-21 19:26:17,755 - INFO - Move 32: KataGo (White) thinking...
+2025-11-21 19:26:17,801 - INFO - Move 32: KataGo (White) plays N18
+2025-11-21 19:26:17,851 - INFO - Move 33: DataGo (Black) thinking...
+2025-11-21 19:26:17,861 - INFO - Move 33: DataGo (Black) plays PASS [unc=0.064, 10ms]
+2025-11-21 19:26:17,911 - INFO - Move 34: KataGo (White) thinking...
+2025-11-21 19:26:17,967 - INFO - Move 34: KataGo (White) plays O16
+2025-11-21 19:26:18,017 - INFO - Move 35: DataGo (Black) thinking...
+2025-11-21 19:26:18,026 - INFO - Move 35: DataGo (Black) plays P14 [unc=0.058, 9ms]
+2025-11-21 19:26:18,077 - INFO - Move 36: KataGo (White) thinking...
+2025-11-21 19:26:18,137 - INFO - Move 36: KataGo (White) plays O15
+2025-11-21 19:26:18,187 - INFO - Move 37: DataGo (Black) thinking...
+2025-11-21 19:26:18,207 - INFO - Move 37: DataGo (Black) plays O14 [unc=0.056, 20ms]
+2025-11-21 19:26:18,257 - INFO - Move 38: KataGo (White) thinking...
+2025-11-21 19:26:18,323 - INFO - Move 38: KataGo (White) plays G4
+2025-11-21 19:26:18,373 - INFO - Move 39: DataGo (Black) thinking...
+2025-11-21 19:26:18,401 - INFO - Move 39: DataGo (Black) plays F4 [unc=0.097, 28ms]
+2025-11-21 19:26:18,452 - INFO - Move 40: KataGo (White) thinking...
+2025-11-21 19:26:18,521 - INFO - Move 40: KataGo (White) plays H3
+2025-11-21 19:26:18,572 - INFO - Move 41: DataGo (Black) thinking...
+2025-11-21 19:26:18,582 - INFO - Move 41: DataGo (Black) plays G5 [unc=0.069, 10ms]
+2025-11-21 19:26:18,632 - INFO - Move 42: KataGo (White) thinking...
+2025-11-21 19:26:18,686 - INFO - Move 42: KataGo (White) plays H4
+2025-11-21 19:26:18,736 - INFO - Move 43: DataGo (Black) thinking...
+2025-11-21 19:26:18,745 - INFO - Move 43: DataGo (Black) plays F5 [unc=0.077, 9ms]
+2025-11-21 19:26:18,795 - INFO - Move 44: KataGo (White) thinking...
+2025-11-21 19:26:18,839 - INFO - Move 44: KataGo (White) plays H5
+2025-11-21 19:26:18,890 - INFO - Move 45: DataGo (Black) thinking...
+2025-11-21 19:26:18,904 - INFO - Move 45: DataGo (Black) plays G2 [unc=0.110, 14ms]
+2025-11-21 19:26:18,954 - INFO - Move 46: KataGo (White) thinking...
+2025-11-21 19:26:19,020 - INFO - Move 46: KataGo (White) plays L3
+2025-11-21 19:26:19,071 - INFO - Move 47: DataGo (Black) thinking...
+2025-11-21 19:26:19,095 - INFO - Move 47: DataGo (Black) plays N3 [unc=0.118, 24ms]
+2025-11-21 19:26:19,145 - INFO - Move 48: KataGo (White) thinking...
+2025-11-21 19:26:19,212 - INFO - Move 48: KataGo (White) plays K5
+2025-11-21 19:26:19,262 - INFO - Move 49: DataGo (Black) thinking...
+2025-11-21 19:26:19,286 - INFO - Move 49: DataGo (Black) plays K6 [unc=0.119, 24ms]
+2025-11-21 19:26:19,336 - INFO - Move 50: KataGo (White) thinking...
+2025-11-21 19:26:19,403 - INFO - Move 50: KataGo (White) plays H7
+2025-11-21 19:26:19,453 - INFO - Move 51: DataGo (Black) thinking...
+2025-11-21 19:26:19,474 - INFO - Move 51: DataGo (Black) plays K4 [unc=0.102, 21ms]
+2025-11-21 19:26:19,524 - INFO - Move 52: KataGo (White) thinking...
+2025-11-21 19:26:19,588 - INFO - Move 52: KataGo (White) plays E2
+2025-11-21 19:26:19,638 - INFO - Move 53: DataGo (Black) thinking...
+2025-11-21 19:26:19,664 - INFO - Move 53: DataGo (Black) plays D2 [unc=0.118, 26ms]
+2025-11-21 19:26:19,715 - INFO - Move 54: KataGo (White) thinking...
+2025-11-21 19:26:19,782 - INFO - Move 54: KataGo (White) plays H2
+2025-11-21 19:26:19,832 - INFO - Move 55: DataGo (Black) thinking...
+2025-11-21 19:26:19,844 - INFO - Move 55: DataGo (Black) plays F7 [unc=0.111, 11ms]
+2025-11-21 19:26:19,894 - INFO - Move 56: KataGo (White) thinking...
+2025-11-21 19:26:19,960 - INFO - Move 56: KataGo (White) plays G7
+2025-11-21 19:26:20,011 - INFO - Move 57: DataGo (Black) thinking...
+2025-11-21 19:26:20,025 - INFO - Move 57: DataGo (Black) plays G6 [unc=0.104, 14ms]
+2025-11-21 19:26:20,075 - INFO - Move 58: KataGo (White) thinking...
+2025-11-21 19:26:20,141 - INFO - Move 58: KataGo (White) plays J5
+2025-11-21 19:26:20,191 - INFO - Move 59: DataGo (Black) thinking...
+2025-11-21 19:26:20,203 - INFO - Move 59: DataGo (Black) plays K3 [unc=0.113, 12ms]
+2025-11-21 19:26:20,253 - INFO - Move 60: KataGo (White) thinking...
+2025-11-21 19:26:20,312 - INFO - Move 60: KataGo (White) plays F8
+2025-11-21 19:26:20,363 - INFO - Move 61: DataGo (Black) thinking...
+2025-11-21 19:26:20,376 - INFO - Move 61: DataGo (Black) plays E7 [unc=0.114, 13ms]
+2025-11-21 19:26:20,426 - INFO - Move 62: KataGo (White) thinking...
+2025-11-21 19:26:20,489 - INFO - Move 62: KataGo (White) plays K2
+2025-11-21 19:26:20,539 - INFO - Move 63: DataGo (Black) thinking...
+2025-11-21 19:26:20,548 - INFO - Move 63: DataGo (Black) plays L4 [unc=0.111, 9ms]
+2025-11-21 19:26:20,599 - INFO - Move 64: KataGo (White) thinking...
+2025-11-21 19:26:20,662 - INFO - Move 64: KataGo (White) plays M3
+2025-11-21 19:26:20,712 - INFO - Move 65: DataGo (Black) thinking...
+2025-11-21 19:26:20,724 - INFO - Move 65: DataGo (Black) plays N2 [unc=0.117, 11ms]
+2025-11-21 19:26:20,774 - INFO - Move 66: KataGo (White) thinking...
+2025-11-21 19:26:20,837 - INFO - Move 66: KataGo (White) plays M2
+2025-11-21 19:26:20,887 - INFO - Move 67: DataGo (Black) thinking...
+2025-11-21 19:26:20,896 - INFO - Move 67: DataGo (Black) plays M1 [unc=0.107, 8ms]
+2025-11-21 19:26:20,946 - INFO - Move 68: KataGo (White) thinking...
+2025-11-21 19:26:21,002 - INFO - Move 68: KataGo (White) plays L1
+2025-11-21 19:26:21,052 - INFO - Move 69: DataGo (Black) thinking...
+2025-11-21 19:26:21,061 - INFO - Move 69: DataGo (Black) plays N1 [unc=0.104, 9ms]
+2025-11-21 19:26:21,112 - INFO - Move 70: KataGo (White) thinking...
+2025-11-21 19:26:21,160 - INFO - Move 70: KataGo (White) plays K7
+2025-11-21 19:26:21,210 - INFO - Move 71: DataGo (Black) thinking...
+2025-11-21 19:26:21,228 - INFO - Move 71: DataGo (Black) plays L7 [unc=0.133, 18ms]
+2025-11-21 19:26:21,278 - INFO - Move 72: KataGo (White) thinking...
+2025-11-21 19:26:21,334 - INFO - Move 72: KataGo (White) plays K8
+2025-11-21 19:26:21,384 - INFO - Move 73: DataGo (Black) thinking...
+2025-11-21 19:26:21,399 - INFO - Move 73: DataGo (Black) plays H9 [unc=0.131, 15ms]
+2025-11-21 19:26:21,450 - INFO - Move 74: KataGo (White) thinking...
+2025-11-21 19:26:21,515 - INFO - Move 74: KataGo (White) plays K10
+2025-11-21 19:26:21,565 - INFO - Move 75: DataGo (Black) thinking...
+2025-11-21 19:26:21,585 - INFO -   → Complex position detected (unc=0.151)
+2025-11-21 19:26:21,585 - INFO -   → No match found: 62a8e3d0a4b8, running deep search
+2025-11-21 19:26:21,588 - INFO -   → Deep search (depth=0, unc=0.151)
+2025-11-21 19:26:21,688 - INFO -     → Recursive search for child
+2025-11-21 19:26:21,691 - INFO -     → Deep search (depth=1, unc=0.561)
+2025-11-21 19:26:21,780 - INFO -       → Recursive search for child
+2025-11-21 19:26:21,782 - INFO -       → Deep search (depth=2, unc=0.590)
+2025-11-21 19:26:21,857 - INFO -         → Recursive search for child
+2025-11-21 19:26:21,857 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:21,870 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:21,873 - INFO -         → Recursive search for child
+2025-11-21 19:26:21,873 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:21,879 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:21,882 - INFO -         → Recursive search for child
+2025-11-21 19:26:21,882 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:21,888 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:21,890 - INFO -         → Recursive search for child
+2025-11-21 19:26:21,890 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:21,896 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:21,898 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:21,901 - INFO -       → Recursive search for child
+2025-11-21 19:26:21,903 - INFO -       → Deep search (depth=2, unc=0.590)
+2025-11-21 19:26:21,954 - INFO -         → Recursive search for child
+2025-11-21 19:26:21,954 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:21,970 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:21,973 - INFO -         → Recursive search for child
+2025-11-21 19:26:21,973 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:21,992 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:21,995 - INFO -         → Recursive search for child
+2025-11-21 19:26:21,995 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,001 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,004 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,004 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,009 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,011 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,013 - INFO -       → Recursive search for child
+2025-11-21 19:26:22,016 - INFO -       → Deep search (depth=2, unc=0.590)
+2025-11-21 19:26:22,073 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,073 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,078 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,081 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,081 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,085 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,088 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,088 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,092 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,094 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,094 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,098 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,100 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,103 - INFO -       → Recursive search for child
+2025-11-21 19:26:22,105 - INFO -       → Deep search (depth=2, unc=0.590)
+2025-11-21 19:26:22,130 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,130 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,154 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,156 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,157 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,165 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,167 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,168 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,173 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,176 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,176 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,182 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,184 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,185 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,188 - INFO -     → Recursive search for child
+2025-11-21 19:26:22,191 - INFO -     → Deep search (depth=1, unc=0.561)
+2025-11-21 19:26:22,267 - INFO -       → Recursive search for child
+2025-11-21 19:26:22,269 - INFO -       → Deep search (depth=2, unc=0.478)
+2025-11-21 19:26:22,338 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,338 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,344 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,346 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,346 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,351 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,353 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,354 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,359 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,362 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,362 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,387 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,389 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,392 - INFO -       → Recursive search for child
+2025-11-21 19:26:22,394 - INFO -       → Deep search (depth=2, unc=0.478)
+2025-11-21 19:26:22,465 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,465 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,481 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,484 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,484 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,501 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,504 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,504 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,525 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,527 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,527 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,535 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,536 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,539 - INFO -       → Recursive search for child
+2025-11-21 19:26:22,541 - INFO -       → Deep search (depth=2, unc=0.478)
+2025-11-21 19:26:22,594 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,594 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,600 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,603 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,603 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,608 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,610 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,610 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,615 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,618 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,618 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,623 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,625 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,627 - INFO -       → Child cache hit: f72d1eb61069
+2025-11-21 19:26:22,628 - INFO -       → Child context discarded (score=0.256 < 0.500)
+2025-11-21 19:26:22,629 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,632 - INFO -     → Recursive search for child
+2025-11-21 19:26:22,634 - INFO -     → Deep search (depth=1, unc=0.561)
+2025-11-21 19:26:22,665 - INFO -       → Recursive search for child
+2025-11-21 19:26:22,668 - INFO -       → Deep search (depth=2, unc=0.488)
+2025-11-21 19:26:22,747 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,747 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,752 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,754 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,755 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,759 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,761 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,761 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,766 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,769 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,769 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,773 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,775 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,778 - INFO -       → Recursive search for child
+2025-11-21 19:26:22,780 - INFO -       → Deep search (depth=2, unc=0.488)
+2025-11-21 19:26:22,811 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,811 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,816 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,818 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,819 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,824 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,827 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,827 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,831 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,834 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,834 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,838 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,840 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,842 - INFO -       → Recursive search for child
+2025-11-21 19:26:22,845 - INFO -       → Deep search (depth=2, unc=0.488)
+2025-11-21 19:26:22,868 - INFO -         → Child cache hit: 46d8d325e3d6
+2025-11-21 19:26:22,871 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,871 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,875 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,878 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,878 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,883 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,885 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,885 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,890 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,891 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,894 - INFO -       → Recursive search for child
+2025-11-21 19:26:22,896 - INFO -       → Deep search (depth=2, unc=0.488)
+2025-11-21 19:26:22,915 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,915 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,920 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,922 - INFO -         → Child cache hit: 72410c45df64
+2025-11-21 19:26:22,925 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,925 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:22,932 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,934 - INFO -         → Child cache hit: e6ffce005e23
+2025-11-21 19:26:22,936 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,937 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:22,940 - INFO -     → Recursive search for child
+2025-11-21 19:26:22,942 - INFO -     → Deep search (depth=1, unc=0.561)
+2025-11-21 19:26:22,965 - INFO -       → Recursive search for child
+2025-11-21 19:26:22,968 - INFO -       → Deep search (depth=2, unc=0.449)
+2025-11-21 19:26:22,985 - INFO -         → Recursive search for child
+2025-11-21 19:26:22,985 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:23,018 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,021 - INFO -         → Recursive search for child
+2025-11-21 19:26:23,021 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:23,033 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,036 - INFO -         → Recursive search for child
+2025-11-21 19:26:23,036 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:23,047 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,049 - INFO -         → Recursive search for child
+2025-11-21 19:26:23,049 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:23,056 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,058 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,060 - INFO -       → Recursive search for child
+2025-11-21 19:26:23,063 - INFO -       → Deep search (depth=2, unc=0.449)
+2025-11-21 19:26:23,147 - INFO -         → Child cache hit: 6e57d2178423
+2025-11-21 19:26:23,150 - INFO -         → Recursive search for child
+2025-11-21 19:26:23,150 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:23,156 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,159 - INFO -         → Recursive search for child
+2025-11-21 19:26:23,159 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:23,163 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,166 - INFO -         → Recursive search for child
+2025-11-21 19:26:23,166 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:23,171 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,172 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,175 - INFO -       → Recursive search for child
+2025-11-21 19:26:23,177 - INFO -       → Deep search (depth=2, unc=0.449)
+2025-11-21 19:26:23,209 - INFO -         → Recursive search for child
+2025-11-21 19:26:23,209 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:23,228 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,231 - INFO -         → Child cache hit: a3c7d30dac91
+2025-11-21 19:26:23,234 - INFO -         → Child cache hit: e468ece56408
+2025-11-21 19:26:23,234 - INFO -         → Child context discarded (score=0.480 < 0.500)
+2025-11-21 19:26:23,236 - INFO -         → Recursive search for child
+2025-11-21 19:26:23,236 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:23,252 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,254 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,256 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,258 - INFO -     → Recursive search for child
+2025-11-21 19:26:23,261 - INFO -     → Deep search (depth=1, unc=0.561)
+2025-11-21 19:26:23,339 - INFO -       → Recursive search for child
+2025-11-21 19:26:23,341 - INFO -       → Deep search (depth=2, unc=0.436)
+2025-11-21 19:26:23,369 - INFO -         → Recursive search for child
+2025-11-21 19:26:23,369 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:23,375 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,378 - INFO -         → Recursive search for child
+2025-11-21 19:26:23,378 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:23,383 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,385 - INFO -         → Recursive search for child
+2025-11-21 19:26:23,386 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:23,390 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,392 - INFO -         → Recursive search for child
+2025-11-21 19:26:23,393 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:23,399 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,400 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,403 - INFO -       → Recursive search for child
+2025-11-21 19:26:23,405 - INFO -       → Deep search (depth=2, unc=0.436)
+2025-11-21 19:26:23,426 - INFO -         → Child cache hit: 57fcf6e29b3d
+2025-11-21 19:26:23,431 - INFO -         → Recursive search for child
+2025-11-21 19:26:23,432 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:23,439 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,443 - INFO -         → Recursive search for child
+2025-11-21 19:26:23,443 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:23,448 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,451 - INFO -         → Recursive search for child
+2025-11-21 19:26:23,451 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:23,455 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,457 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,459 - INFO -       → Recursive search for child
+2025-11-21 19:26:23,462 - INFO -       → Deep search (depth=2, unc=0.436)
+2025-11-21 19:26:23,488 - INFO -         → Child cache hit: 7eb6106bd8f1
+2025-11-21 19:26:23,491 - INFO -         → Recursive search for child
+2025-11-21 19:26:23,491 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:23,496 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,498 - INFO -         → Child cache hit: 6d0f1df2b14a
+2025-11-21 19:26:23,501 - INFO -         → Recursive search for child
+2025-11-21 19:26:23,501 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:23,505 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,507 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,510 - INFO -       → Recursive search for child
+2025-11-21 19:26:23,512 - INFO -       → Deep search (depth=2, unc=0.436)
+2025-11-21 19:26:23,543 - INFO -         → Child cache hit: e7d988fcf752
+2025-11-21 19:26:23,543 - INFO -         → Child context discarded (score=0.473 < 0.500)
+2025-11-21 19:26:23,546 - INFO -         → Child cache hit: ba156d516126
+2025-11-21 19:26:23,549 - INFO -         → Recursive search for child
+2025-11-21 19:26:23,549 - INFO -         → Max recursion depth reached
+2025-11-21 19:26:23,553 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,555 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,557 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,559 - INFO - Appended new deep-search entry to rag_store/rag_output/added_entries.json
+2025-11-21 19:26:23,562 - INFO - Move 75: DataGo (Black) plays G9 [unc=0.151, DEEP, 1994ms]
+2025-11-21 19:26:23,612 - INFO - Move 76: KataGo (White) thinking...
+2025-11-21 19:26:23,622 - INFO - Move 76: KataGo (White) plays L18
+2025-11-21 19:26:23,672 - INFO - Move 77: DataGo (Black) thinking...
+2025-11-21 19:26:23,681 - INFO - Move 77: DataGo (Black) plays PASS [unc=0.000, 8ms]
+2025-11-21 19:26:23,731 - INFO - Move 78: KataGo (White) thinking...
+2025-11-21 19:26:23,740 - INFO - Move 78: KataGo (White) plays Q16
+2025-11-21 19:26:23,790 - INFO - Move 79: DataGo (Black) thinking...
+2025-11-21 19:26:23,805 - INFO - Move 79: DataGo (Black) plays PASS [unc=0.066, 15ms]
+2025-11-21 19:26:23,855 - INFO - Move 80: KataGo (White) thinking...
+2025-11-21 19:26:23,861 - INFO - Move 80: KataGo (White) plays Q17
+2025-11-21 19:26:23,911 - INFO - Move 81: DataGo (Black) thinking...
+2025-11-21 19:26:23,938 - INFO - Move 81: DataGo (Black) plays Q15 [unc=0.083, 27ms]
+2025-11-21 19:26:23,989 - INFO - Move 82: KataGo (White) thinking...
+2025-11-21 19:26:24,045 - INFO - Move 82: KataGo (White) plays R17
+2025-11-21 19:26:24,095 - INFO - Move 83: DataGo (Black) thinking...
+2025-11-21 19:26:24,101 - INFO - Move 83: DataGo (Black) plays PASS [unc=0.000, 6ms]
+2025-11-21 19:26:24,152 - INFO - Move 84: KataGo (White) thinking...
+2025-11-21 19:26:24,166 - INFO - Move 84: KataGo (White) plays R15
+2025-11-21 19:26:24,216 - INFO - Move 85: DataGo (Black) thinking...
+2025-11-21 19:26:24,241 - INFO - Move 85: DataGo (Black) plays R14 [unc=0.000, 25ms]
+2025-11-21 19:26:24,292 - INFO - Move 86: KataGo (White) thinking...
+2025-11-21 19:26:24,302 - INFO - Move 86: KataGo (White) plays R14
+2025-11-21 19:26:24,353 - INFO - Move 87: DataGo (Black) thinking...
+2025-11-21 19:26:24,372 - INFO - Move 87: DataGo (Black) plays PASS [unc=0.088, 20ms]
+2025-11-21 19:26:24,423 - INFO - Move 88: KataGo (White) thinking...
+2025-11-21 19:26:24,432 - INFO - Move 88: KataGo (White) plays R12
+2025-11-21 19:26:24,482 - INFO - Move 89: DataGo (Black) thinking...
+2025-11-21 19:26:24,507 - INFO - Move 89: DataGo (Black) plays PASS [unc=0.096, 25ms]
+2025-11-21 19:26:24,557 - INFO - Move 90: KataGo (White) thinking...
+2025-11-21 19:26:24,568 - INFO - Move 90: KataGo (White) plays N14
+2025-11-21 19:26:24,619 - INFO - Move 91: DataGo (Black) thinking...
+2025-11-21 19:26:24,642 - INFO - Move 91: DataGo (Black) plays M15 [unc=0.027, 23ms]
+2025-11-21 19:26:24,692 - INFO - Move 92: KataGo (White) thinking...
+2025-11-21 19:26:24,746 - INFO - Move 92: KataGo (White) plays P13
+2025-11-21 19:26:24,796 - INFO - Move 93: DataGo (Black) thinking...
+2025-11-21 19:26:24,821 - INFO - Move 93: DataGo (Black) plays S11 [unc=0.032, 25ms]
+2025-11-21 19:26:24,872 - INFO - Move 94: KataGo (White) thinking...
+2025-11-21 19:26:24,938 - INFO - Move 94: KataGo (White) plays O12
+2025-11-21 19:26:24,988 - INFO - Move 95: DataGo (Black) thinking...
+2025-11-21 19:26:24,997 - INFO - Move 95: DataGo (Black) plays N13 [unc=0.046, 9ms]
+2025-11-21 19:26:25,047 - INFO - Move 96: KataGo (White) thinking...
+2025-11-21 19:26:25,102 - INFO - Move 96: KataGo (White) plays O13
+2025-11-21 19:26:25,152 - INFO - Move 97: DataGo (Black) thinking...
+2025-11-21 19:26:25,178 - INFO - Move 97: DataGo (Black) plays PASS [unc=0.084, 25ms]
+2025-11-21 19:26:25,228 - INFO - Move 98: KataGo (White) thinking...
+2025-11-21 19:26:25,253 - INFO - Move 98: KataGo (White) plays M14
+2025-11-21 19:26:25,303 - INFO - Move 99: DataGo (Black) thinking...
+2025-11-21 19:26:25,325 - INFO - Move 99: DataGo (Black) plays L14 [unc=0.081, 22ms]
+2025-11-21 19:26:25,375 - INFO - Move 100: KataGo (White) thinking...
+2025-11-21 19:26:25,425 - INFO - Move 100: KataGo (White) plays O10
+2025-11-21 19:26:25,475 - INFO - Move 101: DataGo (Black) thinking...
+2025-11-21 19:26:25,497 - INFO - Move 101: DataGo (Black) plays PASS [unc=0.027, 21ms]
+2025-11-21 19:26:25,547 - INFO - Move 102: KataGo (White) thinking...
+2025-11-21 19:26:25,574 - INFO - Move 102: KataGo (White) plays O8
+2025-11-21 19:26:25,624 - INFO - Move 103: DataGo (Black) thinking...
+2025-11-21 19:26:25,652 - INFO - Move 103: DataGo (Black) plays M13 [unc=0.108, 28ms]
+2025-11-21 19:26:25,702 - INFO - Move 104: KataGo (White) thinking...
+2025-11-21 19:26:25,763 - INFO - Move 104: KataGo (White) plays R8
+2025-11-21 19:26:25,813 - INFO - Move 105: DataGo (Black) thinking...
